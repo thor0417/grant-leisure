@@ -40,76 +40,80 @@
 .hero-stat-num { font-family: 'Libre Baskerville', Georgia, serif; font-size: 34px; font-weight: 400; color: var(--dark); line-height: 1; margin-bottom: 4px; }
 .hero-stat-label { font-size: 11px; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
 
-/* clients */
-#clients { padding: 44px 0; background: var(--light-grey); border-top: 1px solid var(--mid-grey); border-bottom: 1px solid var(--mid-grey); }
-.clients-inner { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-.clients-label { font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; padding-right: 16px; border-right: 1px solid var(--mid-grey); }
-.clients-logos { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 22px; }
-.client-name { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: #B8BBC8; text-transform: uppercase; white-space: nowrap; transition: color var(--tr); }
-.client-name:hover { color: var(--text-muted); }
 
-/* home about strip */
-#home-about { padding: 110px 0; background: var(--white); }
-.home-about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-.home-about-heading { font-size: clamp(30px, 4vw, 52px); font-weight: 400; color: var(--dark); line-height: 1.15; margin-bottom: 26px; }
-.home-about-heading em { font-style: italic; color: var(--navy); }
-.home-about-body { font-size: 15px; font-weight: 300; color: var(--text-muted); line-height: 1.8; margin-bottom: 18px; }
-.home-about-cta { margin-top: 32px; display: flex; gap: 16px; align-items: center; }
-.about-accent { width: 48px; height: 3px; background: linear-gradient(90deg, var(--sage), var(--navy)); margin: 32px 0 0; border-radius: 2px; }
 
-.metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--mid-grey); border: 1px solid var(--mid-grey); }
-.metric-cell { background: var(--white); padding: 28px 24px; }
-.metric-num { font-family: 'Libre Baskerville', Georgia, serif; font-size: 42px; font-weight: 400; color: var(--dark); line-height: 1; margin-bottom: 6px; }
-.metric-label { font-size: 11px; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
 
-/* services preview */
-#home-services { padding: 110px 0; background: var(--light-grey); }
-.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--mid-grey); border: 1px solid var(--mid-grey); }
-.service-card { background: var(--white); padding: 36px 32px; position: relative; overflow: hidden; }
-.service-card::after { content:''; position:absolute; bottom:0; left:0; width:100%; height:3px; background: linear-gradient(90deg, var(--sage), var(--navy)); transform:scaleX(0); transform-origin:left; transition:transform var(--tr); }
-.service-card:hover::after { transform:scaleX(1); }
-.service-card:hover { background: #FAFAFA; }
-.service-num { font-size: 11px; font-weight: 500; letter-spacing: 0.18em; color: var(--sage); margin-bottom: 12px; display: block; }
-.service-title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 17px; font-weight: 400; color: var(--dark); margin-bottom: 12px; line-height: 1.3; }
-.service-desc { font-size: 13px; font-weight: 300; color: var(--text-muted); line-height: 1.7; }
-.services-cta { margin-top: 48px; display: flex; justify-content: center; }
+.marquee-outer {
+  width: 100%;
+  overflow: hidden;
+  background: var(--light-grey);
+  border-top: 1px solid var(--mid-grey);
+  border-bottom: 1px solid var(--mid-grey);
+  padding: 32px 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 40s linear infinite;
+}
+.marquee-outer:hover .marquee-track { animation-play-state: paused; }
+.marquee-set {
+  display: flex;
+  align-items: center;
+  gap: 72px;
+  padding-right: 72px;
+  flex-shrink: 0;
+}
+.marquee-logo {
+  height: 48px;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  filter: grayscale(100%) opacity(0.35);
+  transition: filter 0.3s ease;
+  flex-shrink: 0;
+  display: block;
+}
+.marquee-outer:hover .marquee-logo { filter: grayscale(80%) opacity(0.65); }
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
 
-/* featured projects */
-#home-projects { padding: 110px 0; background: var(--white); }
-.projects-header-row { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 56px; gap: 32px; flex-wrap: wrap; }
-.projects-grid-home { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--mid-grey); }
-.proj-row-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--mid-grey); margin-top: 1px; }
-.project-card { background: var(--white); overflow: hidden; position: relative; cursor: pointer; }
-.project-img { width:100%; aspect-ratio: 4/3; overflow: hidden; }
-.project-img-inner { width:100%; height:100%; background: linear-gradient(135deg, #E8E9EE 0%, #D4D6E0 100%); display:flex; align-items:center; justify-content:center; transition: transform var(--tr); }
-.proj-row-2 .project-img { aspect-ratio: 16/7; }
-.project-card:hover .project-img-inner { transform: scale(1.04); }
-.proj-placeholder { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #B0B3C4; }
-.project-body { padding: 22px; background: var(--white); border-top: 1px solid var(--mid-grey); transition: background var(--tr); }
-.project-card:hover .project-body { background: #FAFAFA; }
-.project-cat { font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sage); margin-bottom: 6px; display: block; }
-.project-name { font-family: 'Libre Baskerville', Georgia, serif; font-size: 15px; font-weight: 400; color: var(--dark); margin-bottom: 4px; line-height: 1.3; }
-.project-loc { font-size: 12px; font-weight: 300; color: var(--text-muted); }
 
-/* credibility band */
-#credibility { padding: 76px 0; background: var(--navy); }
-.cred-inner { display: grid; grid-template-columns: repeat(4, 1fr); }
-.cred-item { padding: 0 32px; text-align: center; position: relative; }
-.cred-item:not(:last-child)::after { content:''; position:absolute; right:0; top:50%; transform:translateY(-50%); height:48px; width:1px; background:rgba(255,255,255,0.14); }
-.cred-num { font-family: 'Libre Baskerville', Georgia, serif; font-size: 54px; font-weight: 400; color: var(--white); line-height: 1; margin-bottom: 10px; display: block; }
-.cred-num sup { font-size: 28px; vertical-align: super; }
-.cred-label { font-size: 11px; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
-
-/* testimonials */
-#home-testimonials { padding: 110px 0; background: var(--light-grey); }
-.testimonials-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--mid-grey); margin-top: 60px; }
-.testimonial-card { background: var(--white); padding: 44px; }
-.testimonial-quote { font-family: 'Libre Baskerville', Georgia, serif; font-size: 15px; font-style: italic; color: var(--text); line-height: 1.8; margin-bottom: 32px; padding-left: 22px; border-left: 2px solid var(--sage); }
-.testimonial-author { display: flex; align-items: center; gap: 14px; }
-.t-avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--navy); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:500; color:var(--white); flex-shrink:0; letter-spacing:0.04em; }
-.t-name { font-size: 13px; font-weight: 500; color: var(--dark); margin-bottom: 2px; }
-.t-title { font-size: 11px; color: var(--text-muted); letter-spacing: 0.03em; }
-
+/* ── MARQUEE ── */
+.marquee-outer {
+  width: 100%; overflow: hidden;
+  background: var(--light-grey);
+  border-top: 1px solid var(--mid-grey);
+  border-bottom: 1px solid var(--mid-grey);
+  padding: 32px 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+.marquee-track {
+  display: flex; width: max-content;
+  animation: marqueeScroll 40s linear infinite;
+}
+.marquee-outer:hover .marquee-track { animation-play-state: paused; }
+.marquee-set {
+  display: flex; align-items: center;
+  gap: 72px; padding-right: 72px; flex-shrink: 0;
+}
+.marquee-logo {
+  height: 44px; width: auto; max-width: none;
+  object-fit: contain;
+  filter: grayscale(100%) opacity(0.35);
+  transition: filter 0.3s ease;
+  flex-shrink: 0; display: block;
+}
+.marquee-outer:hover .marquee-logo { filter: grayscale(80%) opacity(0.65); }
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
 @media(max-width:1024px){
   .services-grid{grid-template-columns:repeat(2,1fr);}
   .cred-inner{grid-template-columns:repeat(2,1fr);gap:32px;}
@@ -195,11 +199,41 @@
 
 <!-- CLIENTS -->
 <section id="clients">
-  <div class="container">
-    <div class="clients-inner">
-      <span class="clients-label">Trusted by</span>
-      <div class="clients-logos">
-        <span class="client-name">Disney</span><span class="client-name">Universal</span><span class="client-name">Ferrari World</span><span class="client-name">Legoland</span><span class="client-name">Paramount Parks</span><span class="client-name">Ocean Park HK</span><span class="client-name">NBCUniversal</span><span class="client-name">London Zoo</span><span class="client-name">V&amp;A Museum</span><span class="client-name">San Diego Zoo</span><span class="client-name">English Heritage</span>
+  <div class="marquee-outer">
+    <div class="marquee-track">
+      <div class="marquee-set">
+        <img src="images/logos/disneyland.png" alt="Disneyland" class="marquee-logo">
+        <img src="images/logos/universal.png" alt="Universal" class="marquee-logo">
+        <img src="images/logos/harrahs.png" alt="Harrah's Las Vegas" class="marquee-logo">
+        <img src="images/logos/anheuser.png" alt="Anheuser-Busch" class="marquee-logo">
+        <img src="images/logos/ferrari.png" alt="Ferrari World" class="marquee-logo">
+        <img src="images/logos/legoland.png" alt="Legoland Parks" class="marquee-logo">
+        <img src="images/logos/paramount.png" alt="Paramount Parks" class="marquee-logo">
+        <img src="images/logos/oceanpark.png" alt="Ocean Park Hong Kong" class="marquee-logo">
+        <img src="images/logos/parques.png" alt="Parques Reunidos" class="marquee-logo">
+        <img src="images/logos/nbcuniversal.png" alt="NBCUniversal" class="marquee-logo">
+        <img src="images/logos/zsl.png" alt="ZSL" class="marquee-logo">
+        <img src="images/logos/va.png" alt="V&A Museum" class="marquee-logo">
+        <img src="images/logos/sandiegozoo.png" alt="San Diego Zoo" class="marquee-logo">
+        <img src="images/logos/englishheritage.png" alt="English Heritage" class="marquee-logo">
+        <img src="images/logos/bluewater.png" alt="Bluewater" class="marquee-logo">
+      </div>
+      <div class="marquee-set" aria-hidden="true">
+        <img src="images/logos/disneyland.png" alt="Disneyland" class="marquee-logo">
+        <img src="images/logos/universal.png" alt="Universal" class="marquee-logo">
+        <img src="images/logos/harrahs.png" alt="Harrah's Las Vegas" class="marquee-logo">
+        <img src="images/logos/anheuser.png" alt="Anheuser-Busch" class="marquee-logo">
+        <img src="images/logos/ferrari.png" alt="Ferrari World" class="marquee-logo">
+        <img src="images/logos/legoland.png" alt="Legoland Parks" class="marquee-logo">
+        <img src="images/logos/paramount.png" alt="Paramount Parks" class="marquee-logo">
+        <img src="images/logos/oceanpark.png" alt="Ocean Park Hong Kong" class="marquee-logo">
+        <img src="images/logos/parques.png" alt="Parques Reunidos" class="marquee-logo">
+        <img src="images/logos/nbcuniversal.png" alt="NBCUniversal" class="marquee-logo">
+        <img src="images/logos/zsl.png" alt="ZSL" class="marquee-logo">
+        <img src="images/logos/va.png" alt="V&A Museum" class="marquee-logo">
+        <img src="images/logos/sandiegozoo.png" alt="San Diego Zoo" class="marquee-logo">
+        <img src="images/logos/englishheritage.png" alt="English Heritage" class="marquee-logo">
+        <img src="images/logos/bluewater.png" alt="Bluewater" class="marquee-logo">
       </div>
     </div>
   </div>
