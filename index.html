@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grant Leisure — Global Leisure &amp; Attractions Consultancy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* ── HOME-SPECIFIC ── */
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
+
+#hero {
+  min-height: 100vh; display: flex; align-items: center;
+  position: relative; overflow: hidden; background: var(--white); padding-top: 72px;
+}
+.hero-bg { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.hero-geo { position: absolute; border-radius: 4px; }
+.hero-geo-1 { width: 340px; height: 340px; background: var(--sage); opacity: 0.055; top: -90px; right: -70px; transform: rotate(15deg); border-radius: 28px; }
+.hero-geo-2 { width: 190px; height: 190px; background: var(--navy); opacity: 0.04; bottom: 130px; right: 210px; transform: rotate(-8deg); border-radius: 14px; }
+.hero-geo-3 { width: 80px; height: 80px; background: var(--forest); opacity: 0.07; top: 210px; right: 90px; border-radius: 6px; transform: rotate(22deg); }
+.hero-line { position: absolute; left: 0; bottom: 0; width: 100%; height: 1px; background: linear-gradient(90deg, transparent 0%, var(--mid-grey) 30%, var(--mid-grey) 70%, transparent 100%); }
+
+.hero-inner { position: relative; z-index: 1; max-width: 800px; padding: 80px 40px; }
+.hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 36px; opacity:0; animation: fadeUp .8s ease forwards .2s; }
+.hero-eyebrow-line { width: 32px; height: 1px; background: var(--sage); }
+.hero-eyebrow span { font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage); }
+.hero-headline { font-size: clamp(44px, 6.5vw, 86px); font-weight: 400; color: var(--dark); line-height: 1.06; margin-bottom: 28px; opacity:0; animation: fadeUp .8s ease forwards .4s; }
+.hero-headline em { font-style: italic; color: var(--navy); }
+.hero-sub { font-size: 17px; font-weight: 300; color: var(--text-muted); max-width: 520px; line-height: 1.75; margin-bottom: 48px; opacity:0; animation: fadeUp .8s ease forwards .6s; }
+.hero-actions { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; opacity:0; animation: fadeUp .8s ease forwards .8s; }
+.btn-ghost { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); font-size: 13px; font-weight: 400; letter-spacing: 0.04em; text-decoration: none; transition: color var(--tr); }
+.btn-ghost:hover { color: var(--navy); }
+.btn-ghost svg { transition: transform var(--tr); }
+.btn-ghost:hover svg { transform: translateX(3px); }
+
+.hero-stats { position: absolute; bottom: 60px; right: 40px; display: flex; gap: 52px; opacity:0; animation: fadeUp .8s ease forwards 1s; }
+.hero-stat-num { font-family: 'Libre Baskerville', Georgia, serif; font-size: 34px; font-weight: 400; color: var(--dark); line-height: 1; margin-bottom: 4px; }
+.hero-stat-label { font-size: 11px; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+
+/* clients */
+#clients { padding: 44px 0; background: var(--light-grey); border-top: 1px solid var(--mid-grey); border-bottom: 1px solid var(--mid-grey); }
+.clients-inner { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.clients-label { font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; padding-right: 16px; border-right: 1px solid var(--mid-grey); }
+.clients-logos { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 22px; }
+.client-name { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: #B8BBC8; text-transform: uppercase; white-space: nowrap; transition: color var(--tr); }
+.client-name:hover { color: var(--text-muted); }
+
+/* home about strip */
+#home-about { padding: 110px 0; background: var(--white); }
+.home-about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.home-about-heading { font-size: clamp(30px, 4vw, 52px); font-weight: 400; color: var(--dark); line-height: 1.15; margin-bottom: 26px; }
+.home-about-heading em { font-style: italic; color: var(--navy); }
+.home-about-body { font-size: 15px; font-weight: 300; color: var(--text-muted); line-height: 1.8; margin-bottom: 18px; }
+.home-about-cta { margin-top: 32px; display: flex; gap: 16px; align-items: center; }
+.about-accent { width: 48px; height: 3px; background: linear-gradient(90deg, var(--sage), var(--navy)); margin: 32px 0 0; border-radius: 2px; }
+
+.metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--mid-grey); border: 1px solid var(--mid-grey); }
+.metric-cell { background: var(--white); padding: 28px 24px; }
+.metric-num { font-family: 'Libre Baskerville', Georgia, serif; font-size: 42px; font-weight: 400; color: var(--dark); line-height: 1; margin-bottom: 6px; }
+.metric-label { font-size: 11px; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+
+/* services preview */
+#home-services { padding: 110px 0; background: var(--light-grey); }
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--mid-grey); border: 1px solid var(--mid-grey); }
+.service-card { background: var(--white); padding: 36px 32px; position: relative; overflow: hidden; }
+.service-card::after { content:''; position:absolute; bottom:0; left:0; width:100%; height:3px; background: linear-gradient(90deg, var(--sage), var(--navy)); transform:scaleX(0); transform-origin:left; transition:transform var(--tr); }
+.service-card:hover::after { transform:scaleX(1); }
+.service-card:hover { background: #FAFAFA; }
+.service-num { font-size: 11px; font-weight: 500; letter-spacing: 0.18em; color: var(--sage); margin-bottom: 12px; display: block; }
+.service-title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 17px; font-weight: 400; color: var(--dark); margin-bottom: 12px; line-height: 1.3; }
+.service-desc { font-size: 13px; font-weight: 300; color: var(--text-muted); line-height: 1.7; }
+.services-cta { margin-top: 48px; display: flex; justify-content: center; }
+
+/* featured projects */
+#home-projects { padding: 110px 0; background: var(--white); }
+.projects-header-row { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 56px; gap: 32px; flex-wrap: wrap; }
+.projects-grid-home { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--mid-grey); }
+.proj-row-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--mid-grey); margin-top: 1px; }
+.project-card { background: var(--white); overflow: hidden; position: relative; cursor: pointer; }
+.project-img { width:100%; aspect-ratio: 4/3; overflow: hidden; }
+.project-img-inner { width:100%; height:100%; background: linear-gradient(135deg, #E8E9EE 0%, #D4D6E0 100%); display:flex; align-items:center; justify-content:center; transition: transform var(--tr); }
+.proj-row-2 .project-img { aspect-ratio: 16/7; }
+.project-card:hover .project-img-inner { transform: scale(1.04); }
+.proj-placeholder { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #B0B3C4; }
+.project-body { padding: 22px; background: var(--white); border-top: 1px solid var(--mid-grey); transition: background var(--tr); }
+.project-card:hover .project-body { background: #FAFAFA; }
+.project-cat { font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sage); margin-bottom: 6px; display: block; }
+.project-name { font-family: 'Libre Baskerville', Georgia, serif; font-size: 15px; font-weight: 400; color: var(--dark); margin-bottom: 4px; line-height: 1.3; }
+.project-loc { font-size: 12px; font-weight: 300; color: var(--text-muted); }
+
+/* credibility band */
+#credibility { padding: 76px 0; background: var(--navy); }
+.cred-inner { display: grid; grid-template-columns: repeat(4, 1fr); }
+.cred-item { padding: 0 32px; text-align: center; position: relative; }
+.cred-item:not(:last-child)::after { content:''; position:absolute; right:0; top:50%; transform:translateY(-50%); height:48px; width:1px; background:rgba(255,255,255,0.14); }
+.cred-num { font-family: 'Libre Baskerville', Georgia, serif; font-size: 54px; font-weight: 400; color: var(--white); line-height: 1; margin-bottom: 10px; display: block; }
+.cred-num sup { font-size: 28px; vertical-align: super; }
+.cred-label { font-size: 11px; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+
+/* testimonials */
+#home-testimonials { padding: 110px 0; background: var(--light-grey); }
+.testimonials-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--mid-grey); margin-top: 60px; }
+.testimonial-card { background: var(--white); padding: 44px; }
+.testimonial-quote { font-family: 'Libre Baskerville', Georgia, serif; font-size: 15px; font-style: italic; color: var(--text); line-height: 1.8; margin-bottom: 32px; padding-left: 22px; border-left: 2px solid var(--sage); }
+.testimonial-author { display: flex; align-items: center; gap: 14px; }
+.t-avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--navy); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:500; color:var(--white); flex-shrink:0; letter-spacing:0.04em; }
+.t-name { font-size: 13px; font-weight: 500; color: var(--dark); margin-bottom: 2px; }
+.t-title { font-size: 11px; color: var(--text-muted); letter-spacing: 0.03em; }
+
+@media(max-width:1024px){
+  .services-grid{grid-template-columns:repeat(2,1fr);}
+  .cred-inner{grid-template-columns:repeat(2,1fr);gap:32px;}
+  .cred-item::after{display:none;}
+}
+@media(max-width:768px){
+  #hero{min-height:auto;padding:96px 0 60px;}
+  .hero-inner{padding:36px 24px;}
+  .hero-stats{position:static;padding:36px 24px 0;gap:32px;}
+  .home-about-grid{grid-template-columns:1fr;gap:44px;}
+  .projects-grid-home{grid-template-columns:1fr;}
+  .proj-row-2{grid-template-columns:1fr;}
+  .testimonials-grid{grid-template-columns:1fr;}
+  .services-grid{grid-template-columns:1fr;}
+  .metric-grid{grid-template-columns:1fr 1fr;}
+  .projects-header-row{flex-direction:column;align-items:flex-start;}
+  .hero-geo-1,.hero-geo-2,.hero-geo-3{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-squares"><div class="logo-sq logo-sq-1"></div><div class="logo-sq logo-sq-2"></div><div class="logo-sq logo-sq-3"></div></div>
+    <div class="logo-wordmark"><span class="logo-grant">Grant</span><span class="logo-leisure">Leisure</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="about.html">About &amp; Team</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li class="has-dropdown" id="projectsNav">
+      <a href="projects.html">Projects <span class="nav-arrow"></span></a>
+      <div class="dropdown">
+        <a href="projects.html?cat=all"><span class="dropdown-dot" style="background:#7A7F9A"></span>All Projects</a>
+        <div class="dropdown-divider"></div>
+        <a href="projects.html?cat=attractions"><span class="dropdown-dot" style="background:#5BAF7A"></span>Attractions</a>
+        <a href="projects.html?cat=resorts"><span class="dropdown-dot" style="background:#3D8F5F"></span>Resorts</a>
+        <a href="projects.html?cat=zoological"><span class="dropdown-dot" style="background:#3B4F8A"></span>Zoological</a>
+        <a href="projects.html?cat=museums"><span class="dropdown-dot" style="background:#7A7F9A"></span>Museums</a>
+        <a href="projects.html?cat=heritage"><span class="dropdown-dot" style="background:#2C2D35"></span>Heritage</a>
+      </div>
+    </li>
+    <li><a href="contact.html" class="nav-cta">Get in Touch</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="about.html" class="mob-link">About &amp; Team</a>
+  <a href="services.html" class="mob-link">Services</a>
+  <a href="projects.html" class="mob-link">Projects</a>
+  <a href="projects.html?cat=attractions" class="mob-sub"><span class="dropdown-dot" style="background:#5BAF7A;flex-shrink:0"></span>Attractions</a>
+  <a href="projects.html?cat=resorts" class="mob-sub"><span class="dropdown-dot" style="background:#3D8F5F;flex-shrink:0"></span>Resorts</a>
+  <a href="projects.html?cat=zoological" class="mob-sub"><span class="dropdown-dot" style="background:#3B4F8A;flex-shrink:0"></span>Zoological</a>
+  <a href="projects.html?cat=museums" class="mob-sub"><span class="dropdown-dot" style="background:#7A7F9A;flex-shrink:0"></span>Museums</a>
+  <a href="projects.html?cat=heritage" class="mob-sub"><span class="dropdown-dot" style="background:#2C2D35;flex-shrink:0"></span>Heritage</a>
+  <a href="contact.html" class="mob-link mob-cta">Get in Touch</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-geo hero-geo-1"></div>
+    <div class="hero-geo hero-geo-2"></div>
+    <div class="hero-geo hero-geo-3"></div>
+    <div class="hero-line"></div>
+  </div>
+  <div class="hero-inner container">
+    <div class="hero-eyebrow"><div class="hero-eyebrow-line"></div><span>Leisure &amp; Attractions Consultancy</span></div>
+    <h1 class="hero-headline">Shaping the<br>Future of <em>Leisure</em></h1>
+    <p class="hero-sub">Global strategic planning and implementation for visitor attractions, resort destinations, and leisure developments — backed by four decades of proven expertise.</p>
+    <div class="hero-actions">
+      <a href="services.html" class="btn-primary">Explore Our Work</a>
+      <a href="projects.html" class="btn-ghost">View Projects <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+    </div>
+  </div>
+  <div class="hero-stats container">
+    <div class="hero-stat"><div class="hero-stat-num">40+</div><div class="hero-stat-label">Years Active</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">35</div><div class="hero-stat-label">Countries</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">2,500+</div><div class="hero-stat-label">Projects</div></div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section id="clients">
+  <div class="container">
+    <div class="clients-inner">
+      <span class="clients-label">Trusted by</span>
+      <div class="clients-logos">
+        <span class="client-name">Disney</span><span class="client-name">Universal</span><span class="client-name">Ferrari World</span><span class="client-name">Legoland</span><span class="client-name">Paramount Parks</span><span class="client-name">Ocean Park HK</span><span class="client-name">NBCUniversal</span><span class="client-name">London Zoo</span><span class="client-name">V&amp;A Museum</span><span class="client-name">San Diego Zoo</span><span class="client-name">English Heritage</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT STRIP -->
+<section id="home-about">
+  <div class="container">
+    <div class="home-about-grid">
+      <div class="reveal">
+        <span class="section-label">Who We Are</span>
+        <h2 class="home-about-heading">Four decades of <em>unmatched</em> industry authority</h2>
+        <p class="home-about-body">Grant Leisure is a global leader in the strategic planning and implementation of visitor attractions and resort destinations. With offices in the United States and Europe, our team of accomplished senior consultants brings proven track records to every engagement.</p>
+        <p class="home-about-body">Over 150 million people annually pay admission to the heritage sites, museums, visitor attractions, and theme parks around the world that Grant Leisure has consulted, owned, and operated.</p>
+        <div class="home-about-cta">
+          <a href="about.html" class="btn-primary">Meet the Team</a>
+          <a href="services.html" class="btn-outline">Our Services</a>
+        </div>
+        <div class="about-accent"></div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="metric-grid">
+          <div class="metric-cell"><div class="metric-num">35</div><div class="metric-label">Countries</div></div>
+          <div class="metric-cell"><div class="metric-num">5</div><div class="metric-label">Continents</div></div>
+          <div class="metric-cell"><div class="metric-num">2,500+</div><div class="metric-label">Projects</div></div>
+          <div class="metric-cell"><div class="metric-num">40+</div><div class="metric-label">Years</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES PREVIEW -->
+<section id="home-services">
+  <div class="container">
+    <div class="reveal" style="max-width:560px;margin-bottom:56px;">
+      <span class="section-label">What We Do</span>
+      <h2 class="section-heading">Full-spectrum <em>expertise</em> across every stage</h2>
+      <p class="section-sub">From initial feasibility through grand opening and beyond — we deliver the strategic rigour your project demands.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal"><span class="service-num">01</span><h3 class="service-title">Market Analysis</h3><p class="service-desc">Evaluating overall trends, visitor demographics, competitive supply, and sustainable growth in target markets worldwide.</p></div>
+      <div class="service-card reveal reveal-delay-1"><span class="service-num">02</span><h3 class="service-title">Concept Development</h3><p class="service-desc">Building compelling development concepts based on identified target markets, competitive landscape, and location attributes.</p></div>
+      <div class="service-card reveal reveal-delay-2"><span class="service-num">03</span><h3 class="service-title">Feasibility Studies</h3><p class="service-desc">Rigorous financial feasibility assessments, operating pro formas, and cash flow projections to establish economic certainty.</p></div>
+      <div class="service-card reveal reveal-delay-1"><span class="service-num">04</span><h3 class="service-title">Funding Assistance</h3><p class="service-desc">Strategic assistance with soliciting and securing funding opportunities, structuring optimal deal frameworks.</p></div>
+      <div class="service-card reveal reveal-delay-2"><span class="service-num">05</span><h3 class="service-title">Operational Planning</h3><p class="service-desc">Comprehensive operational strategy, performance reviews, and targeted recommendations for improvement and expansion.</p></div>
+      <div class="service-card reveal reveal-delay-3"><span class="service-num">06</span><h3 class="service-title">Turn-Key Management</h3><p class="service-desc">Executive staff recruitment and full turn-key operational management from pre-opening through Grand Opening and beyond.</p></div>
+    </div>
+    <div class="services-cta reveal"><a href="services.html" class="btn-outline">View All Services</a></div>
+  </div>
+</section>
+
+<!-- FEATURED PROJECTS -->
+<section id="home-projects">
+  <div class="container">
+    <div class="projects-header-row">
+      <div class="reveal">
+        <span class="section-label">Selected Work</span>
+        <h2 class="section-heading">A portfolio of <em>defining</em> destinations</h2>
+      </div>
+      <a href="projects.html" class="btn-outline reveal reveal-delay-2">View All Projects</a>
+    </div>
+    <div class="projects-grid-home">
+      <div class="project-card reveal"><div class="project-img"><div class="project-img-inner"><span class="proj-placeholder">London, UK</span></div></div><div class="project-body"><span class="project-cat">Attractions</span><div class="project-name">The London Eye</div><div class="project-loc">London, United Kingdom</div></div></div>
+      <div class="project-card reveal reveal-delay-1"><div class="project-img"><div class="project-img-inner"><span class="proj-placeholder">Abu Dhabi, UAE</span></div></div><div class="project-body"><span class="project-cat">Attractions</span><div class="project-name">Ferrari World</div><div class="project-loc">Abu Dhabi, UAE</div></div></div>
+      <div class="project-card reveal reveal-delay-2"><div class="project-img"><div class="project-img-inner"><span class="proj-placeholder">South Africa</span></div></div><div class="project-body"><span class="project-cat">Resorts</span><div class="project-name">Phinda Game Reserve</div><div class="project-loc">KwaZulu-Natal, South Africa</div></div></div>
+    </div>
+    <div class="proj-row-2">
+      <div class="project-card reveal"><div class="project-img"><div class="project-img-inner"><span class="proj-placeholder">London, UK</span></div></div><div class="project-body"><span class="project-cat">Heritage</span><div class="project-name">Tower of London</div><div class="project-loc">London, United Kingdom</div></div></div>
+      <div class="project-card reveal reveal-delay-1"><div class="project-img"><div class="project-img-inner"><span class="proj-placeholder">Hong Kong</span></div></div><div class="project-body"><span class="project-cat">Zoological</span><div class="project-name">Ocean Park Hong Kong</div><div class="project-loc">Hong Kong</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDIBILITY BAND -->
+<section id="credibility">
+  <div class="container">
+    <div class="cred-inner">
+      <div class="cred-item reveal"><span class="cred-num">40<sup>+</sup></span><span class="cred-label">Years in Business</span></div>
+      <div class="cred-item reveal reveal-delay-1"><span class="cred-num">35</span><span class="cred-label">Countries</span></div>
+      <div class="cred-item reveal reveal-delay-2"><span class="cred-num">2,500<sup>+</sup></span><span class="cred-label">Projects Completed</span></div>
+      <div class="cred-item reveal reveal-delay-3"><span class="cred-num">5</span><span class="cred-label">Continents</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="home-testimonials">
+  <div class="container">
+    <div class="reveal" style="max-width:500px;"><span class="section-label">Client Voice</span><h2 class="section-heading">What our <em>partners</em> say</h2></div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal"><blockquote class="testimonial-quote">I have been working with Grant Leisure for over 30 years and can personally testify to their unparalleled track record in translating creative concepts into feasible and profitable projects. They are our go-to resource when our projects and clients need a dose of reality.</blockquote><div class="testimonial-author"><div class="t-avatar">CM</div><div><div class="t-name">Chris Mather</div><div class="t-title">Chief Executive Officer · Mather &amp; Co</div></div></div></div>
+      <div class="testimonial-card reveal reveal-delay-2"><blockquote class="testimonial-quote">In all cases, I have found Andy's vision for what it takes to create a successful project to be outstanding. His instinct and attention to detail in large-scale land-planning for leisure destinations is second to none.</blockquote><div class="testimonial-author"><div class="t-avatar">LW</div><div><div class="t-name">Larry Wyatt</div><div class="t-title">VP Planning &amp; Development · Paramount Parks</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo"><div class="logo-squares"><div class="logo-sq logo-sq-1"></div><div class="logo-sq logo-sq-2"></div><div class="logo-sq logo-sq-3"></div></div><div class="logo-wordmark"><span class="logo-grant">Grant</span><span class="logo-leisure">Leisure</span></div></div>
+        <p class="footer-tagline">Global strategic planning and implementation for the world's most compelling leisure destinations.</p>
+      </div>
+      <div><span class="footer-col-label">Navigate</span><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About &amp; Team</a></li><li><a href="services.html">Services</a></li><li><a href="projects.html">Projects</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><span class="footer-col-label">Projects</span><ul class="footer-links"><li><a href="projects.html?cat=attractions">Attractions</a></li><li><a href="projects.html?cat=resorts">Resorts</a></li><li><a href="projects.html?cat=zoological">Zoological</a></li><li><a href="projects.html?cat=museums">Museums</a></li><li><a href="projects.html?cat=heritage">Heritage</a></li></ul></div>
+      <div><span class="footer-col-label">Contact</span><ul class="footer-links"><li><a href="mailto:info@grant-leisure.com">info@grant-leisure.com</a></li><li><a href="contact.html">United States Office</a></li><li><a href="contact.html">European Office</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">&copy; 2025 Grant Leisure. All rights reserved.</span><span class="footer-offices">US &amp; European Offices</span></div>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+</body>
+</html>

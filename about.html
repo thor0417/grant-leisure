@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About &amp; Team — Grant Leisure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* ── ABOUT-SPECIFIC ── */
+#about-body { padding: 100px 0; background: var(--white); }
+.about-two-col { display: grid; grid-template-columns: 1.1fr 1fr; gap: 80px; align-items: start; }
+.about-h2 { font-size: clamp(30px, 4vw, 50px); font-weight: 400; color: var(--dark); line-height: 1.15; margin-bottom: 28px; }
+.about-h2 em { font-style: italic; color: var(--navy); }
+.about-p { font-size: 15px; font-weight: 300; color: var(--text-muted); line-height: 1.82; margin-bottom: 18px; }
+.about-pull { font-family: 'Libre Baskerville', Georgia, serif; font-size: 20px; font-weight: 400; font-style: italic; color: var(--navy); line-height: 1.55; padding: 28px 0 28px 28px; border-left: 3px solid var(--sage); margin: 36px 0; }
+.about-accent { width: 44px; height: 3px; background: linear-gradient(90deg, var(--sage), var(--navy)); border-radius: 2px; margin-top: 32px; }
+
+.metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--mid-grey); border: 1px solid var(--mid-grey); }
+.metric-cell { background: var(--white); padding: 28px 24px; }
+.metric-num { font-family: 'Libre Baskerville', Georgia, serif; font-size: 40px; font-weight: 400; color: var(--dark); line-height: 1; margin-bottom: 6px; }
+.metric-label { font-size: 11px; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+.about-ctas { display: flex; gap: 14px; margin-top: 36px; flex-wrap: wrap; }
+
+/* ── APPROACH STRIP ── */
+#approach { padding: 80px 0; background: var(--light-grey); border-top: 1px solid var(--mid-grey); border-bottom: 1px solid var(--mid-grey); }
+.approach-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--mid-grey); border: 1px solid var(--mid-grey); margin-top: 52px; }
+.approach-cell { background: var(--white); padding: 32px 28px; }
+.approach-num { font-size: 11px; font-weight: 500; letter-spacing: 0.18em; color: var(--sage); margin-bottom: 12px; display: block; }
+.approach-title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 16px; font-weight: 400; color: var(--dark); margin-bottom: 10px; }
+.approach-desc { font-size: 13px; font-weight: 300; color: var(--text-muted); line-height: 1.7; }
+
+/* ── TEAM SECTION ── */
+#team { padding: 100px 0; background: var(--white); }
+.team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--mid-grey); border: 1px solid var(--mid-grey); margin-top: 60px; }
+
+/* ── FLIP CARDS ── */
+.flip-card { height: 400px; perspective: 1000px; cursor: pointer; }
+.flip-inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 0.65s cubic-bezier(0.4,0,0.2,1); }
+.flip-card:hover .flip-inner { transform: rotateY(180deg); }
+.flip-front, .flip-back { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.flip-front { background: var(--white); overflow: hidden; display: flex; flex-direction: column; }
+.flip-back { background: var(--navy); transform: rotateY(180deg); padding: 28px 26px; display: flex; flex-direction: column; justify-content: space-between; }
+
+.card-photo { flex: 1; overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative; background: #CDD0DB; }
+.card-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform 0.5s ease; }
+.flip-card:hover .card-photo img { transform: scale(1.04); }
+.card-photo-initials { font-family: 'Libre Baskerville', Georgia, serif; font-size: 44px; font-weight: 400; color: rgba(255,255,255,0.5); letter-spacing: 0.04em; pointer-events: none; }
+.flip-hint { position: absolute; bottom: 10px; right: 10px; width: 26px; height: 26px; background: rgba(255,255,255,0.18); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+.card-front-body { padding: 18px 20px 22px; border-top: 1px solid var(--mid-grey); }
+.card-name { font-family: 'Libre Baskerville', Georgia, serif; font-size: 15px; font-weight: 400; color: var(--dark); margin-bottom: 4px; line-height: 1.2; }
+.card-role { font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); }
+
+.back-bar { width: 28px; height: 2px; background: var(--sage); margin-bottom: 14px; }
+.back-name { font-family: 'Libre Baskerville', Georgia, serif; font-size: 17px; font-weight: 400; color: var(--white); margin-bottom: 3px; line-height: 1.2; }
+.back-role { font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 18px; }
+.back-bio { font-size: 12.5px; font-weight: 300; color: rgba(255,255,255,0.82); line-height: 1.72; flex: 1; }
+.back-footer { margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 6px; }
+.back-sq { width: 7px; height: 7px; border-radius: 1px; }
+.back-brand { font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+
+/* touch fallback */
+.flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+
+/* ── TESTIMONIALS ── */
+#about-testimonials { padding: 100px 0; background: var(--light-grey); }
+.testimonials-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--mid-grey); margin-top: 56px; }
+.testimonial-card { background: var(--white); padding: 44px; }
+.testimonial-quote { font-family: 'Libre Baskerville', Georgia, serif; font-size: 15px; font-style: italic; color: var(--text); line-height: 1.8; margin-bottom: 30px; padding-left: 22px; border-left: 2px solid var(--sage); }
+.testimonial-author { display: flex; align-items: center; gap: 14px; }
+.t-avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--navy); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:500; color:var(--white); flex-shrink:0; }
+.t-name { font-size: 13px; font-weight: 500; color: var(--dark); margin-bottom: 2px; }
+.t-title { font-size: 11px; color: var(--text-muted); }
+
+@media(max-width:1024px){ .team-grid{grid-template-columns:repeat(2,1fr);} .about-two-col{grid-template-columns:1fr;gap:44px;} .approach-grid{grid-template-columns:1fr 1fr;} }
+@media(max-width:768px){ .team-grid{grid-template-columns:repeat(2,1fr);} .flip-card{height:360px;} .testimonials-grid{grid-template-columns:1fr;} .approach-grid{grid-template-columns:1fr;} .metric-grid{grid-template-columns:1fr 1fr;} }
+@media(max-width:480px){ .team-grid{grid-template-columns:1fr;} .flip-card{height:320px;} }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo"><div class="logo-squares"><div class="logo-sq logo-sq-1"></div><div class="logo-sq logo-sq-2"></div><div class="logo-sq logo-sq-3"></div></div><div class="logo-wordmark"><span class="logo-grant">Grant</span><span class="logo-leisure">Leisure</span></div></a>
+  <ul class="nav-links">
+    <li><a href="about.html" class="active">About &amp; Team</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li class="has-dropdown" id="projectsNav"><a href="projects.html">Projects <span class="nav-arrow"></span></a><div class="dropdown"><a href="projects.html?cat=all"><span class="dropdown-dot" style="background:#7A7F9A"></span>All Projects</a><div class="dropdown-divider"></div><a href="projects.html?cat=attractions"><span class="dropdown-dot" style="background:#5BAF7A"></span>Attractions</a><a href="projects.html?cat=resorts"><span class="dropdown-dot" style="background:#3D8F5F"></span>Resorts</a><a href="projects.html?cat=zoological"><span class="dropdown-dot" style="background:#3B4F8A"></span>Zoological</a><a href="projects.html?cat=museums"><span class="dropdown-dot" style="background:#7A7F9A"></span>Museums</a><a href="projects.html?cat=heritage"><span class="dropdown-dot" style="background:#2C2D35"></span>Heritage</a></div></li>
+    <li><a href="contact.html" class="nav-cta">Get in Touch</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="about.html" class="mob-link">About &amp; Team</a>
+  <a href="services.html" class="mob-link">Services</a>
+  <a href="projects.html" class="mob-link">Projects</a>
+  <a href="projects.html?cat=attractions" class="mob-sub"><span class="dropdown-dot" style="background:#5BAF7A;flex-shrink:0"></span>Attractions</a>
+  <a href="projects.html?cat=resorts" class="mob-sub"><span class="dropdown-dot" style="background:#3D8F5F;flex-shrink:0"></span>Resorts</a>
+  <a href="projects.html?cat=zoological" class="mob-sub"><span class="dropdown-dot" style="background:#3B4F8A;flex-shrink:0"></span>Zoological</a>
+  <a href="projects.html?cat=museums" class="mob-sub"><span class="dropdown-dot" style="background:#7A7F9A;flex-shrink:0"></span>Museums</a>
+  <a href="projects.html?cat=heritage" class="mob-sub"><span class="dropdown-dot" style="background:#2C2D35;flex-shrink:0"></span>Heritage</a>
+  <a href="contact.html" class="mob-link mob-cta">Get in Touch</a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-geo page-hero-geo-1"></div>
+  <div class="page-hero-geo page-hero-geo-2"></div>
+  <div class="container">
+    <div class="page-hero-eyebrow"><div class="page-hero-eyebrow-line"></div><span>Who We Are</span></div>
+    <h1>About <em>Grant Leisure</em></h1>
+    <p class="page-hero-sub">A global consultancy built on four decades of hands-on experience in the planning, development, and operation of world-class leisure destinations.</p>
+  </div>
+</section>
+
+<!-- ABOUT BODY -->
+<section id="about-body">
+  <div class="container">
+    <div class="about-two-col">
+      <div class="reveal">
+        <span class="section-label">Our Story</span>
+        <h2 class="about-h2">The authority behind <em>landmark</em> leisure</h2>
+        <p class="about-p">Grant Leisure is a global leader in the strategic planning and implementation of visitor attractions and resort destinations. With offices in the United States and Europe, our team of accomplished senior consultants brings proven track records across every category of leisure development.</p>
+        <p class="about-p">Over 150 million people annually pay admission to the heritage sites, museums, visitor attractions, zoological institutions, and theme parks around the world that Grant Leisure has consulted, owned, and operated.</p>
+        <blockquote class="about-pull">"90% of operational failures are a result of improper planning. We exist to change that statistic."</blockquote>
+        <p class="about-p">Before committing significant capital to competitive, sophisticated markets, our clients deserve certainty. Grant Leisure delivers innovative solutions paired with realistic guidance throughout the entire planning and development process — at any stage, at any scale.</p>
+        <div class="about-accent"></div>
+        <div class="about-ctas">
+          <a href="services.html" class="btn-primary">Our Services</a>
+          <a href="contact.html" class="btn-outline">Start a Conversation</a>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="metric-grid">
+          <div class="metric-cell"><div class="metric-num">35</div><div class="metric-label">Countries</div></div>
+          <div class="metric-cell"><div class="metric-num">5</div><div class="metric-label">Continents</div></div>
+          <div class="metric-cell"><div class="metric-num">2,500+</div><div class="metric-label">Projects</div></div>
+          <div class="metric-cell"><div class="metric-num">40+</div><div class="metric-label">Years Active</div></div>
+          <div class="metric-cell"><div class="metric-num">65</div><div class="metric-label">Theme Parks</div></div>
+          <div class="metric-cell"><div class="metric-num">27</div><div class="metric-label">Zoological Institutions</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section id="approach">
+  <div class="container">
+    <div class="reveal" style="max-width:520px;">
+      <span class="section-label">Our Approach</span>
+      <h2 class="section-heading">Delivering certainty at <em>every stage</em></h2>
+    </div>
+    <div class="approach-grid">
+      <div class="approach-cell reveal"><span class="approach-num">01</span><div class="approach-title">Strategic Planning</div><p class="approach-desc">Every engagement begins with rigorous market evaluation and clear-eyed analysis of what a destination can realistically achieve.</p></div>
+      <div class="approach-cell reveal reveal-delay-1"><span class="approach-num">02</span><div class="approach-title">Financial Rigour</div><p class="approach-desc">Our feasibility studies and financial modelling are built to withstand investor scrutiny — not just to confirm a client's wishlist.</p></div>
+      <div class="approach-cell reveal reveal-delay-2"><span class="approach-num">03</span><div class="approach-title">Operational Depth</div><p class="approach-desc">We have owned and operated the kinds of attractions we advise on. That operational perspective is what sets our recommendations apart.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="container">
+    <div class="reveal" style="max-width:520px;">
+      <span class="section-label">Our People</span>
+      <h2 class="section-heading">The team behind the <em>expertise</em></h2>
+      <p class="section-sub" style="margin-top:8px;">Hover over any card to learn more about each team member.</p>
+    </div>
+
+    <div class="team-grid">
+
+      <!-- CARD 1 — replace src with real photo path -->
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div class="card-photo">
+              <!-- <img src="images/team-andrew-grant.jpg" alt="Andrew Grant"> -->
+              <span class="card-photo-initials">AG</span>
+              <div class="flip-hint"><svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 5.5h8M6 1.5l4 4-4 4"/></svg></div>
+            </div>
+            <div class="card-front-body"><div class="card-name">Andrew Grant</div><div class="card-role">Founder &amp; Managing Director</div></div>
+          </div>
+          <div class="flip-back">
+            <div><div class="back-bar"></div><div class="back-name">Andrew Grant</div><div class="back-role">Founder &amp; Managing Director</div><p class="back-bio">With over 40 years at the forefront of leisure and attractions development, Andrew has overseen projects across 35 countries and five continents — from the London Eye to Ferrari World Abu Dhabi. His instinct for viable, profitable leisure destinations is without equal in the industry.</p></div>
+            <div class="back-footer"><div class="back-sq" style="background:#5BAF7A"></div><div class="back-sq" style="background:#3D8F5F"></div><div class="back-sq" style="background:#3B4F8A;opacity:.5"></div><span class="back-brand">Grant Leisure</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div class="card-photo" style="background:#BEC3CC;">
+              <!-- <img src="images/team-sarah-mitchell.jpg" alt="Sarah Mitchell"> -->
+              <span class="card-photo-initials">SM</span>
+              <div class="flip-hint"><svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 5.5h8M6 1.5l4 4-4 4"/></svg></div>
+            </div>
+            <div class="card-front-body"><div class="card-name">Sarah Mitchell</div><div class="card-role">Director, Feasibility &amp; Strategy</div></div>
+          </div>
+          <div class="flip-back">
+            <div><div class="back-bar"></div><div class="back-name">Sarah Mitchell</div><div class="back-role">Director, Feasibility &amp; Strategy</div><p class="back-bio">Sarah leads Grant Leisure's feasibility and financial modelling practice, with a focus on visitor attraction economics and resort destination planning. She has delivered over 300 feasibility studies across Europe, the Middle East, and Asia-Pacific.</p></div>
+            <div class="back-footer"><div class="back-sq" style="background:#5BAF7A"></div><div class="back-sq" style="background:#3D8F5F"></div><div class="back-sq" style="background:#3B4F8A;opacity:.5"></div><span class="back-brand">Grant Leisure</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div class="card-photo" style="background:#C4C8D4;">
+              <!-- <img src="images/team-james-reeve.jpg" alt="James Reeve"> -->
+              <span class="card-photo-initials">JR</span>
+              <div class="flip-hint"><svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 5.5h8M6 1.5l4 4-4 4"/></svg></div>
+            </div>
+            <div class="card-front-body"><div class="card-name">James Reeve</div><div class="card-role">Senior Consultant, Operations</div></div>
+          </div>
+          <div class="flip-back">
+            <div><div class="back-bar"></div><div class="back-name">James Reeve</div><div class="back-role">Senior Consultant, Operations</div><p class="back-bio">James brings 20 years of hands-on operational experience across theme parks, zoological institutions, and heritage sites. He specialises in pre-opening strategy, staffing structures, and turn-key management from concept through to launch.</p></div>
+            <div class="back-footer"><div class="back-sq" style="background:#5BAF7A"></div><div class="back-sq" style="background:#3D8F5F"></div><div class="back-sq" style="background:#3B4F8A;opacity:.5"></div><span class="back-brand">Grant Leisure</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 4 -->
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div class="card-photo" style="background:#C9CDD8;">
+              <!-- <img src="images/team-diana-chen.jpg" alt="Diana Chen"> -->
+              <span class="card-photo-initials">DC</span>
+              <div class="flip-hint"><svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 5.5h8M6 1.5l4 4-4 4"/></svg></div>
+            </div>
+            <div class="card-front-body"><div class="card-name">Diana Chen</div><div class="card-role">Director, Market Research</div></div>
+          </div>
+          <div class="flip-back">
+            <div><div class="back-bar"></div><div class="back-name">Diana Chen</div><div class="back-role">Director, Market Research</div><p class="back-bio">Diana oversees Grant Leisure's market research and visitor demand analysis practice. Her work spans 25 countries across Asia-Pacific, and she has led demographic and tourism studies for major resort and attraction developments across the region.</p></div>
+            <div class="back-footer"><div class="back-sq" style="background:#5BAF7A"></div><div class="back-sq" style="background:#3D8F5F"></div><div class="back-sq" style="background:#3B4F8A;opacity:.5"></div><span class="back-brand">Grant Leisure</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="about-testimonials">
+  <div class="container">
+    <div class="reveal" style="max-width:500px;"><span class="section-label">Client Voice</span><h2 class="section-heading">What our <em>partners</em> say</h2></div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal"><blockquote class="testimonial-quote">I have been working with Grant Leisure for over 30 years and can personally testify to their unparalleled track record in translating creative concepts into feasible and profitable projects. They are our go-to resource when our projects and clients need a dose of reality.</blockquote><div class="testimonial-author"><div class="t-avatar">CM</div><div><div class="t-name">Chris Mather</div><div class="t-title">Chief Executive Officer · Mather &amp; Co</div></div></div></div>
+      <div class="testimonial-card reveal reveal-delay-2"><blockquote class="testimonial-quote">In all cases, I have found Andy's vision for what it takes to create a successful project to be outstanding. His instinct and attention to detail in large-scale land-planning for leisure destinations is second to none.</blockquote><div class="testimonial-author"><div class="t-avatar">LW</div><div><div class="t-name">Larry Wyatt</div><div class="t-title">VP Planning &amp; Development · Paramount Parks</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand"><div class="footer-logo"><div class="logo-squares"><div class="logo-sq logo-sq-1"></div><div class="logo-sq logo-sq-2"></div><div class="logo-sq logo-sq-3"></div></div><div class="logo-wordmark"><span class="logo-grant">Grant</span><span class="logo-leisure">Leisure</span></div></div><p class="footer-tagline">Global strategic planning and implementation for the world's most compelling leisure destinations.</p></div>
+      <div><span class="footer-col-label">Navigate</span><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About &amp; Team</a></li><li><a href="services.html">Services</a></li><li><a href="projects.html">Projects</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><span class="footer-col-label">Projects</span><ul class="footer-links"><li><a href="projects.html?cat=attractions">Attractions</a></li><li><a href="projects.html?cat=resorts">Resorts</a></li><li><a href="projects.html?cat=zoological">Zoological</a></li><li><a href="projects.html?cat=museums">Museums</a></li><li><a href="projects.html?cat=heritage">Heritage</a></li></ul></div>
+      <div><span class="footer-col-label">Contact</span><ul class="footer-links"><li><a href="mailto:info@grant-leisure.com">info@grant-leisure.com</a></li><li><a href="contact.html">United States Office</a></li><li><a href="contact.html">European Office</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">&copy; 2025 Grant Leisure. All rights reserved.</span><span class="footer-offices">US &amp; European Offices</span></div>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+</body>
+</html>

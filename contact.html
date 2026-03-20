@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Grant Leisure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+#contact-body { padding: 100px 0 120px; background: var(--light-grey); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
+
+.contact-intro { font-size: 15px; font-weight: 300; color: var(--text-muted); line-height: 1.8; margin-bottom: 40px; }
+.contact-details { display: flex; flex-direction: column; gap: 28px; margin-bottom: 48px; }
+.contact-detail { display: flex; align-items: flex-start; gap: 16px; }
+.detail-icon { width: 40px; height: 40px; background: var(--white); border: 1px solid var(--mid-grey); border-radius: 3px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.detail-label { font-size: 10px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
+.detail-value { font-size: 14px; color: var(--dark); line-height: 1.5; }
+.detail-value a { color: var(--navy); text-decoration: none; }
+.detail-value a:hover { text-decoration: underline; }
+
+.offices { display: flex; flex-direction: column; gap: 1px; background: var(--mid-grey); border: 1px solid var(--mid-grey); margin-top: 48px; }
+.office-card { background: var(--white); padding: 24px 22px; }
+.office-flag { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sage); margin-bottom: 8px; display: block; }
+.office-name { font-family: 'Libre Baskerville', Georgia, serif; font-size: 15px; font-weight: 400; color: var(--dark); margin-bottom: 6px; }
+.office-addr { font-size: 13px; font-weight: 300; color: var(--text-muted); line-height: 1.6; }
+
+/* FORM */
+.contact-form { background: var(--white); padding: 52px 48px; border: 1px solid var(--mid-grey); border-left: 3px solid var(--sage); }
+.form-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 22px; font-weight: 400; color: var(--dark); margin-bottom: 6px; }
+.form-sub { font-size: 13px; font-weight: 300; color: var(--text-muted); margin-bottom: 36px; line-height: 1.6; }
+.form-group { margin-bottom: 22px; }
+.form-label { display: block; font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 9px; }
+.form-input { width: 100%; padding: 12px 15px; background: var(--light-grey); border: 1px solid var(--mid-grey); border-radius: 2px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300; color: var(--dark); transition: border-color var(--tr), background var(--tr); outline: none; }
+.form-input:focus { border-color: var(--sage); background: var(--white); }
+.form-input::placeholder { color: #C0C3D0; }
+textarea.form-input { resize: vertical; min-height: 120px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.btn-submit { width: 100%; padding: 15px 32px; background: var(--navy); color: var(--white); border: none; border-radius: 2px; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; transition: background var(--tr); margin-top: 6px; }
+.btn-submit:hover { background: #2d3c6e; }
+.btn-submit:disabled { background: var(--forest); cursor: default; }
+.form-note { font-size: 12px; font-weight: 300; color: var(--text-muted); margin-top: 14px; text-align: center; line-height: 1.5; }
+
+@media(max-width:960px){ .contact-grid{grid-template-columns:1fr;gap:52px;} }
+@media(max-width:600px){ .contact-form{padding:32px 24px;} .form-row{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo"><div class="logo-squares"><div class="logo-sq logo-sq-1"></div><div class="logo-sq logo-sq-2"></div><div class="logo-sq logo-sq-3"></div></div><div class="logo-wordmark"><span class="logo-grant">Grant</span><span class="logo-leisure">Leisure</span></div></a>
+  <ul class="nav-links">
+    <li><a href="about.html">About &amp; Team</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li class="has-dropdown" id="projectsNav"><a href="projects.html">Projects <span class="nav-arrow"></span></a><div class="dropdown"><a href="projects.html?cat=all"><span class="dropdown-dot" style="background:#7A7F9A"></span>All Projects</a><div class="dropdown-divider"></div><a href="projects.html?cat=attractions"><span class="dropdown-dot" style="background:#5BAF7A"></span>Attractions</a><a href="projects.html?cat=resorts"><span class="dropdown-dot" style="background:#3D8F5F"></span>Resorts</a><a href="projects.html?cat=zoological"><span class="dropdown-dot" style="background:#3B4F8A"></span>Zoological</a><a href="projects.html?cat=museums"><span class="dropdown-dot" style="background:#7A7F9A"></span>Museums</a><a href="projects.html?cat=heritage"><span class="dropdown-dot" style="background:#2C2D35"></span>Heritage</a></div></li>
+    <li><a href="contact.html" class="nav-cta active">Get in Touch</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="about.html" class="mob-link">About &amp; Team</a>
+  <a href="services.html" class="mob-link">Services</a>
+  <a href="projects.html" class="mob-link">Projects</a>
+  <a href="projects.html?cat=attractions" class="mob-sub"><span class="dropdown-dot" style="background:#5BAF7A;flex-shrink:0"></span>Attractions</a>
+  <a href="projects.html?cat=resorts" class="mob-sub"><span class="dropdown-dot" style="background:#3D8F5F;flex-shrink:0"></span>Resorts</a>
+  <a href="projects.html?cat=zoological" class="mob-sub"><span class="dropdown-dot" style="background:#3B4F8A;flex-shrink:0"></span>Zoological</a>
+  <a href="projects.html?cat=museums" class="mob-sub"><span class="dropdown-dot" style="background:#7A7F9A;flex-shrink:0"></span>Museums</a>
+  <a href="projects.html?cat=heritage" class="mob-sub"><span class="dropdown-dot" style="background:#2C2D35;flex-shrink:0"></span>Heritage</a>
+  <a href="contact.html" class="mob-link mob-cta">Get in Touch</a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-geo page-hero-geo-1"></div>
+  <div class="page-hero-geo page-hero-geo-2"></div>
+  <div class="container">
+    <div class="page-hero-eyebrow"><div class="page-hero-eyebrow-line"></div><span>Get in Touch</span></div>
+    <h1>Let's build something <em>remarkable</em></h1>
+    <p class="page-hero-sub">Whether you are in the earliest stages of concept evaluation or need experienced operational guidance at any stage — we would welcome the conversation.</p>
+  </div>
+</section>
+
+<!-- CONTACT BODY -->
+<section id="contact-body">
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- LEFT -->
+      <div class="reveal">
+        <span class="section-label">Contact Details</span>
+        <div class="contact-details">
+          <div class="contact-detail">
+            <div class="detail-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="12" height="10" rx="1.5"/><path d="M2 6l6 4 6-4"/></svg></div>
+            <div><div class="detail-label">Email</div><div class="detail-value"><a href="mailto:info@grant-leisure.com">info@grant-leisure.com</a></div></div>
+          </div>
+          <div class="contact-detail">
+            <div class="detail-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M5.5 8.5C5.5 8.5 6 11 8 11s2.5-2.5 2.5-2.5M8 5v3"/><circle cx="8" cy="4.5" r=".5" fill="var(--navy)"/></svg></div>
+            <div><div class="detail-label">Website</div><div class="detail-value"><a href="https://www.grant-leisure.com" target="_blank">www.grant-leisure.com</a></div></div>
+          </div>
+          <div class="contact-detail">
+            <div class="detail-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 10.5c-1 1-2.5 1-2.5 1S7 10.5 4.5 8 3.5 5.5 3.5 5.5c0 0-.5-1.5.5-2.5L5.5 1.5c.5-.5 1-.5 1.5 0l2 2c.5.5.5 1 0 1.5L8 6c1 1.5 2 2.5 2 2.5l1-.5c.5-.5 1-.5 1.5 0l2 2c.5.5.5 1 0 1.5l-1.5 1z"/></svg></div>
+            <div><div class="detail-label">Enquiries</div><div class="detail-value">New project enquiries welcome</div></div>
+          </div>
+        </div>
+
+        <span class="section-label">Our Offices</span>
+        <div class="offices">
+          <div class="office-card">
+            <span class="office-flag">United States</span>
+            <div class="office-name">North American Office</div>
+            <div class="office-addr">Available on enquiry</div>
+          </div>
+          <div class="office-card">
+            <span class="office-flag">Europe</span>
+            <div class="office-name">European Office</div>
+            <div class="office-addr">Available on enquiry</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORM -->
+      <div class="contact-form reveal reveal-delay-2">
+        <div class="form-heading">Send an Enquiry</div>
+        <p class="form-sub">We respond to all project enquiries within two business days.</p>
+
+        <div class="form-row">
+          <div class="form-group"><label class="form-label" for="name">Full Name</label><input class="form-input" type="text" id="name" placeholder="Your name"></div>
+          <div class="form-group"><label class="form-label" for="org">Organisation</label><input class="form-input" type="text" id="org" placeholder="Company / project"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label" for="email">Email Address</label><input class="form-input" type="email" id="email" placeholder="your@email.com"></div>
+          <div class="form-group"><label class="form-label" for="phone">Phone (optional)</label><input class="form-input" type="tel" id="phone" placeholder="+1 or +44..."></div>
+        </div>
+        <div class="form-group"><label class="form-label" for="service">Area of Interest</label>
+          <select class="form-input" id="service">
+            <option value="" disabled selected>Select a service area</option>
+            <option>Market Analysis</option>
+            <option>Concept Development</option>
+            <option>Feasibility Study</option>
+            <option>Funding Assistance</option>
+            <option>Operational Planning</option>
+            <option>Turn-Key Management</option>
+            <option>Other / Not sure yet</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label" for="location">Project Location</label><input class="form-input" type="text" id="location" placeholder="Country / region"></div>
+        <div class="form-group"><label class="form-label" for="message">Tell Us About Your Project</label><textarea class="form-input" id="message" placeholder="Describe your project, timeline, and what you need from Grant Leisure…"></textarea></div>
+        <button class="btn-submit" id="submitBtn" type="button" onclick="submitForm()">Send Enquiry</button>
+        <p class="form-note">Your information is kept strictly confidential and used only to respond to your enquiry.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand"><div class="footer-logo"><div class="logo-squares"><div class="logo-sq logo-sq-1"></div><div class="logo-sq logo-sq-2"></div><div class="logo-sq logo-sq-3"></div></div><div class="logo-wordmark"><span class="logo-grant">Grant</span><span class="logo-leisure">Leisure</span></div></div><p class="footer-tagline">Global strategic planning and implementation for the world's most compelling leisure destinations.</p></div>
+      <div><span class="footer-col-label">Navigate</span><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About &amp; Team</a></li><li><a href="services.html">Services</a></li><li><a href="projects.html">Projects</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><span class="footer-col-label">Projects</span><ul class="footer-links"><li><a href="projects.html?cat=attractions">Attractions</a></li><li><a href="projects.html?cat=resorts">Resorts</a></li><li><a href="projects.html?cat=zoological">Zoological</a></li><li><a href="projects.html?cat=museums">Museums</a></li><li><a href="projects.html?cat=heritage">Heritage</a></li></ul></div>
+      <div><span class="footer-col-label">Contact</span><ul class="footer-links"><li><a href="mailto:info@grant-leisure.com">info@grant-leisure.com</a></li><li><a href="contact.html">United States Office</a></li><li><a href="contact.html">European Office</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">&copy; 2025 Grant Leisure. All rights reserved.</span><span class="footer-offices">US &amp; European Offices</span></div>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+<script>
+function submitForm(){
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const message = document.getElementById('message').value.trim();
+  if(!name || !email || !message){ alert('Please complete your name, email, and project description.'); return; }
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = 'Enquiry Sent ✓';
+  btn.disabled = true;
+}
+</script>
+</body>
+</html>

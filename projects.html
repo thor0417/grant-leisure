@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Grant Leisure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* ── PROJECTS-SPECIFIC ── */
+#filter-bar { background: var(--white); border-bottom: 1px solid var(--mid-grey); position: sticky; top: 72px; z-index: 100; }
+.filter-inner { display: flex; align-items: center; gap: 0; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+.filter-inner::-webkit-scrollbar { display: none; }
+.filter-btn {
+  flex-shrink: 0; padding: 18px 24px; font-family: 'DM Sans', sans-serif;
+  font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-muted); background: none; border: none; border-bottom: 2px solid transparent;
+  cursor: pointer; transition: color var(--tr), border-color var(--tr); white-space: nowrap;
+  display: flex; align-items: center; gap: 8px;
+}
+.filter-btn:hover { color: var(--dark); }
+.filter-btn.active { color: var(--navy); border-bottom-color: var(--navy); }
+.filter-dot { width: 7px; height: 7px; border-radius: 1px; flex-shrink: 0; }
+.filter-count { font-size: 10px; font-weight: 400; color: var(--text-muted); letter-spacing: 0; }
+
+#projects-main { padding: 72px 0 100px; background: var(--light-grey); }
+.projects-grid-full { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--mid-grey); border: 1px solid var(--mid-grey); }
+.project-card { background: var(--white); overflow: hidden; position: relative; cursor: pointer; transition: opacity 0.3s ease, transform 0.3s ease; }
+.project-card.hidden { display: none; }
+.project-img { width: 100%; aspect-ratio: 4/3; overflow: hidden; }
+.project-img-inner { width: 100%; height: 100%; background: linear-gradient(135deg, #E8E9EE 0%, #D4D6E0 100%); display:flex; align-items:center; justify-content:center; transition: transform var(--tr); }
+.project-card:hover .project-img-inner { transform: scale(1.04); }
+.project-img-inner img { width:100%; height:100%; object-fit:cover; transition: transform var(--tr); }
+.project-card:hover .project-img-inner img { transform: scale(1.04); }
+.proj-placeholder { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #B0B3C4; }
+.project-body { padding: 22px 22px 26px; background: var(--white); border-top: 1px solid var(--mid-grey); transition: background var(--tr); position: relative; }
+.project-card:hover .project-body { background: #FAFAFA; }
+.project-cat-badge { display: inline-block; font-size: 10px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; padding: 4px 9px; border-radius: 2px; margin-bottom: 10px; }
+.cat-attractions { background: #EBF6F1; color: #3D8F5F; }
+.cat-resorts     { background: #E8EDF5; color: #3B4F8A; }
+.cat-zoological  { background: #EDF3E8; color: #4A7A30; }
+.cat-museums     { background: #F0EEF6; color: #5A4F8A; }
+.cat-heritage    { background: #F2F0EC; color: #5A5244; }
+.project-name { font-family: 'Libre Baskerville', Georgia, serif; font-size: 16px; font-weight: 400; color: var(--dark); margin-bottom: 5px; line-height: 1.3; }
+.project-loc { font-size: 12px; font-weight: 300; color: var(--text-muted); }
+.project-arrow { position:absolute; top:22px; right:18px; width:30px; height:30px; background:var(--white); border:1px solid var(--mid-grey); border-radius:50%; display:flex; align-items:center; justify-content:center; opacity:0; transform:translateY(4px); transition: opacity var(--tr), transform var(--tr); }
+.project-card:hover .project-arrow { opacity:1; transform:translateY(0); }
+
+.no-results { grid-column: 1 / -1; padding: 80px 40px; text-align: center; background: var(--white); }
+.no-results-text { font-family: 'Libre Baskerville', Georgia, serif; font-size: 20px; font-weight: 400; color: var(--text-muted); }
+
+@media(max-width:1024px){ .projects-grid-full{grid-template-columns:repeat(2,1fr);} }
+@media(max-width:640px){ .projects-grid-full{grid-template-columns:1fr;} .filter-btn{padding:15px 18px;} }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo"><div class="logo-squares"><div class="logo-sq logo-sq-1"></div><div class="logo-sq logo-sq-2"></div><div class="logo-sq logo-sq-3"></div></div><div class="logo-wordmark"><span class="logo-grant">Grant</span><span class="logo-leisure">Leisure</span></div></a>
+  <ul class="nav-links">
+    <li><a href="about.html">About &amp; Team</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li class="has-dropdown active" id="projectsNav"><a href="projects.html" class="active">Projects <span class="nav-arrow"></span></a><div class="dropdown"><a href="projects.html?cat=all"><span class="dropdown-dot" style="background:#7A7F9A"></span>All Projects</a><div class="dropdown-divider"></div><a href="projects.html?cat=attractions"><span class="dropdown-dot" style="background:#5BAF7A"></span>Attractions</a><a href="projects.html?cat=resorts"><span class="dropdown-dot" style="background:#3D8F5F"></span>Resorts</a><a href="projects.html?cat=zoological"><span class="dropdown-dot" style="background:#3B4F8A"></span>Zoological</a><a href="projects.html?cat=museums"><span class="dropdown-dot" style="background:#7A7F9A"></span>Museums</a><a href="projects.html?cat=heritage"><span class="dropdown-dot" style="background:#2C2D35"></span>Heritage</a></div></li>
+    <li><a href="contact.html" class="nav-cta">Get in Touch</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="about.html" class="mob-link">About &amp; Team</a>
+  <a href="services.html" class="mob-link">Services</a>
+  <a href="projects.html" class="mob-link">Projects</a>
+  <a href="projects.html?cat=attractions" class="mob-sub"><span class="dropdown-dot" style="background:#5BAF7A;flex-shrink:0"></span>Attractions</a>
+  <a href="projects.html?cat=resorts" class="mob-sub"><span class="dropdown-dot" style="background:#3D8F5F;flex-shrink:0"></span>Resorts</a>
+  <a href="projects.html?cat=zoological" class="mob-sub"><span class="dropdown-dot" style="background:#3B4F8A;flex-shrink:0"></span>Zoological</a>
+  <a href="projects.html?cat=museums" class="mob-sub"><span class="dropdown-dot" style="background:#7A7F9A;flex-shrink:0"></span>Museums</a>
+  <a href="projects.html?cat=heritage" class="mob-sub"><span class="dropdown-dot" style="background:#2C2D35;flex-shrink:0"></span>Heritage</a>
+  <a href="contact.html" class="mob-link mob-cta">Get in Touch</a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-geo page-hero-geo-1"></div>
+  <div class="page-hero-geo page-hero-geo-2"></div>
+  <div class="container">
+    <div class="page-hero-eyebrow"><div class="page-hero-eyebrow-line"></div><span>Our Portfolio</span></div>
+    <h1>Over 2,500 <em>projects</em><br>across five continents</h1>
+    <p class="page-hero-sub">From iconic observation wheels to private game reserves — a selection of our most defining commissions, spanning every category of leisure and attractions development.</p>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<div id="filter-bar">
+  <div class="container">
+    <div class="filter-inner">
+      <button class="filter-btn active" data-cat="all">All Projects <span class="filter-count" id="count-all"></span></button>
+      <button class="filter-btn" data-cat="attractions"><span class="filter-dot" style="background:#5BAF7A"></span>Attractions <span class="filter-count" id="count-attractions"></span></button>
+      <button class="filter-btn" data-cat="resorts"><span class="filter-dot" style="background:#3D8F5F"></span>Resorts <span class="filter-count" id="count-resorts"></span></button>
+      <button class="filter-btn" data-cat="zoological"><span class="filter-dot" style="background:#3B4F8A"></span>Zoological <span class="filter-count" id="count-zoological"></span></button>
+      <button class="filter-btn" data-cat="museums"><span class="filter-dot" style="background:#7A7F9A"></span>Museums <span class="filter-count" id="count-museums"></span></button>
+      <button class="filter-btn" data-cat="heritage"><span class="filter-dot" style="background:#2C2D35"></span>Heritage <span class="filter-count" id="count-heritage"></span></button>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS GRID -->
+<section id="projects-main">
+  <div class="container">
+    <div class="projects-grid-full" id="projectsGrid">
+
+      <!-- ATTRACTIONS -->
+      <div class="project-card" data-cat="attractions">
+        <div class="project-img"><div class="project-img-inner"><!-- <img src="images/london-eye.jpg" alt="The London Eye"> --><span class="proj-placeholder">London, UK</span></div></div>
+        <div class="project-body"><span class="project-cat-badge cat-attractions">Attractions</span><div class="project-name">The London Eye</div><div class="project-loc">London, United Kingdom</div><div class="project-arrow"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 6.5h10M7 2.5l4 4-4 4"/></svg></div></div>
+      </div>
+
+      <div class="project-card" data-cat="attractions">
+        <div class="project-img"><div class="project-img-inner"><!-- <img src="images/ferrari-world.jpg" alt="Ferrari World"> --><span class="proj-placeholder">Abu Dhabi, UAE</span></div></div>
+        <div class="project-body"><span class="project-cat-badge cat-attractions">Attractions</span><div class="project-name">Ferrari World</div><div class="project-loc">Abu Dhabi, UAE</div><div class="project-arrow"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 6.5h10M7 2.5l4 4-4 4"/></svg></div></div>
+      </div>
+
+      <div class="project-card" data-cat="attractions">
+        <div class="project-img"><div class="project-img-inner"><span class="proj-placeholder">Las Vegas, USA</span></div></div>
+        <div class="project-body"><span class="project-cat-badge cat-attractions">Attractions</span><div class="project-name">Harrah's Las Vegas</div><div class="project-loc">Las Vegas, Nevada, USA</div><div class="project-arrow"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 6.5h10M7 2.5l4 4-4 4"/></svg></div></div>
+      </div>
+
+      <!-- RESORTS -->
+      <div class="project-card" data-cat="resorts">
+        <div class="project-img"><div class="project-img-inner"><!-- <img src="images/phinda.jpg" alt="Phinda Game Reserve"> --><span class="proj-placeholder">KwaZulu-Natal</span></div></div>
+        <div class="project-body"><span class="project-cat-badge cat-resorts">Resorts</span><div class="project-name">Phinda Private Game Reserve</div><div class="project-loc">South Africa</div><div class="project-arrow"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 6.5h10M7 2.5l4 4-4 4"/></svg></div></div>
+      </div>
+
+      <div class="project-card" data-cat="resorts">
+        <div class="project-img"><div class="project-img-inner"><span class="proj-placeholder">Caribbean</span></div></div>
+        <div class="project-body"><span class="project-cat-badge cat-resorts">Resorts</span><div class="project-name">Caribbean Resort Development</div><div class="project-loc">Caribbean</div><div class="project-arrow"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 6.5h10M7 2.5l4 4-4 4"/></svg></div></div>
+      </div>
+
+      <!-- ZOOLOGICAL -->
+      <div class="project-card" data-cat="zoological">
+        <div class="project-img"><div class="project-img-inner"><!-- <img src="images/ocean-park.jpg" alt="Ocean Park Hong Kong"> --><span class="proj-placeholder">Hong Kong</span></div></div>
+        <div class="project-body"><span class="project-cat-badge cat-zoological">Zoological</span><div class="project-name">Ocean Park Hong Kong</div><div class="project-loc">Hong Kong</div><div class="project-arrow"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 6.5h10M7 2.5l4 4-4 4"/></svg></div></div>
+      </div>
+
+      <div class="project-card" data-cat="zoological">
+        <div class="project-img"><div class="project-img-inner"><span class="proj-placeholder">London, UK</span></div></div>
+        <div class="project-body"><span class="project-cat-badge cat-zoological">Zoological</span><div class="project-name">Zoological Society of London</div><div class="project-loc">London, United Kingdom</div><div class="project-arrow"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 6.5h10M7 2.5l4 4-4 4"/></svg></div></div>
+      </div>
+
+      <div class="project-card" data-cat="zoological">
+        <div class="project-img"><div class="project-img-inner"><span class="proj-placeholder">San Diego, USA</span></div></div>
+        <div class="project-body"><span class="project-cat-badge cat-zoological">Zoological</span><div class="project-name">San Diego Zoo</div><div class="project-loc">San Diego, California, USA</div><div class="project-arrow"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 6.5h10M7 2.5l4 4-4 4"/></svg></div></div>
+      </div>
+
+      <!-- MUSEUMS -->
+      <div class="project-card" data-cat="museums">
+        <div class="project-img"><div class="project-img-inner"><span class="proj-placeholder">London, UK</span></div></div>
+        <div class="project-body"><span class="project-cat-badge cat-museums">Museums</span><div class="project-name">Victoria &amp; Albert Museum</div><div class="project-loc">London, United Kingdom</div><div class="project-arrow"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 6.5h10M7 2.5l4 4-4 4"/></svg></div></div>
+      </div>
+
+      <div class="project-card" data-cat="museums">
+        <div class="project-img"><div class="project-img-inner"><span class="proj-placeholder">Leeds, UK</span></div></div>
+        <div class="project-body"><span class="project-cat-badge cat-museums">Museums</span><div class="project-name">Royal Armouries Museum</div><div class="project-loc">Leeds, United Kingdom</div><div class="project-arrow"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 6.5h10M7 2.5l4 4-4 4"/></svg></div></div>
+      </div>
+
+      <!-- HERITAGE -->
+      <div class="project-card" data-cat="heritage">
+        <div class="project-img"><div class="project-img-inner"><!-- <img src="images/tower-of-london.jpg" alt="Tower of London"> --><span class="proj-placeholder">London, UK</span></div></div>
+        <div class="project-body"><span class="project-cat-badge cat-heritage">Heritage</span><div class="project-name">Tower of London</div><div class="project-loc">London, United Kingdom</div><div class="project-arrow"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 6.5h10M7 2.5l4 4-4 4"/></svg></div></div>
+      </div>
+
+      <div class="project-card" data-cat="heritage">
+        <div class="project-img"><div class="project-img-inner"><span class="proj-placeholder">UK</span></div></div>
+        <div class="project-body"><span class="project-cat-badge cat-heritage">Heritage</span><div class="project-name">English Heritage Portfolio</div><div class="project-loc">United Kingdom</div><div class="project-arrow"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 6.5h10M7 2.5l4 4-4 4"/></svg></div></div>
+      </div>
+
+      <div class="project-card" data-cat="heritage">
+        <div class="project-img"><div class="project-img-inner"><span class="proj-placeholder">UK</span></div></div>
+        <div class="project-body"><span class="project-cat-badge cat-heritage">Heritage</span><div class="project-name">Stately Homes Programme</div><div class="project-loc">United Kingdom</div><div class="project-arrow"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 6.5h10M7 2.5l4 4-4 4"/></svg></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand"><div class="footer-logo"><div class="logo-squares"><div class="logo-sq logo-sq-1"></div><div class="logo-sq logo-sq-2"></div><div class="logo-sq logo-sq-3"></div></div><div class="logo-wordmark"><span class="logo-grant">Grant</span><span class="logo-leisure">Leisure</span></div></div><p class="footer-tagline">Global strategic planning and implementation for the world's most compelling leisure destinations.</p></div>
+      <div><span class="footer-col-label">Navigate</span><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About &amp; Team</a></li><li><a href="services.html">Services</a></li><li><a href="projects.html">Projects</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><span class="footer-col-label">Projects</span><ul class="footer-links"><li><a href="projects.html?cat=attractions">Attractions</a></li><li><a href="projects.html?cat=resorts">Resorts</a></li><li><a href="projects.html?cat=zoological">Zoological</a></li><li><a href="projects.html?cat=museums">Museums</a></li><li><a href="projects.html?cat=heritage">Heritage</a></li></ul></div>
+      <div><span class="footer-col-label">Contact</span><ul class="footer-links"><li><a href="mailto:info@grant-leisure.com">info@grant-leisure.com</a></li><li><a href="contact.html">United States Office</a></li><li><a href="contact.html">European Office</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">&copy; 2025 Grant Leisure. All rights reserved.</span><span class="footer-offices">US &amp; European Offices</span></div>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+<script>
+(function(){
+  const cards = Array.from(document.querySelectorAll('.project-card'));
+  const btns  = Array.from(document.querySelectorAll('.filter-btn'));
+  const cats  = ['all','attractions','resorts','zoological','museums','heritage'];
+
+  cats.forEach(c => {
+    const n = c === 'all' ? cards.length : cards.filter(card => card.dataset.cat === c).length;
+    const el = document.getElementById('count-' + c);
+    if(el) el.textContent = '(' + n + ')';
+  });
+
+  function filter(cat) {
+    btns.forEach(b => b.classList.toggle('active', b.dataset.cat === cat));
+    cards.forEach(card => {
+      const show = cat === 'all' || card.dataset.cat === cat;
+      card.classList.toggle('hidden', !show);
+    });
+    history.replaceState(null,'', cat === 'all' ? 'projects.html' : 'projects.html?cat=' + cat);
+  }
+
+  btns.forEach(b => b.addEventListener('click', () => filter(b.dataset.cat)));
+
+  const params = new URLSearchParams(window.location.search);
+  const initCat = params.get('cat') || 'all';
+  filter(initCat);
+})();
+</script>
+</body>
+</html>
