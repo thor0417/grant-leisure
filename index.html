@@ -56,9 +56,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;color:var(--text);background:var
 /* HERO */
 #hero{position:relative;width:100%;height:100vh;min-height:640px;
   display:flex;align-items:center;justify-content:center;overflow:hidden;background:#080e1c;}
-#hero::after{content:'';position:absolute;inset:0;z-index:1;
-  background:linear-gradient(135deg,rgba(59,79,138,0.3) 0%,transparent 50%,rgba(61,143,95,0.15) 100%);
-  pointer-events:none;}
+#hero::after{display:none;}
 #hero-yt, #hero-yt iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;pointer-events:none;}
 .hero-inner{position:relative;z-index:2;text-align:center;padding:0 32px;max-width:1000px;}
 .h-label{display:inline-flex;align-items:center;gap:12px;margin-bottom:36px;
@@ -249,12 +247,12 @@ footer{background:#0a0b10;padding:64px 0 32px;}
 <section id="hero">
   <!-- YouTube background video via IFrame API -->
   <div style="position:absolute;inset:0;overflow:hidden;z-index:0;background:#080e1c;">
-    <div id="hero-yt-wrap" style="position:absolute;top:50%;left:50%;width:177.78vh;height:100vh;min-width:100%;min-height:56.25vw;transform:translate(-50%,-50%);opacity:0;transition:opacity 1.5s ease;">
+    <div id="hero-yt-wrap" style="position:absolute;top:50%;left:50%;width:177.78vh;height:100vh;min-width:100%;min-height:56.25vw;transform:translate(-50%,-50%);opacity:0;transition:opacity 1.8s ease;">
       <div id="hero-yt"></div>
     </div>
   </div>
-  <!-- Dark overlay for text legibility -->
-  <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(160deg,rgba(8,14,28,0.65) 0%,rgba(8,14,28,0.45) 50%,rgba(8,14,28,0.65) 100%);"></div>
+  <!-- Minimal bottom fade for text legibility only -->
+  <div style="position:absolute;bottom:0;left:0;right:0;height:40%;z-index:1;background:linear-gradient(to bottom,transparent,rgba(0,0,0,0.5));pointer-events:none;"></div>
   <script>
     // Load YouTube IFrame API
     var ytAPIReady = false;
@@ -281,7 +279,7 @@ footer{background:#0a0b10;padding:64px 0 32px;}
             e.target.mute();
             e.target.playVideo();
             // Fade in once playing
-            document.getElementById('hero-yt-wrap').style.opacity = '0.6';
+            document.getElementById('hero-yt-wrap').style.opacity = '1';
           },
           onStateChange: function(e) {
             // Keep playing if paused by browser
