@@ -5,212 +5,652 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Services — Grant Leisure</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="shared.css">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <style>
-#services-body { padding: 100px 0; background: var(--white); }
-.services-grid-full { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--mid-grey); border: 1px solid var(--mid-grey); }
-.service-card-full { background: var(--white); padding: 44px 36px; position: relative; overflow: hidden; }
-.service-card-full::after { content:''; position:absolute; bottom:0; left:0; width:100%; height:3px; background: linear-gradient(90deg, var(--sage), var(--navy)); transform:scaleX(0); transform-origin:left; transition:transform var(--tr); }
-.service-card-full:hover::after { transform:scaleX(1); }
-.service-card-full:hover { background: #FAFAFA; }
-.service-num-large { font-family: 'Libre Baskerville', Georgia, serif; font-size: 48px; font-weight: 400; color: var(--mid-grey); line-height: 1; margin-bottom: 20px; }
-.service-title-large { font-family: 'Libre Baskerville', Georgia, serif; font-size: 20px; font-weight: 400; color: var(--dark); margin-bottom: 14px; line-height: 1.25; }
-.service-desc-large { font-size: 14px; font-weight: 300; color: var(--text-muted); line-height: 1.78; }
-.service-list { margin-top: 18px; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
-.service-list li { font-size: 13px; font-weight: 300; color: var(--text-muted); padding-left: 16px; position: relative; }
-.service-list li::before { content:''; position:absolute; left:0; top:8px; width:5px; height:5px; border-radius:1px; background:var(--sage); }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-#process-full { padding: 100px 0; background: var(--light-grey); border-top: 1px solid var(--mid-grey); }
-.process-timeline { margin-top: 64px; display: flex; flex-direction: column; gap: 0; }
-.process-row { display: grid; grid-template-columns: 80px 1fr; gap: 0; align-items: start; position: relative; }
-.process-row:not(:last-child) .process-track::after { content:''; position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:1px; height:100%; background:var(--mid-grey); z-index:0; }
-.process-track { width:80px; display:flex; flex-direction:column; align-items:center; padding-top: 4px; position:relative; }
-.process-dot { width:32px; height:32px; border-radius:50%; background:var(--white); border:2px solid var(--mid-grey); display:flex; align-items:center; justify-content:center; z-index:1; transition: border-color var(--tr), background var(--tr); flex-shrink:0; }
-.process-dot span { font-size:11px; font-weight:500; color:var(--text-muted); }
-.process-track-line { flex:1; width:1px; background:var(--mid-grey); min-height:60px; }
-.process-content { padding: 0 0 60px 16px; }
-.process-row:last-child .process-content { padding-bottom: 0; }
-.process-content-inner { background: var(--white); border: 1px solid var(--mid-grey); padding: 32px 36px; transition: border-color var(--tr); }
-.process-content-inner:hover { border-color: var(--sage); }
-.process-content-inner:hover .process-dot { border-color: var(--sage); background: var(--sage); }
-.process-title-row { font-family: 'Libre Baskerville', Georgia, serif; font-size: 20px; font-weight: 400; color: var(--dark); margin-bottom: 12px; }
-.process-body { font-size: 14px; font-weight: 300; color: var(--text-muted); line-height: 1.78; }
+:root {
+  --off-white: #F7F7F5;
+  --near-black: #111212;
+  --green: #5BAF7A;
+  --navy: #3B4F8A;
+  --slate: #7A7F9A;
+  --body-text: #2E2F2F;
+  --rule-color: rgba(0,0,0,0.07);
+  --gutter: clamp(2rem, 6vw, 6rem);
+  --max: 1300px;
+}
 
-#services-cta { padding: 80px 0; background: var(--navy); }
-.cta-inner { display:flex; align-items:center; justify-content:space-between; gap:40px; flex-wrap:wrap; }
-.cta-text h2 { font-family: 'Libre Baskerville', Georgia, serif; font-size: clamp(24px,3vw,36px); font-weight:400; color:var(--white); margin-bottom:10px; }
-.cta-text p { font-size:15px; font-weight:300; color:rgba(255,255,255,0.65); max-width:520px; line-height:1.7; }
-.btn-white { display:inline-block; background:var(--white); color:var(--navy); padding:14px 30px; border-radius:3px; font-size:12px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; text-decoration:none; transition:background var(--tr); white-space:nowrap; flex-shrink:0; }
-.btn-white:hover { background:#EFF1F7; }
+html { scroll-behavior: smooth; }
 
-@media(max-width:1024px){ .services-grid-full{grid-template-columns:repeat(2,1fr);} }
-@media(max-width:768px){ .services-grid-full{grid-template-columns:1fr;} .process-row{grid-template-columns:48px 1fr;} .cta-inner{flex-direction:column;align-items:flex-start;} }
+body {
+  font-family: 'Barlow Condensed', sans-serif;
+  background: var(--off-white);
+  color: var(--body-text);
+  overflow-x: hidden;
+}
+
+/* ── HERO ─────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+
+  /* Ferrari World as background */
+  background-image: url('Ferrari-World-Abu-Dhabi-aerial-view-e1430369113358.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Dark overlay — image is atmosphere, type is authority */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(17,18,18,0.55) 0%,
+    rgba(17,18,18,0.75) 60%,
+    rgba(17,18,18,0.92) 100%
+  );
+  z-index: 1;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  padding: 0 var(--gutter) clamp(4rem, 9vh, 8rem);
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.hero__rule {
+  display: block;
+  width: 48px;
+  height: 1px;
+  background: var(--green);
+  margin-bottom: 1.5rem;
+}
+
+.hero__kicker {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 1.5rem;
+}
+
+.hero__headline {
+  font-size: clamp(3rem, 7.5vw, 7rem);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  color: white;
+  max-width: 14ch;
+}
+
+.hero__headline span { color: var(--green); }
+
+/* ── APPROACH ─────────────────────────────── */
+.approach {
+  padding: 5rem var(--gutter);
+  border-bottom: 1px solid var(--rule-color);
+}
+
+.approach__inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 0 clamp(2rem, 5vw, 5rem);
+  align-items: start;
+}
+
+.approach__label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--slate);
+  margin-bottom: 1rem;
+}
+
+.approach__rule {
+  display: block;
+  width: 32px;
+  height: 2px;
+  background: var(--green);
+}
+
+/* Heading scale — NOT display scale */
+.approach__text {
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--near-black);
+}
+
+.approach__text em {
+  color: var(--green);
+  font-style: normal;
+}
+
+.approach__text .line2 {
+  display: block;
+  margin-top: 0.5em;
+}
+
+/* ── SERVICES ─────────────────────────────── */
+.lifecycle { position: relative; }
+
+.service {
+  border-bottom: 1px solid var(--rule-color);
+  position: relative;
+}
+
+.service__inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 4rem var(--gutter);
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 0 clamp(1.5rem, 3vw, 3rem);
+  align-items: start;
+}
+
+/* Offset even services — asymmetric editorial tension */
+.service:nth-child(even) .service__inner {
+  padding-left: calc(var(--gutter) + clamp(2rem, 6vw, 6rem));
+}
+
+/* Number — match about.html exactly */
+.service__number {
+  display: block;
+  font-size: var(--num-size, clamp(8rem, 14vw, 13rem));
+  font-weight: 300;
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  color: var(--slate);
+  opacity: 0.15;
+  user-select: none;
+  margin-left: -0.06em;
+  margin-top: -0.05em;
+}
+
+.service__kicker {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 0.6rem;
+}
+
+.service__accent {
+  display: block;
+  width: 28px;
+  height: 2px;
+  background: var(--green);
+  margin-bottom: 1.2rem;
+}
+
+.service__name {
+  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+  font-weight: 800;
+  line-height: 0.97;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--near-black);
+  margin-bottom: 1.1rem;
+  max-width: 26ch;
+}
+
+.service__body {
+  font-size: clamp(0.9rem, 1.1vw, 0.98rem);
+  font-weight: 400;
+  line-height: 1.72;
+  color: var(--body-text);
+  max-width: 52ch;
+  opacity: 0.78;
+}
+
+/* ── IMAGE MOMENT — Tower of London ──────── */
+/* Between services 03 and 04.
+   Full width. Fixed height. Film frame.
+   Dark overlay. One declarative line.
+   A breath in the lifecycle. */
+.image-moment {
+  position: relative;
+  height: clamp(280px, 40vh, 480px);
+  overflow: hidden;
+
+  background-image: url('Tower_of_London.jpg');
+  background-size: cover;
+  background-position: center 30%;
+}
+
+/* Dark overlay — heavier at bottom for text legibility */
+.image-moment::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(17,18,18,0.3) 0%,
+    rgba(17,18,18,0.65) 100%
+  );
+  z-index: 1;
+}
+
+.image-moment__content {
+  position: absolute;
+  bottom: clamp(1.5rem, 4vh, 3rem);
+  left: var(--gutter);
+  right: var(--gutter);
+  z-index: 2;
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.image-moment__rule {
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--green);
+  margin-bottom: 1rem;
+}
+
+.image-moment__text {
+  font-size: clamp(1.1rem, 2.2vw, 1.8rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: white;
+  max-width: 28ch;
+}
+
+.image-moment__text span { color: var(--green); }
+
+/* ── QUOTES ──────────────────────────────── */
+.quotes {
+  background: var(--near-black);
+  padding: 5rem var(--gutter) 6rem;
+  margin-top: 5rem;
+}
+
+.quotes__inner {
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.quotes__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 3.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.quotes__kicker {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+
+.quotes__years {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green);
+}
+
+.quotes__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-left: 1px solid rgba(255,255,255,0.06);
+}
+
+.quote {
+  padding: 2.5rem;
+  border-right: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.quote__mark {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--green);
+  opacity: 0.4;
+  line-height: 1;
+  font-family: Georgia, serif;
+}
+
+.quote__text {
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  font-weight: 400;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.58);
+  flex: 1;
+}
+
+.quote__name {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 0.3rem;
+}
+
+.quote__role {
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.22);
+  line-height: 1.6;
+}
+
+/* ── CTA ─────────────────────────────────── */
+.cta {
+  background: var(--near-black);
+  padding: 5rem var(--gutter) 7rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.cta__inner {
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.cta__rule {
+  display: block;
+  width: 48px;
+  height: 1px;
+  background: var(--green);
+  margin-bottom: 1.5rem;
+}
+
+.cta__kicker {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 1.25rem;
+}
+
+.cta__headline {
+  font-size: clamp(2.2rem, 5vw, 4.2rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  color: white;
+  margin-bottom: 3rem;
+}
+
+.cta__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: white;
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 1em calc(2em - 0.14em) 1em 2em;
+  text-decoration: none;
+  background: transparent;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.cta__button:hover {
+  background: var(--green);
+  border-color: var(--green);
+  color: var(--near-black);
+}
+
+.concept-label {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background: rgba(17,18,18,0.92);
+  color: rgba(255,255,255,0.3);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid rgba(255,255,255,0.07);
+  pointer-events: none;
+  z-index: 999;
+}
+
+@media (max-width: 768px) {
+  .approach__inner { grid-template-columns: 1fr; gap: 1.5rem; }
+  .service__inner { grid-template-columns: 70px 1fr; }
+  .service:nth-child(even) .service__inner { padding-left: var(--gutter); }
+  .service__number { font-size: 5rem; }
+  .quotes__grid { grid-template-columns: 1fr; }
+  .image-moment { height: 240px; }
+}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav id="navbar">
-  <a href="index.html" class="nav-logo"><div class="logo-squares"><div class="logo-sq logo-sq-1"></div><div class="logo-sq logo-sq-2"></div><div class="logo-sq logo-sq-3"></div></div><div class="logo-wordmark"><span class="logo-grant">Grant</span><span class="logo-leisure">Leisure</span></div></a>
-  <ul class="nav-links">
-    <li><a href="about.html">About &amp; Team</a></li>
-    <li><a href="services.html" class="active">Services</a></li>
-    <li class="has-dropdown" id="projectsNav"><a href="projects.html">Projects <span class="nav-arrow"></span></a><div class="dropdown"><a href="projects.html?cat=all"><span class="dropdown-dot" style="background:#7A7F9A"></span>All Projects</a><div class="dropdown-divider"></div><a href="projects.html?cat=attractions"><span class="dropdown-dot" style="background:#5BAF7A"></span>Attractions</a><a href="projects.html?cat=resorts"><span class="dropdown-dot" style="background:#3D8F5F"></span>Resorts</a><a href="projects.html?cat=zoological"><span class="dropdown-dot" style="background:#3B4F8A"></span>Zoological</a><a href="projects.html?cat=museums"><span class="dropdown-dot" style="background:#7A7F9A"></span>Museums</a><a href="projects.html?cat=heritage"><span class="dropdown-dot" style="background:#2C2D35"></span>Heritage</a></div></li>
-    <li><a href="contact.html" class="nav-cta">Get in Touch</a></li>
-  </ul>
-  <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
-</nav>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="about.html" class="mob-link">About &amp; Team</a>
-  <a href="services.html" class="mob-link">Services</a>
-  <a href="projects.html" class="mob-link">Projects</a>
-  <a href="projects.html?cat=attractions" class="mob-sub"><span class="dropdown-dot" style="background:#5BAF7A;flex-shrink:0"></span>Attractions</a>
-  <a href="projects.html?cat=resorts" class="mob-sub"><span class="dropdown-dot" style="background:#3D8F5F;flex-shrink:0"></span>Resorts</a>
-  <a href="projects.html?cat=zoological" class="mob-sub"><span class="dropdown-dot" style="background:#3B4F8A;flex-shrink:0"></span>Zoological</a>
-  <a href="projects.html?cat=museums" class="mob-sub"><span class="dropdown-dot" style="background:#7A7F9A;flex-shrink:0"></span>Museums</a>
-  <a href="projects.html?cat=heritage" class="mob-sub"><span class="dropdown-dot" style="background:#2C2D35;flex-shrink:0"></span>Heritage</a>
-  <a href="contact.html" class="mob-link mob-cta">Get in Touch</a>
+<!-- HERO — Ferrari World aerial -->
+<header class="hero">
+  <div class="hero__content">
+    <span class="hero__rule" aria-hidden="true"></span>
+    <span class="hero__kicker">Our Services</span>
+    <h1 class="hero__headline">
+      Treating Projects<br>
+      With A <span>Disciplined</span><br>
+      Approach.
+    </h1>
+  </div>
+</header>
+
+<!-- APPROACH -->
+<section class="approach">
+  <div class="approach__inner">
+    <div>
+      <span class="approach__label">Our Approach</span>
+      <span class="approach__rule" aria-hidden="true"></span>
+    </div>
+    <p class="approach__text">
+      Our goal is to create <em>self-sustaining</em> development ecosystems that capitalise existing assets and encourage expansion.
+      <span class="line2">Resulting in longer visitor length of stay and increased profits.</span>
+    </p>
+  </div>
+</section>
+
+<!-- LIFECYCLE -->
+<section class="lifecycle" aria-label="Grant Leisure service lifecycle">
+
+  <!-- 01 -->
+  <article class="service">
+    <div class="service__inner">
+      <div><span class="service__number" aria-hidden="true">01</span></div>
+      <div>
+        <span class="service__kicker">Market Analysis</span>
+        <span class="service__accent" aria-hidden="true"></span>
+        <h2 class="service__name">Understanding the opportunity before a single decision is made.</h2>
+        <p class="service__body">Grant Leisure assesses market support by evaluating overall market trends and growth in targeted markets. Consumer surveys, focus groups, and other market research techniques are used to test and refine demand estimates and market profiles.</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- 02 — offset right -->
+  <article class="service">
+    <div class="service__inner">
+      <div><span class="service__number" aria-hidden="true">02</span></div>
+      <div>
+        <span class="service__kicker">Development Planning</span>
+        <span class="service__accent" aria-hidden="true"></span>
+        <h2 class="service__name">Where economic reality and physical vision meet.</h2>
+        <p class="service__body">Grant Leisure works directly with architects, planners, engineers, and other professionals to achieve the optimum balance between economic planning and physical design, resulting in real estate products and creative development programs that are responsive to the market and financially viable.</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- 03 -->
+  <article class="service">
+    <div class="service__inner">
+      <div><span class="service__number" aria-hidden="true">03</span></div>
+      <div>
+        <span class="service__kicker">Financial Feasibility</span>
+        <span class="service__accent" aria-hidden="true"></span>
+        <h2 class="service__name">Proprietary models. No guesswork.</h2>
+        <p class="service__body">Grant Leisure has created proprietary financial models for preparing cash flow and income projections, determining financial rates of return, and sensitivity testing of multi-use community development, income properties, and portfolio disposition programs.</p>
+      </div>
+    </div>
+  </article>
+
+</section>
+
+<!-- IMAGE MOMENT — Tower of London -->
+<div class="image-moment" role="img" aria-label="Tower of London — a Grant Leisure project">
+  <div class="image-moment__content">
+    <span class="image-moment__rule" aria-hidden="true"></span>
+    <p class="image-moment__text">
+      From concept to operation.<br>
+      <span>40 years. Every continent.</span>
+    </p>
+  </div>
 </div>
 
-<!-- PAGE HERO -->
-<section class="page-hero">
-  <div class="page-hero-geo page-hero-geo-1"></div>
-  <div class="page-hero-geo page-hero-geo-2"></div>
-  <div class="container">
-    <div class="page-hero-eyebrow"><div class="page-hero-eyebrow-line"></div><span>What We Do</span></div>
-    <h1>Full-spectrum <em>expertise</em><br>at every stage</h1>
-    <p class="page-hero-sub">From initial market analysis through to operational launch and ongoing management — Grant Leisure delivers at every phase of the development lifecycle.</p>
-  </div>
+<!-- LIFECYCLE CONTINUED -->
+<section class="lifecycle" aria-label="Grant Leisure service lifecycle continued">
+
+  <!-- 04 — offset right -->
+  <article class="service">
+    <div class="service__inner">
+      <div><span class="service__number" aria-hidden="true">04</span></div>
+      <div>
+        <span class="service__kicker">Funding Assistance</span>
+        <span class="service__accent" aria-hidden="true"></span>
+        <h2 class="service__name">Capital identified, evaluated, secured.</h2>
+        <p class="service__body">Grant Leisure identifies and evaluates acquisition and investment opportunities for our clients and provides assistance in purchase, sale, lease, and financing transaction negotiations. We additionally reach out to our own network of investors and financiers to evaluate interest and make introductions.</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- 05 -->
+  <article class="service">
+    <div class="service__inner">
+      <div><span class="service__number" aria-hidden="true">05</span></div>
+      <div>
+        <span class="service__kicker">Operational Planning</span>
+        <span class="service__accent" aria-hidden="true"></span>
+        <h2 class="service__name">Every system. Every team. Every process.</h2>
+        <p class="service__body">Grant Leisure reviews performance, examines areas for expansion and revitalisation, prepares pricing strategies and marketing programs, assists in operator selection and tenant negotiation, and evaluates financial restructuring and disposition alternatives.</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- 06 — offset right -->
+  <article class="service" style="border-bottom:none;">
+    <div class="service__inner">
+      <div><span class="service__number" aria-hidden="true">06</span></div>
+      <div>
+        <span class="service__kicker">Turnkey Management</span>
+        <span class="service__accent" aria-hidden="true"></span>
+        <h2 class="service__name">We run it. Then we hand it over.</h2>
+        <p class="service__body">Clients profit from Grant Leisure's decades of operating experience applied to the policies and procedures that become the operational foundation for their venture. Team members are reserved for two years following opening to monitor operations and make adjustments until the client is left with a self-sufficient operation.</p>
+      </div>
+    </div>
+  </article>
+
 </section>
 
-<!-- SERVICES GRID -->
-<section id="services-body">
-  <div class="container">
-    <div class="services-grid-full">
-
-      <div class="service-card-full reveal">
-        <div class="service-num-large">01</div>
-        <h3 class="service-title-large">Market Analysis</h3>
-        <p class="service-desc-large">Assessing market support by evaluating overall trends and growth in target markets. We answer the questions that determine whether a project has a real, sustainable audience.</p>
-        <ul class="service-list">
-          <li>Visitor demand forecasting</li>
-          <li>Competitive landscape evaluation</li>
-          <li>Tourism growth analysis</li>
-          <li>Demographics &amp; catchment mapping</li>
-        </ul>
+<!-- QUOTES -->
+<section class="quotes">
+  <div class="quotes__inner">
+    <div class="quotes__header">
+      <span class="quotes__kicker">Four Decades of Relationships</span>
+      <span class="quotes__years">25 to 30 Year Partnerships</span>
+    </div>
+    <div class="quotes__grid">
+      <div class="quote">
+        <span class="quote__mark">"</span>
+        <p class="quote__text">His instinct and attention to detail in large-scale land-planning for leisure destinations is second to none.</p>
+        <div>
+          <span class="quote__name">Larry Wyatt</span>
+          <span class="quote__role">VP Planning and Development<br>Paramount Parks · 25 Years</span>
+        </div>
       </div>
-
-      <div class="service-card-full reveal reveal-delay-1">
-        <div class="service-num-large">02</div>
-        <h3 class="service-title-large">Concept Development</h3>
-        <p class="service-desc-large">Building compelling, differentiated development concepts based on identified target markets, competitive supply, location attributes, and brand positioning.</p>
-        <ul class="service-list">
-          <li>Attraction concept design</li>
-          <li>Brand &amp; theming strategy</li>
-          <li>Programme &amp; mix planning</li>
-          <li>Site evaluation &amp; selection</li>
-        </ul>
+      <div class="quote">
+        <span class="quote__mark">"</span>
+        <p class="quote__text">Andrew's unique understanding of operations and how technology could enhance the guest experience has been a big positive on every project.</p>
+        <div>
+          <span class="quote__name">Brian Edwards</span>
+          <span class="quote__role">Founder and Chairman<br>Edwards Technologies Inc · 25 Years</span>
+        </div>
       </div>
-
-      <div class="service-card-full reveal reveal-delay-2">
-        <div class="service-num-large">03</div>
-        <h3 class="service-title-large">Feasibility Studies</h3>
-        <p class="service-desc-large">Rigorous financial feasibility assessments, operating pro formas, and cash flow projections to establish economic certainty before significant capital is committed.</p>
-        <ul class="service-list">
-          <li>Financial modelling &amp; pro formas</li>
-          <li>Capital cost estimates</li>
-          <li>Cash flow projections</li>
-          <li>Sensitivity analysis</li>
-        </ul>
+      <div class="quote">
+        <span class="quote__mark">"</span>
+        <p class="quote__text">Their unparalleled track record in translating creative concepts into feasible and profitable projects. Our go-to resource when projects need a dose of reality.</p>
+        <div>
+          <span class="quote__name">Chris Mather</span>
+          <span class="quote__role">Chief Executive Officer<br>Mather and Co · 30 Years</span>
+        </div>
       </div>
-
-      <div class="service-card-full reveal">
-        <div class="service-num-large">04</div>
-        <h3 class="service-title-large">Funding Assistance</h3>
-        <p class="service-desc-large">Strategic assistance with soliciting and securing funding opportunities, working in conjunction with our financial partners to structure optimal deal frameworks for each project.</p>
-        <ul class="service-list">
-          <li>Investor presentation preparation</li>
-          <li>Funding source identification</li>
-          <li>Deal structure advisory</li>
-          <li>Partner introductions</li>
-        </ul>
+      <div class="quote">
+        <span class="quote__mark">"</span>
+        <p class="quote__text">Andy is able to gauge the needs of the client in any situation and develop programs that are both functional and cost-effective.</p>
+        <div>
+          <span class="quote__name">Pat Janikowski AIA NCARB</span>
+          <span class="quote__role">President<br>PJA · 10 Years</span>
+        </div>
       </div>
-
-      <div class="service-card-full reveal reveal-delay-1">
-        <div class="service-num-large">05</div>
-        <h3 class="service-title-large">Operational Planning</h3>
-        <p class="service-desc-large">Comprehensive operational strategy, performance reviews, and targeted recommendations for improvement and expansion — from first opening through ongoing optimisation.</p>
-        <ul class="service-list">
-          <li>Operations manuals &amp; SOPs</li>
-          <li>Staffing structures &amp; org charts</li>
-          <li>Revenue optimisation</li>
-          <li>Performance benchmarking</li>
-        </ul>
-      </div>
-
-      <div class="service-card-full reveal reveal-delay-2">
-        <div class="service-num-large">06</div>
-        <h3 class="service-title-large">Turn-Key Management</h3>
-        <p class="service-desc-large">Executive staff recruitment and full turn-key operational management from pre-opening through Grand Opening and post-launch, ensuring your destination launches successfully.</p>
-        <ul class="service-list">
-          <li>Executive recruitment</li>
-          <li>Pre-opening management</li>
-          <li>Grand Opening planning</li>
-          <li>Ongoing management advisory</li>
-        </ul>
-      </div>
-
     </div>
   </div>
 </section>
 
-<!-- PROCESS TIMELINE -->
-<section id="process-full">
-  <div class="container">
-    <div class="reveal" style="max-width:540px;margin-bottom:64px;">
-      <span class="section-label">How We Work</span>
-      <h2 class="section-heading">A proven framework for <em>certainty</em></h2>
-      <p class="section-sub">Grant Leisure can supply the necessary resources at any stage of a project's development and management.</p>
-    </div>
-    <div class="process-timeline">
-      <div class="process-row reveal"><div class="process-track"><div class="process-dot"><span>01</span></div><div class="process-track-line"></div></div><div class="process-content"><div class="process-content-inner"><div class="process-title-row">Site &amp; Market Evaluation</div><p class="process-body">Where should it be built? Who is the market next year, in ten years, in twenty? We establish the full picture before a single development decision is made.</p></div></div></div>
-      <div class="process-row reveal reveal-delay-1"><div class="process-track"><div class="process-dot"><span>02</span></div><div class="process-track-line"></div></div><div class="process-content"><div class="process-content-inner"><div class="process-title-row">Concept Validation</div><p class="process-body">What trends are developing? What forms of leisure will come into demand? We match your concept to real, demonstrable opportunity in the target market.</p></div></div></div>
-      <div class="process-row reveal reveal-delay-2"><div class="process-track"><div class="process-dot"><span>03</span></div><div class="process-track-line"></div></div><div class="process-content"><div class="process-content-inner"><div class="process-title-row">Capital Requirements &amp; Feasibility</div><p class="process-body">Gross and net income projections, financing options, cash flow needs — full economic certainty before commitment of significant capital resources.</p></div></div></div>
-      <div class="process-row reveal"><div class="process-track"><div class="process-dot"><span>04</span></div><div class="process-track-line"></div></div><div class="process-content"><div class="process-content-inner"><div class="process-title-row">Development Planning</div><p class="process-body">Hotel facilities, ancillary services, visitor flow, infrastructure — every element planned to keep visitor interest and drive per-capita spend.</p></div></div></div>
-      <div class="process-row reveal reveal-delay-1"><div class="process-track"><div class="process-dot"><span>05</span></div><div class="process-track-line"></div></div><div class="process-content"><div class="process-content-inner"><div class="process-title-row">Funding Structure</div><p class="process-body">We work alongside financial partners to secure the optimal funding architecture for leisure and resort developments of every scale and geography.</p></div></div></div>
-      <div class="process-row reveal reveal-delay-2"><div class="process-track"><div class="process-dot"><span>06</span></div></div><div class="process-content"><div class="process-content-inner"><div class="process-title-row">Operational Launch &amp; Beyond</div><p class="process-body">From pre-opening staffing to Grand Opening day — and the ongoing management that follows — Grant Leisure remains your strategic partner.</p></div></div></div>
-    </div>
+<!-- CTA -->
+<section class="cta">
+  <div class="cta__inner">
+    <span class="cta__rule" aria-hidden="true"></span>
+    <span class="cta__kicker">Est. 1980 · Global</span>
+    <h2 class="cta__headline">
+      Ready to Build<br>
+      Something Lasting?
+    </h2>
+    <a href="contact.html" class="cta__button">
+      Start a Conversation <span aria-hidden="true">→</span>
+    </a>
   </div>
 </section>
 
-<!-- CTA BAND -->
-<section id="services-cta">
-  <div class="container">
-    <div class="cta-inner">
-      <div class="cta-text reveal">
-        <h2>Ready to build something<br>remarkable?</h2>
-        <p>Tell us about your project. Whether you are in the earliest stages of concept evaluation or need experienced operational guidance, we would welcome the conversation.</p>
-      </div>
-      <a href="contact.html" class="btn-white reveal reveal-delay-2">Start a Conversation</a>
-    </div>
-  </div>
-</section>
+<div class="concept-label">Concept v6 — Not Final</div>
 
-<!-- FOOTER -->
-<footer>
-  <div class="container">
-    <div class="footer-inner">
-      <div class="footer-brand"><div class="footer-logo"><div class="logo-squares"><div class="logo-sq logo-sq-1"></div><div class="logo-sq logo-sq-2"></div><div class="logo-sq logo-sq-3"></div></div><div class="logo-wordmark"><span class="logo-grant">Grant</span><span class="logo-leisure">Leisure</span></div></div><p class="footer-tagline">Global strategic planning and implementation for the world's most compelling leisure destinations.</p></div>
-      <div><span class="footer-col-label">Navigate</span><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About &amp; Team</a></li><li><a href="services.html">Services</a></li><li><a href="projects.html">Projects</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-      <div><span class="footer-col-label">Projects</span><ul class="footer-links"><li><a href="projects.html?cat=attractions">Attractions</a></li><li><a href="projects.html?cat=resorts">Resorts</a></li><li><a href="projects.html?cat=zoological">Zoological</a></li><li><a href="projects.html?cat=museums">Museums</a></li><li><a href="projects.html?cat=heritage">Heritage</a></li></ul></div>
-      <div><span class="footer-col-label">Contact</span><ul class="footer-links"><li><a href="mailto:info@grant-leisure.com">info@grant-leisure.com</a></li><li><a href="contact.html">United States Office</a></li><li><a href="contact.html">European Office</a></li></ul></div>
-    </div>
-    <div class="footer-bottom"><span class="footer-copy">&copy; 2025 Grant Leisure. All rights reserved.</span><span class="footer-offices">US &amp; European Offices</span></div>
-  </div>
-</footer>
-
-<script src="shared.js"></script>
 </body>
 </html>
