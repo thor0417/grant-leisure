@@ -1,0 +1,447 @@
+/* ================================================================
+   GRANT LEISURE — LAYOUT.CSS
+   Version: 1.0
+   Scope: Container · Navigation · Section scaffolding ·
+          Koyo number system · Hero layer stack ·
+          Tourist card positioning · Footer structure
+   ----------------------------------------------------------------
+   Load order: base.css → layout.css → components.css
+   This file knows WHERE things live. It does not know
+   what is inside any component. Zero component internals here.
+   All values via tokens from base.css — no magic numbers.
+================================================================ */
+
+
+/* ================================================================
+   CONTAINER
+   Max-width wrapper with fluid horizontal gutter.
+   Used on every section. Single class, consistent behaviour.
+================================================================ */
+
+.container {
+  width: 100%;
+  max-width: var(--grid-max);
+  margin-inline: auto;
+  padding-inline: var(--grid-gutter);
+}
+
+
+/* ================================================================
+   NAVIGATION
+   Fixed. Transparent over hero. Gains near-black + blur on scroll
+   via .is-scrolled (added by JS at 80px scroll depth).
+   Logo left. Links right. Contact = green bordered pill.
+   Links hidden on mobile — no hamburger in scope for this build.
+================================================================ */
+
+.site-nav {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  z-index: 200;
+
+  /* Vertical breathing room — logo renders at 36px, nav at ~64px total */
+  padding-block: var(--space-sm);
+
+  /* Transparent at top — hero bleeds behind it */
+  background-color: transparent;
+
+  transition:
+    background-color var(--dur-fast) var(--ease-in-out),
+    border-color     var(--dur-fast) var(--ease-in-out);
+}
+
+/* Scrolled state: near-black with blur — JS toggles this at 80px.
+   80px clears the nav height — prevents flicker at very top. */
+.site-nav.is-scrolled {
+  background-color: rgba(17, 18, 18, 0.95);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Inner flex row: logo anchors left, links anchor right */
+.site-nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo: flex container so img aligns cleanly without descender gap */
+.site-nav__logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  /* text-decoration reset already in base.css a rule */
+}
+
+/* CSS height is the render authority.
+   HTML width/height attrs on the img prevent layout reflow. */
+.site-nav__logo img {
+  height: 36px;
+  width: auto;
+}
+
+/* Links row: flex, gap driven by spacing token.
+   list-style reset already in base.css. */
+.site-nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+/* Hidden on mobile — nav links are desktop-only in this scope */
+@media (max-width: 767px) {
+  .site-nav__links {
+    display: none;
+  }
+}
+
+
+/* ================================================================
+   SECTION 01 — HERO
+   Near-black. Full viewport (100svh).
+   Three-layer z-stack: ghost(0) → rule(1) → content(2).
+   Content is position: absolute, pinned bottom-left.
+   The headline emerges from the floor of the frame.
+   Non-negotiable — this is not a centred hero.
+================================================================ */
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  background-color: var(--color-near-black);
+
+  /* Ghost numbers and type bleed right — clipped at section edge */
+  overflow: hidden;
+}
+
+/* ── Layer 0: Ghost number ───────────────────────────────────────
+   Atmospheric texture. Bleeds off the right edge.
+   3–4% opacity: present but never read.
+   pointer-events none: invisible to interaction.
+────────────────────────────────────────────────────────────────── */
+.hero__ghost {
+  position: absolute;
+  bottom: -0.1em;
+  right: -0.04em;
+
+  /* Ghost is oversized — it IS the atmosphere, not a number */
+  font-size: clamp(18rem, 42vw, 40rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+
+  color: var(--color-white);
+  opacity: 0.03;
+
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+
+  /* Beneath the rule and content layers */
+  z-index: 0;
+}
+
+/* ── Layer 1: Midground architectural rule ───────────────────────
+   Single 1px horizontal line at viewport midpoint.
+   4–5% white opacity: invisible until felt.
+   This is structural texture, not decoration.
+────────────────────────────────────────────────────────────────── */
+.hero__midground-rule {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+
+  /* Above ghost, below content */
+  z-index: 1;
+}
+
+/* ── Layer 2: Content ────────────────────────────────────────────
+   Absolute. Pinned to the bottom-left of the hero.
+   The headline does not float in the middle of the viewport.
+   It lives on the floor. It has gravity.
+────────────────────────────────────────────────────────────────── */
+.hero__content {
+  position: absolute;
+  bottom: var(--space-xl);
+  left: 0;
+  right: 0;
+
+  /* Above all atmospheric layers */
+  z-index: 2;
+}
+
+
+/* ================================================================
+   SECTION 02 — WHO WE ARE
+   Off-white. Editorial baseline.
+   Asymmetric two-column: 140px number col + content col.
+   No bottom padding — the section number handles the visual close
+   by bleeding down into Credentials below.
+   z-index: 2 keeps it above the Tourist card z-stack.
+================================================================ */
+
+.who-we-are {
+  position: relative;
+  background-color: var(--color-off-white);
+  padding-top: var(--space-xl);
+
+  /* No bottom padding: section number bleeds the boundary */
+  padding-bottom: 0;
+
+  /* Above Tourist card z-stack */
+  z-index: 2;
+}
+
+/* Mobile: single column — number sits above content */
+.who-we-are__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+/* Desktop: 140px structural number column | content fills remainder */
+@media (min-width: 768px) {
+  .who-we-are__grid {
+    grid-template-columns: var(--grid-num-col) 1fr;
+    gap: 0 var(--space-xl);
+    align-items: start;
+  }
+}
+
+
+/* ================================================================
+   SECTION 03 — CREDENTIALS
+   Off-white. Continuous surface with Who We Are — same background,
+   no break. The two sections read as one editorial conversation.
+   Section number 02 bleeds down into the Tourist card below.
+   No bottom padding — same reason as Who We Are.
+================================================================ */
+
+.credentials {
+  position: relative;
+  background-color: var(--color-off-white);
+  padding-top: var(--space-lg);
+
+  /* No bottom padding: section number 02 bleeds into Tourist */
+  padding-bottom: 0;
+
+  z-index: 2;
+}
+
+/* Same asymmetric grid as Who We Are — visual continuity */
+.credentials__layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 768px) {
+  .credentials__layout {
+    grid-template-columns: var(--grid-num-col) 1fr;
+    gap: 0 var(--space-xl);
+    align-items: start;
+  }
+}
+
+
+/* ================================================================
+   SECTION NUMBER SYSTEM — KOYO TREATMENT
+   Numbers are typographic bridges between sections.
+   They sit in the left column of light sections but bleed
+   below their containing section via negative bottom margin.
+   z-index: 10 — above both sections they span.
+   The number is the architecture. Content lives inside it.
+================================================================ */
+
+/* Wrapper: overflow visible so the number can escape vertically */
+.section-num-wrap {
+  position: relative;
+  overflow: visible;
+}
+
+.section-number {
+  display: block;
+  font-size: var(--num-size);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.05em;
+
+  color: var(--color-slate);
+  opacity: 0.15;
+
+  user-select: none;
+
+  /* Negative margin pulls the number below its section boundary —
+     it crosses into the section beneath. No clip-path needed.
+     The transition between sections is felt through typography. */
+  margin-bottom: var(--num-bleed);
+
+  position: relative;
+
+  /* Above both sections it spans — the architecture layer */
+  z-index: 10;
+}
+
+
+/* ================================================================
+   SECTION 04 — THE TOURIST (OPTION A: CONTAINED CARD)
+   Structure: off-white wrapper → contained dark card.
+   The wrapper IS the off-white page. The card is an object on it.
+   The ghost year (1980) bleeds out of the card into white space
+   above and below — the box contains the content, type escapes.
+================================================================ */
+
+/* Off-white wrapper: the page surface the card sits on.
+   Padding creates white space above and below the card.
+   z-index: 1 — behind the section numbers bleeding down from above. */
+.tourist-wrapper {
+  position: relative;
+  background-color: var(--color-off-white);
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-xl);
+  z-index: 1;
+}
+
+/* The card: contained dark object.
+   margin-inline creates the deliberate inset from viewport edge.
+   overflow: visible allows the ghost year to escape top and bottom.
+   No border-radius — this is a chapter card, not a UI widget. */
+.tourist {
+  position: relative;
+  background-color: var(--color-tourist-card);
+  margin-inline: var(--tourist-margin);
+  padding: var(--tourist-padding);
+
+  /* Ghost year must escape the card boundary — critical */
+  overflow: visible;
+}
+
+/* Ghost year: escapes the card top and bottom into white space.
+   top: var(--tourist-ghost-bleed) positions it so the top of the
+   number sits above the card edge. At this font-size (~22rem),
+   the character body overflows above and below simultaneously.
+   This is the Rolf Jensen / Microsoft tension move — the box
+   contains the content, the type refuses to be contained. */
+.tourist__ghost-year {
+  position: absolute;
+  top: var(--tourist-ghost-bleed);
+  right: -0.02em;
+  font-size: clamp(10rem, 22vw, 22rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--color-white);
+  opacity: 0.055;
+  pointer-events: none;
+  user-select: none;
+
+  /* Above card background, below readable content */
+  z-index: 0;
+}
+
+/* Midground architectural rule inside the card.
+   Mirrors the hero's midground rule — a site-wide texture system.
+   Positioned at 55% rather than 50% — the pull quote sits lower,
+   so the rule is weighted slightly below centre. */
+.tourist__midground-rule {
+  position: absolute;
+  top: 55%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.04);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Content layer: above ghost and midground rule */
+.tourist__content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Two-column body grid: single column on mobile, two on desktop.
+   Gap uses --space-2xl at desktop — this section needs the most
+   breathing room on the page. The silence is as designed
+   as the content. */
+.tourist__body-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+@media (min-width: 900px) {
+  .tourist__body-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+  }
+}
+
+
+/* ================================================================
+   SECTION 05 — CTA CLOSE
+   Near-black. Full bleed. Confident bookend.
+   Page opens dark (hero) — it closes dark. The symmetry is
+   the design decision. No ghost texture — silence is the design.
+   Border-top separates from Tourist wrapper's off-white margin.
+================================================================ */
+
+.cta-close {
+  position: relative;
+  background-color: var(--color-near-black);
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-2xl);
+
+  /* Thin line separates from the off-white Tourist wrapper above.
+     rgba value matches the hero's atmospheric register. */
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+
+  z-index: 2;
+}
+
+
+/* ================================================================
+   FOOTER
+   Near-black. Continuous with CTA close — same surface.
+   Border-top at lower opacity than the CTA separator —
+   footer is less of a statement, more of a close.
+   Mobile: stacked column. Desktop: copyright left, logo right.
+================================================================ */
+
+.site-footer {
+  background-color: var(--color-near-black);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-block: var(--space-lg);
+}
+
+/* Mobile-first: stacked, left-aligned */
+.site-footer__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  align-items: flex-start;
+}
+
+/* Desktop: copyright left, logo anchors right */
+@media (min-width: 768px) {
+  .site-footer__inner {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* CSS height is the render authority.
+   HTML attrs on the img prevent reflow. */
+.site-footer__logo img {
+  height: 22px;
+  width: auto;
+  opacity: 0.4;
+}

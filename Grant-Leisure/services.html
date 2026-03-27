@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Grant Leisure services — a disciplined, lifecycle approach from market analysis through turnkey management." />
+  <title>Services — Grant Leisure</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <!--
+    DEPLOYMENT: Remove the <style> block and uncomment these three links:
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+  -->
+
+  <style>
+    /* PREVIEW ONLY — replace with external stylesheet links before deployment:
+       <link rel="stylesheet" href="css/base.css">
+       <link rel="stylesheet" href="css/layout.css">
+       <link rel="stylesheet" href="css/components.css">
+    */
+
+
+    /* ================================================================
+       BASE.CSS — TOKENS · FONT-FACE · RESET · UTILITY ATOMS · REVEAL
+    ================================================================ */
+
+    @font-face {
+      font-family: 'Barlow Condensed';
+      font-style: normal;
+      font-weight: 300;
+      font-display: swap;
+      src: url('assets/fonts/barlow-condensed-300.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Barlow Condensed';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('assets/fonts/barlow-condensed-400.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Barlow Condensed';
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url('assets/fonts/barlow-condensed-600.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Barlow Condensed';
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url('assets/fonts/barlow-condensed-700.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Barlow Condensed';
+      font-style: normal;
+      font-weight: 800;
+      font-display: swap;
+      src: url('assets/fonts/barlow-condensed-800.woff2') format('woff2');
+    }
+
+    :root {
+      --color-green:         #5BAF7A;
+      --color-green-dark:    #3D8F5F;
+      --color-navy:          #3B4F8A;
+      --color-slate:         #7A7F9A;
+      --color-white:         #FFFFFF;
+      --color-near-black:    #111212;
+      --color-off-white:     #F7F7F5;
+      --color-body-text:     #2E2F2F;
+      --color-tourist-card:  #111212;
+
+      --type-display:        clamp(3rem, 7.5vw, 6.5rem);
+      --type-heading:        clamp(2.2rem, 5vw, 4rem);
+      --type-subheading:     clamp(1.4rem, 2.5vw, 2rem);
+      --type-credentials:    clamp(1rem, 2.4vw, 1.75rem);
+      --type-label:          0.75rem;
+      --type-org:            clamp(0.85rem, 1.5vw, 1.05rem);
+      --type-body:           clamp(1rem, 1.2vw, 1.1rem);
+      --type-caption:        0.8rem;
+
+      --space-xs:            0.5rem;
+      --space-sm:            1rem;
+      --space-md:            2rem;
+      --space-lg:            4rem;
+      --space-xl:            7rem;
+      --space-2xl:           12rem;
+
+      --grid-max:            1440px;
+      --grid-gutter:         clamp(1.5rem, 5vw, 5rem);
+      --grid-num-col:        140px;
+
+      --num-size:            clamp(14rem, 28vw, 26rem);
+      --num-bleed:           -0.22em;
+
+      --tourist-margin:      clamp(1.5rem, 5vw, 5rem);
+      --tourist-padding:     clamp(3rem, 6vw, 6rem);
+      --tourist-ghost-bleed: -0.18em;
+
+      --ease-out-expo:       cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out:         cubic-bezier(0.4, 0, 0.2, 1);
+      --dur-fast:            350ms;
+      --dur-med:             650ms;
+      --dur-slow:            1000ms;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: var(--type-body);
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--color-body-text);
+      background-color: var(--color-near-black);
+      overflow-x: hidden;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    ul, ol { list-style: none; }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    /* ── Typography atoms ─────────────────────────────────────── */
+
+    .kicker {
+      display: block;
+      font-size: var(--type-label);
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-slate);
+      margin-bottom: var(--space-sm);
+    }
+
+    .kicker--green { color: var(--color-green); }
+    .kicker--white { color: rgba(255, 255, 255, 0.45); }
+
+    .kicker-rule {
+      display: block;
+      width: 100%;
+      height: 1px;
+      background-color: currentColor;
+      opacity: 0.15;
+      margin-bottom: var(--space-md);
+    }
+
+    .section-footer-rule {
+      display: block;
+      width: 100%;
+      height: 1px;
+      background-color: var(--color-slate);
+      opacity: 0.15;
+      margin-top: var(--space-xl);
+    }
+
+    /* ── Scroll-reveal system ─────────────────────────────────── */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition:
+        opacity   var(--dur-slow) var(--ease-out-expo),
+        transform var(--dur-slow) var(--ease-out-expo);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-group > * {
+      opacity: 0;
+      transform: translateY(18px);
+      transition:
+        opacity   var(--dur-med) var(--ease-out-expo),
+        transform var(--dur-med) var(--ease-out-expo);
+    }
+
+    .reveal-group.is-visible > *:nth-child(1)  { transition-delay: 0ms;   opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(2)  { transition-delay: 80ms;  opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(3)  { transition-delay: 160ms; opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(4)  { transition-delay: 240ms; opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(5)  { transition-delay: 320ms; opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(6)  { transition-delay: 400ms; opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(7)  { transition-delay: 480ms; opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(8)  { transition-delay: 560ms; opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(9)  { transition-delay: 640ms; opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(10) { transition-delay: 720ms; opacity: 1; transform: none; }
+
+
+    /* ================================================================
+       LAYOUT.CSS — CONTAINER · NAV · SCAFFOLDING · KOYO · HERO · FOOTER
+    ================================================================ */
+
+    .container {
+      width: 100%;
+      max-width: var(--grid-max);
+      margin-inline: auto;
+      padding-inline: var(--grid-gutter);
+    }
+
+    /* ── Navigation ───────────────────────────────────────────── */
+
+    .site-nav {
+      position: fixed;
+      inset-block-start: 0;
+      inset-inline: 0;
+      z-index: 200;
+      padding-block: var(--space-sm);
+      background-color: transparent;
+      transition:
+        background-color var(--dur-fast) var(--ease-in-out),
+        border-color     var(--dur-fast) var(--ease-in-out);
+    }
+
+    .site-nav.is-scrolled {
+      background-color: rgba(17, 18, 18, 0.95);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .site-nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .site-nav__logo {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .site-nav__logo img {
+      height: 36px;
+      width: auto;
+    }
+
+    .site-nav__links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+    }
+
+    @media (max-width: 767px) {
+      .site-nav__links { display: none; }
+    }
+
+    /* ── Hero ─────────────────────────────────────────────────── */
+
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      background-color: var(--color-near-black);
+      overflow: hidden;
+    }
+
+    .hero__ghost {
+      position: absolute;
+      bottom: -0.1em;
+      right: -0.04em;
+      font-size: clamp(18rem, 42vw, 40rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: var(--color-white);
+      opacity: 0.03;
+      pointer-events: none;
+      user-select: none;
+      white-space: nowrap;
+      z-index: 0;
+    }
+
+    .hero__midground-rule {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background-color: rgba(255, 255, 255, 0.05);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero__content {
+      position: absolute;
+      bottom: var(--space-xl);
+      left: 0;
+      right: 0;
+      z-index: 2;
+    }
+
+    /* ── Koyo section number system ───────────────────────────── */
+
+    .section-num-wrap {
+      position: relative;
+      overflow: visible;
+    }
+
+    .section-number {
+      display: block;
+      font-size: var(--num-size);
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      color: var(--color-slate);
+      opacity: 0.15;
+      user-select: none;
+      margin-bottom: var(--num-bleed);
+      position: relative;
+      z-index: 10;
+    }
+
+    /* ── CTA close ────────────────────────────────────────────── */
+
+    .cta-close {
+      position: relative;
+      background-color: var(--color-near-black);
+      padding-top: var(--space-xl);
+      padding-bottom: var(--space-2xl);
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      z-index: 2;
+    }
+
+    /* ── Footer ───────────────────────────────────────────────── */
+
+    .site-footer {
+      background-color: var(--color-near-black);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-block: var(--space-lg);
+    }
+
+    .site-footer__inner {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      align-items: flex-start;
+    }
+
+    @media (min-width: 768px) {
+      .site-footer__inner {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    .site-footer__logo img {
+      height: 22px;
+      width: auto;
+      opacity: 0.4;
+    }
+
+
+    /* ================================================================
+       COMPONENTS.CSS — DISCRETE UI COMPONENTS
+    ================================================================ */
+
+    /* ── Navigation components ────────────────────────────────── */
+
+    .site-nav__links a {
+      font-size: var(--type-label);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.65);
+      transition: color var(--dur-fast) var(--ease-in-out);
+    }
+
+    .site-nav__links a:hover { color: var(--color-white); }
+
+    .site-nav__links a[aria-current="page"] { color: var(--color-green); }
+
+    .site-nav__links .nav-contact {
+      color: var(--color-green);
+      border: 1px solid var(--color-green);
+      padding: 0.45em calc(1em - 0.12em) 0.4em 1em;
+      transition:
+        color            var(--dur-fast) var(--ease-in-out),
+        background-color var(--dur-fast) var(--ease-in-out);
+    }
+
+    .site-nav__links .nav-contact:hover {
+      color: var(--color-near-black);
+      background-color: var(--color-green);
+    }
+
+    .site-nav__links a:focus-visible {
+      outline: 2px solid var(--color-green);
+      outline-offset: 3px;
+    }
+
+    /* ── Hero components ──────────────────────────────────────── */
+
+    .hero__rule {
+      display: block;
+      width: 48px;
+      height: 1px;
+      background-color: var(--color-green);
+      margin-bottom: var(--space-md);
+    }
+
+    .hero__headline {
+      font-size: var(--type-display);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: var(--color-white);
+    }
+
+    .hero__headline-accent {
+      color: var(--color-green);
+    }
+
+    /* ── CTA close components ─────────────────────────────────── */
+
+    .cta-close__top-rule {
+      display: block;
+      width: 48px;
+      height: 1px;
+      background-color: var(--color-green);
+      margin-bottom: var(--space-lg);
+    }
+
+    .cta-close__headline {
+      font-size: var(--type-heading);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--color-white);
+      margin-bottom: var(--space-xl);
+      max-width: 20ch;
+    }
+
+    .cta-close__button {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: var(--type-label);
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-white);
+      background-color: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      padding: 1em calc(2em - 0.14em) 1em 2em;
+      cursor: pointer;
+      transition:
+        background-color var(--dur-fast) var(--ease-in-out),
+        border-color     var(--dur-fast) var(--ease-in-out),
+        color            var(--dur-fast) var(--ease-in-out);
+    }
+
+    .cta-close__button:hover {
+      background-color: var(--color-green-dark);
+      border-color: var(--color-green-dark);
+      color: var(--color-near-black);
+    }
+
+    .cta-close__button:focus-visible {
+      outline: 2px solid var(--color-green);
+      outline-offset: 3px;
+    }
+
+    .cta-close__button-arrow {
+      display: inline-block;
+      transition: transform var(--dur-fast) var(--ease-out-expo);
+    }
+
+    .cta-close__button:hover .cta-close__button-arrow {
+      transform: translateX(5px);
+    }
+
+    /* ── Footer components ────────────────────────────────────── */
+
+    .site-footer__copy {
+      font-size: var(--type-caption);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: rgba(255, 255, 255, 0.28);
+    }
+
+
+    /* ================================================================
+       SERVICES PAGE — SCOPED STYLES
+       No scope tags. All classes prefixed to avoid collisions.
+    ================================================================ */
+
+    /* ── Hero — services variant ──────────────────────────────── */
+
+    .hero--services .hero__ghost {
+      font-size: clamp(14rem, 30vw, 32rem);
+      bottom: -0.05em;
+      right: -0.06em;
+      letter-spacing: -0.06em;
+    }
+
+    /* Green geometric block: top-right of hero.
+       Purely decorative — aria-hidden in markup.
+       Echoes the brand palette without function. */
+    .hero__geo-block {
+      position: absolute;
+      top: clamp(4rem, 8vw, 7rem);
+      right: clamp(1.5rem, 5vw, 5rem);
+      width: clamp(3rem, 5vw, 5rem);
+      height: clamp(8rem, 14vw, 13rem);
+      background-color: var(--color-green);
+      opacity: 0.18;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── Approach section — off-white ─────────────────────────── */
+
+    .approach-section {
+      position: relative;
+      background-color: var(--color-off-white);
+      padding-top: var(--space-xl);
+      padding-bottom: var(--space-xl);
+      z-index: 2;
+    }
+
+    /* Two-column: label + rule left, statement right.
+       Mobile: single column stacked. */
+    .approach-section__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+    }
+
+    @media (min-width: 768px) {
+      .approach-section__grid {
+        grid-template-columns: 220px 1fr;
+        gap: 0 var(--space-xl);
+        align-items: start;
+      }
+    }
+
+    /* Left: label + green 2px rule stacked */
+    .approach-section__label-col {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      padding-top: 0.4em;
+    }
+
+    .approach-section__accent-rule {
+      display: block;
+      width: 48px;
+      height: 2px;
+      background-color: var(--color-green);
+    }
+
+    /* Right: statement at heading scale */
+    .approach-section__statement {
+      font-size: var(--type-heading);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--color-near-black);
+    }
+
+    /* "self-sustaining" — single green deployment in this section */
+    .approach-section__accent {
+      color: var(--color-green);
+    }
+
+    /* ── Lifecycle section — off-white, single surface ────────── */
+
+    .lifecycle-section {
+      position: relative;
+      background-color: var(--color-off-white);
+      padding-top: var(--space-lg);
+      padding-bottom: var(--space-xl);
+      z-index: 2;
+      /* Overflow visible: Koyo numbers bleed between services */
+      overflow: visible;
+    }
+
+    /* Geometric shape 1 — navy, top of lifecycle (near service 01).
+       Sits in the right-column negative space.
+       position: absolute relative to lifecycle-section. */
+    .lifecycle-section__geo-top {
+      position: absolute;
+      top: clamp(6rem, 12vw, 10rem);
+      right: clamp(1.5rem, 5vw, 5rem);
+      width: 80px;
+      height: 180px;
+      background-color: var(--color-navy);
+      opacity: 0.12;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Geometric shape 2 — green, bottom of lifecycle (near service 06).
+       Smaller — lighter exit accent vs heavier navy entry. */
+    .lifecycle-section__geo-bottom {
+      position: absolute;
+      bottom: clamp(6rem, 12vw, 10rem);
+      right: clamp(1.5rem, 5vw, 5rem);
+      width: 48px;
+      height: 120px;
+      background-color: var(--color-green);
+      opacity: 0.10;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Hide decorative shapes on mobile — not needed at single column */
+    @media (max-width: 767px) {
+      .lifecycle-section__geo-top,
+      .lifecycle-section__geo-bottom {
+        display: none;
+      }
+    }
+
+    /* Three-column grid per service:
+       Left (160px): structural number
+       Centre: kicker + accent rule + name + body
+       Right: intentional negative space
+       Mobile: single column — number sits above content */
+    .service-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-sm) 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    @media (min-width: 768px) {
+      .service-row {
+        /* 160px number col | content col | right negative space */
+        grid-template-columns: 160px 1fr 18%;
+        align-items: start;
+        gap: 0;
+      }
+    }
+
+    /* Thin 1px rule separating each service.
+       On the container — full content width, not full viewport. */
+    .service-row + .service-row {
+      border-top: 1px solid rgba(44, 45, 45, 0.1);
+      padding-top: var(--space-lg);
+      margin-top: var(--space-lg);
+    }
+
+    /* Number column: Koyo treatment, 160px col on desktop.
+       overflow: visible allows the number to bleed below. */
+    .service-row__num-col {
+      overflow: visible;
+      position: relative;
+    }
+
+    /* Service name: credentials scale — sits between heading and body.
+       Uppercase. Near-black on light surface.
+       Acts as the visual anchor for each service row. */
+    .service-row__name {
+      font-size: var(--type-credentials);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      color: var(--color-near-black);
+      margin-bottom: var(--space-sm);
+      max-width: 46ch;
+    }
+
+    /* Green 2px accent rule: single green deployment per row */
+    .service-row__accent-rule {
+      display: block;
+      width: 40px;
+      height: 2px;
+      background-color: var(--color-green);
+      margin-bottom: var(--space-sm);
+    }
+
+    /* Body: readable, never decorative. max-width keeps line length
+       optimal — doesn't sprawl into the right negative-space column. */
+    .service-row__body {
+      font-size: var(--type-body);
+      font-weight: 400;
+      line-height: 1.72;
+      color: var(--color-body-text);
+      max-width: 58ch;
+      padding-bottom: var(--space-lg);
+    }
+
+    /* ── Quotes section — near-black, 2x2 grid ────────────────── */
+
+    .quotes-section {
+      position: relative;
+      background-color: var(--color-near-black);
+      padding-top: var(--space-xl);
+      padding-bottom: var(--space-xl);
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      z-index: 2;
+    }
+
+    /* Section header: kicker + sub-kicker stacked */
+    .quotes-section__header {
+      margin-bottom: var(--space-xl);
+    }
+
+    /* Sub-label below the kicker: slightly larger than kicker,
+       white, carries the "25 to 30 Year Partnerships" weight. */
+    .quotes-section__sub {
+      display: block;
+      font-size: var(--type-subheading);
+      font-weight: 700;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--color-white);
+      margin-top: var(--space-sm);
+    }
+
+    /* 2x2 grid: single column mobile, two column desktop */
+    .quotes-section__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+    }
+
+    @media (min-width: 768px) {
+      .quotes-section__grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-lg) var(--space-xl);
+      }
+    }
+
+    /* Individual quote card: left green rule, internal padding */
+    .quote-card {
+      border-left: 2px solid var(--color-green);
+      padding-left: var(--space-md);
+    }
+
+    /* Quote text: subheading scale — this is what gets read first */
+    .quote-card__text {
+      font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+      font-weight: 600;
+      line-height: 1.4;
+      letter-spacing: -0.01em;
+      color: var(--color-white);
+      margin-bottom: var(--space-md);
+    }
+
+    /* Attribution block */
+    .quote-card__attribution {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2em;
+    }
+
+    .quote-card__name {
+      font-size: var(--type-label);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-green);
+    }
+
+    .quote-card__role {
+      font-size: var(--type-caption);
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-slate);
+      line-height: 1.5;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <!-- ============================================================
+       NAVIGATION
+       Fixed. Transparent over hero. .is-scrolled via JS at 80px.
+       Services = aria-current. Contact = green bordered pill.
+  ============================================================ -->
+  <nav class="site-nav" aria-label="Primary navigation">
+    <div class="container">
+      <div class="site-nav__inner">
+
+        <a href="index.html" class="site-nav__logo" aria-label="Grant Leisure — home">
+          <img
+            src="assets/images/GLILogoWhiteBG.png"
+            alt="Grant Leisure"
+            width="120"
+            height="40"
+          />
+        </a>
+
+        <ul class="site-nav__links" role="list">
+          <li><a href="about.html">About</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="services.html" aria-current="page">Services</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html" class="nav-contact">Contact</a></li>
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+
+
+  <main id="main-content">
+
+    <!-- ============================================================
+         HERO
+         Near-black. Full viewport. Three-layer z-stack.
+         Ghost "GL" bleeds off right edge.
+         Green geometric block top-right.
+         Headline two lines, "Disciplined" in green.
+         Content pinned bottom-left — emerges from the floor.
+    ============================================================ -->
+    <section class="hero hero--services" aria-labelledby="hero-headline">
+
+      <!-- Layer 0: ghost GL — atmospheric, never readable -->
+      <span class="hero__ghost" aria-hidden="true">GL</span>
+
+      <!-- Layer 1: midground architectural rule -->
+      <span class="hero__midground-rule" aria-hidden="true"></span>
+
+      <!-- Green geometric block top-right — decorative punctuation -->
+      <div class="hero__geo-block" aria-hidden="true"></div>
+
+      <!-- Layer 2: content — floor of the frame, left spine -->
+      <div class="hero__content">
+        <div class="container">
+
+          <span class="hero__rule" aria-hidden="true"></span>
+          <span class="kicker kicker--white">Our Services</span>
+
+          <h1 class="hero__headline" id="hero-headline">
+            Treating Projects With A<br />
+            <span class="hero__headline-accent">Disciplined</span> Approach.
+          </h1>
+
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ============================================================
+         APPROACH SECTION
+         Off-white. Full width. Two-column layout.
+         Left: label + green 2px rule.
+         Right: statement at heading scale.
+         "self-sustaining" in green — single deployment.
+    ============================================================ -->
+    <section class="approach-section" aria-labelledby="approach-heading">
+      <div class="container">
+        <div class="approach-section__grid">
+
+          <!-- Left: label + rule -->
+          <div class="approach-section__label-col reveal">
+            <span class="kicker">Our Approach</span>
+            <span class="approach-section__accent-rule" aria-hidden="true"></span>
+          </div>
+
+          <!-- Right: heading-scale statement -->
+          <div>
+            <p
+              class="approach-section__statement reveal"
+              id="approach-heading"
+            >
+              Our goal is to create
+              <span class="approach-section__accent">self-sustaining</span>
+              development ecosystems that capitalise existing assets and
+              encourage expansion.<br />
+              Resulting in longer visitor length of stay
+              and increased profits.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         LIFECYCLE — SIX SERVICES
+         Single off-white surface. No alternating colours.
+         Thin 1px rules between services.
+         Three-column grid: number | content | negative space.
+         Two geometric shapes: navy top, green bottom.
+    ============================================================ -->
+    <section class="lifecycle-section" aria-label="Our services lifecycle">
+
+      <!-- Geometric shape 1: navy, top-right — entry anchor -->
+      <div class="lifecycle-section__geo-top" aria-hidden="true"></div>
+
+      <!-- Geometric shape 2: green, bottom-right — exit accent -->
+      <div class="lifecycle-section__geo-bottom" aria-hidden="true"></div>
+
+      <div class="container">
+
+        <!-- ── 01 MARKET ANALYSIS ─────────────────────────────── -->
+        <div class="service-row" aria-labelledby="svc-01-name">
+
+          <div class="section-num-wrap service-row__num-col" aria-hidden="true">
+            <span class="section-number">01</span>
+          </div>
+
+          <div>
+            <span class="kicker reveal">Market Analysis</span>
+            <span class="service-row__accent-rule reveal" aria-hidden="true"></span>
+
+            <h2 class="service-row__name reveal" id="svc-01-name">
+              Understanding the opportunity before
+              a single decision is made.
+            </h2>
+
+            <p class="service-row__body reveal">
+              Grant Leisure assesses market support by evaluating overall market trends
+              and growth in targeted markets. Consumer surveys, focus groups, and other
+              market research techniques are used to test and refine demand estimates
+              and market profiles.
+            </p>
+          </div>
+
+          <!-- Right column: intentional negative space -->
+          <div aria-hidden="true"></div>
+
+        </div>
+
+
+        <!-- ── 02 DEVELOPMENT PLANNING ───────────────────────── -->
+        <div class="service-row" aria-labelledby="svc-02-name">
+
+          <div class="section-num-wrap service-row__num-col" aria-hidden="true">
+            <span class="section-number">02</span>
+          </div>
+
+          <div>
+            <span class="kicker reveal">Development Planning</span>
+            <span class="service-row__accent-rule reveal" aria-hidden="true"></span>
+
+            <h2 class="service-row__name reveal" id="svc-02-name">
+              Where economic reality and
+              physical vision meet.
+            </h2>
+
+            <p class="service-row__body reveal">
+              Grant Leisure works directly with architects, planners, engineers, and
+              other professionals to achieve the optimum balance between economic
+              planning and physical design, resulting in real estate products and
+              creative development programs that are responsive to the market and
+              financially viable.
+            </p>
+          </div>
+
+          <div aria-hidden="true"></div>
+
+        </div>
+
+
+        <!-- ── 03 FINANCIAL FEASIBILITY ──────────────────────── -->
+        <div class="service-row" aria-labelledby="svc-03-name">
+
+          <div class="section-num-wrap service-row__num-col" aria-hidden="true">
+            <span class="section-number">03</span>
+          </div>
+
+          <div>
+            <span class="kicker reveal">Financial Feasibility</span>
+            <span class="service-row__accent-rule reveal" aria-hidden="true"></span>
+
+            <h2 class="service-row__name reveal" id="svc-03-name">
+              Proprietary models. No guesswork.
+            </h2>
+
+            <p class="service-row__body reveal">
+              Grant Leisure has created proprietary financial models for preparing cash
+              flow and income projections, determining financial rates of return, and
+              sensitivity testing of multi-use community development, income properties,
+              and portfolio disposition programs.
+            </p>
+          </div>
+
+          <div aria-hidden="true"></div>
+
+        </div>
+
+
+        <!-- ── 04 FUNDING ASSISTANCE ─────────────────────────── -->
+        <div class="service-row" aria-labelledby="svc-04-name">
+
+          <div class="section-num-wrap service-row__num-col" aria-hidden="true">
+            <span class="section-number">04</span>
+          </div>
+
+          <div>
+            <span class="kicker reveal">Funding Assistance</span>
+            <span class="service-row__accent-rule reveal" aria-hidden="true"></span>
+
+            <h2 class="service-row__name reveal" id="svc-04-name">
+              Capital identified, evaluated, secured.
+            </h2>
+
+            <p class="service-row__body reveal">
+              Grant Leisure identifies and evaluates acquisition and investment
+              opportunities for our clients and provides assistance in purchase, sale,
+              lease, and financing transaction negotiations. We additionally reach out
+              to our own network of investors and financiers to evaluate interest and
+              make introductions.
+            </p>
+          </div>
+
+          <div aria-hidden="true"></div>
+
+        </div>
+
+
+        <!-- ── 05 OPERATIONAL PLANNING ───────────────────────── -->
+        <div class="service-row" aria-labelledby="svc-05-name">
+
+          <div class="section-num-wrap service-row__num-col" aria-hidden="true">
+            <span class="section-number">05</span>
+          </div>
+
+          <div>
+            <span class="kicker reveal">Operational Planning</span>
+            <span class="service-row__accent-rule reveal" aria-hidden="true"></span>
+
+            <h2 class="service-row__name reveal" id="svc-05-name">
+              Every system. Every team. Every process.
+            </h2>
+
+            <p class="service-row__body reveal">
+              Grant Leisure reviews performance, examines areas for expansion and
+              revitalisation, prepares pricing strategies and marketing programs,
+              assists in operator selection and tenant negotiation, and evaluates
+              financial restructuring and disposition alternatives.
+            </p>
+          </div>
+
+          <div aria-hidden="true"></div>
+
+        </div>
+
+
+        <!-- ── 06 TURNKEY MANAGEMENT ─────────────────────────── -->
+        <div class="service-row" aria-labelledby="svc-06-name">
+
+          <div class="section-num-wrap service-row__num-col" aria-hidden="true">
+            <span class="section-number">06</span>
+          </div>
+
+          <div>
+            <span class="kicker reveal">Turnkey Management</span>
+            <span class="service-row__accent-rule reveal" aria-hidden="true"></span>
+
+            <h2 class="service-row__name reveal" id="svc-06-name">
+              We run it. Then we hand it over.
+            </h2>
+
+            <p class="service-row__body reveal">
+              Clients profit from Grant Leisure's decades of operating experience
+              applied to the policies and procedures that become the operational
+              foundation for their venture. Team members are reserved for two years
+              following opening to monitor operations and make adjustments until the
+              client is left with a self-sufficient operation.
+            </p>
+          </div>
+
+          <div aria-hidden="true"></div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         QUOTES SECTION
+         Near-black. 2x2 uniform grid.
+         No geometric shapes. No ticker.
+         Kicker + sub-heading, then four quote cards.
+    ============================================================ -->
+    <section class="quotes-section" aria-labelledby="quotes-heading">
+      <div class="container">
+
+        <div class="quotes-section__header">
+          <span class="kicker kicker--green reveal">Four Decades of Relationships</span>
+          <span class="quotes-section__sub reveal" id="quotes-heading">
+            25 to 30 Year Partnerships
+          </span>
+        </div>
+
+        <div class="quotes-section__grid reveal-group">
+
+          <!-- Quote 1 -->
+          <figure
+            class="quote-card"
+            aria-label="Testimonial from Larry Wyatt, Paramount Parks"
+          >
+            <blockquote class="quote-card__text">
+              &#8220;His instinct and attention to detail in large-scale land-planning
+              for leisure destinations is second to none.&#8221;
+            </blockquote>
+            <figcaption class="quote-card__attribution">
+              <span class="quote-card__name">Larry Wyatt</span>
+              <span class="quote-card__role">
+                VP Planning and Development · Paramount Parks · 25 Years
+              </span>
+            </figcaption>
+          </figure>
+
+          <!-- Quote 2 -->
+          <figure
+            class="quote-card"
+            aria-label="Testimonial from Brian Edwards, Edwards Technologies Inc"
+          >
+            <blockquote class="quote-card__text">
+              &#8220;Andrew&#8217;s unique understanding of operations and how technology
+              could enhance the guest experience has been a big positive on every
+              project.&#8221;
+            </blockquote>
+            <figcaption class="quote-card__attribution">
+              <span class="quote-card__name">Brian Edwards</span>
+              <span class="quote-card__role">
+                Founder and Chairman · Edwards Technologies Inc · 25 Years
+              </span>
+            </figcaption>
+          </figure>
+
+          <!-- Quote 3 -->
+          <figure
+            class="quote-card"
+            aria-label="Testimonial from Chris Mather, Mather and Co"
+          >
+            <blockquote class="quote-card__text">
+              &#8220;Their unparalleled track record in translating creative concepts
+              into feasible and profitable projects. Our go-to resource when projects
+              need a dose of reality.&#8221;
+            </blockquote>
+            <figcaption class="quote-card__attribution">
+              <span class="quote-card__name">Chris Mather</span>
+              <span class="quote-card__role">
+                Chief Executive Officer · Mather and Co · 30 Years
+              </span>
+            </figcaption>
+          </figure>
+
+          <!-- Quote 4 -->
+          <figure
+            class="quote-card"
+            aria-label="Testimonial from Pat Janikowski, PJA"
+          >
+            <blockquote class="quote-card__text">
+              &#8220;Andy is able to gauge the needs of the client in any situation
+              and develop programs that are both functional and cost-effective.&#8221;
+            </blockquote>
+            <figcaption class="quote-card__attribution">
+              <span class="quote-card__name">Pat Janikowski AIA NCARB</span>
+              <span class="quote-card__role">
+                President · PJA · 10 Years
+              </span>
+            </figcaption>
+          </figure>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         CTA CLOSE
+         Near-black. No geometric shapes. Mirrors about.html exactly.
+         Kicker: Est. 1980 · Global
+         Headline: Ready to Build / Something Lasting?
+         Button: Start a Conversation
+    ============================================================ -->
+    <section class="cta-close" aria-labelledby="cta-headline">
+      <div class="container">
+
+        <span class="cta-close__top-rule reveal" aria-hidden="true"></span>
+
+        <span class="kicker kicker--green reveal">Est. 1980 &#183; Global</span>
+
+        <h2 class="cta-close__headline reveal" id="cta-headline">
+          Ready to Build<br />Something Lasting?
+        </h2>
+
+        <a
+          href="contact.html"
+          class="cta-close__button reveal"
+          aria-label="Start a conversation with Grant Leisure"
+        >
+          Start a Conversation
+          <span class="cta-close__button-arrow" aria-hidden="true">&#8594;</span>
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="site-footer" aria-label="Site footer">
+    <div class="container">
+      <div class="site-footer__inner">
+
+        <p class="site-footer__copy">
+          &copy; <span id="footer-year"></span> Grant Leisure. All rights reserved.
+        </p>
+
+        <div class="site-footer__logo">
+          <img
+            src="assets/images/GLILogoWhiteBG.png"
+            alt="Grant Leisure"
+            width="80"
+            height="27"
+            loading="lazy"
+          />
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- JS — deferred, non-blocking. No inline handlers. const/let only. -->
+  <script defer>
+    (() => {
+      'use strict';
+
+      // ── Footer year ──────────────────────────────────────────────
+      const yearEl = document.getElementById('footer-year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      // ── Nav scroll state ─────────────────────────────────────────
+      const nav = document.querySelector('.site-nav');
+      if (nav) {
+        const onScroll = () => {
+          nav.classList.toggle('is-scrolled', window.scrollY > 80);
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+      }
+
+      // ── Scroll-reveal ────────────────────────────────────────────
+      const revealTargets = document.querySelectorAll('.reveal, .reveal-group');
+
+      if ('IntersectionObserver' in window && revealTargets.length) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            });
+          },
+          { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+        );
+        revealTargets.forEach((el) => observer.observe(el));
+      } else {
+        revealTargets.forEach((el) => el.classList.add('is-visible'));
+      }
+
+    })();
+  </script>
+
+</body>
+</html>
