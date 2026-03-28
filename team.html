@@ -293,7 +293,7 @@
     }
 
     .site-nav__logo img {
-      height: 80px;
+      height: 48px;
       width: auto;
     }
 
@@ -404,9 +404,16 @@
     }
 
     .site-footer__logo img {
-      height: 52px;
+      height: 36px;
       width: auto;
       opacity: 1;
+    }
+
+    /* Fix 3 — Ensure PNG transparency renders correctly on both surfaces */
+    .site-nav__logo img,
+    .site-footer__logo img {
+      background: transparent;
+      mix-blend-mode: normal;
     }
 
 
@@ -1242,7 +1249,7 @@
 
         <div class="site-footer__logo">
           <img
-            src="assets/images/gli-logo-primary.png"
+            src="assets/images/gli-logo-dark.png"
             alt="Grant Leisure"
             width="80"
             height="27"
