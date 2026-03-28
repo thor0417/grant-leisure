@@ -178,7 +178,10 @@
     }
 
     .kicker--green { color: var(--color-green); }
-    .kicker--white { color: rgba(255, 255, 255, 0.45); }
+    .kicker--white {
+      color: rgba(255, 255, 255, 0.95);
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+    }
 
     .kicker-rule {
       display: block;
@@ -252,7 +255,14 @@
       inset-inline: 0;
       z-index: 200;
       padding-block: var(--space-sm);
-      background-color: transparent;
+      /* Permanent gradient: ensures nav links read over the hero photo
+         at all times. Does not conflict with .is-scrolled — the solid
+         background-color on that state overrides this. */
+      background: linear-gradient(
+        to bottom,
+        rgba(17, 18, 18, 0.6) 0%,
+        transparent 100%
+      );
       transition:
         background-color var(--dur-fast) var(--ease-in-out),
         border-color     var(--dur-fast) var(--ease-in-out);
@@ -309,7 +319,7 @@
     .hero__bg {
       position: absolute;
       inset: 0;
-      background-image: url('assets/images/attractions/palace-of-westminster.jpg');
+      background-image: url('assets/images/attraction-photos/palace-of-westminster.jpg');
       background-position: center center;
       background-size: cover;
       background-blend-mode: normal;
@@ -417,27 +427,6 @@
       height: 22px;
       width: auto;
       opacity: 0.4;
-    }
-
-    /* Footer nav: centred between logo and copyright */
-    .site-footer__nav {
-      display: flex;
-      align-items: center;
-      gap: var(--space-md);
-      flex-wrap: wrap;
-    }
-
-    .site-footer__nav a {
-      font-size: 0.7rem;
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.3);
-      transition: color var(--dur-fast) var(--ease-in-out);
-    }
-
-    .site-footer__nav a:hover {
-      color: rgba(255, 255, 255, 0.6);
     }
 
 
@@ -745,7 +734,7 @@
       position: relative;
       width: 100%;
       height: clamp(320px, 45vh, 520px);
-      background-image: url('assets/images/attractions/tower-of-london.jpg');
+      background-image: url('assets/images/attraction-photos/tower-of-london.jpg');
       background-position: center 20%;
       background-size: cover;
       overflow: hidden;
@@ -915,7 +904,7 @@
 
         <a href="index.html" class="site-nav__logo" aria-label="Grant Leisure — home">
           <img
-            src="assets/images/GLILogoWhiteBG.png"
+            src="assets/images/gli-logo-primary.png"
             alt="Grant Leisure"
             width="120"
             height="40"
@@ -1342,8 +1331,8 @@
 
   <!-- ============================================================
        FOOTER
-       Logo left · Nav links centred · Copyright right.
-       Mobile: stacked. Desktop: single row.
+       Logo left · Copyright right. Compact single row.
+       Mobile: stacked. Desktop: single horizontal row.
   ============================================================ -->
   <footer class="site-footer" aria-label="Site footer">
     <div class="container">
@@ -1352,22 +1341,13 @@
         <!-- Logo left -->
         <div class="site-footer__logo">
           <img
-            src="assets/images/GLILogoWhiteBG.png"
+            src="assets/images/gli-logo-primary.png"
             alt="Grant Leisure"
             width="80"
             height="27"
             loading="lazy"
           />
         </div>
-
-        <!-- Nav links centred -->
-        <nav class="site-footer__nav" aria-label="Footer navigation">
-          <a href="about.html">About</a>
-          <a href="team.html">Team</a>
-          <a href="services.html">Services</a>
-          <a href="projects.html">Projects</a>
-          <a href="contact.html">Contact</a>
-        </nav>
 
         <!-- Copyright right -->
         <p class="site-footer__copy">
