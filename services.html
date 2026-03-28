@@ -296,10 +296,11 @@
 
     .hero {
       position: relative;
-      /* svh matches the system's unit from layout.css.
-         svh = small viewport height — stable on mobile where
-         browser chrome would affect plain vh calculations. */
-      min-height: 65svh;
+      /* height (not min-height) is the containing block for
+         position: absolute. Without a hard height the element
+         collapses and bottom: * has nothing to pin against. */
+      height: 65svh;
+      min-height: 380px;
       background-color: var(--color-near-black);
       overflow: hidden;
     }
@@ -339,14 +340,16 @@
       z-index: 2;
     }
 
-    /* Content: absolute, pinned bottom-left.
-       bottom: var(--space-xl) = 7rem — exact match to layout.css.
-       svh on the parent gives this a real frame to anchor against. */
+    /* Content: floor-anchored bottom-left at every viewport width.
+       bottom: var(--space-lg) — tighter than about.html's --space-xl
+       because the hero is 65svh not 100svh.
+       left: var(--grid-gutter) — aligns directly with container
+       gutter so no wrapping .container div is needed. */
     .hero__content {
       position: absolute;
-      bottom: var(--space-xl);
-      left: 0;
-      right: 0;
+      bottom: var(--space-lg);
+      left: var(--grid-gutter);
+      right: var(--grid-gutter);
       z-index: 2;
     }
 
@@ -388,7 +391,8 @@
     .site-footer {
       background-color: var(--color-near-black);
       border-top: 1px solid rgba(255, 255, 255, 0.05);
-      padding-block: var(--space-lg);
+      /* Compact — one line of content, not a section */
+      padding-block: var(--space-md);
     }
 
     /* Mobile: stacked column */
@@ -948,20 +952,20 @@
       <!-- Layer 2: midground architectural rule -->
       <span class="hero__midground-rule" aria-hidden="true"></span>
 
-      <!-- Layer 3: content — floor of the frame, left spine -->
+      <!-- Layer 3: content — floor of the frame, left spine.
+           No inner .container needed — left/right gutter is set
+           directly on .hero__content via var(--grid-gutter). -->
       <div class="hero__content">
-        <div class="container">
 
-          <span class="hero__rule" aria-hidden="true"></span>
-          <span class="kicker kicker--white">Our Services</span>
+        <span class="hero__rule" aria-hidden="true"></span>
+        <span class="kicker kicker--white">Our Services</span>
 
-          <h1 class="hero__headline" id="hero-headline">
-            Treating Projects<br />
-            With A<br />
-            <span class="hero__headline-accent">Disciplined</span> Approach.
-          </h1>
+        <h1 class="hero__headline" id="hero-headline">
+          Treating Projects<br />
+          With A<br />
+          <span class="hero__headline-accent">Disciplined</span> Approach.
+        </h1>
 
-        </div>
       </div>
 
     </section>
@@ -1244,13 +1248,17 @@
             aria-label="Testimonial from Brian Edwards, Edwards Technologies Inc"
           >
             <blockquote class="quote-card__text">
-              &#8220;Andrew&#8217;s unique understanding of operations and how technology
-              could enhance the guest experience has been a big positive on all
-              of the projects with which we have collaborated.&#8221;
+              &#8220;Andy Grant and I have had the opportunity to work together for
+              the past 25 years. We started with Legoland entry into US and continued
+              with Universal Studios, the Olympics experiences, and the Doha Zoo. Our
+              collaboration was truly an experience due to Andrew&#8217;s unique
+              understanding of operations and how technology could enhance the guest
+              experience. His many years of experience have proven to be a big positive
+              on all of the projects with which we have collaborated.&#8221;
             </blockquote>
             <figcaption class="quote-card__attribution">
               <span class="quote-card__name">Brian Edwards</span>
-              <span class="quote-card__title">Founder and Chairman</span>
+              <span class="quote-card__title">Founder &amp; Chairman</span>
               <span class="quote-card__org">Edwards Technologies Inc · 25 Years</span>
             </figcaption>
           </figure>
@@ -1279,10 +1287,13 @@
             aria-label="Testimonial from Pat Janikowski, PJA"
           >
             <blockquote class="quote-card__text">
-              &#8220;Andy is able to gauge the needs of the client in any situation
-              and develop programs that are both functional and cost-effective. He also
-              has a great sense of humor that at certain times is much needed to keep
-              the team focused on the goal.&#8221;
+              &#8220;I have known Andy for over ten years and have worked on both
+              small projects as well as major new developments around the world. I can
+              tell you that Andy is able to gauge the needs of the client in any
+              situation and develop programs that are both functional and
+              cost-effective. He also has a great sense of humor that at certain times
+              is much needed to keep the team focused on the goal, especially during
+              the most tense and pressured times.&#8221;
             </blockquote>
             <figcaption class="quote-card__attribution">
               <span class="quote-card__name">Pat Janikowski AIA NCARB</span>
@@ -1341,7 +1352,7 @@
         <!-- Logo left -->
         <div class="site-footer__logo">
           <img
-            src="assets/images/gl-logo/GLILogoWhiteBG.png"
+            src="assets/images/GLILogoWhiteBG.png"
             alt="Grant Leisure"
             width="80"
             height="27"
