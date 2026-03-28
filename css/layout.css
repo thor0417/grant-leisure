@@ -165,15 +165,27 @@
    Absolute. Pinned to the bottom-left of the hero.
    The headline does not float in the middle of the viewport.
    It lives on the floor. It has gravity.
+   bottom: clamp(3rem, 8vh, 7rem) — viewport-relative so the
+   content lifts proportionally on tall screens without
+   ever sitting too close to the edge on short ones.
+   left: 0 / right: 0 — full width. The .container inside
+   provides the padding-inline gutter. This div is the canvas,
+   the container is the margin.
 ────────────────────────────────────────────────────────────────── */
 .hero__content {
   position: absolute;
-  bottom: var(--space-xl);
+  bottom: clamp(3rem, 8vh, 7rem);
   left: 0;
   right: 0;
-
-  /* Above all atmospheric layers */
   z-index: 2;
+}
+
+/* .container inside the hero layer stack must always carry the
+   full grid gutter. The absolute positioning context of
+   .hero__content does not affect padding inheritance, but this
+   explicit scoped rule ensures no cascade or reset can strip it. */
+.hero__content .container {
+  padding-inline: var(--grid-gutter);
 }
 
 
