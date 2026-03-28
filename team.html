@@ -579,11 +579,6 @@
       margin-top: var(--space-sm);
     }
 
-    /* Team photos: cover crop — preserves aspect ratio within fixed dimensions */
-    .team-member__photo-placeholder {
-      object-fit: cover;
-    }
-
     /* ── Individual member row ────────────────────────────────── */
 
     /* Each member is a full-width row.
@@ -600,7 +595,7 @@
     }
 
     /* Two-column grid:
-       Left: fixed 280px — holds Koyo number + portrait placeholder
+       Left: photo width only — no Koyo number column
        Right: 1fr — all text content
        Mobile: single column stacked */
     .team-member__grid {
@@ -612,59 +607,36 @@
 
     @media (min-width: 768px) {
       .team-member__grid {
-        grid-template-columns: 280px 1fr;
+        grid-template-columns: 260px 1fr;
         gap: 0 var(--space-lg);
       }
     }
 
-    /* Left column: contains Koyo number (behind) + placeholder (in front) */
+    /* Left column: photo only — no overflow needed without Koyo number */
     .team-member__left {
       position: relative;
-      /* Enough height on desktop to contain placeholder comfortably */
-      min-height: 140px;
-      overflow: visible;
+      min-height: 130px;
     }
 
     @media (min-width: 768px) {
       .team-member__left {
-        min-height: 280px;
+        min-height: 300px;
       }
     }
 
-    /* Koyo number: sits behind the placeholder in z-axis.
-       Smaller than services numbers — portrait shares the column.
-       Positioned absolutely within left col so it doesn't push layout. */
-    .team-member__number {
-      position: absolute;
-      top: -0.18em;
-      left: -0.1em;
-      font-size: var(--team-num-size);
-      font-weight: 300;
-      line-height: 1;
-      letter-spacing: -0.05em;
-      color: var(--color-slate);
-      opacity: 0.15;
-      user-select: none;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    /* Portrait placeholder: CSS-only div, no img.
-       Sits above the Koyo number in z-index.
-       Off-white section: dark tint treatment. */
+    /* Photo and placeholder — shared dimensions and crop rule */
     .team-member__photo-placeholder {
-      position: relative;
-      z-index: 2;
-      width: 120px;
-      height: 140px;
+      width: 130px;
+      height: 152px;
       background: rgba(17, 18, 18, 0.06);
       border: 1px solid rgba(17, 18, 18, 0.08);
+      object-fit: cover;
     }
 
     @media (min-width: 768px) {
       .team-member__photo-placeholder {
-        width: 240px;
-        height: 280px;
+        width: 260px;
+        height: 300px;
       }
     }
 
@@ -801,7 +773,7 @@
 
         <a href="index.html" class="site-nav__logo" aria-label="Grant Leisure — home">
           <img
-            src="assets/images/gli-logo-primary.png"
+            src="assets/images/gli-logo-dark.png"
             alt="Grant Leisure"
             width="120"
             height="40"
@@ -876,13 +848,12 @@
           <div class="team-member__grid">
 
             <div class="team-member__left" aria-hidden="true">
-              <span class="team-member__number">01</span>
               <img
                 class="team-member__photo-placeholder"
                 src="assets/images/team/andy-grant.png"
                 alt="Andy Grant"
-                width="240"
-                height="280"
+                width="260"
+                height="300"
               />
             </div>
 
@@ -921,13 +892,12 @@
           <div class="team-member__grid">
 
             <div class="team-member__left" aria-hidden="true">
-              <span class="team-member__number">02</span>
               <img
                 class="team-member__photo-placeholder"
                 src="assets/images/team/claus-frimand.png"
                 alt="Claus Frimand"
-                width="240"
-                height="280"
+                width="260"
+                height="300"
                 loading="lazy"
               />
             </div>
@@ -967,13 +937,12 @@
           <div class="team-member__grid">
 
             <div class="team-member__left" aria-hidden="true">
-              <span class="team-member__number">03</span>
               <img
                 class="team-member__photo-placeholder"
                 src="assets/images/team/clive-jones.png"
                 alt="Clive Jones"
-                width="240"
-                height="280"
+                width="260"
+                height="300"
                 loading="lazy"
               />
             </div>
@@ -1013,14 +982,14 @@
           <div class="team-member__grid">
 
             <div class="team-member__left" aria-hidden="true">
-              <span class="team-member__number">04</span>
               <img
                 class="team-member__photo-placeholder"
                 src="assets/images/team/keith-robertson.png"
                 alt="Keith Robertson"
-                width="240"
-                height="280"
+                width="260"
+                height="300"
                 loading="lazy"
+                style="object-position: center 20%;"
               />
             </div>
 
@@ -1059,13 +1028,12 @@
           <div class="team-member__grid">
 
             <div class="team-member__left" aria-hidden="true">
-              <span class="team-member__number">05</span>
               <img
                 class="team-member__photo-placeholder"
                 src="assets/images/team/robert-liljenwall.png"
                 alt="Robert Liljenwall"
-                width="240"
-                height="280"
+                width="260"
+                height="300"
                 loading="lazy"
               />
             </div>
@@ -1105,13 +1073,12 @@
           <div class="team-member__grid">
 
             <div class="team-member__left" aria-hidden="true">
-              <span class="team-member__number">06</span>
               <img
                 class="team-member__photo-placeholder"
                 src="assets/images/team/raul-rios.png"
                 alt="Raul Rios"
-                width="240"
-                height="280"
+                width="260"
+                height="300"
                 loading="lazy"
               />
             </div>
@@ -1151,13 +1118,12 @@
           <div class="team-member__grid">
 
             <div class="team-member__left" aria-hidden="true">
-              <span class="team-member__number">07</span>
               <img
                 class="team-member__photo-placeholder"
                 src="assets/images/team/philip-kwong.png"
                 alt="Philip Kwong"
-                width="240"
-                height="280"
+                width="260"
+                height="300"
                 loading="lazy"
               />
             </div>
@@ -1197,7 +1163,6 @@
           <div class="team-member__grid">
 
             <div class="team-member__left" aria-hidden="true">
-              <span class="team-member__number">08</span>
               <div class="team-member__photo-placeholder"></div>
             </div>
 
@@ -1216,7 +1181,6 @@
           <div class="team-member__grid">
 
             <div class="team-member__left" aria-hidden="true">
-              <span class="team-member__number">09</span>
               <div class="team-member__photo-placeholder"></div>
             </div>
 
@@ -1307,9 +1271,17 @@
       // ── Nav scroll state ─────────────────────────────────────────
       // 80px clears nav height — prevents flicker at very top of page
       const nav = document.querySelector('.site-nav');
+      const logo = document.querySelector('.site-nav__logo img');
       if (nav) {
         const onScroll = () => {
-          nav.classList.toggle('is-scrolled', window.scrollY > 80);
+          const scrolled = window.scrollY > 80;
+          nav.classList.toggle('is-scrolled', scrolled);
+          // Swap logo: dark on off-white (default), primary on dark nav (scrolled)
+          if (logo) {
+            logo.src = scrolled
+              ? 'assets/images/gli-logo-primary.png'
+              : 'assets/images/gli-logo-dark.png';
+          }
         };
         window.addEventListener('scroll', onScroll, { passive: true });
         onScroll();
