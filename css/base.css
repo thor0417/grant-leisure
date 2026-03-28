@@ -173,7 +173,7 @@
   --grid-max:           1440px;
 
   /* Fluid horizontal padding — tighter on mobile, generous on wide screens */
-  --grid-gutter:        clamp(1.5rem, 5vw, 5rem);
+  --grid-gutter:        clamp(1.5rem, 4vw, 4rem);
 
   /* Who We Are / Credentials: left structural column width.
      140px is the minimum viable width for a Koyo section number

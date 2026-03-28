@@ -409,7 +409,7 @@
   position: relative;
   background-color: var(--color-near-black);
   padding-top: var(--space-xl);
-  padding-bottom: var(--space-2xl);
+  padding-bottom: var(--space-xl);
 
   /* Thin line separates from the off-white Tourist wrapper above.
      rgba value matches the hero's atmospheric register. */
@@ -430,7 +430,7 @@
 .site-footer {
   background-color: var(--color-near-black);
   border-top: 1px solid rgba(255, 255, 255, 0.05);
-  padding-block: var(--space-lg);
+  padding-block: var(--space-md);
 }
 
 /* Mobile-first: stacked, left-aligned */
