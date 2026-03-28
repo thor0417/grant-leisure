@@ -287,8 +287,9 @@
       flex-shrink: 0;
     }
 
+    /* FIX 2 — Logo sizing: nav logo */
     .site-nav__logo img {
-      height: 36px;
+      height: 44px;
       width: auto;
     }
 
@@ -413,7 +414,7 @@
       align-items: flex-start;
     }
 
-    /* Desktop: logo left | nav links centred | copyright right */
+    /* Desktop: logo left | copyright right */
     @media (min-width: 768px) {
       .site-footer__inner {
         flex-direction: row;
@@ -423,10 +424,11 @@
       }
     }
 
+    /* FIX 2 — Logo sizing: footer logo */
     .site-footer__logo img {
-      height: 22px;
+      height: 28px;
       width: auto;
-      opacity: 0.4;
+      opacity: 0.5;
     }
 
 
@@ -436,12 +438,14 @@
 
     /* ── Navigation components ────────────────────────────────── */
 
+    /* FIX 1 — Nav link legibility over hero photo */
     .site-nav__links a {
       font-size: 0.85rem;
       font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.65);
+      color: rgba(255, 255, 255, 0.9);
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7);
       transition: color var(--dur-fast) var(--ease-in-out);
     }
 
@@ -449,10 +453,12 @@
 
     .site-nav__links a[aria-current="page"] { color: var(--color-green); }
 
+    /* FIX 1 — Contact pill: green text, no text-shadow */
     .site-nav__links .nav-contact {
       color: var(--color-green);
       border: 1px solid var(--color-green);
       padding: 0.45em calc(1em - 0.12em) 0.4em 1em;
+      text-shadow: none;
       transition:
         color            var(--dur-fast) var(--ease-in-out),
         background-color var(--dur-fast) var(--ease-in-out);
@@ -706,13 +712,12 @@
       margin-bottom: var(--space-sm);
     }
 
-    /* Service name: credentials scale — the scannable anchor.
-       No max-width — runs the full content column width. */
+    /* FIX 3 — Service name headlines stronger */
     .service-row__name {
       font-size: var(--type-credentials);
-      font-weight: 700;
+      font-weight: 800;
       line-height: 1.2;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.02em;
       text-transform: uppercase;
       color: var(--color-near-black);
       margin-bottom: var(--space-sm);
@@ -786,7 +791,7 @@
       color: var(--color-white);
     }
 
-    /* Line 2: green — "40 years. Every continent." */
+    /* Line 2: green */
     .image-moment__line2 {
       display: block;
       font-size: clamp(1.1rem, 2.2vw, 1.8rem);
