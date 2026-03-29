@@ -295,6 +295,7 @@
     .site-nav__logo img {
       height: 48px;
       width: auto;
+      filter: none;
     }
 
     .site-nav__links {
@@ -780,7 +781,7 @@
 
         <a href="index.html" class="site-nav__logo" aria-label="Grant Leisure — home">
           <img
-            src="assets/images/gli-logo-dark.png"
+            src="assets/images/gli-logo.svg"
             alt="Grant Leisure"
             width="120"
             height="40"
@@ -1249,7 +1250,7 @@
 
         <div class="site-footer__logo">
           <img
-            src="assets/images/gli-logo-dark.png"
+            src="assets/images/gli-logo.svg"
             alt="Grant Leisure"
             width="80"
             height="27"
@@ -1278,17 +1279,10 @@
       // ── Nav scroll state ─────────────────────────────────────────
       // 80px clears nav height — prevents flicker at very top of page
       const nav = document.querySelector('.site-nav');
-      const logo = document.querySelector('.site-nav__logo img');
       if (nav) {
         const onScroll = () => {
           const scrolled = window.scrollY > 80;
           nav.classList.toggle('is-scrolled', scrolled);
-          // Swap logo: dark on off-white (default), primary on dark nav (scrolled)
-          if (logo) {
-            logo.src = scrolled
-              ? 'assets/images/gli-logo-primary.png'
-              : 'assets/images/gli-logo-dark.png';
-          }
         };
         window.addEventListener('scroll', onScroll, { passive: true });
         onScroll();
