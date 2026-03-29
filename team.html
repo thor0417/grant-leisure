@@ -295,13 +295,15 @@
     .site-nav__logo img {
       height: 48px;
       width: auto;
-      /* Default: on light background — darken SVG text paths to near-black */
-      filter: brightness(0);
+      /* multiply: baked-in white background disappears on light surface */
+      mix-blend-mode: multiply;
+      background: transparent;
     }
 
-    /* Scrolled: nav is dark — restore SVG to its natural colours */
+    /* Scrolled: dark nav — switch to invert so logo reads white */
     .site-nav.is-scrolled .site-nav__logo img {
-      filter: none;
+      mix-blend-mode: normal;
+      filter: brightness(0) invert(1);
     }
 
     .site-nav__links {
@@ -413,14 +415,8 @@
     .site-footer__logo img {
       height: 36px;
       width: auto;
-      opacity: 1;
-    }
-
-    /* Fix 3 — Ensure PNG transparency renders correctly on both surfaces */
-    .site-nav__logo img,
-    .site-footer__logo img {
-      background: transparent;
-      mix-blend-mode: normal;
+      /* multiply: baked-in white background disappears on off-white surface */
+      mix-blend-mode: multiply;
     }
 
 
