@@ -1,185 +1,963 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact — Grant Leisure</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="shared.css">
-<style>
-#contact-body { padding: 100px 0 120px; background: var(--light-grey); }
-.contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contact Grant Leisure — every great project begins with a conversation. Get in touch with our global team." />
+  <title>Contact — Grant Leisure</title>
 
-.contact-intro { font-size: 15px; font-weight: 300; color: var(--text-muted); line-height: 1.8; margin-bottom: 40px; }
-.contact-details { display: flex; flex-direction: column; gap: 28px; margin-bottom: 48px; }
-.contact-detail { display: flex; align-items: flex-start; gap: 16px; }
-.detail-icon { width: 40px; height: 40px; background: var(--white); border: 1px solid var(--mid-grey); border-radius: 3px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.detail-label { font-size: 10px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
-.detail-value { font-size: 14px; color: var(--dark); line-height: 1.5; }
-.detail-value a { color: var(--navy); text-decoration: none; }
-.detail-value a:hover { text-decoration: underline; }
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;800&display=swap"
+    rel="stylesheet"
+  />
 
-.offices { display: flex; flex-direction: column; gap: 1px; background: var(--mid-grey); border: 1px solid var(--mid-grey); margin-top: 48px; }
-.office-card { background: var(--white); padding: 24px 22px; }
-.office-flag { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sage); margin-bottom: 8px; display: block; }
-.office-name { font-family: 'Libre Baskerville', Georgia, serif; font-size: 15px; font-weight: 400; color: var(--dark); margin-bottom: 6px; }
-.office-addr { font-size: 13px; font-weight: 300; color: var(--text-muted); line-height: 1.6; }
+  <!--
+    DEPLOYMENT: Remove the <style> block and uncomment these three links:
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+  -->
 
-/* FORM */
-.contact-form { background: var(--white); padding: 52px 48px; border: 1px solid var(--mid-grey); border-left: 3px solid var(--sage); }
-.form-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 22px; font-weight: 400; color: var(--dark); margin-bottom: 6px; }
-.form-sub { font-size: 13px; font-weight: 300; color: var(--text-muted); margin-bottom: 36px; line-height: 1.6; }
-.form-group { margin-bottom: 22px; }
-.form-label { display: block; font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 9px; }
-.form-input { width: 100%; padding: 12px 15px; background: var(--light-grey); border: 1px solid var(--mid-grey); border-radius: 2px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300; color: var(--dark); transition: border-color var(--tr), background var(--tr); outline: none; }
-.form-input:focus { border-color: var(--sage); background: var(--white); }
-.form-input::placeholder { color: #C0C3D0; }
-textarea.form-input { resize: vertical; min-height: 120px; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.btn-submit { width: 100%; padding: 15px 32px; background: var(--navy); color: var(--white); border: none; border-radius: 2px; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; transition: background var(--tr); margin-top: 6px; }
-.btn-submit:hover { background: #2d3c6e; }
-.btn-submit:disabled { background: var(--forest); cursor: default; }
-.form-note { font-size: 12px; font-weight: 300; color: var(--text-muted); margin-top: 14px; text-align: center; line-height: 1.5; }
+  <style>
+    /* PREVIEW ONLY — replace with external stylesheet links before deployment */
 
-@media(max-width:960px){ .contact-grid{grid-template-columns:1fr;gap:52px;} }
-@media(max-width:600px){ .contact-form{padding:32px 24px;} .form-row{grid-template-columns:1fr;} }
-</style>
+
+    /* ================================================================
+       BASE.CSS — TOKENS · FONT-FACE · RESET · UTILITY ATOMS · REVEAL
+    ================================================================ */
+
+    @font-face {
+      font-family: 'Barlow Condensed';
+      font-style: normal;
+      font-weight: 300;
+      font-display: swap;
+      src: url('assets/fonts/barlow-condensed-300.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Barlow Condensed';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('assets/fonts/barlow-condensed-400.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Barlow Condensed';
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url('assets/fonts/barlow-condensed-600.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Barlow Condensed';
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url('assets/fonts/barlow-condensed-700.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Barlow Condensed';
+      font-style: normal;
+      font-weight: 800;
+      font-display: swap;
+      src: url('assets/fonts/barlow-condensed-800.woff2') format('woff2');
+    }
+
+    :root {
+      /* ── Palette ──────────────────────────────────────────────── */
+      --color-green:         #5BAF7A;
+      --color-green-dark:    #3D8F5F;
+      --color-navy:          #3B4F8A;
+      --color-slate:         #7A7F9A;
+      --color-white:         #FFFFFF;
+      --color-near-black:    #111212;
+      --color-off-white:     #F7F7F5;
+      --color-body-text:     #2E2F2F;
+
+      /* ── Type scale ───────────────────────────────────────────── */
+      --type-display:        clamp(3rem, 7.5vw, 6.5rem);
+      --type-heading:        clamp(2.2rem, 5vw, 4rem);
+      --type-subheading:     clamp(1.4rem, 2.5vw, 2rem);
+      --type-credentials:    clamp(1rem, 2.4vw, 1.75rem);
+      --type-label:          0.75rem;
+      --type-body:           clamp(1rem, 1.2vw, 1.1rem);
+      --type-caption:        0.8rem;
+
+      /* ── Spacing ──────────────────────────────────────────────── */
+      --space-xs:            0.5rem;
+      --space-sm:            1rem;
+      --space-md:            2rem;
+      --space-lg:            4rem;
+      --space-xl:            7rem;
+      --space-2xl:           12rem;
+
+      /* ── Layout ───────────────────────────────────────────────── */
+      --grid-max:            1440px;
+      --grid-gutter:         clamp(1.5rem, 5vw, 5rem);
+
+      /* ── Motion ───────────────────────────────────────────────── */
+      --ease-out-expo:       cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out:         cubic-bezier(0.4, 0, 0.2, 1);
+      --dur-fast:            350ms;
+      --dur-med:             650ms;
+      --dur-slow:            1000ms;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: var(--type-body);
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--color-body-text);
+      background-color: var(--color-off-white);
+      overflow-x: hidden;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    ul, ol { list-style: none; }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    /* ── Typography atoms ─────────────────────────────────────── */
+
+    .kicker {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-slate);
+      margin-bottom: var(--space-sm);
+    }
+
+    .kicker--green { color: var(--color-green); }
+    .kicker--white {
+      color: rgba(255, 255, 255, 0.95);
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+    }
+
+    /* ── Scroll-reveal system ─────────────────────────────────── */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition:
+        opacity   var(--dur-slow) var(--ease-out-expo),
+        transform var(--dur-slow) var(--ease-out-expo);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-group > * {
+      opacity: 0;
+      transform: translateY(18px);
+      transition:
+        opacity   var(--dur-med) var(--ease-out-expo),
+        transform var(--dur-med) var(--ease-out-expo);
+    }
+
+    .reveal-group.is-visible > *:nth-child(1)  { transition-delay: 0ms;   opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(2)  { transition-delay: 80ms;  opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(3)  { transition-delay: 160ms; opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(4)  { transition-delay: 240ms; opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(5)  { transition-delay: 320ms; opacity: 1; transform: none; }
+
+
+    /* ================================================================
+       LAYOUT.CSS — CONTAINER · NAV · HERO · FOOTER
+    ================================================================ */
+
+    .container {
+      width: 100%;
+      max-width: var(--grid-max);
+      margin-inline: auto;
+      padding-inline: var(--grid-gutter);
+    }
+
+    /* ── Navigation ───────────────────────────────────────────── */
+
+    .site-nav {
+      position: fixed;
+      inset-block-start: 0;
+      inset-inline: 0;
+      z-index: 200;
+      padding-block: var(--space-sm);
+      background: transparent;
+      transition:
+        background-color var(--dur-fast) var(--ease-in-out),
+        border-color     var(--dur-fast) var(--ease-in-out);
+    }
+
+    .site-nav.is-scrolled {
+      background-color: rgba(17, 18, 18, 0.95);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    /* Scrolled: links flip to white */
+    .site-nav.is-scrolled .site-nav__links a {
+      color: rgba(255, 255, 255, 0.9);
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7);
+    }
+
+    .site-nav.is-scrolled .site-nav__links a:hover {
+      color: var(--color-white);
+    }
+
+    .site-nav.is-scrolled .site-nav__links a[aria-current="page"] {
+      color: var(--color-green);
+    }
+
+    .site-nav.is-scrolled .site-nav__links .nav-contact {
+      color: var(--color-green);
+      text-shadow: none;
+    }
+
+    .site-nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .site-nav__logo {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .site-nav__logo img {
+      height: 48px;
+      width: auto;
+      /* multiply: baked-in white background disappears on light surface */
+      mix-blend-mode: multiply;
+      background: transparent;
+    }
+
+    /* Scrolled: dark nav — switch to invert so logo reads white */
+    .site-nav.is-scrolled .site-nav__logo img {
+      mix-blend-mode: normal;
+      filter: brightness(0) invert(1);
+    }
+
+    .site-nav__links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+    }
+
+    @media (max-width: 767px) {
+      .site-nav__links { display: none; }
+    }
+
+    /* ── Hero ─────────────────────────────────────────────────── */
+
+    .hero {
+      position: relative;
+      height: 65svh;
+      min-height: 380px;
+      background-color: var(--color-near-black);
+      margin-inline: var(--grid-gutter);
+      margin-top: 100px;
+      overflow: hidden;
+    }
+
+    /* Full-bleed background photo layer */
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/images/attractions/ferrari-world.png');
+      background-size: cover;
+      background-position: center 30%;
+      z-index: 0;
+    }
+
+    /* Gradient overlay — bottom-heavy for legible reversed type */
+    .hero__bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(17, 18, 18, 0.1)  0%,
+        rgba(17, 18, 18, 0.55) 50%,
+        rgba(17, 18, 18, 0.88) 100%
+      );
+    }
+
+    /* Midground architectural rule — Layer 1 */
+    .hero__midground-rule {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background-color: rgba(255, 255, 255, 0.05);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Content: absolute bottom-left — non-negotiable */
+    .hero__content {
+      position: absolute;
+      bottom: var(--space-lg);
+      left: var(--grid-gutter);
+      right: var(--grid-gutter);
+      z-index: 3;
+    }
+
+    /* ── Footer ───────────────────────────────────────────────── */
+
+    .site-footer {
+      background-color: transparent;
+      border-top: none;
+      padding-block: var(--space-md);
+      margin-inline: 0;
+    }
+
+    .site-footer__inner {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      align-items: flex-start;
+    }
+
+    @media (min-width: 768px) {
+      .site-footer__inner {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: var(--space-lg);
+      }
+    }
+
+    .site-footer__logo img {
+      height: 36px;
+      width: auto;
+      mix-blend-mode: multiply;
+    }
+
+
+    /* ================================================================
+       COMPONENTS.CSS — DISCRETE UI COMPONENTS
+    ================================================================ */
+
+    /* ── Navigation components ────────────────────────────────── */
+
+    .site-nav__links a {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(17, 18, 18, 0.7);
+      text-shadow: none;
+      transition: color var(--dur-fast) var(--ease-in-out);
+    }
+
+    .site-nav__links a:hover { color: var(--color-near-black); }
+
+    .site-nav__links a[aria-current="page"] { color: var(--color-green); }
+
+    .site-nav__links .nav-contact {
+      color: var(--color-green);
+      border: 1px solid var(--color-green);
+      padding: 0.45em calc(1em - 0.12em) 0.4em 1em;
+      text-shadow: none;
+      transition:
+        color            var(--dur-fast) var(--ease-in-out),
+        background-color var(--dur-fast) var(--ease-in-out);
+    }
+
+    .site-nav__links .nav-contact:hover {
+      color: var(--color-near-black);
+      background-color: var(--color-green);
+    }
+
+    .site-nav__links a:focus-visible {
+      outline: 2px solid var(--color-green);
+      outline-offset: 3px;
+    }
+
+    /* ── Hero components ──────────────────────────────────────── */
+
+    .hero__rule {
+      display: block;
+      width: 48px;
+      height: 1px;
+      background-color: var(--color-green);
+      margin-bottom: var(--space-md);
+    }
+
+    .hero__tagline {
+      font-size: var(--type-body);
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.85);
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+      margin-bottom: var(--space-md);
+      max-width: 40ch;
+    }
+
+    .hero__headline {
+      font-size: var(--type-display);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: var(--color-white);
+    }
+
+    .hero__headline-accent {
+      color: var(--color-green);
+    }
+
+    /* ── Footer components ────────────────────────────────────── */
+
+    .site-footer__copy {
+      font-size: var(--type-caption);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: rgba(17, 18, 18, 0.4);
+    }
+
+
+    /* ================================================================
+       CONTACT PAGE — SCOPED STYLES
+       All classes prefixed .contact- to avoid collisions.
+    ================================================================ */
+
+    /* ── Contact form section ─────────────────────────────────── */
+
+    .contact-section {
+      position: relative;
+      background-color: var(--color-off-white);
+      padding-top: var(--space-xl);
+      padding-bottom: var(--space-xl);
+      /* padding-inline handled entirely by .container child */
+      z-index: 2;
+    }
+
+    /* Container override — explicit centering for contact section.
+       Redundant with global .container but stated here for clarity. */
+    .contact-section > .container {
+      max-width: var(--grid-max);
+      margin-inline: auto;
+      padding-inline: var(--grid-gutter);
+    }
+
+    /* Two-column grid: fixed intro column left, form right */
+    .contact-section__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-xl) 0;
+      align-items: start;
+    }
+
+    @media (min-width: 900px) {
+      .contact-section__grid {
+        grid-template-columns: 280px 1fr;
+        gap: 0 var(--space-xl);
+      }
+    }
+
+    /* ── Left column — intro ──────────────────────────────────── */
+
+    .contact-intro__body {
+      font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+      font-weight: 600;
+      line-height: 1.5;
+      color: var(--color-near-black);
+    }
+
+    /* ── Right column — form ──────────────────────────────────── */
+
+    .contact-form__label {
+      display: block;
+      font-size: var(--type-label);
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-slate);
+      margin-bottom: 0.5em;
+    }
+
+    .contact-form__input,
+    .contact-form__textarea {
+      display: block;
+      width: 100%;
+      background-color: rgba(17, 18, 18, 0.04);
+      border: none;
+      border-bottom: 2px solid rgba(17, 18, 18, 0.15);
+      padding: 0.75em 1em;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: var(--type-body);
+      font-weight: 400;
+      color: var(--color-near-black);
+      outline: none;
+      transition:
+        border-color     var(--dur-fast) var(--ease-in-out),
+        background-color var(--dur-fast) var(--ease-in-out);
+      margin-bottom: var(--space-lg);
+      /* Ensure no browser autofill background bleed */
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    /* Autofill: preserve our tinted background */
+    .contact-form__input:-webkit-autofill,
+    .contact-form__input:-webkit-autofill:hover,
+    .contact-form__input:-webkit-autofill:focus {
+      -webkit-box-shadow: 0 0 0 1000px rgba(17, 18, 18, 0.04) inset;
+      -webkit-text-fill-color: var(--color-near-black);
+    }
+
+    .contact-form__input:focus,
+    .contact-form__textarea:focus {
+      background-color: rgba(91, 175, 122, 0.06);
+      border-bottom-color: var(--color-green);
+    }
+
+    .contact-form__textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .contact-form__input.is-error,
+    .contact-form__textarea.is-error {
+      border-bottom-color: #e05252;
+    }
+
+    .contact-form__submit {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: var(--type-label);
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-near-black);
+      background-color: var(--color-green);
+      border: 1px solid var(--color-green);
+      padding: 1em calc(2em - 0.14em) 1em 2em;
+      cursor: pointer;
+      transition:
+        background-color var(--dur-fast) var(--ease-in-out),
+        border-color     var(--dur-fast) var(--ease-in-out);
+    }
+
+    .contact-form__submit:hover {
+      background-color: var(--color-green-dark);
+      border-color: var(--color-green-dark);
+    }
+
+    .contact-form__submit:focus-visible {
+      outline: 2px solid var(--color-green);
+      outline-offset: 3px;
+    }
+
+    /* Submit arrow — matches CTA close arrow motion */
+    .contact-form__submit-arrow {
+      display: inline-block;
+      transition: transform var(--dur-fast) var(--ease-out-expo);
+    }
+
+    .contact-form__submit:hover .contact-form__submit-arrow {
+      transform: translateX(5px);
+    }
+
+    /* Success state — replaces form on successful send */
+    .contact-form__success {
+      display: none;
+      padding: var(--space-md) 0;
+    }
+
+    .contact-form__success.is-visible {
+      display: block;
+    }
+
+    .contact-form__success-headline {
+      font-size: var(--type-heading);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--color-near-black);
+      margin-bottom: var(--space-sm);
+    }
+
+    .contact-form__success-body {
+      font-size: var(--type-body);
+      color: var(--color-body-text);
+    }
+
+    /* Bottom breathing room below the form — page ends here */
+    .contact-section + .site-footer {
+      padding-top: 0;
+    }
+
+  </style>
 </head>
+
 <body>
 
-<!-- NAV -->
-<nav id="navbar">
-  <a href="index.html" class="nav-logo"><div class="logo-squares"><div class="logo-sq logo-sq-1"></div><div class="logo-sq logo-sq-2"></div><div class="logo-sq logo-sq-3"></div></div><div class="logo-wordmark"><span class="logo-grant">Grant</span><span class="logo-leisure">Leisure</span></div></a>
-  <ul class="nav-links">
-    <li><a href="about.html">About &amp; Team</a></li>
-    <li><a href="services.html">Services</a></li>
-    <li class="has-dropdown" id="projectsNav"><a href="projects.html">Projects <span class="nav-arrow"></span></a><div class="dropdown"><a href="projects.html?cat=all"><span class="dropdown-dot" style="background:#7A7F9A"></span>All Projects</a><div class="dropdown-divider"></div><a href="projects.html?cat=attractions"><span class="dropdown-dot" style="background:#5BAF7A"></span>Attractions</a><a href="projects.html?cat=resorts"><span class="dropdown-dot" style="background:#3D8F5F"></span>Resorts</a><a href="projects.html?cat=zoological"><span class="dropdown-dot" style="background:#3B4F8A"></span>Zoological</a><a href="projects.html?cat=museums"><span class="dropdown-dot" style="background:#7A7F9A"></span>Museums</a><a href="projects.html?cat=heritage"><span class="dropdown-dot" style="background:#2C2D35"></span>Heritage</a></div></li>
-    <li><a href="contact.html" class="nav-cta active">Get in Touch</a></li>
-  </ul>
-  <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
-</nav>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="about.html" class="mob-link">About &amp; Team</a>
-  <a href="services.html" class="mob-link">Services</a>
-  <a href="projects.html" class="mob-link">Projects</a>
-  <a href="projects.html?cat=attractions" class="mob-sub"><span class="dropdown-dot" style="background:#5BAF7A;flex-shrink:0"></span>Attractions</a>
-  <a href="projects.html?cat=resorts" class="mob-sub"><span class="dropdown-dot" style="background:#3D8F5F;flex-shrink:0"></span>Resorts</a>
-  <a href="projects.html?cat=zoological" class="mob-sub"><span class="dropdown-dot" style="background:#3B4F8A;flex-shrink:0"></span>Zoological</a>
-  <a href="projects.html?cat=museums" class="mob-sub"><span class="dropdown-dot" style="background:#7A7F9A;flex-shrink:0"></span>Museums</a>
-  <a href="projects.html?cat=heritage" class="mob-sub"><span class="dropdown-dot" style="background:#2C2D35;flex-shrink:0"></span>Heritage</a>
-  <a href="contact.html" class="mob-link mob-cta">Get in Touch</a>
-</div>
+  <!-- ============================================================
+       NAVIGATION
+       Transparent default — dark links on off-white surface.
+       Solid dark + white links on scroll past 80px.
+       Contact is active page — aria-current="page".
+  ============================================================ -->
+  <nav class="site-nav" aria-label="Primary navigation">
+    <div class="container">
+      <div class="site-nav__inner">
 
-<!-- PAGE HERO -->
-<section class="page-hero">
-  <div class="page-hero-geo page-hero-geo-1"></div>
-  <div class="page-hero-geo page-hero-geo-2"></div>
-  <div class="container">
-    <div class="page-hero-eyebrow"><div class="page-hero-eyebrow-line"></div><span>Get in Touch</span></div>
-    <h1>Let's build something <em>remarkable</em></h1>
-    <p class="page-hero-sub">Whether you are in the earliest stages of concept evaluation or need experienced operational guidance at any stage — we would welcome the conversation.</p>
-  </div>
-</section>
+        <a href="index.html" class="site-nav__logo" aria-label="Grant Leisure — Home">
+          <img
+            src="assets/images/gli-logo.svg"
+            alt="Grant Leisure"
+            width="120"
+            height="40"
+          />
+        </a>
 
-<!-- CONTACT BODY -->
-<section id="contact-body">
-  <div class="container">
-    <div class="contact-grid">
+        <ul class="site-nav__links" role="list">
+          <li><a href="about.html">About</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li>
+            <a
+              href="contact.html"
+              class="nav-contact"
+              aria-current="page"
+            >
+              Contact
+            </a>
+          </li>
+        </ul>
 
-      <!-- LEFT -->
-      <div class="reveal">
-        <span class="section-label">Contact Details</span>
-        <div class="contact-details">
-          <div class="contact-detail">
-            <div class="detail-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="12" height="10" rx="1.5"/><path d="M2 6l6 4 6-4"/></svg></div>
-            <div><div class="detail-label">Email</div><div class="detail-value"><a href="mailto:info@grant-leisure.com">info@grant-leisure.com</a></div></div>
-          </div>
-          <div class="contact-detail">
-            <div class="detail-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M5.5 8.5C5.5 8.5 6 11 8 11s2.5-2.5 2.5-2.5M8 5v3"/><circle cx="8" cy="4.5" r=".5" fill="var(--navy)"/></svg></div>
-            <div><div class="detail-label">Website</div><div class="detail-value"><a href="https://www.grant-leisure.com" target="_blank">www.grant-leisure.com</a></div></div>
-          </div>
-          <div class="contact-detail">
-            <div class="detail-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 10.5c-1 1-2.5 1-2.5 1S7 10.5 4.5 8 3.5 5.5 3.5 5.5c0 0-.5-1.5.5-2.5L5.5 1.5c.5-.5 1-.5 1.5 0l2 2c.5.5.5 1 0 1.5L8 6c1 1.5 2 2.5 2 2.5l1-.5c.5-.5 1-.5 1.5 0l2 2c.5.5.5 1 0 1.5l-1.5 1z"/></svg></div>
-            <div><div class="detail-label">Enquiries</div><div class="detail-value">New project enquiries welcome</div></div>
-          </div>
-        </div>
+      </div>
+    </div>
+  </nav>
 
-        <span class="section-label">Our Offices</span>
-        <div class="offices">
-          <div class="office-card">
-            <span class="office-flag">United States</span>
-            <div class="office-name">North American Office</div>
-            <div class="office-addr">Available on enquiry</div>
-          </div>
-          <div class="office-card">
-            <span class="office-flag">Europe</span>
-            <div class="office-name">European Office</div>
-            <div class="office-addr">Available on enquiry</div>
-          </div>
-        </div>
+
+  <main id="main-content">
+
+    <!-- ============================================================
+         SECTION 01 — HERO CARD
+         Contained dark card on the off-white page surface.
+         Background image: ferrari-world.png.
+         Content pinned bottom-left. Display headline.
+    ============================================================ -->
+    <section class="hero" aria-labelledby="hero-headline">
+
+      <!-- Layer 0: background photo + gradient overlay via ::after -->
+      <div class="hero__bg" role="presentation" aria-hidden="true"></div>
+
+      <!-- Layer 1: architectural midground rule -->
+      <div class="hero__midground-rule" aria-hidden="true"></div>
+
+      <!-- Layer 2: content -->
+      <div class="hero__content reveal-group">
+
+        <!-- 48px green rule -->
+        <span class="hero__rule" aria-hidden="true"></span>
+
+        <!-- Display headline — two lines, line 2 in green -->
+        <h1 class="hero__headline" id="hero-headline">
+          Let's Build<br />
+          <span class="hero__headline-accent">Something Lasting.</span>
+        </h1>
+
       </div>
 
-      <!-- FORM -->
-      <div class="contact-form reveal reveal-delay-2">
-        <div class="form-heading">Send an Enquiry</div>
-        <p class="form-sub">We respond to all project enquiries within two business days.</p>
+    </section>
 
-        <div class="form-row">
-          <div class="form-group"><label class="form-label" for="name">Full Name</label><input class="form-input" type="text" id="name" placeholder="Your name"></div>
-          <div class="form-group"><label class="form-label" for="org">Organisation</label><input class="form-input" type="text" id="org" placeholder="Company / project"></div>
+
+    <!-- ============================================================
+         SECTION 02 — CONTACT FORM
+         Off-white surface. Two-column at desktop: intro left, form right.
+         Form is the CTA — no separate CTA close section.
+    ============================================================ -->
+    <section class="contact-section" aria-labelledby="contact-heading">
+      <div class="container">
+
+        <div class="contact-section__grid">
+
+          <!-- Left column — intro ─────────────────────────────── -->
+          <div class="contact-intro reveal">
+            <p class="contact-intro__body">
+              Every great project starts with a conversation.<br><br>
+              Tell us what you're working on.
+            </p>
+          </div>
+
+          <!-- Right column — form ─────────────────────────────── -->
+          <div class="contact-form-wrap reveal">
+
+            <form
+              class="contact-form"
+              id="contact-form"
+              action="#"
+              method="post"
+              novalidate
+              aria-label="Contact form"
+            >
+
+              <!-- Name -->
+              <div class="contact-form__field">
+                <label class="contact-form__label" for="field-name">
+                  Name
+                </label>
+                <input
+                  class="contact-form__input"
+                  type="text"
+                  id="field-name"
+                  name="name"
+                  autocomplete="name"
+                  aria-required="true"
+                />
+              </div>
+
+              <!-- Company -->
+              <div class="contact-form__field">
+                <label class="contact-form__label" for="field-company">
+                  Company
+                </label>
+                <input
+                  class="contact-form__input"
+                  type="text"
+                  id="field-company"
+                  name="company"
+                  autocomplete="organization"
+                />
+              </div>
+
+              <!-- Email -->
+              <div class="contact-form__field">
+                <label class="contact-form__label" for="field-email">
+                  Email
+                </label>
+                <input
+                  class="contact-form__input"
+                  type="email"
+                  id="field-email"
+                  name="email"
+                  autocomplete="email"
+                  aria-required="true"
+                />
+              </div>
+
+              <!-- Message -->
+              <div class="contact-form__field">
+                <label class="contact-form__label" for="field-message">
+                  Message
+                </label>
+                <textarea
+                  class="contact-form__textarea"
+                  id="field-message"
+                  name="message"
+                  rows="6"
+                  aria-required="true"
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                class="contact-form__submit"
+                aria-label="Send your message to Grant Leisure"
+              >
+                Send Message
+                <span class="contact-form__submit-arrow" aria-hidden="true">&#8594;</span>
+              </button>
+
+            </form>
+
+            <!-- Success state — shown by JS after valid submit -->
+            <div
+              class="contact-form__success"
+              id="contact-success"
+              role="alert"
+              aria-live="polite"
+            >
+              <p class="contact-form__success-headline">Message Sent.</p>
+              <p class="contact-form__success-body">
+                Thank you for reaching out. We'll be in touch shortly.
+              </p>
+            </div>
+
+          </div><!-- /.contact-form-wrap -->
+
+        </div><!-- /.contact-section__grid -->
+
+      </div><!-- /.container -->
+    </section>
+
+  </main>
+
+
+  <!-- ============================================================
+       FOOTER
+       Transparent background on off-white canvas.
+       Logo left · Copyright right. Year injected by JS.
+       No CTA close — the form is the CTA.
+  ============================================================ -->
+  <footer class="site-footer" aria-label="Site footer">
+    <div class="container">
+      <div class="site-footer__inner">
+
+        <div class="site-footer__logo">
+          <img
+            src="assets/images/gli-logo.svg"
+            alt="Grant Leisure"
+            width="80"
+            height="27"
+            loading="lazy"
+          />
         </div>
-        <div class="form-row">
-          <div class="form-group"><label class="form-label" for="email">Email Address</label><input class="form-input" type="email" id="email" placeholder="your@email.com"></div>
-          <div class="form-group"><label class="form-label" for="phone">Phone (optional)</label><input class="form-input" type="tel" id="phone" placeholder="+1 or +44..."></div>
-        </div>
-        <div class="form-group"><label class="form-label" for="service">Area of Interest</label>
-          <select class="form-input" id="service">
-            <option value="" disabled selected>Select a service area</option>
-            <option>Market Analysis</option>
-            <option>Concept Development</option>
-            <option>Feasibility Study</option>
-            <option>Funding Assistance</option>
-            <option>Operational Planning</option>
-            <option>Turn-Key Management</option>
-            <option>Other / Not sure yet</option>
-          </select>
-        </div>
-        <div class="form-group"><label class="form-label" for="location">Project Location</label><input class="form-input" type="text" id="location" placeholder="Country / region"></div>
-        <div class="form-group"><label class="form-label" for="message">Tell Us About Your Project</label><textarea class="form-input" id="message" placeholder="Describe your project, timeline, and what you need from Grant Leisure…"></textarea></div>
-        <button class="btn-submit" id="submitBtn" type="button" onclick="submitForm()">Send Enquiry</button>
-        <p class="form-note">Your information is kept strictly confidential and used only to respond to your enquiry.</p>
+
+        <p class="site-footer__copy">
+          &copy; <span id="footer-year"></span> Grant Leisure. All rights reserved.
+        </p>
+
       </div>
-
     </div>
-  </div>
-</section>
+  </footer>
 
-<!-- FOOTER -->
-<footer>
-  <div class="container">
-    <div class="footer-inner">
-      <div class="footer-brand"><div class="footer-logo"><div class="logo-squares"><div class="logo-sq logo-sq-1"></div><div class="logo-sq logo-sq-2"></div><div class="logo-sq logo-sq-3"></div></div><div class="logo-wordmark"><span class="logo-grant">Grant</span><span class="logo-leisure">Leisure</span></div></div><p class="footer-tagline">Global strategic planning and implementation for the world's most compelling leisure destinations.</p></div>
-      <div><span class="footer-col-label">Navigate</span><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About &amp; Team</a></li><li><a href="services.html">Services</a></li><li><a href="projects.html">Projects</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-      <div><span class="footer-col-label">Projects</span><ul class="footer-links"><li><a href="projects.html?cat=attractions">Attractions</a></li><li><a href="projects.html?cat=resorts">Resorts</a></li><li><a href="projects.html?cat=zoological">Zoological</a></li><li><a href="projects.html?cat=museums">Museums</a></li><li><a href="projects.html?cat=heritage">Heritage</a></li></ul></div>
-      <div><span class="footer-col-label">Contact</span><ul class="footer-links"><li><a href="mailto:info@grant-leisure.com">info@grant-leisure.com</a></li><li><a href="contact.html">United States Office</a></li><li><a href="contact.html">European Office</a></li></ul></div>
-    </div>
-    <div class="footer-bottom"><span class="footer-copy">&copy; 2025 Grant Leisure. All rights reserved.</span><span class="footer-offices">US &amp; European Offices</span></div>
-  </div>
-</footer>
 
-<script src="shared.js"></script>
-<script>
-function submitForm(){
-  const name = document.getElementById('name').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const message = document.getElementById('message').value.trim();
-  if(!name || !email || !message){ alert('Please complete your name, email, and project description.'); return; }
-  const btn = document.getElementById('submitBtn');
-  btn.textContent = 'Enquiry Sent ✓';
-  btn.disabled = true;
-}
-</script>
+  <!-- JS — deferred, non-blocking. No inline handlers. const/let only. -->
+  <script defer>
+    (() => {
+      'use strict';
+
+      // ── Footer year ──────────────────────────────────────────────
+      const yearEl = document.getElementById('footer-year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      // ── Nav scroll state ─────────────────────────────────────────
+      // 80px clears fixed nav height — prevents flicker at very top
+      const nav = document.querySelector('.site-nav');
+      if (nav) {
+        const onScroll = () => {
+          const scrolled = window.scrollY > 80;
+          nav.classList.toggle('is-scrolled', scrolled);
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+      }
+
+      // ── Scroll-reveal via IntersectionObserver ───────────────────
+      // One-shot. Graceful fallback if IO unavailable.
+      const revealTargets = document.querySelectorAll('.reveal, .reveal-group');
+
+      if ('IntersectionObserver' in window && revealTargets.length) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            });
+          },
+          { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+        );
+        revealTargets.forEach((el) => observer.observe(el));
+      } else {
+        // Graceful fallback — reveal everything immediately
+        revealTargets.forEach((el) => el.classList.add('is-visible'));
+      }
+
+      // ── Form validation ──────────────────────────────────────────
+      // Required fields: name, email, message.
+      // Company is optional.
+      // On invalid field: add .is-error. Remove .is-error on focus.
+      const form = document.getElementById('contact-form');
+      const successEl = document.getElementById('contact-success');
+
+      if (form) {
+        // Remove error state as soon as the user engages with a field
+        const fields = form.querySelectorAll('.contact-form__input, .contact-form__textarea');
+        fields.forEach((field) => {
+          field.addEventListener('focus', () => {
+            field.classList.remove('is-error');
+          });
+        });
+
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+
+          const nameField    = form.querySelector('[name="name"]');
+          const emailField   = form.querySelector('[name="email"]');
+          const messageField = form.querySelector('[name="message"]');
+
+          let isValid = true;
+
+          // Validate name
+          if (!nameField.value.trim()) {
+            nameField.classList.add('is-error');
+            isValid = false;
+          }
+
+          // Validate email — must be non-empty and contain @
+          const emailVal = emailField.value.trim();
+          if (!emailVal || !emailVal.includes('@')) {
+            emailField.classList.add('is-error');
+            isValid = false;
+          }
+
+          // Validate message
+          if (!messageField.value.trim()) {
+            messageField.classList.add('is-error');
+            isValid = false;
+          }
+
+          if (!isValid) return;
+
+          // ── Valid: hide form, show success state ─────────────
+          // TODO: replace with Formspree fetch() call before deployment.
+          // form.action will be set to the Formspree endpoint.
+          form.style.display = 'none';
+          if (successEl) {
+            successEl.classList.add('is-visible');
+            // Move focus to success message for screen reader announcement
+            successEl.setAttribute('tabindex', '-1');
+            successEl.focus();
+          }
+        });
+      }
+
+    })();
+  </script>
+
 </body>
 </html>
