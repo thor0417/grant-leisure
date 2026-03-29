@@ -6,12 +6,6 @@
   <meta name="description" content="About Grant Leisure — a global consortium of entertainment and attractions executives with decades of experience across the world's leading themed entertainment brands." />
   <title>About — Grant Leisure</title>
 
-  <!--
-    FONT NOTE: Google Fonts CDN scaffold for local development.
-    Self-hosted @font-face declarations in base.css take over
-    once font files land in assets/fonts/.
-    Weights loaded: 300 400 600 700 800
-  -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -19,37 +13,920 @@
     rel="stylesheet"
   />
 
-  <!--
-    STYLESHEET LOAD ORDER — must not be reordered.
-    base.css     → tokens · font-face · reset · utility atoms · scroll-reveal
-    layout.css   → container · nav · section scaffolding · Koyo numbers · hero layers · Tourist card · footer structure
-    components.css → every discrete UI component — internal styles only
-  -->
-  <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/layout.css" />
-  <link rel="stylesheet" href="css/components.css" />
+  <style>
 
+    /* ================================================================
+       BASE.CSS — TOKENS · FONT-FACE · RESET · UTILITY ATOMS · REVEAL
+    ================================================================ */
+
+    @font-face {
+      font-family: 'Barlow Condensed';
+      font-style: normal;
+      font-weight: 300;
+      font-display: swap;
+      src: url('assets/fonts/barlow-condensed-300.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Barlow Condensed';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('assets/fonts/barlow-condensed-400.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Barlow Condensed';
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url('assets/fonts/barlow-condensed-600.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Barlow Condensed';
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url('assets/fonts/barlow-condensed-700.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Barlow Condensed';
+      font-style: normal;
+      font-weight: 800;
+      font-display: swap;
+      src: url('assets/fonts/barlow-condensed-800.woff2') format('woff2');
+    }
+
+    :root {
+      /* ── Palette ──────────────────────────────────────────────── */
+      --color-green:         #5BAF7A;
+      --color-green-dark:    #3D8F5F;
+      --color-navy:          #3B4F8A;
+      --color-slate:         #7A7F9A;
+      --color-white:         #FFFFFF;
+      --color-near-black:    #111212;
+      --color-off-white:     #F7F7F5;
+      --color-body-text:     #2E2F2F;
+
+      /* ── Type scale ───────────────────────────────────────────── */
+      --type-display:        clamp(3rem, 7.5vw, 6.5rem);
+      --type-heading:        clamp(2.2rem, 5vw, 4rem);
+      --type-subheading:     clamp(1.4rem, 2.5vw, 2rem);
+      --type-credentials:    clamp(1rem, 2.4vw, 1.75rem);
+      --type-label:          0.75rem;
+      --type-org:            clamp(0.85rem, 1.5vw, 1.05rem);
+      --type-body:           clamp(1rem, 1.2vw, 1.1rem);
+      --type-caption:        0.8rem;
+
+      /* ── Spacing ──────────────────────────────────────────────── */
+      --space-xs:            0.5rem;
+      --space-sm:            1rem;
+      --space-md:            2rem;
+      --space-lg:            4rem;
+      --space-xl:            7rem;
+      --space-2xl:           12rem;
+
+      /* ── Layout ───────────────────────────────────────────────── */
+      --grid-max:            1440px;
+      --grid-gutter:         clamp(1.5rem, 5vw, 5rem);
+
+      /* ── Section numbers (Koyo treatment) ────────────────────── */
+      --num-size:            clamp(14rem, 28vw, 26rem);
+      --num-bleed:           -0.22em;
+
+      /* ── Tourist card ─────────────────────────────────────────── */
+      --tourist-margin:      clamp(1.5rem, 5vw, 5rem);
+
+      /* ── Motion ───────────────────────────────────────────────── */
+      --ease-out-expo:       cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out:         cubic-bezier(0.4, 0, 0.2, 1);
+      --dur-fast:            350ms;
+      --dur-med:             650ms;
+      --dur-slow:            1000ms;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: var(--type-body);
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--color-body-text);
+      /* Off-white page canvas — hero and Tourist sit as dark cards */
+      background-color: var(--color-off-white);
+      overflow-x: hidden;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    ul, ol { list-style: none; }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ── Typography atoms ─────────────────────────────────────── */
+
+    .kicker {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-slate);
+      margin-bottom: var(--space-sm);
+    }
+
+    .kicker--green { color: var(--color-green); }
+
+    .kicker--white {
+      color: rgba(255, 255, 255, 0.95);
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+    }
+
+    .kicker-rule {
+      display: block;
+      width: 100%;
+      height: 1px;
+      background-color: currentColor;
+      opacity: 0.15;
+      margin-bottom: var(--space-md);
+    }
+
+    /* ── Scroll-reveal ────────────────────────────────────────── */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition:
+        opacity   var(--dur-slow) var(--ease-out-expo),
+        transform var(--dur-slow) var(--ease-out-expo);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-group > * {
+      opacity: 0;
+      transform: translateY(18px);
+      transition:
+        opacity   var(--dur-med) var(--ease-out-expo),
+        transform var(--dur-med) var(--ease-out-expo);
+    }
+
+    .reveal-group.is-visible > *:nth-child(1)  { transition-delay: 0ms;   opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(2)  { transition-delay: 80ms;  opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(3)  { transition-delay: 160ms; opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(4)  { transition-delay: 240ms; opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(5)  { transition-delay: 320ms; opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(6)  { transition-delay: 400ms; opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(7)  { transition-delay: 480ms; opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(8)  { transition-delay: 560ms; opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(9)  { transition-delay: 640ms; opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(10) { transition-delay: 720ms; opacity: 1; transform: none; }
+
+
+    /* ================================================================
+       LAYOUT.CSS — CONTAINER · NAV · HERO · KOYO · CTA · FOOTER
+    ================================================================ */
+
+    /* max-width: 1440px (--grid-max). Content never stretches beyond this.
+       Ghost letters and section backgrounds sit outside .container — they bleed edge to edge. */
+    .container {
+      width: 100%;
+      max-width: var(--grid-max);
+      margin-inline: auto;
+      padding-inline: var(--grid-gutter);
+    }
+
+    /* ── Navigation ───────────────────────────────────────────── */
+
+    .site-nav {
+      position: fixed;
+      inset-block-start: 0;
+      inset-inline: 0;
+      z-index: 200;
+      padding-block: var(--space-sm);
+      background: transparent;
+      transition:
+        background-color var(--dur-fast) var(--ease-in-out),
+        border-color     var(--dur-fast) var(--ease-in-out);
+    }
+
+    .site-nav.is-scrolled {
+      background-color: rgba(17, 18, 18, 0.95);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    /* Scrolled: links flip to white */
+    .site-nav.is-scrolled .site-nav__links a {
+      color: rgba(255, 255, 255, 0.9);
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7);
+    }
+
+    .site-nav.is-scrolled .site-nav__links a:hover {
+      color: var(--color-white);
+    }
+
+    .site-nav.is-scrolled .site-nav__links a[aria-current="page"] {
+      color: var(--color-green);
+    }
+
+    .site-nav.is-scrolled .site-nav__links .nav-contact {
+      color: var(--color-green);
+      text-shadow: none;
+    }
+
+    .site-nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .site-nav__logo {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .site-nav__logo img {
+      height: 48px;
+      width: auto;
+      mix-blend-mode: multiply;
+      background: transparent;
+      transition: filter var(--dur-fast) var(--ease-in-out);
+    }
+
+    /* Scrolled: dark nav — invert logo to white */
+    .site-nav.is-scrolled .site-nav__logo img {
+      mix-blend-mode: normal;
+      filter: brightness(0) invert(1);
+    }
+
+    .site-nav__links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+    }
+
+    @media (max-width: 767px) {
+      .site-nav__links { display: none; }
+    }
+
+    /* ── Hero card ────────────────────────────────────────────── */
+
+    .hero {
+      position: relative;
+      height: 65svh;
+      min-height: 380px;
+      background-color: var(--color-near-black);
+      margin-inline: var(--grid-gutter);
+      margin-top: 100px;
+      overflow: hidden;
+    }
+
+    /* Photo background */
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/images/attractions/stone-henge.jpg');
+      background-size: cover;
+      background-position: center 40%;
+      z-index: 0;
+    }
+
+    /* Gradient overlay */
+    .hero__bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(17, 18, 18, 0.15) 0%,
+        rgba(17, 18, 18, 0.45) 50%,
+        rgba(17, 18, 18, 0.88) 100%
+      );
+      z-index: 1;
+    }
+
+    .hero__midground-rule {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background-color: rgba(255, 255, 255, 0.05);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Content: pinned absolute bottom-left */
+    .hero__content {
+      position: absolute;
+      bottom: var(--space-lg);
+      left: var(--grid-gutter);
+      right: var(--grid-gutter);
+      z-index: 3;
+    }
+
+    /* ── Koyo section numbers ─────────────────────────────────── */
+
+    .section-num-wrap {
+      position: relative;
+      overflow: visible;
+    }
+
+    .section-number {
+      display: block;
+      font-size: var(--num-size);
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      color: var(--color-slate);
+      opacity: 0.15;
+      user-select: none;
+      margin-bottom: var(--num-bleed);
+      position: relative;
+      z-index: 10;
+    }
+
+    /* ── Footer ───────────────────────────────────────────────── */
+
+    .site-footer {
+      background-color: transparent;
+      border-top: none;
+      padding-block: var(--space-md);
+    }
+
+    .site-footer__inner {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      align-items: flex-start;
+    }
+
+    @media (min-width: 768px) {
+      .site-footer__inner {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: var(--space-lg);
+      }
+    }
+
+    .site-footer__logo img {
+      height: 36px;
+      width: auto;
+      mix-blend-mode: multiply;
+    }
+
+
+    /* ================================================================
+       COMPONENTS.CSS — DISCRETE UI COMPONENTS
+    ================================================================ */
+
+    /* ── Nav links — technical metadata style ─────────────────── */
+
+    .site-nav__links a {
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(17, 18, 18, 0.6);
+      text-shadow: none;
+      transition: color var(--dur-fast) var(--ease-in-out);
+    }
+
+    .site-nav__links a:hover { color: var(--color-near-black); }
+
+    .site-nav__links a[aria-current="page"] { color: var(--color-green); }
+
+    /* Contact pill — exact team.html treatment */
+    .site-nav__links .nav-contact {
+      color: var(--color-green);
+      border: 1px solid var(--color-green);
+      padding: 0.45em calc(1em - 0.18em) 0.4em 1em;
+      text-shadow: none;
+      transition:
+        color            var(--dur-fast) var(--ease-in-out),
+        background-color var(--dur-fast) var(--ease-in-out);
+    }
+
+    .site-nav__links .nav-contact:hover {
+      color: var(--color-near-black);
+      background-color: var(--color-green);
+    }
+
+    .site-nav__links a:focus-visible {
+      outline: 2px solid var(--color-green);
+      outline-offset: 3px;
+    }
+
+    /* ── Hero components ──────────────────────────────────────── */
+
+    .hero__rule {
+      display: block;
+      width: 48px;
+      height: 3px; /* Thickened — matches accent rule authority */
+      background-color: var(--color-green);
+      margin-bottom: var(--space-md);
+    }
+
+    .hero__headline {
+      font-size: var(--type-display);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: var(--color-white);
+    }
+
+    .hero__headline-accent {
+      display: block;
+      color: var(--color-green);
+    }
+
+    /* ── Who We Are ───────────────────────────────────────────── */
+
+    .who-we-are {
+      position: relative;
+      background-color: var(--color-off-white);
+      padding-top: var(--space-xl);
+      padding-bottom: var(--space-lg);
+      overflow: hidden; /* Contains the ghost number watermark */
+      z-index: 1;
+    }
+
+    /* Ghost number 01 — color-shift watermark. Background: #F7F7F5, ghost: #EEEEEC.
+       Subtle contrast only — opacity 1 so it renders as architecture not fade. */
+    .who-we-are__ghost {
+      position: absolute;
+      top: -0.1em;
+      left: -0.05em;
+      font-size: clamp(20rem, 40vw, 48rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      color: #EEEEEC;
+      opacity: 1;
+      user-select: none;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Content sits above the ghost */
+    .who-we-are__inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .who-we-are__heading {
+      font-size: var(--type-heading);
+      font-weight: 700;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      color: var(--color-near-black);
+      margin-bottom: var(--space-md);
+    }
+
+    .who-we-are__body {
+      font-size: var(--type-body);
+      font-weight: 400;
+      line-height: 1.75;
+      color: var(--color-body-text);
+      /* Full container width — no max-width constraint */
+      margin-bottom: var(--space-md);
+    }
+
+    .who-we-are__body:last-of-type { margin-bottom: 0; }
+
+    .section-footer-rule {
+      display: block;
+      width: 100%;
+      height: 1px;
+      background-color: var(--color-slate);
+      opacity: 0.15;
+      margin-top: var(--space-xl);
+    }
+
+    /* ── Stats — bento dashboard on off-white ─────────────────── */
+
+    .stats {
+      position: relative;
+      background-color: var(--color-off-white);
+      padding-block: var(--space-xl);
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    /* Ghost 40 — color-shift watermark, center-right. */
+    .stats__ghost {
+      position: absolute;
+      top: 50%;
+      right: -0.08em;
+      transform: translateY(-50%);
+      font-size: clamp(20rem, 40vw, 48rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      color: #EEEEEC;
+      opacity: 1;
+      user-select: none;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .stats__grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    @media (min-width: 640px) {
+      .stats__grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    /* Each bento tile */
+    .stat-tile {
+      padding: var(--space-lg) var(--space-md);
+      border: 1px solid rgba(17, 18, 18, 0.08);
+      background: rgba(17, 18, 18, 0.02);
+      position: relative;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.03);
+      transition:
+        box-shadow    var(--dur-fast) var(--ease-in-out),
+        background    var(--dur-fast) var(--ease-in-out),
+        border-color  var(--dur-fast) var(--ease-in-out);
+    }
+
+    .stat-tile:hover {
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.06);
+      background: rgba(91, 175, 122, 0.05);
+      border-color: var(--color-green);
+    }
+
+    /* Stat number: subtle scale on tile hover */
+    .stat-tile:hover .stat-tile__number {
+      transform: scale(1.02);
+      transition: transform var(--dur-fast) var(--ease-out-expo);
+    }
+
+    .stat-tile__number {
+      display: block;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--color-near-black);
+    }
+
+    /* Green accent — only 2,500+ receives this */
+    .stat-tile__number--green {
+      color: var(--color-green);
+    }
+
+    .stat-tile__label {
+      display: block;
+      font-size: var(--type-label);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-slate);
+      margin-top: 0.5em;
+      line-height: 1.4;
+    }
+
+    /* ── Credentials — bento org grid ────────────────────────── */
+
+    .credentials {
+      position: relative;
+      background-color: var(--color-off-white);
+      padding-top: var(--space-xl);
+      padding-bottom: var(--space-xl);
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    /* Ghost 02 watermark — color-shift method, positioned left. */
+    .credentials__ghost {
+      position: absolute;
+      top: -0.1em;
+      left: -0.05em;
+      font-size: clamp(20rem, 40vw, 48rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      color: #EEEEEC;
+      opacity: 1;
+      user-select: none;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .credentials__inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Headline — credentials scale, navy */
+    .credentials__headline {
+      font-size: var(--type-credentials);
+      font-weight: 600;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      color: var(--color-navy);
+      margin-bottom: var(--space-md);
+    }
+
+    /* 40px green accent rule */
+    .credentials__accent-rule {
+      display: block;
+      width: 40px;
+      height: 3px; /* Thickened from 2px — more visual authority */
+      background-color: var(--color-green);
+      margin-bottom: var(--space-lg);
+    }
+
+    /* Bento org grid — strict 5×2. Wall of authority, not a flowing list. */
+    .credentials__org-grid {
+      display: grid;
+      /* Mobile: 2 columns */
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+    }
+
+    @media (min-width: 640px) {
+      .credentials__org-grid {
+        /* Desktop: exactly 5 per row — forces clean 5×2 layout */
+        grid-template-columns: repeat(5, 1fr);
+      }
+    }
+
+    .org-tile {
+      padding: var(--space-sm) var(--space-md);
+      border: 1px solid rgba(17, 18, 18, 0.08);
+      background: transparent;
+      font-size: var(--type-label);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-near-black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 64px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.03);
+      transition:
+        box-shadow    var(--dur-fast) var(--ease-in-out),
+        background    var(--dur-fast) var(--ease-in-out),
+        border-color  var(--dur-fast) var(--ease-in-out);
+    }
+
+    .org-tile:hover {
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.06);
+      background: rgba(91, 175, 122, 0.05);
+      border-color: var(--color-green);
+    }
+
+    /* ── Tourist — contained dark card ───────────────────────── */
+
+    .tourist-wrapper {
+      background-color: var(--color-off-white);
+      padding-block: 0;
+      z-index: 1;
+      position: relative;
+    }
+
+    .tourist {
+      position: relative;
+      background-color: var(--color-near-black);
+      margin-inline: var(--tourist-margin);
+      margin-block: var(--space-md);
+      /* No card padding — content block owns the padding */
+      overflow: visible; /* Ghost escapes card boundary */
+    }
+
+    /* Ghost 1980 — blueprint watermark, vertically centred */
+    .tourist__ghost-year {
+      font-size: clamp(12rem, 22vw, 20rem);
+      opacity: 0.06;
+      position: absolute;
+      right: -0.05em;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--color-white);
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      user-select: none;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Midground architectural rule */
+    .tourist__midground-rule {
+      position: absolute;
+      top: 55%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background-color: rgba(255, 255, 255, 0.04);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Tightened content padding per spec */
+    .tourist__content {
+      padding: var(--space-lg) var(--space-xl);
+      position: relative;
+      z-index: 2;
+    }
+
+    .tourist__heading {
+      font-size: var(--type-heading);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--color-white);
+      margin-bottom: var(--space-md);
+    }
+
+    .tourist__rule {
+      display: block;
+      width: 100%;
+      height: 1px;
+      background-color: rgba(255, 255, 255, 0.08);
+      margin-bottom: var(--space-xl);
+    }
+
+    /* Two-column body — single on mobile */
+    .tourist__body-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+      margin-bottom: var(--space-xl);
+    }
+
+    @media (min-width: 900px) {
+      .tourist__body-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-2xl);
+      }
+    }
+
+    .tourist__body {
+      font-size: var(--type-body);
+      font-weight: 400;
+      line-height: 1.78;
+      color: rgba(255, 255, 255, 0.58);
+    }
+
+    /* Pull quote — green left rule + radial spotlight.
+       Only element on the site with this treatment. */
+    .tourist__pull-quote {
+      position: relative;
+      border-left: 2px solid var(--color-green);
+      padding: var(--space-lg) var(--space-xl);
+      margin-top: var(--space-xl);
+      background: radial-gradient(
+        ellipse 65% 110% at 25% 50%,
+        rgba(91, 175, 122, 0.07) 0%,
+        transparent 70%
+      );
+    }
+
+    .tourist__pull-quote p {
+      font-size: var(--type-subheading);
+      font-weight: 700;
+      line-height: 1.3;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+      color: var(--color-white);
+      max-width: 40ch;
+    }
+
+    /* ── CTA close — off-white, no dark card ─────────────────── */
+
+    .cta-close {
+      position: relative;
+      background-color: transparent; /* Off-white canvas shows through */
+      padding-block: var(--space-xl);
+      z-index: 2;
+    }
+
+    .cta-close__top-rule {
+      display: block;
+      width: 48px;
+      height: 3px; /* Thickened — consistent with accent rule system */
+      background-color: var(--color-green);
+      margin-bottom: var(--space-lg);
+    }
+
+    /* Headline: near-black on off-white */
+    .cta-close__headline {
+      font-size: var(--type-heading);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--color-near-black);
+      margin-bottom: var(--space-md);
+      max-width: 20ch;
+    }
+
+    /* Outline button — near-black border on off-white.
+       Hover: fills near-black, text white. */
+    .cta-close__button {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: var(--type-label);
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-near-black);
+      background: transparent;
+      border: 1px solid rgba(17, 18, 18, 0.35);
+      padding: 1em calc(2em - 0.14em) 1em 2em;
+      cursor: pointer;
+      transition:
+        background-color var(--dur-fast) var(--ease-in-out),
+        border-color     var(--dur-fast) var(--ease-in-out),
+        color            var(--dur-fast) var(--ease-in-out);
+    }
+
+    .cta-close__button:hover {
+      background: var(--color-near-black);
+      color: var(--color-white);
+      border-color: var(--color-near-black);
+    }
+
+    .cta-close__button:focus-visible {
+      outline: 2px solid var(--color-near-black);
+      outline-offset: 3px;
+    }
+
+    .cta-close__button-arrow {
+      display: inline-block;
+      transition: transform var(--dur-fast) var(--ease-out-expo);
+    }
+
+    .cta-close__button:hover .cta-close__button-arrow {
+      transform: translateX(5px);
+    }
+
+    /* ── Footer components ────────────────────────────────────── */
+
+    .site-footer__copy {
+      font-size: var(--type-caption);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: rgba(17, 18, 18, 0.4);
+    }
+
+  </style>
 </head>
 
 <body>
 
   <!-- ============================================================
        NAVIGATION
-       Fixed. Transparent over hero. .is-scrolled via JS at 80px.
-       About = aria-current. Contact = green bordered pill.
+       Fixed. Transparent default — dark links on off-white.
+       .is-scrolled: solid dark + white links via JS at 80px.
+       Logo: multiply default → brightness invert on dark.
+       Active: about.html. Contact: green bordered pill.
   ============================================================ -->
   <nav class="site-nav" aria-label="Primary navigation">
     <div class="container">
       <div class="site-nav__inner">
 
-        <!--
-          Source: assets/images/gl-logo/GLILogoWhiteBG.png
-          HTML attrs: display dimensions (120×40) for reflow prevention
-          CSS height: 36px — final rendered size
-        -->
         <a href="index.html" class="site-nav__logo" aria-label="Grant Leisure — home">
           <img
-            src="assets/images/GLILogoWhiteBG.png"
+            src="assets/images/gli-logo.svg"
             alt="Grant Leisure"
             width="120"
             height="40"
@@ -72,32 +949,28 @@
   <main id="main-content">
 
     <!-- ============================================================
-         SECTION 01 — HERO
-         Near-black. Full viewport.
-         Content: position absolute, pinned bottom-left.
-         Headline emerges from the floor of the frame.
+         SECTION 01 — HERO — Contained dark card with Stonehenge photo
+         margin-inline: var(--grid-gutter), margin-top: 100px.
+         65svh, min-height 380px. Content pinned bottom-left.
+         No ghost number. Pure image statement.
     ============================================================ -->
     <section class="hero" aria-labelledby="hero-headline">
 
-      <!-- Layer 0: ghost — atmospheric, never readable -->
-      <span class="hero__ghost" aria-hidden="true">40</span>
+      <!-- Photo background — CSS background-image, no img tag -->
+      <div class="hero__bg" role="presentation" aria-hidden="true"></div>
 
-      <!-- Layer 1: midground architectural rule -->
+      <!-- Midground depth rule -->
       <span class="hero__midground-rule" aria-hidden="true"></span>
 
-      <!-- Layer 2: content — floor of the frame, left spine -->
+      <!-- Content: absolute bottom-left -->
       <div class="hero__content">
-        <div class="container">
+        <span class="hero__rule" aria-hidden="true"></span>
+        <span class="kicker kicker--white">Est. 1980</span>
 
-          <span class="hero__rule" aria-hidden="true"></span>
-          <span class="kicker kicker--white">Est. 1980</span>
-
-          <h1 class="hero__headline" id="hero-headline">
-            We&#8217;ve Been Making People Smile<br />
-            <span class="hero__headline-accent">For Over 40 Years.</span>
-          </h1>
-
-        </div>
+        <h1 class="hero__headline" id="hero-headline">
+          We&#8217;ve Been Making People Smile<br />
+          <span class="hero__headline-accent">For Over 40 Years.</span>
+        </h1>
       </div>
 
     </section>
@@ -105,123 +978,139 @@
 
     <!-- ============================================================
          SECTION 02 — WHO WE ARE
-         Off-white. Editorial baseline.
-         Section number 01 bleeds down into Credentials below.
-         The number is the transition — no shape cuts anywhere.
+         Off-white. Single column. Ghost 01 watermark behind content.
+         padding: xl top, lg bottom.
     ============================================================ -->
     <section class="who-we-are" aria-labelledby="who-we-are-heading">
+
+      <!-- Blueprint ghost number 01 — aria-hidden, behind content -->
+      <span class="who-we-are__ghost" aria-hidden="true">01</span>
+
       <div class="container">
+        <div class="who-we-are__inner">
 
-        <div class="who-we-are__grid">
+          <span class="kicker reveal">About Us</span>
+          <span class="kicker-rule reveal" aria-hidden="true"></span>
 
-          <!-- Number column: Koyo treatment — structural, bleeds boundary -->
-          <div class="section-num-wrap" aria-hidden="true">
-            <span class="section-number">01</span>
-          </div>
+          <h2 class="who-we-are__heading reveal" id="who-we-are-heading">
+            A Global Consortium.
+          </h2>
 
-          <!-- Content column -->
-          <div>
-            <span class="kicker reveal">About Us</span>
-            <span class="kicker-rule reveal" aria-hidden="true"></span>
+          <p class="who-we-are__body reveal">
+            Grant Leisure is a global consortium of entertainment and attractions executives
+            with decades of experience as developers and operators. When it comes to running
+            visitor attractions, our team has seen it all.
+          </p>
 
-            <h2 class="who-we-are__heading reveal" id="who-we-are-heading">
-              A Global Consortium.
-            </h2>
+          <p class="who-we-are__body reveal">
+            Our key members have held senior management and lead positions with the
+            world&#8217;s leading themed entertainment organisations &#8212; building,
+            operating, and innovating across every major market on every continent.
+          </p>
 
-            <p class="who-we-are__body reveal">
-              Grant Leisure is a global consortium of entertainment and attractions executives
-              with decades of experience as developers and operators. When it comes to running
-              visitor attractions, our team has seen it all.
-            </p>
-
-            <p class="who-we-are__body reveal">
-              Our key members have held senior management and lead positions with the
-              world&#8217;s leading themed entertainment organisations &#8212; building,
-              operating, and innovating across every major market on every continent.
-            </p>
-
-            <span class="section-footer-rule reveal" aria-hidden="true"></span>
-          </div>
+          <span class="section-footer-rule reveal" aria-hidden="true"></span>
 
         </div>
-
       </div>
     </section>
 
 
     <!-- ============================================================
-         SECTION 03 — CREDENTIALS
-         Off-white. Continuous surface with Who We Are.
-         Same conversation — no break, no gap.
-         Section number 02 bleeds down into Tourist card below.
-         Headline: single line. Org names: heavier scale.
+         SECTION 03 — STATS — Bento dashboard on off-white
+         No dark card. Ghost 40 watermark center-right.
+         Four tiles: 4-col desktop, 2-col mobile.
+    ============================================================ -->
+    <section class="stats" aria-label="Grant Leisure at a glance">
+
+      <!-- Ghost 40 watermark -->
+      <span class="stats__ghost" aria-hidden="true">40</span>
+
+      <div class="container">
+        <div class="stats__grid reveal-group">
+
+          <div class="stat-tile">
+            <span class="stat-tile__number">35</span>
+            <span class="stat-tile__label">Countries</span>
+          </div>
+
+          <div class="stat-tile">
+            <span class="stat-tile__number">5</span>
+            <span class="stat-tile__label">Continents</span>
+          </div>
+
+          <div class="stat-tile">
+            <span class="stat-tile__number stat-tile__number--green">2,500+</span>
+            <span class="stat-tile__label">Projects Completed</span>
+          </div>
+
+          <div class="stat-tile">
+            <span class="stat-tile__number">150M+</span>
+            <span class="stat-tile__label">Annual Visitors</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 04 — CREDENTIALS — Off-white. Bento org grid.
+         Ghost 02 watermark left. Headline navy credentials scale.
+         Green 40px accent rule. Org tiles with hover state.
     ============================================================ -->
     <section class="credentials" aria-labelledby="credentials-heading">
+
+      <!-- Ghost 02 watermark -->
+      <span class="credentials__ghost" aria-hidden="true">02</span>
+
       <div class="container">
+        <div class="credentials__inner">
 
-        <div class="credentials__layout">
+          <span class="kicker reveal">Our Experience</span>
 
-          <!-- Number column: bleeds into Tourist card below -->
-          <div class="section-num-wrap" aria-hidden="true">
-            <span class="section-number">02</span>
-          </div>
+          <h2 class="credentials__headline reveal" id="credentials-heading">
+            Experience from the world&#8217;s leading themed entertainment brands.
+          </h2>
 
-          <div>
-            <!-- No kicker-rule here — removed by design decision -->
-            <span class="kicker reveal">Our Experience</span>
+          <span class="credentials__accent-rule reveal" aria-hidden="true"></span>
 
-            <!--
-              Single line headline. --type-credentials clamp keeps it
-              fluid. white-space: nowrap enforces one line above 480px.
-            -->
-            <h2 class="credentials__headline reveal" id="credentials-heading">
-              Experience from the world&#8217;s leading themed entertainment brands.
-            </h2>
-
-            <span class="credentials__accent-rule reveal" aria-hidden="true"></span>
-
-            <ul
-              class="credentials__org-grid reveal-group"
-              aria-label="Organisations our team has worked with"
-            >
-              <li>Disneyland</li>
-              <li>Universal</li>
-              <li>Paramount Parks</li>
-              <li>Parques Reunidos</li>
-              <li>Busch Gardens</li>
-              <li>Ferrari World</li>
-              <li>Legoland Parks</li>
-              <li>ZSL Living Conservation</li>
-              <li>V&amp;A Museum</li>
-              <li>San Diego Zoo</li>
-            </ul>
-
-          </div>
+          <ul
+            class="credentials__org-grid reveal-group"
+            aria-label="Organisations our team has worked with"
+          >
+            <li class="org-tile">Disneyland</li>
+            <li class="org-tile">Universal</li>
+            <li class="org-tile">Paramount Parks</li>
+            <li class="org-tile">Parques Reunidos</li>
+            <li class="org-tile">Busch Gardens</li>
+            <li class="org-tile">Ferrari World</li>
+            <li class="org-tile">Legoland Parks</li>
+            <li class="org-tile">ZSL Living Conservation</li>
+            <li class="org-tile">V&amp;A Museum</li>
+            <li class="org-tile">San Diego Zoo</li>
+          </ul>
 
         </div>
-
       </div>
     </section>
 
 
     <!-- ============================================================
-         SECTION 04 — THE TOURIST (OPTION A: CONTAINED CARD)
-         A dark object sitting on the off-white page.
-         Not full-bleed. Defined margins — a chapter card.
-         The 1980 ghost bleeds outside the card boundary into white.
-         Box contains the content. Type escapes it.
-         Rolf Jensen / Microsoft tension move.
+         SECTION 05 — THE TOURIST — Contained dark card
+         margin-inline: var(--tourist-margin), margin-block: space-md.
+         Ghost 1980 vertically centred, escapes card.
+         All existing content preserved. Tighter internal padding.
     ============================================================ -->
     <div class="tourist-wrapper">
       <section class="tourist" aria-labelledby="tourist-heading">
 
-        <!-- Ghost year: escapes card — bleeds into white above and below -->
+        <!-- Ghost year — vertically centred, bleeds right of card -->
         <span class="tourist__ghost-year" aria-hidden="true">1980</span>
 
-        <!-- Midground architectural rule inside card -->
+        <!-- Midground architectural rule -->
         <span class="tourist__midground-rule" aria-hidden="true"></span>
 
-        <!-- Content: above ghost and rule -->
+        <!-- Content: tighter padding per spec -->
         <div class="tourist__content">
 
           <span class="kicker kicker--green reveal">London &#183; 1980</span>
@@ -246,11 +1135,8 @@
             </p>
           </div>
 
-          <!--
-            Pull quote: green left rule + radial spotlight.
-            The only element on this site with the spotlight treatment.
-            Deliberate singularity.
-          -->
+          <!-- Pull quote: green left rule + radial spotlight.
+               Only element on the site with this treatment. -->
           <blockquote class="tourist__pull-quote reveal">
             <p>
               The Tourist has been and always will be Grant Leisure&#8217;s
@@ -264,10 +1150,10 @@
 
 
     <!-- ============================================================
-         SECTION 05 — CTA CLOSE
-         Near-black. Full bleed. Confident bookend.
-         Page opened dark — closes dark. The symmetry is intentional.
-         No ghost texture. The silence is the design.
+         SECTION 06 — CTA CLOSE — Off-white. No dark card.
+         Sits directly on the page canvas. padding-block: xl.
+         Green rule. Green kicker. Near-black headline.
+         Outline button: dark border, fills near-black on hover.
     ============================================================ -->
     <section class="cta-close" aria-labelledby="cta-headline">
       <div class="container">
@@ -296,25 +1182,18 @@
 
 
   <!-- ============================================================
-       FOOTER
+       FOOTER — Transparent on off-white.
+       Logo left: mix-blend-mode multiply.
+       Copyright right: rgba(17,18,18,0.4).
+       Identical to team.html footer.
   ============================================================ -->
   <footer class="site-footer" aria-label="Site footer">
     <div class="container">
       <div class="site-footer__inner">
 
-        <p class="site-footer__copy">
-          &copy; <span id="footer-year"></span> Grant Leisure. All rights reserved.
-        </p>
-
-        <!--
-          Source: assets/images/gl-logo/GLILogoWhiteBG.png
-          HTML attrs: display dimensions (80×27) for reflow prevention
-          CSS height: 22px — final rendered size
-          opacity: 0.4 set in components.css
-        -->
         <div class="site-footer__logo">
           <img
-            src="assets/images/GLILogoWhiteBG.png"
+            src="assets/images/gli-logo.svg"
             alt="Grant Leisure"
             width="80"
             height="27"
@@ -322,60 +1201,52 @@
           />
         </div>
 
+        <p class="site-footer__copy">
+          &copy; <span id="footer-year"></span> Grant Leisure. All rights reserved.
+        </p>
+
       </div>
     </div>
   </footer>
 
 
-  <!--
-    JAVASCRIPT — deferred, non-blocking.
-    main.js: shared site-wide utilities (loads first in execution
-    order after defer resolves — window.GL is available to the
-    inline script below by the time DOMContentLoaded fires).
-    No inline handlers. addEventListener only.
-    const/let only — no var.
-  -->
-  <script defer src="js/main.js"></script>
-
+  <!-- JS — deferred, non-blocking. No inline handlers. const/let only. -->
   <script defer>
     (() => {
       'use strict';
 
-      // ── Footer year: injected — never hardcoded ───────────────
+      // ── Footer year ──────────────────────────────────────────────
       const yearEl = document.getElementById('footer-year');
       if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-      // ── Nav scroll state ──────────────────────────────────────
-      // 80px clears nav height — prevents flicker at very top of page
+      // ── Nav scroll state ─────────────────────────────────────────
+      // 80px clears nav height — prevents flicker at top of page
       const nav = document.querySelector('.site-nav');
       if (nav) {
-        const onNavScroll = () => {
-          nav.classList.toggle('is-scrolled', window.scrollY > 80);
+        const onScroll = () => {
+          const scrolled = window.scrollY > 80;
+          nav.classList.toggle('is-scrolled', scrolled);
         };
-        window.addEventListener('scroll', onNavScroll, { passive: true });
-        onNavScroll(); // Immediate — handles hard refresh mid-page
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll(); // Immediate — handles hard refresh mid-page
       }
 
-      // ── Scroll-reveal via IntersectionObserver ────────────────
-      // One-shot: .is-visible on first intersection, then unobserves.
-      // Graceful fallback: immediate reveal if IO not available.
+      // ── Scroll-reveal via IntersectionObserver ───────────────────
+      // One-shot. Graceful fallback if IO unavailable.
       const revealTargets = document.querySelectorAll('.reveal, .reveal-group');
 
       if ('IntersectionObserver' in window && revealTargets.length) {
-        const revealObserver = new IntersectionObserver(
+        const observer = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
               if (!entry.isIntersecting) return;
               entry.target.classList.add('is-visible');
-              revealObserver.unobserve(entry.target);
+              observer.unobserve(entry.target);
             });
           },
-          {
-            threshold: 0.1,
-            rootMargin: '0px 0px -40px 0px'
-          }
+          { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
         );
-        revealTargets.forEach((el) => revealObserver.observe(el));
+        revealTargets.forEach((el) => observer.observe(el));
       } else {
         revealTargets.forEach((el) => el.classList.add('is-visible'));
       }
