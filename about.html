@@ -6,6 +6,7 @@
   <meta name="description" content="About Grant Leisure — a global consortium of entertainment and attractions executives with decades of experience across the world's leading themed entertainment brands." />
   <title>About — Grant Leisure</title>
 
+  <!-- Barlow Condensed — Layer 3: nav · kickers · stats · metadata -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -16,67 +17,59 @@
   <style>
 
     /* ================================================================
-       BASE.CSS — TOKENS · FONT-FACE · RESET · UTILITY ATOMS · REVEAL
+       FONT SYSTEM — THREE LAYERS, STRICTLY ENFORCED
+       Layer 1 — Playfair Display: .legacy-statement · .pull-quote-text ONLY
+       Layer 2 — System sans-serif: all body copy · consortium · tourist body
+       Layer 3 — Barlow Condensed: nav · kickers · stats · metadata · labels
+       These layers never bleed. Applied only via explicit selectors.
     ================================================================ */
 
+    /* Layer 1 — Playfair Display (self-hosted) */
     @font-face {
-      font-family: 'Barlow Condensed';
+      font-family: 'Playfair Display';
       font-style: normal;
-      font-weight: 300;
+      font-weight: 900;
       font-display: swap;
-      src: url('assets/fonts/barlow-condensed-300.woff2') format('woff2');
+      src: url('assets/fonts/PlayfairDisplay-Black.ttf') format('truetype');
     }
     @font-face {
-      font-family: 'Barlow Condensed';
-      font-style: normal;
+      font-family: 'Playfair Display';
+      font-style: italic;
       font-weight: 400;
       font-display: swap;
-      src: url('assets/fonts/barlow-condensed-400.woff2') format('woff2');
+      src: url('assets/fonts/PlayfairDisplay-Italic.ttf') format('truetype');
     }
     @font-face {
-      font-family: 'Barlow Condensed';
+      font-family: 'Playfair Display';
       font-style: normal;
-      font-weight: 600;
+      font-weight: 500;
       font-display: swap;
-      src: url('assets/fonts/barlow-condensed-600.woff2') format('woff2');
-    }
-    @font-face {
-      font-family: 'Barlow Condensed';
-      font-style: normal;
-      font-weight: 700;
-      font-display: swap;
-      src: url('assets/fonts/barlow-condensed-700.woff2') format('woff2');
-    }
-    @font-face {
-      font-family: 'Barlow Condensed';
-      font-style: normal;
-      font-weight: 800;
-      font-display: swap;
-      src: url('assets/fonts/barlow-condensed-800.woff2') format('woff2');
+      src: url('assets/fonts/PlayfairDisplay-Medium.ttf') format('truetype');
     }
 
+
+    /* ================================================================
+       TOKENS
+    ================================================================ */
+
     :root {
-      /* ── Palette ──────────────────────────────────────────────── */
       --color-green:         #5BAF7A;
       --color-green-dark:    #3D8F5F;
       --color-navy:          #3B4F8A;
       --color-slate:         #7A7F9A;
       --color-white:         #FFFFFF;
       --color-near-black:    #111212;
-      --color-off-white:     #F7F7F5;
+      --color-off-white:     #F9F9F9;
       --color-body-text:     #2E2F2F;
 
-      /* ── Type scale ───────────────────────────────────────────── */
       --type-display:        clamp(3rem, 7.5vw, 6.5rem);
       --type-heading:        clamp(2.2rem, 5vw, 4rem);
       --type-subheading:     clamp(1.4rem, 2.5vw, 2rem);
       --type-credentials:    clamp(1rem, 2.4vw, 1.75rem);
       --type-label:          0.75rem;
-      --type-org:            clamp(0.85rem, 1.5vw, 1.05rem);
       --type-body:           clamp(1rem, 1.2vw, 1.1rem);
       --type-caption:        0.8rem;
 
-      /* ── Spacing ──────────────────────────────────────────────── */
       --space-xs:            0.5rem;
       --space-sm:            1rem;
       --space-md:            2rem;
@@ -84,24 +77,21 @@
       --space-xl:            7rem;
       --space-2xl:           12rem;
 
-      /* ── Layout ───────────────────────────────────────────────── */
       --grid-max:            1440px;
       --grid-gutter:         clamp(1.5rem, 5vw, 5rem);
-
-      /* ── Section numbers (Koyo treatment) ────────────────────── */
-      --num-size:            clamp(14rem, 28vw, 26rem);
-      --num-bleed:           -0.22em;
-
-      /* ── Tourist card ─────────────────────────────────────────── */
       --tourist-margin:      clamp(1.5rem, 5vw, 5rem);
 
-      /* ── Motion ───────────────────────────────────────────────── */
       --ease-out-expo:       cubic-bezier(0.16, 1, 0.3, 1);
       --ease-in-out:         cubic-bezier(0.4, 0, 0.2, 1);
       --dur-fast:            350ms;
       --dur-med:             650ms;
       --dur-slow:            1000ms;
     }
+
+
+    /* ================================================================
+       RESET
+    ================================================================ */
 
     *, *::before, *::after {
       box-sizing: border-box;
@@ -115,13 +105,14 @@
       text-size-adjust: 100%;
     }
 
+    /* Layer 2 — system sans-serif is the body default.
+       Barlow and Playfair only applied via explicit class selectors. */
     body {
-      font-family: 'Barlow Condensed', sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       font-size: var(--type-body);
       font-weight: 400;
       line-height: 1.6;
       color: var(--color-body-text);
-      /* Off-white page canvas — hero and Tourist sit as dark cards */
       background-color: var(--color-off-white);
       overflow-x: hidden;
     }
@@ -139,35 +130,10 @@
       color: inherit;
     }
 
-    /* ── Typography atoms ─────────────────────────────────────── */
 
-    .kicker {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--color-slate);
-      margin-bottom: var(--space-sm);
-    }
-
-    .kicker--green { color: var(--color-green); }
-
-    .kicker--white {
-      color: rgba(255, 255, 255, 0.95);
-      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
-    }
-
-    .kicker-rule {
-      display: block;
-      width: 100%;
-      height: 1px;
-      background-color: currentColor;
-      opacity: 0.15;
-      margin-bottom: var(--space-md);
-    }
-
-    /* ── Scroll-reveal ────────────────────────────────────────── */
+    /* ================================================================
+       SCROLL-REVEAL
+    ================================================================ */
 
     .reveal {
       opacity: 0;
@@ -203,11 +169,9 @@
 
 
     /* ================================================================
-       LAYOUT.CSS — CONTAINER · NAV · HERO · KOYO · CTA · FOOTER
+       LAYOUT
     ================================================================ */
 
-    /* max-width: 1440px (--grid-max). Content never stretches beyond this.
-       Ghost letters and section backgrounds sit outside .container — they bleed edge to edge. */
     .container {
       width: 100%;
       max-width: var(--grid-max);
@@ -215,7 +179,13 @@
       padding-inline: var(--grid-gutter);
     }
 
-    /* ── Navigation ───────────────────────────────────────────── */
+
+    /* ================================================================
+       NAVIGATION — GHOST PERSISTENT OVERLAY
+       Always transparent. Never solid. Frosted glass lens.
+       No .is-scrolled state — the nav does not respond to scroll.
+       mix-blend-mode: difference auto-inverts links on dark/light backgrounds.
+    ================================================================ */
 
     .site-nav {
       position: fixed;
@@ -224,35 +194,9 @@
       z-index: 200;
       padding-block: var(--space-sm);
       background: transparent;
-      transition:
-        background-color var(--dur-fast) var(--ease-in-out),
-        border-color     var(--dur-fast) var(--ease-in-out);
-    }
-
-    .site-nav.is-scrolled {
-      background-color: rgba(17, 18, 18, 0.95);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    /* Scrolled: links flip to white */
-    .site-nav.is-scrolled .site-nav__links a {
-      color: rgba(255, 255, 255, 0.9);
-      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7);
-    }
-
-    .site-nav.is-scrolled .site-nav__links a:hover {
-      color: var(--color-white);
-    }
-
-    .site-nav.is-scrolled .site-nav__links a[aria-current="page"] {
-      color: var(--color-green);
-    }
-
-    .site-nav.is-scrolled .site-nav__links .nav-contact {
-      color: var(--color-green);
-      text-shadow: none;
+      /* Frosted glass — subtle depth over content below */
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
 
     .site-nav__inner {
@@ -267,18 +211,12 @@
       flex-shrink: 0;
     }
 
+    /* Logo: difference blend — inverts automatically over dark sections */
     .site-nav__logo img {
       height: 48px;
       width: auto;
-      mix-blend-mode: multiply;
-      background: transparent;
-      transition: filter var(--dur-fast) var(--ease-in-out);
-    }
-
-    /* Scrolled: dark nav — invert logo to white */
-    .site-nav.is-scrolled .site-nav__logo img {
-      mix-blend-mode: normal;
-      filter: brightness(0) invert(1);
+      mix-blend-mode: difference;
+      filter: invert(1);
     }
 
     .site-nav__links {
@@ -291,140 +229,35 @@
       .site-nav__links { display: none; }
     }
 
-    /* ── Hero card ────────────────────────────────────────────── */
-
-    .hero {
-      position: relative;
-      height: 65svh;
-      min-height: 380px;
-      background-color: var(--color-near-black);
-      margin-inline: var(--grid-gutter);
-      margin-top: 100px;
-      overflow: hidden;
-    }
-
-    /* Photo background */
-    .hero__bg {
-      position: absolute;
-      inset: 0;
-      background-image: url('assets/images/attractions/stone-henge.jpg');
-      background-size: cover;
-      background-position: center 40%;
-      z-index: 0;
-    }
-
-    /* Gradient overlay */
-    .hero__bg::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(17, 18, 18, 0.15) 0%,
-        rgba(17, 18, 18, 0.45) 50%,
-        rgba(17, 18, 18, 0.88) 100%
-      );
-      z-index: 1;
-    }
-
-    .hero__midground-rule {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background-color: rgba(255, 255, 255, 0.05);
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    /* Content: pinned absolute bottom-left */
-    .hero__content {
-      position: absolute;
-      bottom: var(--space-lg);
-      left: var(--grid-gutter);
-      right: var(--grid-gutter);
-      z-index: 3;
-    }
-
-    /* ── Koyo section numbers ─────────────────────────────────── */
-
-    .section-num-wrap {
-      position: relative;
-      overflow: visible;
-    }
-
-    .section-number {
-      display: block;
-      font-size: var(--num-size);
-      font-weight: 300;
-      line-height: 1;
-      letter-spacing: -0.05em;
-      color: var(--color-slate);
-      opacity: 0.15;
-      user-select: none;
-      margin-bottom: var(--num-bleed);
-      position: relative;
-      z-index: 10;
-    }
-
-    /* ── Footer ───────────────────────────────────────────────── */
-
-    .site-footer {
-      background-color: transparent;
-      border-top: none;
-      padding-block: var(--space-md);
-    }
-
-    .site-footer__inner {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-md);
-      align-items: flex-start;
-    }
-
-    @media (min-width: 768px) {
-      .site-footer__inner {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        gap: var(--space-lg);
-      }
-    }
-
-    .site-footer__logo img {
-      height: 36px;
-      width: auto;
-      mix-blend-mode: multiply;
-    }
-
-
-    /* ================================================================
-       COMPONENTS.CSS — DISCRETE UI COMPONENTS
-    ================================================================ */
-
-    /* ── Nav links — technical metadata style ─────────────────── */
-
+    /* Layer 3: Barlow Condensed — nav links.
+       mix-blend-mode: difference — dark on light, white on dark automatically. */
     .site-nav__links a {
+      font-family: 'Barlow Condensed', sans-serif;
       font-size: 0.9rem;
       font-weight: 700;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: rgba(17, 18, 18, 0.6);
-      text-shadow: none;
-      transition: color var(--dur-fast) var(--ease-in-out);
+      color: #111212;
+      mix-blend-mode: difference;
+      transition: opacity var(--dur-fast) var(--ease-in-out);
     }
 
-    .site-nav__links a:hover { color: var(--color-near-black); }
+    .site-nav__links a:hover {
+      opacity: 0.6;
+    }
 
-    .site-nav__links a[aria-current="page"] { color: var(--color-green); }
+    /* Active link: green, normal blend — stays green regardless of background */
+    .site-nav__links a[aria-current="page"] {
+      color: var(--color-green);
+      mix-blend-mode: normal;
+    }
 
-    /* Contact pill — exact team.html treatment */
+    /* Contact pill: green, normal blend */
     .site-nav__links .nav-contact {
       color: var(--color-green);
       border: 1px solid var(--color-green);
-      padding: 0.45em calc(1em - 0.18em) 0.4em 1em;
-      text-shadow: none;
+      padding: 0.45em calc(1em - 0.12em) 0.4em 1em;
+      mix-blend-mode: normal;
       transition:
         color            var(--dur-fast) var(--ease-in-out),
         background-color var(--dur-fast) var(--ease-in-out);
@@ -440,65 +273,160 @@
       outline-offset: 3px;
     }
 
-    /* ── Hero components ──────────────────────────────────────── */
 
-    .hero__rule {
+    /* ================================================================
+       SHARED ATOMS
+    ================================================================ */
+
+    /* Layer 3: Barlow Condensed — all metadata/kicker labels */
+    .about-kicker {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-slate);
       display: block;
-      width: 48px;
-      height: 3px; /* Thickened — matches accent rule authority */
-      background-color: var(--color-green);
+      margin-bottom: var(--space-sm);
+    }
+
+    .about-kicker--green { color: var(--color-green); }
+
+    .kicker-rule {
+      display: block;
+      width: 100%;
+      height: 1px;
+      background-color: currentColor;
+      opacity: 0.15;
       margin-bottom: var(--space-md);
     }
 
-    .hero__headline {
-      font-size: var(--type-display);
-      font-weight: 800;
-      line-height: 0.95;
-      letter-spacing: -0.03em;
+    /* File reference metadata label — Layer 3 */
+    .file-ref {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--color-white);
-    }
-
-    .hero__headline-accent {
+      color: var(--color-slate);
       display: block;
-      color: var(--color-green);
+      margin-bottom: var(--space-md);
     }
 
-    /* ── Who We Are ───────────────────────────────────────────── */
-
-    .who-we-are {
-      position: relative;
-      background-color: var(--color-off-white);
-      padding-top: var(--space-xl);
-      padding-bottom: var(--space-lg);
-      overflow: hidden; /* Contains the ghost number watermark */
-      z-index: 1;
-    }
-
-    /* Ghost number 01 — color-shift watermark. Background: #F7F7F5, ghost: #EEEEEC.
-       Subtle contrast only — opacity 1 so it renders as architecture not fade. */
-    .who-we-are__ghost {
+    /* Ghost watermark base — color-shift: #F9F9F9 bg → #EEEEEC ghost.
+       Layer 3: Barlow Condensed — structural/data element. */
+    .about-ghost {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(20rem, 40vw, 48rem);
+      font-weight: 800;
+      color: #EEEEEC;
       position: absolute;
       top: -0.1em;
       left: -0.05em;
-      font-size: clamp(20rem, 40vw, 48rem);
-      font-weight: 800;
       line-height: 1;
-      letter-spacing: -0.05em;
-      color: #EEEEEC;
-      opacity: 1;
       user-select: none;
       pointer-events: none;
       z-index: 0;
     }
 
-    /* Content sits above the ghost */
-    .who-we-are__inner {
-      position: relative;
-      z-index: 1;
+    /* Section hairline — stops 60px from each edge */
+    .section-hairline {
+      display: block;
+      height: 1px;
+      background-color: rgba(17, 18, 18, 0.08);
+      margin-top: var(--space-xl);
+      margin-inline: 60px;
     }
 
+    /* 3px green accent rule — credentials and CTA */
+    .accent-rule {
+      display: block;
+      width: 40px;
+      height: 3px;
+      background-color: var(--color-green);
+      margin-bottom: var(--space-lg);
+    }
+
+    .accent-rule--48 {
+      width: 48px;
+      margin-bottom: var(--space-lg);
+    }
+
+
+    /* ================================================================
+       SECTION 01 — CLAY HEADER
+       Full viewport white. Content bottom-left — Furrion/Koyo spine.
+       Massive negative space above. No card, no container constraint.
+    ================================================================ */
+
+    .about-hero {
+      background: #FFFFFF;
+      min-height: 100svh;
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: var(--space-2xl);
+      position: relative;
+    }
+
+    .about-hero__content {
+      /* Double gutter inset — intentional breathing room left */
+      padding-inline: calc(var(--grid-gutter) * 2);
+      max-width: 1440px;
+      width: 100%;
+    }
+
+    /* Layer 1: Playfair Display — H1 ONLY */
+    .legacy-statement {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 900;
+      font-size: clamp(3.5rem, 6vw, 5.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: var(--color-near-black);
+      max-width: 16ch;
+    }
+
+    /* Italic accent — Layer 1 italic variant */
+    .legacy-statement__accent {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--color-green);
+    }
+
+
+    /* ================================================================
+       SECTION 02 — WHO WE ARE
+    ================================================================ */
+
+    .who-we-are {
+      position: relative;
+      background-color: var(--color-off-white);
+      padding-block: var(--space-xl);
+      overflow: hidden;
+    }
+
+    /* Blueprint hairline — cuts ghost at midpoint.
+       z-index: 1: above ghost (0), below content (2). */
+    .who-we-are__hairline {
+      position: absolute;
+      left: 60px;
+      right: 60px;
+      top: 50%;
+      height: 1px;
+      background: rgba(17, 18, 18, 0.06);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .who-we-are__inner {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Layer 3: Barlow Condensed — section heading */
     .who-we-are__heading {
+      font-family: 'Barlow Condensed', sans-serif;
       font-size: var(--type-heading);
       font-weight: 700;
       line-height: 1.0;
@@ -507,118 +435,133 @@
       margin-bottom: var(--space-md);
     }
 
-    .who-we-are__body {
-      font-size: var(--type-body);
-      font-weight: 400;
-      line-height: 1.75;
+    /* Layer 2: system sans-serif — body copy */
+    .consortium-body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: clamp(1rem, 1.2vw, 1.1rem);
+      line-height: 1.7;
       color: var(--color-body-text);
-      /* Full container width — no max-width constraint */
+      max-width: 800px;
       margin-bottom: var(--space-md);
     }
 
-    .who-we-are__body:last-of-type { margin-bottom: 0; }
+    .consortium-body:last-of-type { margin-bottom: 0; }
 
-    .section-footer-rule {
-      display: block;
+
+    /* ================================================================
+       SECTION 03 — STONEHENGE IMAGE INSET
+    ================================================================ */
+
+    .site-exhibit {
+      margin-inline: var(--grid-gutter);
+      margin-block: var(--space-xl);
+    }
+
+    .site-exhibit__image {
       width: 100%;
-      height: 1px;
-      background-color: var(--color-slate);
-      opacity: 0.15;
-      margin-top: var(--space-xl);
+      max-height: 520px;
+      object-fit: cover;
+      object-position: center 40%;
+      border: 1px solid rgba(17, 18, 18, 0.12);
+      display: block;
     }
 
-    /* ── Stats — bento dashboard on off-white ─────────────────── */
+    /* Layer 3: Barlow Condensed — figure caption */
+    .site-exhibit__caption {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-slate);
+      margin-top: 0.75em;
+    }
 
-    .stats {
+
+    /* ================================================================
+       SECTION 04 — STATS BENTO — CONTAINED DARK CARD
+    ================================================================ */
+
+    .stats-card {
       position: relative;
-      background-color: var(--color-off-white);
-      padding-block: var(--space-xl);
+      background: #0A0A0A;
+      margin-inline: var(--grid-gutter);
+      margin-block: var(--space-md);
       overflow: hidden;
-      z-index: 1;
     }
 
-    /* Ghost 40 — color-shift watermark, center-right. */
-    .stats__ghost {
-      position: absolute;
-      top: 50%;
-      right: -0.08em;
-      transform: translateY(-50%);
+    /* Ghost 40 — inside dark card at 4% white */
+    .stats-card__ghost {
+      font-family: 'Barlow Condensed', sans-serif;
       font-size: clamp(20rem, 40vw, 48rem);
       font-weight: 800;
+      color: rgba(255, 255, 255, 0.04);
+      position: absolute;
+      right: -0.08em;
+      top: 50%;
+      transform: translateY(-50%);
       line-height: 1;
       letter-spacing: -0.05em;
-      color: #EEEEEC;
-      opacity: 1;
       user-select: none;
       pointer-events: none;
       z-index: 0;
     }
 
-    .stats__grid {
+    /* Layer 3: Barlow Condensed — stat grid */
+    .stats-bento {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
       position: relative;
       z-index: 1;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
     }
 
     @media (min-width: 640px) {
-      .stats__grid {
+      .stats-bento {
         grid-template-columns: repeat(4, 1fr);
       }
     }
 
-    /* Each bento tile */
     .stat-tile {
+      font-family: 'Barlow Condensed', sans-serif;
       padding: var(--space-lg) var(--space-md);
-      border: 1px solid rgba(17, 18, 18, 0.08);
-      background: rgba(17, 18, 18, 0.02);
-      position: relative;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.03);
-      transition:
-        box-shadow    var(--dur-fast) var(--ease-in-out),
-        background    var(--dur-fast) var(--ease-in-out),
-        border-color  var(--dur-fast) var(--ease-in-out);
+      border: 0.5px solid rgba(255, 255, 255, 0.1);
+      background: transparent;
+      transition: background var(--dur-fast) var(--ease-in-out);
     }
 
     .stat-tile:hover {
-      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.06);
-      background: rgba(91, 175, 122, 0.05);
-      border-color: var(--color-green);
-    }
-
-    /* Stat number: subtle scale on tile hover */
-    .stat-tile:hover .stat-tile__number {
-      transform: scale(1.02);
-      transition: transform var(--dur-fast) var(--ease-out-expo);
+      background: rgba(255, 255, 255, 0.03);
     }
 
     .stat-tile__number {
-      display: block;
       font-size: clamp(2.8rem, 5vw, 4.5rem);
       font-weight: 800;
+      color: var(--color-white);
+      display: block;
       line-height: 1;
-      letter-spacing: -0.02em;
-      color: var(--color-near-black);
+      transition: transform var(--dur-fast) var(--ease-out-expo);
     }
 
-    /* Green accent — only 2,500+ receives this */
-    .stat-tile__number--green {
-      color: var(--color-green);
+    .stat-tile:hover .stat-tile__number {
+      transform: translateY(-3px);
     }
+
+    .stat-tile__number--green { color: var(--color-green); }
 
     .stat-tile__label {
-      display: block;
-      font-size: var(--type-label);
+      font-size: 0.68rem;
       font-weight: 600;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--color-slate);
-      margin-top: 0.5em;
-      line-height: 1.4;
+      margin-top: 0.75em;
+      display: block;
     }
 
-    /* ── Credentials — bento org grid ────────────────────────── */
+
+    /* ================================================================
+       SECTION 05 — CREDENTIALS
+    ================================================================ */
 
     .credentials {
       position: relative;
@@ -626,23 +569,6 @@
       padding-top: var(--space-xl);
       padding-bottom: var(--space-xl);
       overflow: hidden;
-      z-index: 1;
-    }
-
-    /* Ghost 02 watermark — color-shift method, positioned left. */
-    .credentials__ghost {
-      position: absolute;
-      top: -0.1em;
-      left: -0.05em;
-      font-size: clamp(20rem, 40vw, 48rem);
-      font-weight: 800;
-      line-height: 1;
-      letter-spacing: -0.05em;
-      color: #EEEEEC;
-      opacity: 1;
-      user-select: none;
-      pointer-events: none;
-      z-index: 0;
     }
 
     .credentials__inner {
@@ -650,8 +576,9 @@
       z-index: 1;
     }
 
-    /* Headline — credentials scale, navy */
+    /* Layer 3: Barlow Condensed — credentials headline */
     .credentials__headline {
+      font-family: 'Barlow Condensed', sans-serif;
       font-size: var(--type-credentials);
       font-weight: 600;
       line-height: 1.25;
@@ -660,35 +587,28 @@
       margin-bottom: var(--space-md);
     }
 
-    /* 40px green accent rule */
-    .credentials__accent-rule {
-      display: block;
-      width: 40px;
-      height: 3px; /* Thickened from 2px — more visual authority */
-      background-color: var(--color-green);
-      margin-bottom: var(--space-lg);
-    }
-
-    /* Bento org grid — strict 5×2. Wall of authority, not a flowing list. */
-    .credentials__org-grid {
+    /* Strict 5×2 grid — 1px gap via background creates hairline dividers */
+    .org-grid {
       display: grid;
-      /* Mobile: 2 columns */
       grid-template-columns: repeat(2, 1fr);
-      gap: 0;
+      gap: 1px;
+      background: rgba(17, 18, 18, 0.08);
+      border: 1px solid rgba(17, 18, 18, 0.08);
+      margin-top: var(--space-lg);
     }
 
     @media (min-width: 640px) {
-      .credentials__org-grid {
-        /* Desktop: exactly 5 per row — forces clean 5×2 layout */
+      .org-grid {
         grid-template-columns: repeat(5, 1fr);
       }
     }
 
+    /* Layer 3: Barlow Condensed — org names */
     .org-tile {
-      padding: var(--space-sm) var(--space-md);
-      border: 1px solid rgba(17, 18, 18, 0.08);
-      background: transparent;
-      font-size: var(--type-label);
+      font-family: 'Barlow Condensed', sans-serif;
+      background: var(--color-off-white);
+      padding: var(--space-md);
+      font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -697,26 +617,24 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      min-height: 64px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.03);
+      min-height: 72px;
       transition:
-        box-shadow    var(--dur-fast) var(--ease-in-out),
-        background    var(--dur-fast) var(--ease-in-out),
-        border-color  var(--dur-fast) var(--ease-in-out);
+        background var(--dur-fast) var(--ease-in-out),
+        color      var(--dur-fast) var(--ease-in-out);
     }
 
     .org-tile:hover {
-      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.06);
-      background: rgba(91, 175, 122, 0.05);
-      border-color: var(--color-green);
+      background: rgba(91, 175, 122, 0.06);
+      color: var(--color-green);
     }
 
-    /* ── Tourist — contained dark card ───────────────────────── */
+
+    /* ================================================================
+       SECTION 06 — THE TOURIST — CONTAINED DARK CARD
+    ================================================================ */
 
     .tourist-wrapper {
       background-color: var(--color-off-white);
-      padding-block: 0;
-      z-index: 1;
       position: relative;
     }
 
@@ -725,46 +643,35 @@
       background-color: var(--color-near-black);
       margin-inline: var(--tourist-margin);
       margin-block: var(--space-md);
-      /* No card padding — content block owns the padding */
-      overflow: visible; /* Ghost escapes card boundary */
+      overflow: hidden;
     }
 
     /* Ghost 1980 — blueprint watermark, vertically centred */
     .tourist__ghost-year {
+      font-family: 'Barlow Condensed', sans-serif;
       font-size: clamp(12rem, 22vw, 20rem);
-      opacity: 0.06;
+      color: rgba(255, 255, 255, 0.06);
       position: absolute;
       right: -0.05em;
       top: 50%;
       transform: translateY(-50%);
-      color: var(--color-white);
       font-weight: 800;
       letter-spacing: -0.05em;
       user-select: none;
       pointer-events: none;
       z-index: 0;
+      line-height: 1;
     }
 
-    /* Midground architectural rule */
-    .tourist__midground-rule {
-      position: absolute;
-      top: 55%;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background-color: rgba(255, 255, 255, 0.04);
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    /* Tightened content padding per spec */
     .tourist__content {
       padding: var(--space-lg) var(--space-xl);
       position: relative;
-      z-index: 2;
+      z-index: 1;
     }
 
+    /* Layer 3: Barlow Condensed — tourist heading */
     .tourist__heading {
+      font-family: 'Barlow Condensed', sans-serif;
       font-size: var(--type-heading);
       font-weight: 800;
       line-height: 0.95;
@@ -797,18 +704,19 @@
       }
     }
 
+    /* Layer 2: system sans-serif — tourist body copy */
     .tourist__body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       font-size: var(--type-body);
       font-weight: 400;
-      line-height: 1.78;
-      color: rgba(255, 255, 255, 0.58);
+      line-height: 1.75;
+      color: rgba(255, 255, 255, 0.6);
     }
 
-    /* Pull quote — green left rule + radial spotlight.
-       Only element on the site with this treatment. */
+    /* Pull quote — 3px green left rule + radial spotlight */
     .tourist__pull-quote {
       position: relative;
-      border-left: 2px solid var(--color-green);
+      border-left: 3px solid var(--color-green);
       padding: var(--space-lg) var(--space-xl);
       margin-top: var(--space-xl);
       background: radial-gradient(
@@ -818,35 +726,30 @@
       );
     }
 
-    .tourist__pull-quote p {
-      font-size: var(--type-subheading);
-      font-weight: 700;
-      line-height: 1.3;
-      letter-spacing: 0.01em;
-      text-transform: uppercase;
+    /* Layer 1: Playfair Display Medium — pull quote ONLY */
+    .pull-quote-text {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 500;
+      font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+      line-height: 1.4;
       color: var(--color-white);
-      max-width: 40ch;
     }
 
-    /* ── CTA close — off-white, no dark card ─────────────────── */
+
+    /* ================================================================
+       SECTION 07 — CTA CLOSE — OFF-WHITE, NO DARK CARD
+    ================================================================ */
 
     .cta-close {
       position: relative;
-      background-color: transparent; /* Off-white canvas shows through */
+      background-color: transparent;
       padding-block: var(--space-xl);
       z-index: 2;
     }
 
-    .cta-close__top-rule {
-      display: block;
-      width: 48px;
-      height: 3px; /* Thickened — consistent with accent rule system */
-      background-color: var(--color-green);
-      margin-bottom: var(--space-lg);
-    }
-
-    /* Headline: near-black on off-white */
+    /* Layer 3: Barlow Condensed — CTA heading */
     .cta-close__headline {
+      font-family: 'Barlow Condensed', sans-serif;
       font-size: var(--type-heading);
       font-weight: 800;
       line-height: 1.0;
@@ -857,8 +760,7 @@
       max-width: 20ch;
     }
 
-    /* Outline button — near-black border on off-white.
-       Hover: fills near-black, text white. */
+    /* Outline button — dark border on light surface */
     .cta-close__button {
       display: inline-flex;
       align-items: center;
@@ -869,8 +771,8 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--color-near-black);
-      background: transparent;
       border: 1px solid rgba(17, 18, 18, 0.35);
+      background: transparent;
       padding: 1em calc(2em - 0.14em) 1em 2em;
       cursor: pointer;
       transition:
@@ -899,13 +801,73 @@
       transform: translateX(5px);
     }
 
-    /* ── Footer components ────────────────────────────────────── */
 
+    /* ================================================================
+       FOOTER — transparent on off-white. Identical to team.html.
+    ================================================================ */
+
+    .site-footer {
+      background-color: transparent;
+      border-top: none;
+      padding-block: var(--space-md);
+    }
+
+    .site-footer__inner {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      align-items: flex-start;
+    }
+
+    @media (min-width: 768px) {
+      .site-footer__inner {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: var(--space-lg);
+      }
+    }
+
+    .site-footer__logo img {
+      height: 36px;
+      width: auto;
+      mix-blend-mode: multiply;
+    }
+
+    /* Layer 3: Barlow Condensed — footer copyright */
     .site-footer__copy {
+      font-family: 'Barlow Condensed', sans-serif;
       font-size: var(--type-caption);
       font-weight: 400;
       letter-spacing: 0.04em;
       color: rgba(17, 18, 18, 0.4);
+    }
+
+
+    /* ================================================================
+       Nav inversion over dark sections
+       .nav-over-dark toggled by IntersectionObserver in JS.
+    ================================================================ */
+
+    .nav-over-dark .site-nav__links a {
+      color: rgba(255, 255, 255, 0.9) !important;
+      mix-blend-mode: normal !important;
+      text-shadow: none;
+    }
+
+    .nav-over-dark .site-nav__links a[aria-current="page"] {
+      color: var(--color-green) !important;
+    }
+
+    .nav-over-dark .site-nav__links .nav-contact {
+      color: var(--color-green) !important;
+      border-color: var(--color-green) !important;
+      text-shadow: none;
+    }
+
+    .nav-over-dark .site-nav__logo img {
+      filter: brightness(0) invert(1) !important;
+      mix-blend-mode: normal !important;
     }
 
   </style>
@@ -914,11 +876,10 @@
 <body>
 
   <!-- ============================================================
-       NAVIGATION
-       Fixed. Transparent default — dark links on off-white.
-       .is-scrolled: solid dark + white links via JS at 80px.
-       Logo: multiply default → brightness invert on dark.
-       Active: about.html. Contact: green bordered pill.
+       NAVIGATION — GHOST PERSISTENT OVERLAY
+       Always transparent. Never solid.
+       mix-blend-mode: difference auto-inverts links on dark/light.
+       Active (about) and Contact pill use mix-blend-mode: normal.
   ============================================================ -->
   <nav class="site-nav" aria-label="Primary navigation">
     <div class="container">
@@ -949,66 +910,61 @@
   <main id="main-content">
 
     <!-- ============================================================
-         SECTION 01 — HERO — Contained dark card with Stonehenge photo
-         margin-inline: var(--grid-gutter), margin-top: 100px.
-         65svh, min-height 380px. Content pinned bottom-left.
-         No ghost number. Pure image statement.
+         SECTION 01 — CLAY HEADER
+         Full viewport white. Content bottom-left.
+         Layer 1 (Playfair Display) H1. Layer 3 (Barlow) file-ref.
     ============================================================ -->
-    <section class="hero" aria-labelledby="hero-headline">
+    <section class="about-hero" aria-labelledby="legacy-headline">
+      <div class="about-hero__content">
 
-      <!-- Photo background — CSS background-image, no img tag -->
-      <div class="hero__bg" role="presentation" aria-hidden="true"></div>
+        <span class="file-ref reveal">[ FILE_REF: ABOUT_GL_1980 ]</span>
 
-      <!-- Midground depth rule -->
-      <span class="hero__midground-rule" aria-hidden="true"></span>
-
-      <!-- Content: absolute bottom-left -->
-      <div class="hero__content">
-        <span class="hero__rule" aria-hidden="true"></span>
-        <span class="kicker kicker--white">Est. 1980</span>
-
-        <h1 class="hero__headline" id="hero-headline">
-          We&#8217;ve Been Making People Smile<br />
-          <span class="hero__headline-accent">For Over 40 Years.</span>
+        <h1 class="legacy-statement reveal" id="legacy-headline">
+          We&#8217;ve been making people <em class="legacy-statement__accent">smile</em><br />
+          for 40 years.
         </h1>
-      </div>
 
+      </div>
     </section>
 
 
     <!-- ============================================================
          SECTION 02 — WHO WE ARE
-         Off-white. Single column. Ghost 01 watermark behind content.
-         padding: xl top, lg bottom.
+         Off-white. Ghost 01 color-shift watermark.
+         Blueprint hairline at midpoint (z-index: 1).
+         Content at z-index: 2.
     ============================================================ -->
     <section class="who-we-are" aria-labelledby="who-we-are-heading">
 
-      <!-- Blueprint ghost number 01 — aria-hidden, behind content -->
-      <span class="who-we-are__ghost" aria-hidden="true">01</span>
+      <!-- Ghost 01 — #EEEEEC, z-index: 0 -->
+      <span class="about-ghost" aria-hidden="true">01</span>
+
+      <!-- Blueprint hairline — z-index: 1 -->
+      <span class="who-we-are__hairline" aria-hidden="true"></span>
 
       <div class="container">
         <div class="who-we-are__inner">
 
-          <span class="kicker reveal">About Us</span>
+          <span class="about-kicker reveal">About Us</span>
           <span class="kicker-rule reveal" aria-hidden="true"></span>
 
           <h2 class="who-we-are__heading reveal" id="who-we-are-heading">
             A Global Consortium.
           </h2>
 
-          <p class="who-we-are__body reveal">
+          <p class="consortium-body reveal">
             Grant Leisure is a global consortium of entertainment and attractions executives
             with decades of experience as developers and operators. When it comes to running
             visitor attractions, our team has seen it all.
           </p>
 
-          <p class="who-we-are__body reveal">
+          <p class="consortium-body reveal">
             Our key members have held senior management and lead positions with the
             world&#8217;s leading themed entertainment organisations &#8212; building,
             operating, and innovating across every major market on every continent.
           </p>
 
-          <span class="section-footer-rule reveal" aria-hidden="true"></span>
+          <span class="section-hairline reveal" aria-hidden="true"></span>
 
         </div>
       </div>
@@ -1016,66 +972,81 @@
 
 
     <!-- ============================================================
-         SECTION 03 — STATS — Bento dashboard on off-white
-         No dark card. Ghost 40 watermark center-right.
-         Four tiles: 4-col desktop, 2-col mobile.
+         SECTION 03 — STONEHENGE IMAGE INSET
+         Document exhibit. Layer 3 (Barlow) for figcaption.
     ============================================================ -->
-    <section class="stats" aria-label="Grant Leisure at a glance">
-
-      <!-- Ghost 40 watermark -->
-      <span class="stats__ghost" aria-hidden="true">40</span>
-
-      <div class="container">
-        <div class="stats__grid reveal-group">
-
-          <div class="stat-tile">
-            <span class="stat-tile__number">35</span>
-            <span class="stat-tile__label">Countries</span>
-          </div>
-
-          <div class="stat-tile">
-            <span class="stat-tile__number">5</span>
-            <span class="stat-tile__label">Continents</span>
-          </div>
-
-          <div class="stat-tile">
-            <span class="stat-tile__number stat-tile__number--green">2,500+</span>
-            <span class="stat-tile__label">Projects Completed</span>
-          </div>
-
-          <div class="stat-tile">
-            <span class="stat-tile__number">150M+</span>
-            <span class="stat-tile__label">Annual Visitors</span>
-          </div>
-
-        </div>
-      </div>
-    </section>
+    <figure class="site-exhibit reveal">
+      <img
+        src="assets/images/attractions/stone-henge.jpg"
+        alt="Stonehenge, Wiltshire, UK — Grant Leisure historic site preservation"
+        width="1920"
+        height="1080"
+        loading="lazy"
+        class="site-exhibit__image"
+      />
+      <figcaption class="site-exhibit__caption">
+        FIG_01 // HISTORIC SITE PRESERVATION // STONEHENGE, UK
+      </figcaption>
+    </figure>
 
 
     <!-- ============================================================
-         SECTION 04 — CREDENTIALS — Off-white. Bento org grid.
-         Ghost 02 watermark left. Headline navy credentials scale.
-         Green 40px accent rule. Org tiles with hover state.
+         SECTION 04 — STATS BENTO — CONTAINED DARK CARD
+         Ghost 40 inside card. 4-col desktop, 2-col mobile.
+         Layer 3 (Barlow Condensed) throughout.
+    ============================================================ -->
+    <div class="stats-card stats-bento-section" role="region" aria-label="Grant Leisure at a glance">
+
+      <span class="stats-card__ghost" aria-hidden="true">40</span>
+
+      <div class="stats-bento reveal-group">
+
+        <div class="stat-tile">
+          <span class="stat-tile__number">35</span>
+          <span class="stat-tile__label">Countries</span>
+        </div>
+
+        <div class="stat-tile">
+          <span class="stat-tile__number">5</span>
+          <span class="stat-tile__label">Continents</span>
+        </div>
+
+        <div class="stat-tile">
+          <span class="stat-tile__number stat-tile__number--green">2,500+</span>
+          <span class="stat-tile__label">Projects Completed</span>
+        </div>
+
+        <div class="stat-tile">
+          <span class="stat-tile__number stat-tile__number--green">150M+</span>
+          <span class="stat-tile__label">Annual Visitors</span>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ============================================================
+         SECTION 05 — CREDENTIALS
+         Off-white. Ghost 02. 5×2 org grid with 1px gap dividers.
     ============================================================ -->
     <section class="credentials" aria-labelledby="credentials-heading">
 
-      <!-- Ghost 02 watermark -->
-      <span class="credentials__ghost" aria-hidden="true">02</span>
+      <!-- Ghost 02 — #EEEEEC, top-left, z-index: 0 -->
+      <span class="about-ghost" aria-hidden="true">02</span>
 
       <div class="container">
         <div class="credentials__inner">
 
-          <span class="kicker reveal">Our Experience</span>
+          <span class="about-kicker reveal">Our Experience</span>
 
           <h2 class="credentials__headline reveal" id="credentials-heading">
             Experience from the world&#8217;s leading themed entertainment brands.
           </h2>
 
-          <span class="credentials__accent-rule reveal" aria-hidden="true"></span>
+          <span class="accent-rule reveal" aria-hidden="true"></span>
 
           <ul
-            class="credentials__org-grid reveal-group"
+            class="org-grid reveal-group"
             aria-label="Organisations our team has worked with"
           >
             <li class="org-tile">Disneyland</li>
@@ -1096,24 +1067,20 @@
 
 
     <!-- ============================================================
-         SECTION 05 — THE TOURIST — Contained dark card
-         margin-inline: var(--tourist-margin), margin-block: space-md.
-         Ghost 1980 vertically centred, escapes card.
-         All existing content preserved. Tighter internal padding.
+         SECTION 06 — THE TOURIST — CONTAINED DARK CARD
+         Ghost 1980 vertically centred.
+         Layer 3 (Barlow) for kicker and heading.
+         Layer 2 (system sans-serif) for body.
+         Layer 1 (Playfair Medium) for pull quote ONLY.
     ============================================================ -->
-    <div class="tourist-wrapper">
+    <div class="tourist-wrapper tourist-section">
       <section class="tourist" aria-labelledby="tourist-heading">
 
-        <!-- Ghost year — vertically centred, bleeds right of card -->
         <span class="tourist__ghost-year" aria-hidden="true">1980</span>
 
-        <!-- Midground architectural rule -->
-        <span class="tourist__midground-rule" aria-hidden="true"></span>
-
-        <!-- Content: tighter padding per spec -->
         <div class="tourist__content">
 
-          <span class="kicker kicker--green reveal">London &#183; 1980</span>
+          <span class="about-kicker about-kicker--green reveal">London &#183; 1980</span>
           <span class="kicker-rule reveal" aria-hidden="true"></span>
 
           <h2 class="tourist__heading reveal" id="tourist-heading">
@@ -1135,10 +1102,9 @@
             </p>
           </div>
 
-          <!-- Pull quote: green left rule + radial spotlight.
-               Only element on the site with this treatment. -->
+          <!-- Pull quote — Layer 1: Playfair Display Medium ONLY -->
           <blockquote class="tourist__pull-quote reveal">
-            <p>
+            <p class="pull-quote-text">
               The Tourist has been and always will be Grant Leisure&#8217;s
               primary consideration for all of our projects.
             </p>
@@ -1150,17 +1116,16 @@
 
 
     <!-- ============================================================
-         SECTION 06 — CTA CLOSE — Off-white. No dark card.
-         Sits directly on the page canvas. padding-block: xl.
-         Green rule. Green kicker. Near-black headline.
-         Outline button: dark border, fills near-black on hover.
+         SECTION 07 — CTA CLOSE — OFF-WHITE, NO DARK CARD
+         3px green rule. Green kicker. Near-black headline.
+         Dark outline button. Layer 3 (Barlow) throughout.
     ============================================================ -->
     <section class="cta-close" aria-labelledby="cta-headline">
       <div class="container">
 
-        <span class="cta-close__top-rule reveal" aria-hidden="true"></span>
+        <span class="accent-rule accent-rule--48 reveal" aria-hidden="true"></span>
 
-        <span class="kicker kicker--green reveal">Est. 1980 &#183; Global</span>
+        <span class="about-kicker about-kicker--green reveal">Est. 1980 &#183; Global</span>
 
         <h2 class="cta-close__headline reveal" id="cta-headline">
           Ready to Build Something Lasting?
@@ -1182,10 +1147,8 @@
 
 
   <!-- ============================================================
-       FOOTER — Transparent on off-white.
-       Logo left: mix-blend-mode multiply.
-       Copyright right: rgba(17,18,18,0.4).
-       Identical to team.html footer.
+       FOOTER — identical to team.html
+       Transparent on off-white. Logo left multiply. Copyright right.
   ============================================================ -->
   <footer class="site-footer" aria-label="Site footer">
     <div class="container">
@@ -1210,7 +1173,8 @@
   </footer>
 
 
-  <!-- JS — deferred, non-blocking. No inline handlers. const/let only. -->
+  <!-- JS — deferred, non-blocking. No inline handlers. const/let only.
+       No nav scroll state — nav is always transparent. -->
   <script defer>
     (() => {
       'use strict';
@@ -1218,18 +1182,6 @@
       // ── Footer year ──────────────────────────────────────────────
       const yearEl = document.getElementById('footer-year');
       if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-      // ── Nav scroll state ─────────────────────────────────────────
-      // 80px clears nav height — prevents flicker at top of page
-      const nav = document.querySelector('.site-nav');
-      if (nav) {
-        const onScroll = () => {
-          const scrolled = window.scrollY > 80;
-          nav.classList.toggle('is-scrolled', scrolled);
-        };
-        window.addEventListener('scroll', onScroll, { passive: true });
-        onScroll(); // Immediate — handles hard refresh mid-page
-      }
 
       // ── Scroll-reveal via IntersectionObserver ───────────────────
       // One-shot. Graceful fallback if IO unavailable.
@@ -1249,6 +1201,36 @@
         revealTargets.forEach((el) => observer.observe(el));
       } else {
         revealTargets.forEach((el) => el.classList.add('is-visible'));
+      }
+
+
+      // ── Nav inversion over dark sections ─────────────────────────
+      const darkSections = document.querySelectorAll(
+        '.stats-bento-section, .tourist-section'
+      );
+      const navEl = document.querySelector('.site-nav');
+
+      if (navEl && darkSections.length) {
+        let darkCount = 0;
+
+        const navObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                darkCount++;
+              } else {
+                darkCount = Math.max(0, darkCount - 1);
+              }
+              navEl.classList.toggle('nav-over-dark', darkCount > 0);
+            });
+          },
+          {
+            rootMargin: '-80px 0px 0px 0px',
+            threshold: 0
+          }
+        );
+
+        darkSections.forEach((section) => navObserver.observe(section));
       }
 
     })();
