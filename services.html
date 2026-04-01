@@ -12,7 +12,7 @@
 
   <style>
     /* ================================================================
-       FONT SYSTEM & TOKENS
+       FONT SYSTEM — THREE LAYERS
     ================================================================ */
 
     @font-face {
@@ -21,6 +21,13 @@
       font-weight: 900;
       font-display: swap;
       src: url('assets/fonts/PlayfairDisplay-Black.ttf') format('truetype');
+    }
+    @font-face {
+      font-family: 'Playfair Display';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url('assets/fonts/PlayfairDisplay-Medium.ttf') format('truetype');
     }
 
     :root {
@@ -34,7 +41,6 @@
       --type-heading:        clamp(2.2rem, 5vw, 4rem);
       --type-body:           clamp(1rem, 1.2vw, 1.1rem);
       --type-label:          0.75rem;
-      --type-caption:        0.8rem;
 
       --space-sm:            1rem;
       --space-md:            2rem;
@@ -48,7 +54,6 @@
       --ease-out-expo:       cubic-bezier(0.16, 1, 0.3, 1);
       --ease-in-out:         cubic-bezier(0.4, 0, 0.2, 1);
       --dur-fast:            350ms;
-      --dur-med:             650ms;
       --dur-slow:            1000ms;
     }
 
@@ -63,7 +68,7 @@
       font-size: var(--type-body);
       line-height: 1.6;
       color: var(--color-body-text);
-      background-color: var(--color-off-white);
+      background-color: var(--color-white);
       overflow-x: hidden;
     }
 
@@ -75,26 +80,96 @@
     }
 
     /* ================================================================
-       1. HEADER & TYPOGRAPHY
+       SCROLL REVEAL
+    ================================================================ */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity var(--dur-slow) var(--ease-out-expo), transform var(--dur-slow) var(--ease-out-expo);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ================================================================
+       NAVIGATION — CHAMELEON GHOST
+    ================================================================ */
+
+    .site-nav {
+      position: fixed;
+      inset-block-start: 0;
+      inset-inline: 0;
+      z-index: 200;
+      padding-block: var(--space-sm);
+      background: transparent;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .site-nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .site-nav__logo img {
+      height: 48px;
+      width: auto;
+      mix-blend-mode: multiply;
+    }
+
+    .site-nav__links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+      list-style: none;
+    }
+
+    @media (max-width: 767px) {
+      .site-nav__links { display: none; }
+    }
+
+    .site-nav__links a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(17, 18, 18, 0.7);
+      text-decoration: none;
+      transition: color var(--dur-fast) var(--ease-in-out);
+    }
+
+    .site-nav__links a:hover { color: var(--color-near-black); }
+    .site-nav__links a[aria-current="page"] { color: var(--color-green); }
+
+    .site-nav__links .nav-contact {
+      color: var(--color-green);
+      border: 1px solid var(--color-green);
+      padding: 0.45em calc(1em - 0.12em) 0.4em 1em;
+    }
+
+    /* Inversion */
+    .nav-over-dark .site-nav__links a { color: rgba(255, 255, 255, 0.9); }
+    .nav-over-dark .site-nav__logo img { filter: brightness(0) invert(1); mix-blend-mode: normal; }
+
+    /* ================================================================
+       SECTION 01 — ZERO-HERO HEADER
     ================================================================ */
 
     .services-hero {
-      background: var(--color-white);
+      background: #FFFFFF;
       padding-top: 140px;
       padding-bottom: var(--space-xl);
-      text-align: left;
-    }
-
-    .services-hero__content {
-      padding-inline: calc(var(--grid-gutter) * 2);
-      max-width: var(--grid-max);
-      margin-inline: auto;
     }
 
     .services-label {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 10px;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--color-slate);
@@ -107,18 +182,15 @@
       font-weight: 900;
       font-size: clamp(3rem, 6vw, 5.5rem);
       line-height: 1.0;
-      letter-spacing: -0.01em;
       color: var(--color-near-black);
       max-width: 12ch;
       margin-bottom: var(--space-xl);
     }
 
-    .h1-accent {
-      color: var(--color-green);
-    }
+    .h1-accent { color: var(--color-green); }
 
     /* ================================================================
-       2. THE DIPTYCH "LOCK-IN"
+       SECTION 02 — THE DIPTYCH
     ================================================================ */
 
     .services-diptych {
@@ -131,103 +203,83 @@
       .services-diptych { grid-template-columns: 1fr; }
     }
 
-    .services-exhibit {
-      position: relative;
-    }
-
-    .services-exhibit__frame {
+    .exhibit-frame {
+      border: 0.5px solid var(--color-green);
       aspect-ratio: 16 / 9;
       overflow: hidden;
-      border: 0.5px solid var(--color-green);
     }
 
-    .services-exhibit__image {
+    .exhibit-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
 
-    .technical-overlay {
-      position: absolute;
-      bottom: 20px;
-      left: 20px;
-      background: rgba(17, 18, 18, 0.4);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      padding: 8px 12px;
-      border-left: 1px solid var(--color-green);
-    }
-
-    .technical-overlay span {
+    .exhibit-caption {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.15em;
+      font-weight: 600;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--color-white);
+      color: var(--color-slate);
+      margin-top: 0.75rem;
       display: block;
     }
 
     /* ================================================================
-       3. BENTO GRID "ACTIVE" STATES
+       SECTION 03 — BENTO GRID & UX HANDSHAKE
     ================================================================ */
 
-    .services-bento {
+    .bento-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       background: var(--color-off-white);
+      border-top: 0.5px solid rgba(17,18,18,0.1);
     }
 
-    @media (max-width: 900px) { .services-bento { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 540px) { .services-bento { grid-template-columns: 1fr; } }
+    @media (max-width: 900px) { .bento-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .bento-grid { grid-template-columns: 1fr; } }
 
-    .service-card {
+    .service-cell {
+      background: var(--color-white);
       border: 0.5px solid rgba(17,18,18,0.1);
       padding: var(--space-lg) var(--space-md);
-      background: var(--color-white);
       position: relative;
       transition: border var(--dur-fast) var(--ease-in-out), background var(--dur-fast) var(--ease-in-out);
-      cursor: pointer;
     }
 
-    .service-card:hover {
+    .service-cell:hover {
       border: 0.5px solid var(--color-green);
       background: #F9F9F9;
-      z-index: 2;
+      z-index: 5;
     }
 
-    .service-card__inner {
-      transition: transform var(--dur-fast) var(--ease-out-expo);
-    }
+    .service-cell__inner { transition: transform var(--dur-fast) var(--ease-out-expo); }
+    .service-cell:hover .service-cell__inner { transform: translateX(5px); }
 
-    .service-card:hover .service-card__inner {
-      transform: translateX(5px);
-    }
-
-    .service-card__ref {
+    .ref-label {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 10px;
       font-weight: 700;
-      letter-spacing: 0.15em;
       color: var(--color-slate);
       position: absolute;
       top: 20px;
       right: 20px;
     }
 
-    .service-card__kicker {
+    .service-kicker {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 11px;
       font-weight: 800;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
       color: var(--color-green);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
       display: block;
       margin-bottom: 1rem;
     }
 
-    .service-card__name {
+    .service-title {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 1.4rem;
       font-weight: 700;
@@ -238,32 +290,66 @@
     }
 
     /* ================================================================
-       4. DOSSIER FOOTER
+       SECTION 04 — INTERSTITIAL
     ================================================================ */
 
-    .cta-section {
+    .authority-interstitial {
+      background: #111212;
+      padding-block: var(--space-xl);
+      color: var(--color-white);
+    }
+
+    .quote-text {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 500;
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
+      line-height: 1.5;
+      border-left: 2px solid var(--color-green);
+      padding-left: var(--space-md);
+      max-width: 800px;
+    }
+
+    .quote-footer {
+      margin-top: 1rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      color: var(--color-green);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    /* ================================================================
+       SECTION 05 — DOSSIER FOOTER
+    ================================================================ */
+
+    .cta-footer {
       background: var(--color-off-white);
       padding-block: var(--space-2xl);
       position: relative;
       overflow: hidden;
     }
 
-    /* Embossed Seal Watermark */
-    .footer-watermark {
+    .gli-watermark {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(15rem, 30vw, 40rem);
+      font-size: clamp(15rem, 35vw, 45rem);
       font-weight: 900;
       color: var(--color-near-black);
       opacity: 0.05;
       position: absolute;
-      bottom: -0.1em;
+      bottom: -0.15em;
       right: -0.05em;
-      pointer-events: none;
-      z-index: 0;
       line-height: 0.8;
+      pointer-events: none;
     }
 
-    .cta-content {
+    .cta-h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: var(--type-heading);
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: 1.0;
+      color: var(--color-near-black);
+      margin-bottom: var(--space-lg);
       position: relative;
       z-index: 1;
     }
@@ -275,118 +361,151 @@
       background: var(--color-green);
       margin-bottom: var(--space-md);
     }
-
-    .cta-h2 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: var(--type-heading);
-      font-weight: 800;
-      line-height: 1.0;
-      text-transform: uppercase;
-      color: var(--color-near-black);
-      margin-bottom: var(--space-lg);
-    }
-
-    .cta-button {
-      display: inline-flex;
-      padding: 1.2em 2.5em;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 12px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--color-near-black);
-      border: 1px solid rgba(17,18,18,0.3);
-      text-decoration: none;
-      transition: all var(--dur-fast) var(--ease-in-out);
-    }
-
-    .cta-button:hover {
-      background: var(--color-near-black);
-      color: var(--color-white);
-      border-color: var(--color-near-black);
-    }
-
   </style>
 </head>
 <body>
 
-  <main>
-    <header class="services-hero">
-      <div class="services-hero__content">
-        <span class="services-label">SERVICES // [ STRATEGIC ADVISORY &amp; TECHNICAL COMPLIANCE ]</span>
-        <h1 class="services-h1">
-          From Concept<br />
-          to Operation<span class="h1-accent">.</span>
-        </h1>
+  <nav class="site-nav" aria-label="Primary navigation">
+    <div class="container">
+      <div class="site-nav__inner">
+        <a href="index.html" class="site-nav__logo">
+          <img src="assets/images/gli-logo.svg" alt="Grant Leisure" width="120" height="40" />
+        </a>
+        <ul class="site-nav__links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="services.html" aria-current="page">Services</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html" class="nav-contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-        <div class="services-diptych">
-          <figure class="services-exhibit">
-            <div class="services-exhibit__frame">
-              <img src="assets/images/attractions/palace-of-westminster.png" alt="Palace of Westminster" width="1600" height="900" class="services-exhibit__image" />
+  <main>
+    <section class="services-hero">
+      <div class="container">
+        <span class="services-label reveal">SERVICES</span>
+        <h1 class="services-h1 reveal">From Concept<br/>to Operation<span class="h1-accent">.</span></h1>
+
+        <div class="services-diptych reveal">
+          <figure>
+            <div class="exhibit-frame">
+              <img src="assets/images/attractions/palace-of-westminster.png" alt="Westminster" class="exhibit-img" width="800" height="450" />
             </div>
-            <div class="technical-overlay">
-              <span>FIG_02 // STRATEGIC PLANNING // LONDON, UK</span>
-            </div>
+            <figcaption class="exhibit-caption">FIG_02 // STRATEGIC PROGRAMMING & REVENUE OPTIMIZATION // UK PARLIAMENT // BLACK ROD ADVISORY</figcaption>
           </figure>
-          <figure class="services-exhibit">
-            <div class="services-exhibit__frame">
-              <img src="assets/images/attractions/tower-of-london.png" alt="Tower of London" width="1600" height="900" class="services-exhibit__image" />
+          <figure>
+            <div class="exhibit-frame">
+              <img src="assets/images/attractions/tower-of-london.png" alt="Tower of London" class="exhibit-img" width="800" height="450" />
             </div>
-            <div class="technical-overlay">
-              <span>FIG_03 // OPERATIONAL RIGOR // LONDON, UK</span>
-            </div>
+            <figcaption class="exhibit-caption">FIG_03 // OPERATIONAL PLANNING & RETAIL STRATEGY // ROYAL PALACE PROPERTIES // SITE FEASIBILITY</figcaption>
           </figure>
         </div>
       </div>
-    </header>
+    </section>
 
-    <section class="services-bento-wrap">
-      <div class="services-bento">
-        <article class="service-card">
-          <span class="service-card__ref">REF_01</span>
-          <div class="service-card__inner">
-            <span class="service-card__kicker">Market Analysis</span>
-            <h2 class="service-card__name">Understanding the opportunity before a decision is made.</h2>
-            <p>Grant Leisure assesses market support by evaluating overall market trends and consumer survey techniques.</p>
-          </div>
-        </article>
-        <article class="service-card">
-          <span class="service-card__ref">REF_02</span>
-          <div class="service-card__inner">
-            <span class="service-card__kicker">Development Planning</span>
-            <h2 class="service-card__name">Where economic reality and physical vision meet.</h2>
-            <p>Achieving the optimum balance between economic planning and physical design for financially viable results.</p>
-          </div>
-        </article>
-        <article class="service-card">
-          <span class="service-card__ref">REF_03</span>
-          <div class="service-card__inner">
-            <span class="service-card__kicker">Financial Feasibility</span>
-            <h2 class="service-card__name">Proprietary models. No guesswork.</h2>
-            <p>Financial models for preparing cash flow projections and sensitivity testing of multi-use programs.</p>
-          </div>
-        </article>
+    <section class="bento-grid">
+      <article class="service-cell reveal">
+        <span class="ref-label">REF_01</span>
+        <div class="service-cell__inner">
+          <span class="service-kicker">Market Analysis</span>
+          <h2 class="service-title">Understanding the opportunity before a decision is made.</h2>
+          <p>Evaluating overall market trends and consumer survey techniques.</p>
+        </div>
+      </article>
+      <article class="service-cell reveal">
+        <span class="ref-label">REF_02</span>
+        <div class="service-cell__inner">
+          <span class="service-kicker">Development Planning</span>
+          <h2 class="service-title">Where economic reality and physical vision meet.</h2>
+          <p>Balancing economic planning with physical design for financially viable results.</p>
+        </div>
+      </article>
+      <article class="service-cell reveal">
+        <span class="ref-label">REF_03</span>
+        <div class="service-cell__inner">
+          <span class="service-kicker">Financial Feasibility</span>
+          <h2 class="service-title">Proprietary models. No guesswork.</h2>
+          <p>Financial models for preparing cash flow projections and sensitivity testing of multi-use programs.</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="authority-interstitial services-dark-section">
+      <div class="container">
+        <blockquote class="quote-text reveal">
+          "I have found Andy’s vision for what it takes to create a successful project to be outstanding. His instinct and attention to detail in large-scale land-planning for leisure destinations is second to none."
+          <footer class="quote-footer">PAT SCANLON // PARAMOUNT PARKS</footer>
+        </blockquote>
       </div>
     </section>
 
-    <section class="cta-section">
-      <div class="footer-watermark">GLI</div>
-      <div class="container cta-content">
-        <span class="cta-rule"></span>
-        <h2 class="cta-h2">
-          Ready to Build<br />
-          Something Lasting?
-        </h2>
-        <a href="contact.html" class="cta-button">Start a Conversation &rarr;</a>
+    <section class="bento-grid">
+      <article class="service-cell reveal">
+        <span class="ref-label">REF_04</span>
+        <div class="service-cell__inner">
+          <span class="service-kicker">Funding Assistance</span>
+          <h2 class="service-title">Capital identified, evaluated, secured.</h2>
+          <p>Identifying acquisition and investment opportunities for purchase, sale, and lease.</p>
+        </div>
+      </article>
+      <article class="service-cell reveal">
+        <span class="ref-label">REF_05</span>
+        <div class="service-cell__inner">
+          <span class="service-kicker">Operational Planning</span>
+          <h2 class="service-title">Every system. Every team. Every process.</h2>
+          <p>Examination of performance and revitalisation strategies for operators and selection.</p>
+        </div>
+      </article>
+      <article class="service-cell reveal">
+        <span class="ref-label">REF_06</span>
+        <div class="service-cell__inner">
+          <span class="service-kicker">Turnkey Management</span>
+          <h2 class="service-title">We run it. Then we hand it over.</h2>
+          <p>Policies and procedures monitoring following opening until self-sufficiency is achieved.</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="cta-footer">
+      <div class="gli-watermark">GLI</div>
+      <div class="container">
+        <span class="cta-rule reveal"></span>
+        <h2 class="cta-h2 reveal">Ready to Build<br/>Something Lasting?</h2>
       </div>
     </section>
   </main>
 
-  <script>
-    // Footer year update
-    const year = new Date().getFullYear();
-    console.log("Dossier loaded for " + year);
-  </script>
+  <script defer>
+    (() => {
+      'use strict';
+      const year = new Date().getFullYear();
+      
+      const darkSections = document.querySelectorAll('.services-dark-section');
+      const nav = document.querySelector('.site-nav');
+      if (nav && darkSections.length) {
+        let darkCount = 0;
+        const navObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            darkCount += entry.isIntersecting ? 1 : -1;
+            nav.classList.toggle('nav-over-dark', Math.max(0, darkCount) > 0);
+          });
+        }, { rootMargin: '-80px 0px 0px 0px', threshold: 0 });
+        darkSections.forEach((s) => navObserver.observe(s));
+      }
 
+      const revealTargets = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      revealTargets.forEach((el) => observer.observe(el));
+    })();
+  </script>
 </body>
 </html>
