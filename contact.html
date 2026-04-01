@@ -160,9 +160,10 @@
 
 
     /* ================================================================
-       NAVIGATION — CHAMELEON GHOST OVERLAY
-       Always transparent. backdrop-filter: blur(10px). Never solid.
-       .nav-over-dark toggled by JS when Ferrari image intersects nav.
+       NAVIGATION — GHOST PERSISTENT OVERLAY
+       Always transparent. Never solid. Frosted glass lens.
+       Default: dark links on light surface.
+       .nav-over-dark toggled by JS when Ferrari exhibit intersects nav.
     ================================================================ */
 
     .site-nav {
@@ -171,9 +172,13 @@
       inset-inline: 0;
       z-index: 200;
       padding-block: var(--space-sm);
-      background: transparent;
+      background: rgba(247, 247, 245, 0.92);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
+      border-bottom: 0.5px solid rgba(17, 18, 18, 0.06);
+      display: flex;
+      align-items: center;
+      width: 100%;
     }
 
     .site-nav__inner {
@@ -192,12 +197,13 @@
       flex-shrink: 0;
     }
 
-    /* Multiply blend on light — inverts on dark via .nav-over-dark */
+    /* Default: normal blend. Logo SVG has white background — multiply
+       would erase it on white page. Invert handled by .nav-over-dark. */
     .site-nav__logo img {
       height: 48px;
       width: auto;
       mix-blend-mode: multiply;
-      transition: filter var(--dur-fast) var(--ease-in-out);
+      background: #F7F7F5;
     }
 
     .site-nav__links {
@@ -210,21 +216,27 @@
       .site-nav__links { display: none; }
     }
 
-    /* Layer 3: Barlow Condensed */
+    /* Layer 3: Barlow Condensed — dark links on light surface */
     .site-nav__links a {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 0.9rem;
       font-weight: 700;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: rgba(17, 18, 18, 0.7);
+      color: rgba(17, 18, 18, 1);
       transition: color var(--dur-fast) var(--ease-in-out);
     }
 
-    .site-nav__links a:hover { color: var(--color-near-black); }
+    .site-nav__links a:hover {
+      color: var(--color-near-black);
+    }
 
-    .site-nav__links a[aria-current="page"] { color: var(--color-green); }
+    /* Active link: green */
+    .site-nav__links a[aria-current="page"] {
+      color: var(--color-green);
+    }
 
+    /* Contact pill */
     .site-nav__links .nav-contact {
       color: var(--color-green);
       border: 1px solid var(--color-green);
@@ -244,17 +256,22 @@
       outline-offset: 3px;
     }
 
-    /* Dark override — JS adds .nav-over-dark when Ferrari image is in view */
+    /* Nav inversion over dark sections (Ferrari exhibit)
+       .nav-over-dark toggled by IntersectionObserver in JS. */
+
     .nav-over-dark .site-nav__links a {
       color: rgba(255, 255, 255, 0.9) !important;
     }
+
     .nav-over-dark .site-nav__links a[aria-current="page"] {
       color: var(--color-green) !important;
     }
+
     .nav-over-dark .site-nav__links .nav-contact {
       color: var(--color-green) !important;
       border-color: var(--color-green) !important;
     }
+
     .nav-over-dark .site-nav__logo img {
       filter: brightness(0) invert(1) !important;
       mix-blend-mode: normal !important;
@@ -262,21 +279,27 @@
 
 
     /* ================================================================
-       SECTION 01 — ZERO-HERO HEADER
-       Pure white. Matches about.html .about-hero pattern.
-       padding-top: 140px clears the fixed nav with authority.
+       SECTION 01 — HERO HEADER
+       65svh contained card. Content anchored bottom-left via flex.
+       padding-top: 100px clears the fixed nav.
     ================================================================ */
 
     .contact-hero {
       background: #FFFFFF;
-      padding-top: 140px;
-      padding-bottom: var(--space-2xl);
+      height: 65svh;
+      min-height: 380px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: var(--space-xl);
+      padding-top: 100px;
+      position: relative;
     }
 
     .contact-hero__content {
-      /* Double gutter — matching about.html .about-hero__content */
       padding-inline: calc(var(--grid-gutter) * 2);
-      max-width: var(--grid-max);
+      max-width: 1440px;
+      width: 100%;
       margin-inline: auto;
     }
 
@@ -296,8 +319,8 @@
     .contact-legacy-statement {
       font-family: 'Playfair Display', Georgia, serif;
       font-weight: 900;
-      font-size: clamp(3.5rem, 6vw, 5.5rem);
-      line-height: 1.05;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      line-height: 1.0;
       letter-spacing: -0.01em;
       color: var(--color-near-black);
       max-width: 16ch;
@@ -312,13 +335,30 @@
     /* ================================================================
        FIG_04 — FERRARI WORLD EXHIBIT
        Contained 21:9 card. Green 0.5px hairline border.
-       Caption BELOW the frame — not overlaid.
-       data-nav-dark: JS watches this element to flip the nav.
+       Caption BELOW the frame — not overlaid. contact-dark-section
+       class used by nav IntersectionObserver.
     ================================================================ */
 
+    /* ================================================================
+       FIG_04 — FERRARI WORLD EXHIBIT
+       Standalone wrapper between hero and form.
+       contact-dark-section triggers nav inversion in JS.
+    ================================================================ */
+
+    .contact-exhibit-wrap {
+      background: #FFFFFF;
+      padding-top: 15vh;
+      padding-bottom: 0;
+    }
+
+    .contact-exhibit-inner {
+      padding-inline: calc(var(--grid-gutter) * 2);
+      max-width: 1440px;
+      margin-inline: auto;
+    }
+
     .contact-exhibit {
-      /* 15vh "The Void" above — separates H1 from the image card */
-      margin-top: 15vh;
+      margin-top: 0;
       margin-bottom: 0;
     }
 
@@ -326,8 +366,8 @@
       position: relative;
       aspect-ratio: 21 / 9;
       overflow: hidden;
-      /* 0.5px green hairline — Technical Dossier standard */
       border: 0.5px solid var(--color-green);
+      width: 100%;
     }
 
     .contact-exhibit__image {
@@ -343,15 +383,15 @@
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 0.625rem;        /* 10px */
       font-weight: 600;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(17, 18, 18, 0.5);
+      color: rgba(17, 18, 18, 0.7);
       display: block;
       margin-top: 0.75em;
+      text-align: left;
     }
 
     @media (max-width: 600px) {
-      /* Relax on small viewports so image height remains usable */
       .contact-exhibit__frame {
         aspect-ratio: 4 / 3;
       }
@@ -415,8 +455,7 @@
       letter-spacing: 0.06em;
       color: var(--color-near-black);
       display: block;
-      /* Tighter bottom — entries group visually, then a gap before next label */
-      margin-bottom: 0.3em;
+      margin-bottom: var(--space-lg);
       line-height: 1.5;
     }
 
@@ -451,32 +490,35 @@
     }
 
     /* Layer 2: system sans-serif — form input text.
-       Technical Blueprint look: no fill, hairline bottom border only. */
+       Technical Blueprint: bottom border only, no fills, no shadow. */
     .contact-form__input,
     .contact-form__textarea {
       display: block;
       width: 100%;
-      background: transparent;   /* No tint — blueprint clarity */
+      background: transparent;
       border: none;
-      border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+      border-bottom: 0.5px solid rgba(17, 18, 18, 0.25);
+      box-shadow: none;
+      border-radius: 0;
       padding: 0.75em 0;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       font-size: clamp(0.9rem, 1.1vw, 1rem);
       font-weight: 400;
       color: var(--color-near-black);
       outline: none;
-      /* Smooth border-color transition for micro-interaction */
       transition: border-bottom-color var(--dur-fast) var(--ease-in-out);
       margin-bottom: var(--space-lg);
       -webkit-appearance: none;
       appearance: none;
-      border-radius: 0;
     }
 
     /* Micro-interaction: bottom border turns Grant Leisure Green on focus */
     .contact-form__input:focus,
     .contact-form__textarea:focus {
+      background: transparent;
       border-bottom-color: var(--color-green);
+      box-shadow: none;
+      outline: none;
     }
 
     .contact-form__input.is-error,
@@ -489,32 +531,31 @@
       min-height: 140px;
     }
 
-    /* "Prestige" button — outline style from about.html .cta-close__button.
-       Fills solid green on hover. */
+    /* "Prestige" button — outline fills solid green on hover. */
     .contact-form__submit {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: var(--type-label);
+      font-size: 0.75rem;
       font-weight: 700;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--color-near-black);
       background: transparent;
       border: 1px solid rgba(17, 18, 18, 0.35);
-      padding: 1em calc(2em - 0.14em) 1em 2em;
+      padding: 1em 2em;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: var(--space-sm);
       transition:
-        background-color var(--dur-fast) var(--ease-in-out),
-        border-color     var(--dur-fast) var(--ease-in-out),
-        color            var(--dur-fast) var(--ease-in-out);
+        background     var(--dur-fast) var(--ease-in-out),
+        color          var(--dur-fast) var(--ease-in-out),
+        border-color   var(--dur-fast) var(--ease-in-out);
     }
 
     .contact-form__submit:hover {
-      background-color: var(--color-green);
-      border-color: var(--color-green);
+      background: var(--color-green);
       color: var(--color-near-black);
+      border-color: var(--color-green);
     }
 
     .contact-form__submit:focus-visible {
@@ -646,23 +687,32 @@
   <main id="main-content">
 
     <!-- ============================================================
-         SECTION 01 — ZERO-HERO HEADER
-         Pure white. Left-anchored. Playfair H1. 140px top clears nav.
+         SECTION 01 — HERO HEADER
+         Pure white. H1 anchored bottom-left via flex.
     ============================================================ -->
     <section class="contact-hero" aria-labelledby="contact-headline">
       <div class="contact-hero__content">
 
-        <span class="contact-file-ref reveal">[ PROJECT_INQUIRY // REGISTRY_OFFICE ]</span>
+        <span class="contact-file-ref">[ PROJECT_INQUIRY // REGISTRY_OFFICE ]</span>
 
         <!-- Layer 1: Playfair Display Black — H1 ONLY -->
-        <h1 class="contact-legacy-statement reveal" id="contact-headline">
+        <h1 class="contact-legacy-statement" id="contact-headline">
           Start a Conversation<span class="contact-legacy-statement__period">.</span>
         </h1>
 
-        <!-- FIG_04 — Ferrari World Technical Exhibit.
-             data-nav-dark: JS watches this to flip nav links white. -->
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         FIG_04 — FERRARI WORLD EXHIBIT
+         Standalone section between hero and form.
+         contact-dark-section: nav observer flips links white here.
+    ============================================================ -->
+    <div class="contact-exhibit-wrap">
+      <div class="contact-exhibit-inner">
         <figure
-          class="contact-exhibit reveal"
+          class="contact-exhibit contact-dark-section reveal"
           data-nav-dark
           aria-label="Ferrari World Abu Dhabi — tier 1 destination development"
         >
@@ -681,9 +731,8 @@
             FIG_04 // TIER 1 DESTINATION DEVELOPMENT // ABU DHABI, UAE // COMPLIANCE &amp; REVENUE OPTIMIZATION
           </figcaption>
         </figure>
-
       </div>
-    </section>
+    </div>
 
 
     <!-- ============================================================
@@ -853,32 +902,21 @@
       }
 
       // ── Chameleon nav — flips white over Ferrari exhibit ─────────
-      // Watches [data-nav-dark] elements. When any is intersecting
-      // the nav zone, adds .nav-over-dark to the <nav> element.
-      const darkSections = document.querySelectorAll('[data-nav-dark]');
-      const navEl = document.querySelector('.site-nav');
-
-      if (navEl && darkSections.length && 'IntersectionObserver' in window) {
+      const contactDarkSections = document.querySelectorAll('.contact-dark-section');
+      const contactNav = document.querySelector('.site-nav');
+      if (contactNav && contactDarkSections.length) {
         let darkCount = 0;
-
-        const navObserver = new IntersectionObserver(
+        const contactNavObserver = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
-              darkCount = entry.isIntersecting
-                ? darkCount + 1
-                : Math.max(0, darkCount - 1);
-              navEl.classList.toggle('nav-over-dark', darkCount > 0);
+              darkCount += entry.isIntersecting ? 1 : -1;
+              darkCount = Math.max(0, darkCount);
+              contactNav.classList.toggle('nav-over-dark', darkCount > 0);
             });
           },
-          {
-            // rootMargin top: -nav height. When section enters that band,
-            // the nav is over dark content.
-            rootMargin: '-72px 0px 0px 0px',
-            threshold: 0
-          }
+          { rootMargin: '-80px 0px -40% 0px', threshold: 0.3 }
         );
-
-        darkSections.forEach((section) => navObserver.observe(section));
+        contactDarkSections.forEach((s) => contactNavObserver.observe(s));
       }
 
       // ── Form validation ──────────────────────────────────────────
