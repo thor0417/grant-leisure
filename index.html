@@ -12,13 +12,21 @@
 
   <style>
     /* ================================================================
-       FONT SYSTEM — MASTER ALIGNMENT
+       1. FORCE CSS VARIABLE SYNC
     ================================================================ */
     @font-face {
       font-family: 'Playfair Display';
       font-style: normal;
       font-weight: 900;
+      font-display: swap;
       src: url('assets/fonts/PlayfairDisplay-Black.ttf') format('truetype');
+    }
+    @font-face {
+      font-family: 'Playfair Display';
+      font-style: italic;
+      font-weight: 400;
+      font-display: swap;
+      src: url('assets/fonts/PlayfairDisplay-Italic.ttf') format('truetype');
     }
 
     :root {
@@ -32,11 +40,14 @@
       --type-display:        clamp(3.5rem, 8vw, 6.5rem);
       --type-heading:        clamp(2.2rem, 5vw, 4rem);
       --type-body:           clamp(1rem, 1.2vw, 1.1rem);
-      
-      --space-v-rhythm:      15vh; /* Non-negotiable Vertical Rhythm */
+
+      --space-xl:            7rem;
+      --space-2xl:           12rem;
+      --space-v-rhythm:      15vh; 
       --grid-gutter:         clamp(1.5rem, 5vw, 5rem);
-      --dur-fast:            350ms;
+      
       --ease-out-expo:       cubic-bezier(0.16, 1, 0.3, 1);
+      --dur-fast:            350ms;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -50,26 +61,27 @@
       overflow-x: hidden;
     }
 
-    /* Furrion Spine Alignment */
-    .spine-align {
+    /* ================================================================
+       2. FIXED SPINE
+    ================================================================ */
+    .spine-container {
       padding-left: calc(var(--grid-gutter) * 2);
       max-width: 1440px;
       margin-inline: auto;
     }
 
     /* ================================================================
-       NAVIGATION — 1:1 COPY
+       NAVIGATION
     ================================================================ */
     .site-nav {
       position: fixed;
       inset-block-start: 0;
       inset-inline: 0;
-      z-index: 9999; /* Z-Index Lock */
+      z-index: 9999;
       padding-block: 1rem;
       background: transparent;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      transition: all var(--dur-fast);
     }
 
     .site-nav__inner {
@@ -80,10 +92,7 @@
     }
 
     .site-nav__logo img { height: 48px; width: auto; mix-blend-mode: multiply; }
-
     .site-nav__links { display: flex; align-items: center; gap: 4rem; list-style: none; }
-    @media (max-width: 767px) { .site-nav__links { display: none; } }
-
     .site-nav__links a {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 0.9rem;
@@ -98,42 +107,103 @@
     .nav-over-dark .site-nav__logo img { filter: brightness(0) invert(1); mix-blend-mode: normal; }
 
     /* ================================================================
-       SECTIONS & GRID DISCIPLINE
+       SECTIONS
     ================================================================ */
-    section { padding-block: var(--space-v-rhythm); }
+    .hero-registry {
+      min-height: 85svh;
+      padding-top: 180px;
+      padding-bottom: var(--space-v-rhythm);
+    }
 
-    .hero-registry { padding-top: 180px; min-height: 85svh; display: flex; flex-direction: column; justify-content: flex-end; }
-    .hero-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--color-slate); margin-bottom: 2rem; display: block; }
-    .hero-statement { font-family: 'Playfair Display', serif; font-weight: 900; font-size: var(--type-display); line-height: 0.95; color: var(--color-near-black); margin-bottom: 4rem; }
+    .hero-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-slate);
+      margin-bottom: 2rem;
+      display: block;
+    }
 
-    .exhibit-frame { border: 0.5px solid var(--color-green); aspect-ratio: 21 / 9; overflow: hidden; background: #F2F2F2; }
+    .hero-statement {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: var(--type-display);
+      line-height: 0.95;
+      color: var(--color-near-black);
+      margin-bottom: 4rem;
+    }
+
+    .exhibit-frame {
+      border: 0.5px solid var(--color-green);
+      aspect-ratio: 21 / 9;
+      overflow: hidden;
+    }
+
     .exhibit-frame img { width: 100%; height: 100%; object-fit: cover; }
-    
-    /* Partner Grid Discipline */
-    .logo-grid { display: grid; grid-template-columns: repeat(5, 1fr); border: 0.5px solid rgba(0,0,0,0.1); }
-    .logo-cell { 
-      aspect-ratio: 3 / 2; 
-      display: flex; 
-      align-items: center; 
-      justify-content: center; 
-      border: 0.25px solid rgba(0,0,0,0.1); 
-      background: #FFF; 
-      padding: 1.5rem;
+
+    /* ================================================================
+       3. RE-ARCHITECTED LOGO GRID
+    ================================================================ */
+    .logo-registry {
+      padding-block: var(--space-v-rhythm);
+      background-color: var(--color-white);
+    }
+
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border-top: 0.5px solid #E0E0E0;
+      border-left: 0.5px solid #E0E0E0;
+    }
+
+    .logo-cell {
+      aspect-ratio: 3 / 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-right: 0.5px solid #E0E0E0;
+      border-bottom: 0.5px solid #E0E0E0;
+      padding: 2rem;
       transition: border-color var(--dur-fast);
     }
-    .logo-cell img { max-width: 60%; max-height: 80px; width: auto; height: auto; object-fit: contain; filter: grayscale(1) opacity(0.6); transition: all var(--dur-fast); }
-    .logo-cell:hover { border-color: var(--color-green); z-index: 10; }
+
+    .logo-cell img {
+      max-height: 60px;
+      width: auto;
+      object-fit: contain;
+      filter: grayscale(1) opacity(0.5);
+      transition: all var(--dur-fast) var(--ease-out-expo);
+    }
+
+    .logo-cell:hover { border: 1px solid var(--color-green); z-index: 10; }
     .logo-cell:hover img { filter: grayscale(0) opacity(1); }
 
-    /* Sector Stat Bento */
-    .stat-section { background: var(--color-near-black); padding-block: var(--space-v-rhythm); }
-    .stat-grid { display: grid; grid-template-columns: repeat(5, 1fr); border: 0.5px solid rgba(255,255,255,0.1); }
-    .stat-cell { padding: 3rem 2rem; border: 0.25px solid rgba(255,255,255,0.1); transition: background var(--dur-fast); }
-    .stat-cell:hover { background: rgba(255,255,255,0.03); }
-    .stat-number { font-family: 'Barlow Condensed', sans-serif; font-size: 3rem; font-weight: 800; color: var(--color-green); display: block; line-height: 1; margin-bottom: 0.5rem; }
-    .stat-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--color-slate); letter-spacing: 0.1em; }
+    /* ================================================================
+       4. BLACK-OUT SECTION
+    ================================================================ */
+    .failure-hook {
+      background-color: var(--color-near-black);
+      padding-block: var(--space-v-rhythm);
+      color: var(--color-white);
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+    }
 
-    /* Reveal */
+    .failure-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: var(--type-heading);
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: 0.9;
+      max-width: 800px;
+    }
+
     .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s var(--ease-out-expo); }
     .reveal.is-visible { opacity: 1; transform: translateY(0); }
   </style>
@@ -154,34 +224,29 @@
   </nav>
 
   <main>
-    <header class="hero-registry section">
-      <div class="spine-align">
+    <header class="hero-registry">
+      <div class="spine-container">
         <span class="hero-label reveal">[ GLOBAL_REGISTRY_ALPHA ]</span>
         <h1 class="hero-statement reveal">Profit from our experience<span style="color:var(--color-green);">.</span></h1>
-        <figure class="reveal">
-          <div class="exhibit-frame">
-            <img src="assets/images/attractions/london-eye.png" alt="London Eye Strategic Audit" width="1600" height="685">
-          </div>
-          <figcaption class="exhibit-caption" style="font-family:'Barlow Condensed'; font-size:10px; font-weight:600; text-transform:uppercase; color:var(--color-slate); margin-top:1rem; letter-spacing:0.1em;">
-            FIG_00 // STRATEGIC SITE AUDIT // LONDON EYE, UK // TECHNICAL OVERLAY
-          </figcaption>
-        </figure>
+        <div class="exhibit-frame reveal">
+          <img src="assets/images/attractions/london-eye.png" alt="London Eye Strategic Audit" width="1600" height="685">
+        </div>
       </div>
     </header>
 
-    <section id="dark-trigger" style="background:var(--color-near-black); color:#FFF;">
-      <div class="spine-align">
-        <span style="font-family:'Barlow Condensed'; font-size:11px; font-weight:800; color:var(--color-green); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:1rem; display:block;" class="reveal">Critical Intelligence</span>
-        <h2 style="font-family:'Barlow Condensed'; font-size:var(--type-heading); font-weight:800; text-transform:uppercase; line-height:0.9; max-width:20ch;" class="reveal">90% of new visitor attractions fail within the first five years.</h2>
+    <section id="dark-trigger" class="failure-hook">
+      <div class="spine-container">
+        <span style="font-family:'Barlow Condensed'; font-size:11px; font-weight:800; color:var(--color-green); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:1.5rem; display:block;" class="reveal">Critical Intelligence</span>
+        <h2 class="failure-text reveal">90% of new visitor attractions fail within the first five years.</h2>
       </div>
     </section>
 
-    <section class="section">
-      <div class="spine-align">
-        <span class="hero-label reveal" style="margin-bottom:2rem;">[ STRATEGIC_ALLIANCES // TIER_1_DESTINATIONS ]</span>
+    <section class="logo-registry">
+      <div class="spine-container">
+        <span class="hero-label reveal" style="margin-bottom:2.5rem;">[ STRATEGIC_ALLIANCES // TIER_1_DESTINATIONS ]</span>
         <div class="logo-grid reveal">
           <div class="logo-cell"><img src="assets/images/logos/disney.png" alt="Disney"></div>
-          <div class="logo-cell"><img src="assets/images/logos/nbc-universal.png" alt="NBC"></div>
+          <div class="logo-cell"><img src="assets/images/logos/nbc-universal.png" alt="NBC Universal"></div>
           <div class="logo-cell"><img src="assets/images/logos/paramount.png" alt="Paramount"></div>
           <div class="logo-cell"><img src="assets/images/logos/lego-land.png" alt="Lego"></div>
           <div class="logo-cell"><img src="assets/images/logos/ferrari-world.png" alt="Ferrari"></div>
@@ -190,30 +255,18 @@
           <div class="logo-cell"><img src="assets/images/logos/sd-zoo.png" alt="San Diego Zoo"></div>
           <div class="logo-cell"><img src="assets/images/logos/v&a.png" alt="V&A"></div>
           <div class="logo-cell"><img src="assets/images/logos/harrahs.png" alt="Harrah's"></div>
-          <div class="logo-cell"><img src="assets/images/logos/anheuser-busch.png" alt="Busch"></div>
+          <div class="logo-cell"><img src="assets/images/logos/anheuser-busch.png" alt="Anheuser-Busch"></div>
           <div class="logo-cell"><img src="assets/images/logos/ocean-park.png" alt="Ocean Park"></div>
           <div class="logo-cell"><img src="assets/images/logos/blue-water.png" alt="Blue Water"></div>
-          <div class="logo-cell"><img src="assets/images/logos/pr.png" alt="PR"></div>
+          <div class="logo-cell"><img src="assets/images/logos/pr.png" alt="Parques Reunidos"></div>
           <div class="logo-cell"><img src="assets/images/logos/universal.png" alt="Universal"></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="stat-section">
-      <div class="spine-align">
-        <div class="stat-grid reveal">
-          <div class="stat-cell"><span class="stat-number">65</span><span class="stat-label">Theme Parks</span></div>
-          <div class="stat-cell"><span class="stat-number">60+</span><span class="stat-label">Stately Homes</span></div>
-          <div class="stat-cell"><span class="stat-number">27</span><span class="stat-label">Zoo Inst.</span></div>
-          <div class="stat-cell"><span class="stat-number">35</span><span class="stat-label">Museums</span></div>
-          <div class="stat-cell"><span class="stat-number">5</span><span class="stat-label">UNESCO Sites</span></div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer style="background:var(--color-off-white); padding-block:4rem;">
-    <div class="container" style="display:flex; justify-content:space-between; align-items:center;">
+  <footer style="background:var(--color-off-white); padding-block:4rem; border-top:0.5px solid #E0E0E0;">
+    <div class="spine-container" style="display:flex; justify-content:space-between; align-items:center; padding-left:var(--grid-gutter);">
       <img src="assets/images/gli-logo.svg" alt="Grant Leisure" width="80" height="27" style="mix-blend-mode:multiply;">
       <p style="font-family:'Barlow Condensed'; font-size:12px; color:rgba(17,18,18,0.4);">&copy; 2026 Grant Leisure. All rights reserved.</p>
     </div>
