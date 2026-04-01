@@ -476,7 +476,7 @@
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 0.625rem;
       font-weight: 600;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: rgba(17, 18, 18, 0.7);
       margin-top: 0.75em;
@@ -596,16 +596,16 @@
     /* Strict 5×2 grid — 1px gap via background creates hairline dividers */
     .org-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: 1px;
       background: rgba(17, 18, 18, 0.08);
       border: 1px solid rgba(17, 18, 18, 0.08);
       margin-top: var(--space-lg);
     }
 
-    @media (min-width: 640px) {
+    @media (max-width: 767px) {
       .org-grid {
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(2, 1fr);
       }
     }
 
