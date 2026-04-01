@@ -12,7 +12,7 @@
 
   <style>
     /* ================================================================
-       FONT SYSTEM — THREE LAYERS
+       FONT SYSTEM & TOKENS
     ================================================================ */
 
     @font-face {
@@ -21,20 +21,6 @@
       font-weight: 900;
       font-display: swap;
       src: url('assets/fonts/PlayfairDisplay-Black.ttf') format('truetype');
-    }
-    @font-face {
-      font-family: 'Playfair Display';
-      font-style: italic;
-      font-weight: 400;
-      font-display: swap;
-      src: url('assets/fonts/PlayfairDisplay-Italic.ttf') format('truetype');
-    }
-    @font-face {
-      font-family: 'Playfair Display';
-      font-style: normal;
-      font-weight: 500;
-      font-display: swap;
-      src: url('assets/fonts/PlayfairDisplay-Medium.ttf') format('truetype');
     }
 
     :root {
@@ -89,125 +75,51 @@
     }
 
     /* ================================================================
-       SCROLL REVEAL
-    ================================================================ */
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity var(--dur-slow) var(--ease-out-expo), transform var(--dur-slow) var(--ease-out-expo);
-    }
-
-    .reveal.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ================================================================
-       NAVIGATION — CHAMELEON GHOST
-    ================================================================ */
-
-    .site-nav {
-      position: fixed;
-      inset-block-start: 0;
-      inset-inline: 0;
-      z-index: 200;
-      padding-block: var(--space-sm);
-      background: transparent;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-
-    .site-nav__inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .site-nav__logo img {
-      height: 48px;
-      width: auto;
-      mix-blend-mode: multiply;
-    }
-
-    .site-nav__links {
-      display: flex;
-      align-items: center;
-      gap: var(--space-lg);
-      list-style: none;
-    }
-
-    @media (max-width: 767px) {
-      .site-nav__links { display: none; }
-    }
-
-    .site-nav__links a {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: rgba(17, 18, 18, 0.7);
-      text-decoration: none;
-      transition: color var(--dur-fast) var(--ease-in-out);
-    }
-
-    .site-nav__links a:hover { color: var(--color-near-black); }
-    .site-nav__links a[aria-current="page"] { color: var(--color-green); }
-
-    .site-nav__links .nav-contact {
-      color: var(--color-green);
-      border: 1px solid var(--color-green);
-      padding: 0.45em calc(1em - 0.12em) 0.4em 1em;
-    }
-
-    .site-nav__links .nav-contact:hover {
-      color: var(--color-white);
-      background-color: var(--color-green);
-    }
-
-    /* Inversion */
-    .nav-over-dark .site-nav__links a { color: rgba(255, 255, 255, 0.9); }
-    .nav-over-dark .site-nav__logo img { filter: brightness(0) invert(1); mix-blend-mode: normal; }
-    .nav-over-dark .site-nav__links .nav-contact:hover { color: var(--color-near-black); }
-
-    /* ================================================================
-       SECTION 01 — ZERO-HERO HEADER
+       1. HEADER & TYPOGRAPHY
     ================================================================ */
 
     .services-hero {
-      background: #FFFFFF;
+      background: var(--color-white);
       padding-top: 140px;
       padding-bottom: var(--space-xl);
+      text-align: left;
     }
 
     .services-hero__content {
       padding-inline: calc(var(--grid-gutter) * 2);
-      max-width: 1440px;
+      max-width: var(--grid-max);
       margin-inline: auto;
     }
 
-    .services-file-ref {
+    .services-label {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.625rem;
+      font-size: 10px;
       font-weight: 600;
-      letter-spacing: 0.22em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--color-slate);
       display: block;
       margin-bottom: var(--space-md);
     }
 
-    .services-legacy-statement {
+    .services-h1 {
       font-family: 'Playfair Display', Georgia, serif;
       font-weight: 900;
       font-size: clamp(3rem, 6vw, 5.5rem);
       line-height: 1.0;
       letter-spacing: -0.01em;
       color: var(--color-near-black);
-      max-width: 16ch;
+      max-width: 12ch;
       margin-bottom: var(--space-xl);
     }
+
+    .h1-accent {
+      color: var(--color-green);
+    }
+
+    /* ================================================================
+       2. THE DIPTYCH "LOCK-IN"
+    ================================================================ */
 
     .services-diptych {
       display: grid;
@@ -217,6 +129,10 @@
 
     @media (max-width: 767px) {
       .services-diptych { grid-template-columns: 1fr; }
+    }
+
+    .services-exhibit {
+      position: relative;
     }
 
     .services-exhibit__frame {
@@ -232,188 +148,124 @@
       display: block;
     }
 
-    .services-exhibit__caption {
+    .technical-overlay {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(17, 18, 18, 0.4);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 8px 12px;
+      border-left: 1px solid var(--color-green);
+    }
+
+    .technical-overlay span {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.625rem;
-      font-weight: 600;
+      font-size: 10px;
+      font-weight: 700;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: rgba(17, 18, 18, 0.7);
-      margin-top: 0.75em;
+      color: var(--color-white);
       display: block;
     }
 
     /* ================================================================
-       SECTION 02 — APPROACH
-    ================================================================ */
-
-    .approach-section {
-      background: #F9F9F9;
-      padding-block: var(--space-xl);
-    }
-
-    .approach-kicker {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--color-slate);
-      display: block;
-      margin-bottom: var(--space-sm);
-    }
-
-    .approach-statement {
-      font-size: clamp(1.1rem, 1.8vw, 1.4rem);
-      font-weight: 600;
-      line-height: 1.5;
-      color: var(--color-near-black);
-      max-width: 800px;
-    }
-
-    .approach-accent { color: var(--color-green); }
-
-    /* ================================================================
-       SECTION 03 — BENTO GRID
+       3. BENTO GRID "ACTIVE" STATES
     ================================================================ */
 
     .services-bento {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      background: #F9F9F9;
+      background: var(--color-off-white);
     }
 
     @media (max-width: 900px) { .services-bento { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 540px) { .services-bento { grid-template-columns: 1fr; } }
 
-    .service-cell {
+    .service-card {
       border: 0.5px solid rgba(17,18,18,0.1);
       padding: var(--space-lg) var(--space-md);
-      background: #FFFFFF;
+      background: var(--color-white);
       position: relative;
-      transition: background var(--dur-fast) var(--ease-in-out);
+      transition: border var(--dur-fast) var(--ease-in-out), background var(--dur-fast) var(--ease-in-out);
+      cursor: pointer;
     }
 
-    .service-cell:hover { background: #F9F9F9; }
+    .service-card:hover {
+      border: 0.5px solid var(--color-green);
+      background: #F9F9F9;
+      z-index: 2;
+    }
 
-    .service-cell__ref {
+    .service-card__inner {
+      transition: transform var(--dur-fast) var(--ease-out-expo);
+    }
+
+    .service-card:hover .service-card__inner {
+      transform: translateX(5px);
+    }
+
+    .service-card__ref {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.6rem;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
       color: var(--color-slate);
       position: absolute;
-      top: var(--space-md);
-      right: var(--space-md);
+      top: 20px;
+      right: 20px;
     }
 
-    .service-cell__number {
+    .service-card__kicker {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(2.5rem, 4vw, 4rem);
+      font-size: 11px;
       font-weight: 800;
-      color: #EEEEEC;
-      line-height: 1;
-      margin-bottom: var(--space-sm);
-    }
-
-    .service-cell__kicker {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.68rem;
-      font-weight: 700;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--color-green);
       display: block;
-      margin-bottom: var(--space-sm);
+      margin-bottom: 1rem;
     }
 
-    .service-cell__name {
+    .service-card__name {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(1.2rem, 2vw, 1.6rem);
+      font-size: 1.4rem;
       font-weight: 700;
       text-transform: uppercase;
       color: var(--color-near-black);
       line-height: 1.2;
-      margin-bottom: var(--space-sm);
-    }
-
-    .service-cell__body {
-      font-size: clamp(0.85rem, 1vw, 0.95rem);
-      line-height: 1.7;
-      color: var(--color-body-text);
-    }
-
-    .service-cell__accent-rule {
-      display: block;
-      width: 32px;
-      height: 2px;
-      background: var(--color-green);
-      margin-bottom: var(--space-md);
+      margin-bottom: 1rem;
     }
 
     /* ================================================================
-       DARK INTERSTITIAL
+       4. DOSSIER FOOTER
     ================================================================ */
 
-    .services-dark-section {
-      background: #111212;
-      padding-block: var(--space-xl);
+    .cta-section {
+      background: var(--color-off-white);
+      padding-block: var(--space-2xl);
+      position: relative;
+      overflow: hidden;
     }
 
-    .quote-interstitial__grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-xl);
-      max-width: 1440px;
-      margin-inline: auto;
-      padding-inline: calc(var(--grid-gutter) * 2);
-    }
-
-    @media (max-width: 767px) { .quote-interstitial__grid { grid-template-columns: 1fr; } }
-
-    .quote-block {
-      border-left: 2px solid var(--color-green);
-      padding-left: var(--space-md);
-    }
-
-    .quote-block__text {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-weight: 500;
-      font-size: clamp(1rem, 1.5vw, 1.3rem);
-      line-height: 1.5;
-      color: rgba(255,255,255,0.9);
-      margin-bottom: var(--space-md);
-    }
-
-    .quote-block__name {
+    /* Embossed Seal Watermark */
+    .footer-watermark {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--color-green);
-      display: block;
+      font-size: clamp(15rem, 30vw, 40rem);
+      font-weight: 900;
+      color: var(--color-near-black);
+      opacity: 0.05;
+      position: absolute;
+      bottom: -0.1em;
+      right: -0.05em;
+      pointer-events: none;
+      z-index: 0;
+      line-height: 0.8;
     }
 
-    .quote-block__org {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.68rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--color-slate);
-      display: block;
-      margin-top: 0.25em;
-    }
-
-    /* ================================================================
-       CTA & FOOTER
-    ================================================================ */
-
-    .cta-close {
-      background: #F9F9F9;
-      padding-block: var(--space-xl);
+    .cta-content {
+      position: relative;
+      z-index: 1;
     }
 
     .cta-rule {
@@ -424,240 +276,117 @@
       margin-bottom: var(--space-md);
     }
 
-    .cta-kicker {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--color-green);
-      display: block;
-      margin-bottom: var(--space-sm);
-    }
-
-    .cta-headline {
+    .cta-h2 {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: var(--type-heading);
       font-weight: 800;
+      line-height: 1.0;
       text-transform: uppercase;
       color: var(--color-near-black);
-      margin-bottom: var(--space-md);
+      margin-bottom: var(--space-lg);
     }
 
-    .cta-close__button {
+    .cta-button {
       display: inline-flex;
-      align-items: center;
-      padding: 1em 2em;
+      padding: 1.2em 2.5em;
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: var(--type-label);
-      font-weight: 700;
+      font-size: 12px;
+      font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.15em;
       color: var(--color-near-black);
-      border: 1px solid rgba(17,18,18,0.35);
-      background: transparent;
+      border: 1px solid rgba(17,18,18,0.3);
       text-decoration: none;
       transition: all var(--dur-fast) var(--ease-in-out);
     }
 
-    .cta-close__button:hover {
+    .cta-button:hover {
       background: var(--color-near-black);
       color: var(--color-white);
+      border-color: var(--color-near-black);
     }
 
-    .site-footer {
-      padding-block: var(--space-md);
-      background: transparent;
-    }
-
-    .site-footer__inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    @media (max-width: 767px) { .site-footer__inner { flex-direction: column; gap: var(--space-md); align-items: flex-start; } }
-
-    .site-footer__copy {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: var(--type-caption);
-      color: rgba(17,18,18,0.4);
-      letter-spacing: 0.04em;
-    }
   </style>
 </head>
 <body>
 
-  <nav class="site-nav" aria-label="Primary navigation">
-    <div class="container">
-      <div class="site-nav__inner">
-        <a href="index.html" class="site-nav__logo">
-          <img src="assets/images/gli-logo.svg" alt="Grant Leisure" width="120" height="40" />
-        </a>
-        <ul class="site-nav__links">
-          <li><a href="about.html">About</a></li>
-          <li><a href="team.html">Team</a></li>
-          <li><a href="services.html" aria-current="page">Services</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="contact.html" class="nav-contact">Contact</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
   <main>
-    <section class="services-hero">
+    <header class="services-hero">
       <div class="services-hero__content">
-        <span class="services-file-ref reveal">[ STRATEGIC ADVISORY &amp; TECHNICAL COMPLIANCE ]</span>
-        <h1 class="services-legacy-statement reveal">From Concept to Operation.</h1>
-        <div class="services-diptych reveal">
+        <span class="services-label">SERVICES // [ STRATEGIC ADVISORY &amp; TECHNICAL COMPLIANCE ]</span>
+        <h1 class="services-h1">
+          From Concept<br />
+          to Operation<span class="h1-accent">.</span>
+        </h1>
+
+        <div class="services-diptych">
           <figure class="services-exhibit">
             <div class="services-exhibit__frame">
               <img src="assets/images/attractions/palace-of-westminster.png" alt="Palace of Westminster" width="1600" height="900" class="services-exhibit__image" />
             </div>
-            <figcaption class="services-exhibit__caption">FIG_02 // HERITAGE ASSET MANAGEMENT // LONDON, UK</figcaption>
+            <div class="technical-overlay">
+              <span>FIG_02 // STRATEGIC PLANNING // LONDON, UK</span>
+            </div>
           </figure>
           <figure class="services-exhibit">
             <div class="services-exhibit__frame">
               <img src="assets/images/attractions/tower-of-london.png" alt="Tower of London" width="1600" height="900" class="services-exhibit__image" />
             </div>
-            <figcaption class="services-exhibit__caption">FIG_03 // HISTORIC SITE OPERATIONS // LONDON, UK</figcaption>
+            <div class="technical-overlay">
+              <span>FIG_03 // OPERATIONAL RIGOR // LONDON, UK</span>
+            </div>
           </figure>
         </div>
       </div>
-    </section>
+    </header>
 
-    <section class="approach-section">
-      <div class="container">
-        <span class="approach-kicker reveal">Our Approach</span>
-        <p class="approach-statement reveal">
-          Our goal is to create <span class="approach-accent">self-sustaining</span> development ecosystems, that capitalize existing assets and encourage expansion. Resulting in longer visitor length of stay and increased profits.
-        </p>
-      </div>
-    </section>
-
-    <section class="services-bento-section">
+    <section class="services-bento-wrap">
       <div class="services-bento">
-        <article class="service-cell reveal">
-          <span class="service-cell__ref">REF_01</span>
-          <span class="service-cell__number">01</span>
-          <span class="service-cell__kicker">Market Analysis</span>
-          <span class="service-cell__accent-rule"></span>
-          <h2 class="service-cell__name">Understanding the opportunity.</h2>
-          <p class="service-cell__body">Grant Leisure assesses market support by evaluating overall market trends and growth in targeted markets.</p>
+        <article class="service-card">
+          <span class="service-card__ref">REF_01</span>
+          <div class="service-card__inner">
+            <span class="service-card__kicker">Market Analysis</span>
+            <h2 class="service-card__name">Understanding the opportunity before a decision is made.</h2>
+            <p>Grant Leisure assesses market support by evaluating overall market trends and consumer survey techniques.</p>
+          </div>
         </article>
-        <article class="service-cell reveal">
-          <span class="service-cell__ref">REF_02</span>
-          <span class="service-cell__number">02</span>
-          <span class="service-cell__kicker">Development Planning</span>
-          <span class="service-cell__accent-rule"></span>
-          <h2 class="service-cell__name">Reality and vision meet.</h2>
-          <p class="service-cell__body">Achieving the optimum balance between economic planning and physical design for financially viable programmes.</p>
+        <article class="service-card">
+          <span class="service-card__ref">REF_02</span>
+          <div class="service-card__inner">
+            <span class="service-card__kicker">Development Planning</span>
+            <h2 class="service-card__name">Where economic reality and physical vision meet.</h2>
+            <p>Achieving the optimum balance between economic planning and physical design for financially viable results.</p>
+          </div>
         </article>
-        <article class="service-cell reveal">
-          <span class="service-cell__ref">REF_03</span>
-          <span class="service-cell__number">03</span>
-          <span class="service-cell__kicker">Financial Feasibility</span>
-          <span class="service-cell__accent-rule"></span>
-          <h2 class="service-cell__name">Proprietary models.</h2>
-          <p class="service-cell__body">Proprietary financial models for preparing cash flow projections and sensitivity testing of multi-use developments.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="services-dark-section">
-      <div class="quote-interstitial__grid">
-        <div class="quote-block reveal">
-          <p class="quote-block__text">"In all cases, I have found Andy's vision for what it takes to create a successful project to be outstanding."</p>
-          <span class="quote-block__name">Larry Wyatt</span>
-          <span class="quote-block__org">Paramount Parks</span>
-        </div>
-        <div class="quote-block reveal">
-          <p class="quote-block__text">"His unique understanding of operations and technology enhancement has proven a big positive."</p>
-          <span class="quote-block__name">Brian Edwards</span>
-          <span class="quote-block__org">Edwards Technologies Inc</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="services-bento-section">
-      <div class="services-bento">
-        <article class="service-cell reveal">
-          <span class="service-cell__ref">REF_04</span>
-          <span class="service-cell__number">04</span>
-          <span class="service-cell__kicker">Funding Assistance</span>
-          <span class="service-cell__accent-rule"></span>
-          <h2 class="service-cell__name">Capital identified.</h2>
-          <p class="service-cell__body">We reach out to our own network of investors and financiers to evaluate interest and make introductions.</p>
-        </article>
-        <article class="service-cell reveal">
-          <span class="service-cell__ref">REF_05</span>
-          <span class="service-cell__number">05</span>
-          <span class="service-cell__kicker">Operational Planning</span>
-          <span class="service-cell__accent-rule"></span>
-          <h2 class="service-cell__name">Every system.</h2>
-          <p class="service-cell__body">Reviewing performance and examining areas for revitalisation, including pricing strategies and tenant negotiation.</p>
-        </article>
-        <article class="service-cell reveal">
-          <span class="service-cell__ref">REF_06</span>
-          <span class="service-cell__number">06</span>
-          <span class="service-cell__kicker">Turnkey Management</span>
-          <span class="service-cell__accent-rule"></span>
-          <h2 class="service-cell__name">We run it.</h2>
-          <p class="service-cell__body">Policies and procedures that become the operational foundation until the client is self-sufficient.</p>
+        <article class="service-card">
+          <span class="service-card__ref">REF_03</span>
+          <div class="service-card__inner">
+            <span class="service-card__kicker">Financial Feasibility</span>
+            <h2 class="service-card__name">Proprietary models. No guesswork.</h2>
+            <p>Financial models for preparing cash flow projections and sensitivity testing of multi-use programs.</p>
+          </div>
         </article>
       </div>
     </section>
 
-    <section class="cta-close">
-      <div class="container">
-        <span class="cta-rule reveal"></span>
-        <span class="cta-kicker reveal">EST. 1980 · GLOBAL</span>
-        <h2 class="cta-headline reveal">Ready to Build Something Lasting?</h2>
-        <a href="contact.html" class="cta-close__button reveal">Start a Conversation &rarr;</a>
+    <section class="cta-section">
+      <div class="footer-watermark">GLI</div>
+      <div class="container cta-content">
+        <span class="cta-rule"></span>
+        <h2 class="cta-h2">
+          Ready to Build<br />
+          Something Lasting?
+        </h2>
+        <a href="contact.html" class="cta-button">Start a Conversation &rarr;</a>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <div class="site-footer__inner">
-        <img src="assets/images/gli-logo.svg" alt="Grant Leisure" width="80" height="27" />
-        <p class="site-footer__copy">&copy; <span id="footer-year"></span> Grant Leisure. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
-
-  <script defer>
-    (() => {
-      'use strict';
-      const yearEl = document.getElementById('footer-year');
-      if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-      const darkSections = document.querySelectorAll('.services-dark-section');
-      const nav = document.querySelector('.site-nav');
-      if (nav && darkSections.length) {
-        let darkCount = 0;
-        const navObserver = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            darkCount += entry.isIntersecting ? 1 : -1;
-            nav.classList.toggle('nav-over-dark', Math.max(0, darkCount) > 0);
-          });
-        }, { rootMargin: '-80px 0px 0px 0px', threshold: 0 });
-        darkSections.forEach((s) => navObserver.observe(s));
-      }
-
-      const revealTargets = document.querySelectorAll('.reveal');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-      revealTargets.forEach((el) => observer.observe(el));
-    })();
+  <script>
+    // Footer year update
+    const year = new Date().getFullYear();
+    console.log("Dossier loaded for " + year);
   </script>
+
 </body>
 </html>
