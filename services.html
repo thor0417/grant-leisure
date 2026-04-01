@@ -3,17 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Grant Leisure services — a disciplined, lifecycle approach from market analysis through turnkey management.">
+  <meta name="description" content="Grant Leisure services — from market analysis through turnkey management. A disciplined, lifecycle approach to creating self-sustaining development ecosystems." />
   <title>Services — Grant Leisure</title>
 
+  <!-- Barlow Condensed — Layer 3: nav · kickers · refs · service titles · metadata -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;800&display=swap"
+    rel="stylesheet"
+  />
 
   <style>
+
     /* ================================================================
-       FONT SYSTEM — MASTER ALIGNMENT
+       FONT SYSTEM — THREE LAYERS, STRICTLY ENFORCED
+       Layer 1 — Playfair Display: H1 · quote body text ONLY
+       Layer 2 — System sans-serif: all body copy · service descriptions
+       Layer 3 — Barlow Condensed: nav · kickers · REF numbers ·
+                 service titles · metadata · captions · CTA
+       These layers never bleed. Applied only via explicit selectors.
     ================================================================ */
+
+    /* Layer 1 — Playfair Display (self-hosted) */
     @font-face {
       font-family: 'Playfair Display';
       font-style: normal;
@@ -23,26 +35,44 @@
     }
     @font-face {
       font-family: 'Playfair Display';
+      font-style: italic;
+      font-weight: 400;
+      font-display: swap;
+      src: url('assets/fonts/PlayfairDisplay-Italic.ttf') format('truetype');
+    }
+    @font-face {
+      font-family: 'Playfair Display';
       font-style: normal;
       font-weight: 500;
       font-display: swap;
       src: url('assets/fonts/PlayfairDisplay-Medium.ttf') format('truetype');
     }
 
+
+    /* ================================================================
+       TOKENS — identical to about.html
+    ================================================================ */
+
     :root {
       --color-green:         #5BAF7A;
-      --color-near-black:    #111212;
-      --color-white:         #FFFFFF;
-      --color-off-white:     #F9F9F9;
+      --color-green-dark:    #3D8F5F;
+      --color-navy:          #3B4F8A;
       --color-slate:         #7A7F9A;
+      --color-white:         #FFFFFF;
+      --color-near-black:    #111212;
+      --color-off-white:     #F9F9F9;
       --color-body-text:     #2E2F2F;
 
-      /* Type Scale synced with about.html */
-      --type-display:        clamp(3.5rem, 6vw, 5.5rem);
+      --type-display:        clamp(3rem, 7.5vw, 6.5rem);
       --type-heading:        clamp(2.2rem, 5vw, 4rem);
+      --type-subheading:     clamp(1.4rem, 2.5vw, 2rem);
+      --type-credentials:    clamp(1rem, 2.4vw, 1.75rem);
+      --type-label:          0.75rem;
       --type-body:           clamp(1rem, 1.2vw, 1.1rem);
-      --type-label:          10px;
+      --type-caption:        0.8rem;
 
+      --space-xs:            0.5rem;
+      --space-sm:            1rem;
       --space-md:            2rem;
       --space-lg:            4rem;
       --space-xl:            7rem;
@@ -54,19 +84,89 @@
       --ease-out-expo:       cubic-bezier(0.16, 1, 0.3, 1);
       --ease-in-out:         cubic-bezier(0.4, 0, 0.2, 1);
       --dur-fast:            350ms;
+      --dur-med:             650ms;
       --dur-slow:            1000ms;
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    /* ================================================================
+       RESET
+    ================================================================ */
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    /* Layer 2 — system sans-serif is the body default.
+       Barlow and Playfair only via explicit class selectors. */
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       font-size: var(--type-body);
-      color: var(--color-body-text);
-      background-color: var(--color-white);
+      font-weight: 400;
       line-height: 1.6;
+      color: var(--color-body-text);
+      background-color: var(--color-off-white);
       overflow-x: hidden;
     }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    ul, ol { list-style: none; }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+
+    /* ================================================================
+       SCROLL-REVEAL — identical to about.html
+    ================================================================ */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition:
+        opacity   var(--dur-slow) var(--ease-out-expo),
+        transform var(--dur-slow) var(--ease-out-expo);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-group > * {
+      opacity: 0;
+      transform: translateY(18px);
+      transition:
+        opacity   var(--dur-med) var(--ease-out-expo),
+        transform var(--dur-med) var(--ease-out-expo);
+    }
+
+    .reveal-group.is-visible > *:nth-child(1)  { transition-delay: 0ms;   opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(2)  { transition-delay: 80ms;  opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(3)  { transition-delay: 160ms; opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(4)  { transition-delay: 240ms; opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(5)  { transition-delay: 320ms; opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(6)  { transition-delay: 400ms; opacity: 1; transform: none; }
+
+
+    /* ================================================================
+       LAYOUT
+    ================================================================ */
 
     .container {
       width: 100%;
@@ -75,255 +175,973 @@
       padding-inline: var(--grid-gutter);
     }
 
+
     /* ================================================================
-       1. HEADER & TYPOGRAPHIC HIERARCHY
+       NAVIGATION — CHAMELEON GHOST OVERLAY
+       Always transparent + blur. Never solid.
+       Default: dark links (reads over white/light sections).
+       .nav-over-dark: white links (toggled by JS over dark sections).
     ================================================================ */
-    .services-hero { padding-top: 160px; padding-bottom: var(--space-xl); background: var(--color-white); }
-    
-    .services-label {
+
+    .site-nav {
+      position: fixed;
+      inset-block-start: 0;
+      inset-inline: 0;
+      z-index: 200;
+      padding-block: var(--space-sm);
+      background: transparent;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .site-nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .site-nav__logo {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    /* Default: multiply blends logo onto light backgrounds */
+    .site-nav__logo img {
+      height: 48px;
+      width: auto;
+      mix-blend-mode: multiply;
+    }
+
+    .site-nav__links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+    }
+
+    @media (max-width: 767px) {
+      .site-nav__links { display: none; }
+    }
+
+    /* Layer 3: Barlow Condensed — nav links */
+    .site-nav__links a {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: var(--type-label);
+      font-size: 0.9rem;
       font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(17, 18, 18, 0.7);
+      transition: color var(--dur-fast) var(--ease-in-out);
+    }
+
+    .site-nav__links a:hover { color: var(--color-near-black); }
+
+    .site-nav__links a[aria-current="page"] { color: var(--color-green); }
+
+    .site-nav__links .nav-contact {
+      color: var(--color-green);
+      border: 1px solid var(--color-green);
+      padding: 0.45em calc(1em - 0.12em) 0.4em 1em;
+      transition:
+        color            var(--dur-fast) var(--ease-in-out),
+        background-color var(--dur-fast) var(--ease-in-out);
+    }
+
+    .site-nav__links .nav-contact:hover {
+      color: var(--color-near-black);
+      background-color: var(--color-green);
+    }
+
+    .site-nav__links a:focus-visible {
+      outline: 2px solid var(--color-green);
+      outline-offset: 3px;
+    }
+
+    /* ── Nav inversion over dark sections ────────────────────────
+       .nav-over-dark toggled by IntersectionObserver in JS.
+       Active page and contact pill stay green — not inverted.
+    ────────────────────────────────────────────────────────────── */
+    .nav-over-dark .site-nav__links a {
+      color: rgba(255, 255, 255, 0.9);
+    }
+    .nav-over-dark .site-nav__links a[aria-current="page"] {
+      color: var(--color-green);
+    }
+    .nav-over-dark .site-nav__links .nav-contact {
+      color: var(--color-green);
+      border-color: var(--color-green);
+    }
+    .nav-over-dark .site-nav__logo img {
+      filter: brightness(0) invert(1);
+      mix-blend-mode: normal;
+    }
+
+
+    /* ================================================================
+       SHARED ATOMS — Layer 3 (Barlow Condensed)
+    ================================================================ */
+
+    /* Kicker label — used above section headings */
+    .svc-kicker {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-slate);
+      display: block;
+      margin-bottom: var(--space-sm);
+    }
+
+    .svc-kicker--green { color: var(--color-green); }
+
+    /* 3px green accent rule */
+    .accent-rule {
+      display: block;
+      width: 48px;
+      height: 3px;
+      background-color: var(--color-green);
+      margin-bottom: var(--space-lg);
+    }
+
+
+    /* ================================================================
+       SECTION 01 — ZERO-HERO HEADER
+       Pure white. padding-top: 140px. H1 in Playfair. Diptych below.
+    ================================================================ */
+
+    .services-hero {
+      background: #FFFFFF;
+      padding-top: 140px;
+      padding-bottom: var(--space-xl);
+    }
+
+    .services-hero__content {
+      padding-inline: calc(var(--grid-gutter) * 2);
+      max-width: 1440px;
+      margin-inline: auto;
+    }
+
+    /* Layer 3: Barlow Condensed — metadata label. Strictly Barlow, no system font. */
+    .services-file-ref {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.625rem;
+      font-weight: 600;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--color-slate);
-      margin-bottom: var(--space-md);
       display: block;
+      margin-bottom: var(--space-md);
     }
 
-    .services-h1 {
-      font-family: 'Playfair Display', serif;
+    /* Layer 1: Playfair Display — H1. One per page. */
+    .services-legacy-statement {
+      font-family: 'Playfair Display', Georgia, serif;
       font-weight: 900;
-      font-size: var(--type-display);
-      line-height: 1.05;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      line-height: 1.0;
+      letter-spacing: -0.01em;
       color: var(--color-near-black);
       max-width: 16ch;
       margin-bottom: var(--space-xl);
     }
-    .h1-accent { color: var(--color-green); }
 
-    /* Diptych Frames */
-    .services-diptych { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md); }
-    @media (max-width: 767px) { .services-diptych { grid-template-columns: 1fr; } }
+    /* Diptych: two images side by side */
+    .services-diptych {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+    }
 
-    .exhibit-frame { border: 0.5px solid var(--color-green); aspect-ratio: 16/9; overflow: hidden; }
-    .exhibit-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    @media (max-width: 767px) {
+      .services-diptych {
+        grid-template-columns: 1fr;
+      }
+    }
 
-    .exhibit-caption {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--color-slate);
-      margin-top: 0.75rem;
+    .services-exhibit__frame {
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border: 0.5px solid var(--color-green);
+    }
+
+    .services-exhibit__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
       display: block;
     }
 
+    /* Layer 3: Barlow Condensed — caption. Flush left to image edge. */
+    .services-exhibit__caption {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.625rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(17, 18, 18, 0.7);
+      margin-top: 0.75em;
+      display: block;
+      text-align: left;
+      padding-left: 0;
+    }
+
+
     /* ================================================================
-       2. BENTO GRID — MECHANICAL HANDSHAKE
+       SECTION 02 — APPROACH STATEMENT
+       Background #F9F9F9. System sans-serif for statement text.
     ================================================================ */
-    .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); background: var(--color-off-white); }
-    @media (max-width: 900px) { .bento-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 600px) { .bento-grid { grid-template-columns: 1fr; } }
+
+    .approach-section {
+      background: #F9F9F9;
+      padding-block: var(--space-xl);
+    }
+
+    .approach-section__inner {
+      padding-inline: calc(var(--grid-gutter) * 2);
+      max-width: 1440px;
+      margin-inline: auto;
+    }
+
+    /* Layer 2: system sans-serif — approach statement body */
+    .approach-statement {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+      font-weight: 600;
+      line-height: 1.5;
+      color: var(--color-near-black);
+      max-width: 800px;
+    }
+
+    .approach-accent { color: var(--color-green); }
+
+
+    /* ================================================================
+       SECTION 03 — SERVICES BENTO GRID
+       Background #F9F9F9. 3-col desktop · 2-col tablet · 1-col mobile.
+       0.5px hairline borders. REF index top-right per cell.
+       Mechanical hover: border → green, content shifts 4px right.
+    ================================================================ */
+
+    .services-bento-section {
+      background: #F9F9F9;
+      padding-block: var(--space-xl);
+    }
+
+    .services-bento-section__inner {
+      padding-inline: calc(var(--grid-gutter) * 2);
+      max-width: 1440px;
+      margin-inline: auto;
+    }
+
+    .services-bento {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 0.5px solid rgba(17, 18, 18, 0.1);
+    }
+
+    @media (max-width: 900px) {
+      .services-bento { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 540px) {
+      .services-bento { grid-template-columns: 1fr; }
+    }
 
     .service-cell {
-      background: var(--color-white);
-      border: 0.5px solid rgba(17,18,18,0.1);
+      border: 0.5px solid rgba(17, 18, 18, 0.1);
       padding: var(--space-lg) var(--space-md);
+      background: #FFFFFF;
       position: relative;
-      transition: border var(--dur-fast), background var(--dur-fast);
+      /* Mechanical hover: border color transitions to green */
+      transition:
+        background var(--dur-fast) var(--ease-in-out),
+        border-color var(--dur-fast) var(--ease-in-out);
     }
-    .service-cell:hover { border: 0.5px solid var(--color-green); background: #F9F9F9; z-index: 5; }
 
-    .service-cell__inner { transition: transform var(--dur-fast) var(--ease-out-expo); }
-    .service-cell:hover .service-cell__inner { transform: translateX(5px); }
+    .service-cell:hover {
+      background: #F9F9F9;
+      border-color: var(--color-green);
+    }
 
-    .ref-label {
+    /* All content inside each cell wrapped in .service-cell__inner
+       for the 4px mechanical shift on hover */
+    .service-cell__inner {
+      transition: transform var(--dur-fast) var(--ease-out-expo);
+    }
+
+    .service-cell:hover .service-cell__inner {
+      transform: translateX(4px);
+    }
+
+    /* REF index: top-right, Layer 3 */
+    .service-cell__ref {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 10px;
-      font-weight: 700;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
       color: var(--color-slate);
       position: absolute;
-      top: 20px;
-      right: 20px;
+      top: var(--space-md);
+      right: var(--space-md);
     }
 
-    .service-title {
+    /* Large ghost number — color-shift #EEEEEC */
+    .service-cell__number {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1.6rem;
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      font-weight: 800;
+      color: #EEEEEC;
+      line-height: 1;
+      margin-bottom: var(--space-sm);
+    }
+
+    /* Layer 3: Barlow Condensed — service kicker */
+    .service-cell__kicker {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem;
       font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-green);
+      display: block;
+      margin-bottom: var(--space-sm);
+    }
+
+    /* Green accent rule */
+    .service-cell__accent-rule {
+      display: block;
+      width: 32px;
+      height: 2px;
+      background: var(--color-green);
+      margin-bottom: var(--space-md);
+    }
+
+    /* Layer 3: Barlow Condensed — service name/title */
+    .service-cell__name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
+      font-weight: 700;
+      letter-spacing: -0.01em;
       text-transform: uppercase;
       color: var(--color-near-black);
       line-height: 1.2;
-      margin-bottom: 1rem;
+      margin-bottom: var(--space-sm);
     }
 
+    /* Layer 2: system sans-serif — service description body */
+    .service-cell__body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: clamp(0.85rem, 1vw, 0.95rem);
+      line-height: 1.7;
+      color: var(--color-body-text);
+    }
+
+
     /* ================================================================
-       3. DARK INTERSTITIAL RHYTHM
+       DARK INTERSTITIAL — Between bento 03 and 04
+       background: #111212. Two quotes side by side.
+       Layer 1 (Playfair Medium) for quote text.
+       Layer 3 (Barlow) for attribution.
+       .services-dark-section triggers nav inversion via JS.
     ================================================================ */
-    .authority-interstitial { background: #111212; padding-block: var(--space-xl); color: var(--color-white); }
-    .quote-text {
-      font-family: 'Playfair Display', serif;
-      font-weight: 500;
-      font-size: clamp(1.2rem, 2vw, 1.5rem);
-      line-height: 1.5;
+
+    .quote-interstitial {
+      background: #111212;
+      padding-block: var(--space-xl);
+    }
+
+    .quote-interstitial__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+      max-width: 1440px;
+      margin-inline: auto;
+      padding-inline: calc(var(--grid-gutter) * 2);
+    }
+
+    @media (max-width: 767px) {
+      .quote-interstitial__grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+      }
+    }
+
+    .quote-block {
       border-left: 2px solid var(--color-green);
       padding-left: var(--space-md);
-      max-width: 800px;
     }
-    .quote-cite {
+
+    /* Layer 1: Playfair Display Medium — quote text */
+    .quote-block__text {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 500;
+      font-size: clamp(1rem, 1.5vw, 1.3rem);
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: var(--space-md);
+    }
+
+    /* Layer 3: Barlow Condensed — attribution */
+    .quote-block__name {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 11px;
+      font-size: 0.75rem;
       font-weight: 700;
-      color: var(--color-green);
-      text-transform: uppercase;
-      margin-top: 1.5rem;
       letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-green);
       display: block;
     }
 
-    /* ================================================================
-       4. CTA FOOTER — MASTER SYNC
-    ================================================================ */
-    .cta-footer { background: var(--color-off-white); padding-block: var(--space-xl); border-top: none; }
-    
-    .cta-h2 {
-      font-family: 'Playfair Display', serif;
-      font-weight: 900;
-      font-size: var(--type-heading);
-      line-height: 1.05;
-      color: var(--color-near-black);
-      margin-bottom: var(--space-lg);
+    .quote-block__org {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-slate);
+      display: block;
+      margin-top: 0.25em;
     }
 
-    .cta-button {
+
+    /* ================================================================
+       SECTION 04 — CTA CLOSE
+       Background #F9F9F9. 3px green rule. Outline button.
+       Layer 3 (Barlow) throughout. No dark card.
+    ================================================================ */
+
+    .cta-close {
+      background: #F9F9F9;
+      padding-block: var(--space-xl);
+    }
+
+    /* Layer 3: Barlow Condensed — CTA heading */
+    .cta-close__headline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: var(--type-heading);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--color-near-black);
+      margin-bottom: var(--space-md);
+      max-width: 20ch;
+    }
+
+    /* Outline button — dark border on light surface */
+    .cta-close__button {
       display: inline-flex;
       align-items: center;
-      padding: 1em 2em;
+      gap: var(--space-sm);
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 12px;
+      font-size: var(--type-label);
       font-weight: 700;
-      text-transform: uppercase;
       letter-spacing: 0.14em;
+      text-transform: uppercase;
       color: var(--color-near-black);
-      border: 1px solid rgba(17,18,18,0.35);
-      text-decoration: none;
-      transition: all var(--dur-fast);
+      border: 1px solid rgba(17, 18, 18, 0.35);
+      background: transparent;
+      padding: 1em calc(2em - 0.14em) 1em 2em;
+      cursor: pointer;
+      transition:
+        background-color var(--dur-fast) var(--ease-in-out),
+        border-color     var(--dur-fast) var(--ease-in-out),
+        color            var(--dur-fast) var(--ease-in-out);
     }
-    .cta-button:hover { background: var(--color-near-black); color: var(--color-white); }
 
-    .reveal { opacity: 0; transform: translateY(24px); transition: all 0.8s var(--ease-out-expo); }
-    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .cta-close__button:hover {
+      background: var(--color-near-black);
+      color: var(--color-white);
+      border-color: var(--color-near-black);
+    }
+
+    .cta-close__button:focus-visible {
+      outline: 2px solid var(--color-near-black);
+      outline-offset: 3px;
+    }
+
+    .cta-close__button-arrow {
+      display: inline-block;
+      transition: transform var(--dur-fast) var(--ease-out-expo);
+    }
+
+    .cta-close__button:hover .cta-close__button-arrow {
+      transform: translateX(5px);
+    }
+
+
+    /* ================================================================
+       FOOTER — transparent on #F9F9F9. Identical to about.html.
+       Logo left with mix-blend-mode: multiply.
+       Copyright right in Barlow Condensed.
+    ================================================================ */
+
+    .site-footer {
+      background-color: transparent;
+      border-top: none;
+      padding-block: var(--space-md);
+    }
+
+    .site-footer__inner {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      align-items: flex-start;
+    }
+
+    @media (min-width: 768px) {
+      .site-footer__inner {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: var(--space-lg);
+      }
+    }
+
+    .site-footer__logo img {
+      height: 36px;
+      width: auto;
+      mix-blend-mode: multiply;
+    }
+
+    /* Layer 3: Barlow Condensed — footer copyright */
+    .site-footer__copy {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: var(--type-caption);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: rgba(17, 18, 18, 0.4);
+    }
+
   </style>
+
 </head>
+
 <body>
 
-  <main>
-    <section class="services-hero">
-      <div class="container">
-        <span class="services-label reveal">SERVICES</span>
-        <h1 class="services-h1 reveal">From Concept<br/>to Operation<span class="h1-accent">.</span></h1>
+  <!-- ============================================================
+       NAVIGATION — CHAMELEON GHOST OVERLAY
+       Always transparent + blur. Never solid.
+       Default: dark links over light sections.
+       .nav-over-dark toggled by JS over .services-dark-section.
+       Active: services.html.
+  ============================================================ -->
+  <nav class="site-nav" aria-label="Primary navigation">
+    <div class="container">
+      <div class="site-nav__inner">
 
-        <div class="services-diptych reveal">
-          <figure>
-            <div class="exhibit-frame">
-              <img src="assets/images/attractions/palace-of-westminster.png" alt="Westminster" class="exhibit-img" width="800" height="450" />
+        <a href="index.html" class="site-nav__logo" aria-label="Grant Leisure — home">
+          <img
+            src="assets/images/gli-logo.svg"
+            alt="Grant Leisure"
+            width="120"
+            height="40"
+          />
+        </a>
+
+        <ul class="site-nav__links" role="list">
+          <li><a href="about.html">About</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="services.html" aria-current="page">Services</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html" class="nav-contact">Contact</a></li>
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+
+
+  <main id="main-content">
+
+    <!-- ============================================================
+         SECTION 01 — ZERO-HERO HEADER
+         Pure white. 140px top padding. Left-anchored.
+         Layer 1 (Playfair) H1. Layer 3 (Barlow) file-ref.
+         Diptych: Westminster + Tower of London.
+    ============================================================ -->
+    <section class="services-hero" aria-labelledby="services-headline">
+      <div class="services-hero__content">
+
+        <span class="services-file-ref reveal">[ STRATEGIC ADVISORY &amp; TECHNICAL COMPLIANCE ]</span>
+
+        <h1 class="services-legacy-statement reveal" id="services-headline">
+          From Concept to Operation.
+        </h1>
+
+        <!-- DIPTYCH — Exhibit A and B -->
+        <div class="services-diptych">
+
+          <!-- FIG_02: Westminster — Strategic Vision / Advisory Capability -->
+          <figure class="services-exhibit reveal">
+            <div class="services-exhibit__frame">
+              <img
+                src="assets/images/attractions/palace-of-westminster.png"
+                alt="Palace of Westminster, London UK — Grant Leisure advisory engagement"
+                width="1600"
+                height="900"
+                loading="lazy"
+                class="services-exhibit__image"
+              />
             </div>
-            <figcaption class="exhibit-caption">FIG_02 // STRATEGIC PROGRAMMING & REVENUE OPTIMIZATION // UK PARLIAMENT</figcaption>
+            <figcaption class="services-exhibit__caption">
+              FIG_02 // HERITAGE ASSET MANAGEMENT // PALACE OF WESTMINSTER, LONDON, UK // ADVISORY
+            </figcaption>
           </figure>
-          <figure>
-            <div class="exhibit-frame">
-              <img src="assets/images/attractions/tower-of-london.png" alt="Tower of London" class="exhibit-img" width="800" height="450" />
+
+          <!-- FIG_03: Tower of London — Operational Rigor / Compliance Track Record -->
+          <figure class="services-exhibit reveal">
+            <div class="services-exhibit__frame">
+              <img
+                src="assets/images/attractions/tower-of-london.png"
+                alt="Tower of London, London UK — Grant Leisure advisory engagement"
+                width="1600"
+                height="900"
+                loading="lazy"
+                class="services-exhibit__image"
+              />
             </div>
-            <figcaption class="exhibit-caption">FIG_03 // OPERATIONAL PLANNING & RETAIL STRATEGY // ROYAL PALACE PROPERTIES</figcaption>
+            <figcaption class="services-exhibit__caption">
+              FIG_03 // HISTORIC SITE OPERATIONS // TOWER OF LONDON, LONDON, UK // ONGOING
+            </figcaption>
           </figure>
+
         </div>
       </div>
     </section>
 
-    <section class="bento-grid">
-      <article class="service-cell reveal">
-        <span class="ref-label">REF_01</span>
-        <div class="service-cell__inner">
-          <h2 class="service-title">Market Analysis</h2>
-          <p>Evaluating overall market trends and consumer survey techniques to ensure long-term viability.</p>
-        </div>
-      </article>
-      <article class="service-cell reveal">
-        <span class="ref-label">REF_02</span>
-        <div class="service-cell__inner">
-          <h2 class="service-title">Development Planning</h2>
-          <p>Balancing economic planning with physical design for financially viable results.</p>
-        </div>
-      </article>
+
+    <!-- ============================================================
+         SECTION 02 — APPROACH STATEMENT
+         Background #F9F9F9. Layer 2 (system sans-serif) for statement.
+         "self-sustaining" in green.
+    ============================================================ -->
+    <section class="approach-section" aria-labelledby="approach-statement">
+      <div class="approach-section__inner">
+
+        <span class="svc-kicker reveal">Our Approach</span>
+
+        <p class="approach-statement reveal" id="approach-statement">
+          Our goal is to create <span class="approach-accent">self-sustaining</span>
+          development ecosystems, that capitalize existing assets and encourage expansion.
+          Resulting in longer visitor length of stay and increased profits.
+        </p>
+
+      </div>
     </section>
 
-    <section class="authority-interstitial">
+
+    <!-- ============================================================
+         SECTION 03 — SERVICES BENTO GRID 01–03
+         Background #F9F9F9. White cells. 0.5px hairlines.
+         REF index top-right. Mechanical hover shift.
+         Layer 3 (Barlow) for titles. Layer 2 (system) for body.
+    ============================================================ -->
+    <section class="services-bento-section" aria-label="Our services — part one">
+      <div class="services-bento-section__inner">
+
+        <div class="services-bento reveal-group">
+
+          <!-- 01 — Market Analysis -->
+          <div class="service-cell">
+            <span class="service-cell__ref" aria-hidden="true">REF_01</span>
+            <div class="service-cell__inner">
+              <span class="service-cell__number" aria-hidden="true">01</span>
+              <span class="service-cell__kicker">Market Analysis</span>
+              <span class="service-cell__accent-rule" aria-hidden="true"></span>
+              <h2 class="service-cell__name">
+                Understanding the opportunity before a single decision is made.
+              </h2>
+              <p class="service-cell__body">
+                Grant Leisure assesses market support by evaluating overall market trends
+                and growth in targeted markets. Consumer surveys, focus groups, and other
+                market research techniques are used to test and refine demand estimates
+                and market profiles.
+              </p>
+            </div>
+          </div>
+
+          <!-- 02 — Development Planning -->
+          <div class="service-cell">
+            <span class="service-cell__ref" aria-hidden="true">REF_02</span>
+            <div class="service-cell__inner">
+              <span class="service-cell__number" aria-hidden="true">02</span>
+              <span class="service-cell__kicker">Development Planning</span>
+              <span class="service-cell__accent-rule" aria-hidden="true"></span>
+              <h2 class="service-cell__name">
+                Where economic reality and physical vision meet.
+              </h2>
+              <p class="service-cell__body">
+                Grant Leisure works directly with architects, planners, engineers, and
+                other professionals to achieve the optimum balance between economic
+                planning and physical design, resulting in real estate products and
+                creative development programmes that are responsive to the market and
+                financially viable.
+              </p>
+            </div>
+          </div>
+
+          <!-- 03 — Financial Feasibility -->
+          <div class="service-cell">
+            <span class="service-cell__ref" aria-hidden="true">REF_03</span>
+            <div class="service-cell__inner">
+              <span class="service-cell__number" aria-hidden="true">03</span>
+              <span class="service-cell__kicker">Financial Feasibility</span>
+              <span class="service-cell__accent-rule" aria-hidden="true"></span>
+              <h2 class="service-cell__name">
+                Proprietary models. No guesswork.
+              </h2>
+              <p class="service-cell__body">
+                Grant Leisure has created proprietary financial models for preparing cash
+                flow and income projections, determining financial rates of return, and
+                sensitivity testing of multi-use community development, income properties,
+                and portfolio disposition programmes.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         DARK INTERSTITIAL — Between 03 and 04
+         background: #111212. Two quotes side by side.
+         Layer 1 (Playfair Medium) for quote text.
+         .services-dark-section triggers nav inversion.
+    ============================================================ -->
+    <div class="quote-interstitial services-dark-section" role="region" aria-label="Client testimonials">
+      <div class="quote-interstitial__grid reveal-group">
+
+        <!-- Quote 1 — Larry Wyatt -->
+        <figure class="quote-block" aria-label="Testimonial from Larry Wyatt, Paramount Parks">
+          <blockquote>
+            <p class="quote-block__text">
+              &#8220;I have enjoyed working with Andy Grant for over 25 years, both as a
+              land-planning consultant to Grant Leisure on large scale mixed use destination
+              development projects and with Grant Leisure as an Operations and Management
+              Consultant on projects we have worked directly for the developer/client. In all
+              cases, I have found Andy&#8217;s vision for what it takes to create a successful
+              project to be outstanding.&#8221;
+            </p>
+          </blockquote>
+          <figcaption>
+            <span class="quote-block__name">Larry Wyatt</span>
+            <span class="quote-block__org">VP Planning and Development · Paramount Parks</span>
+          </figcaption>
+        </figure>
+
+        <!-- Quote 2 — Brian Edwards -->
+        <figure class="quote-block" aria-label="Testimonial from Brian Edwards, Edwards Technologies Inc">
+          <blockquote>
+            <p class="quote-block__text">
+              &#8220;Andy Grant and I have had the opportunity to work together for the past
+              25 years. We started with Legoland entry into US and continued with Universal
+              Studios, the Olympics experiences, and the Doha Zoo. Our collaboration was truly
+              an experience due to Andrew&#8217;s unique understanding of operations and how
+              technology could enhance the guest experience.&#8221;
+            </p>
+          </blockquote>
+          <figcaption>
+            <span class="quote-block__name">Brian Edwards</span>
+            <span class="quote-block__org">Founder &amp; Chairman · Edwards Technologies Inc</span>
+          </figcaption>
+        </figure>
+
+      </div>
+    </div>
+
+
+    <!-- ============================================================
+         SERVICES BENTO 04–06 — continuous with 01–03
+         Same bento grid. Same cell rules.
+    ============================================================ -->
+    <section class="services-bento-section" aria-label="Our services — part two">
+      <div class="services-bento-section__inner">
+
+        <div class="services-bento reveal-group">
+
+          <!-- 04 — Funding Assistance -->
+          <div class="service-cell">
+            <span class="service-cell__ref" aria-hidden="true">REF_04</span>
+            <div class="service-cell__inner">
+              <span class="service-cell__number" aria-hidden="true">04</span>
+              <span class="service-cell__kicker">Funding Assistance</span>
+              <span class="service-cell__accent-rule" aria-hidden="true"></span>
+              <h2 class="service-cell__name">
+                Capital identified, evaluated, secured.
+              </h2>
+              <p class="service-cell__body">
+                Grant Leisure identifies and evaluates acquisition and investment
+                opportunities for our clients and provides assistance in purchase, sale,
+                lease, and financing transaction negotiations. We additionally reach out
+                to our own network of investors and financiers to evaluate interest and
+                make introductions.
+              </p>
+            </div>
+          </div>
+
+          <!-- 05 — Operational Planning -->
+          <div class="service-cell">
+            <span class="service-cell__ref" aria-hidden="true">REF_05</span>
+            <div class="service-cell__inner">
+              <span class="service-cell__number" aria-hidden="true">05</span>
+              <span class="service-cell__kicker">Operational Planning</span>
+              <span class="service-cell__accent-rule" aria-hidden="true"></span>
+              <h2 class="service-cell__name">
+                Every system. Every team. Every process.
+              </h2>
+              <p class="service-cell__body">
+                Grant Leisure reviews performance, examines areas for expansion and
+                revitalisation, prepares pricing strategies and marketing programmes,
+                assists in operator selection and tenant negotiation, and evaluates
+                financial restructuring and disposition alternatives.
+              </p>
+            </div>
+          </div>
+
+          <!-- 06 — Turnkey Management -->
+          <div class="service-cell">
+            <span class="service-cell__ref" aria-hidden="true">REF_06</span>
+            <div class="service-cell__inner">
+              <span class="service-cell__number" aria-hidden="true">06</span>
+              <span class="service-cell__kicker">Turnkey Management</span>
+              <span class="service-cell__accent-rule" aria-hidden="true"></span>
+              <h2 class="service-cell__name">
+                We run it. Then we hand it over.
+              </h2>
+              <p class="service-cell__body">
+                Clients profit from Grant Leisure&#8217;s decades of operating experience
+                applied to the policies and procedures that become the operational
+                foundation for their venture. Team members are reserved for two years
+                following opening to monitor operations and make adjustments until the
+                client is left with a self-sufficient operation.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 04 — CTA CLOSE
+         Background #F9F9F9. 3px green rule. Layer 3 (Barlow).
+         Outline button inverts to near-black on hover.
+    ============================================================ -->
+    <section class="cta-close" aria-labelledby="cta-headline">
       <div class="container">
-        <blockquote class="quote-text reveal">
-          "I have found Andy’s vision for what it takes to create a successful project to be outstanding. His instinct and attention to detail is second to none."
-          <span class="quote-cite">PAT SCANLON // PARAMOUNT PARKS</span>
-        </blockquote>
+
+        <span class="accent-rule reveal" aria-hidden="true"></span>
+
+        <span class="svc-kicker svc-kicker--green reveal">Est. 1980 &#183; Global</span>
+
+        <h2 class="cta-close__headline reveal" id="cta-headline">
+          Ready to Build<br />Something Lasting?
+        </h2>
+
+        <a
+          href="contact.html"
+          class="cta-close__button reveal"
+          aria-label="Start a conversation with Grant Leisure"
+        >
+          Start a Conversation
+          <span class="cta-close__button-arrow" aria-hidden="true">&#8594;</span>
+        </a>
+
       </div>
     </section>
 
-    <section class="bento-grid">
-      <article class="service-cell reveal">
-        <span class="ref-label">REF_03</span>
-        <div class="service-cell__inner">
-          <h2 class="service-title">Financial Feasibility</h2>
-          <p>Proprietary financial models for preparing cash flow projections and sensitivity testing.</p>
-        </div>
-      </article>
-      <article class="service-cell reveal">
-        <span class="ref-label">REF_04</span>
-        <div class="service-cell__inner">
-          <h2 class="service-title">Funding Assistance</h2>
-          <p>Identifying acquisition and investment opportunities within our global network.</p>
-        </div>
-      </article>
-    </section>
-
-    <section class="authority-interstitial">
-      <div class="container">
-        <blockquote class="quote-text reveal">
-          "Andrew’s unique understanding of operations and technology proves to be a big positive on all projects."
-          <span class="quote-cite">BRIAN EDWARDS // EDWARDS TECHNOLOGIES</span>
-        </blockquote>
-      </div>
-    </section>
-
-    <section class="bento-grid">
-      <article class="service-cell reveal">
-        <span class="ref-label">REF_05</span>
-        <div class="service-cell__inner">
-          <h2 class="service-title">Operational Planning</h2>
-          <p>Examination of performance and revitalisation strategies to maximize efficiency.</p>
-        </div>
-      </article>
-      <article class="service-cell reveal">
-        <span class="ref-label">REF_06</span>
-        <div class="service-cell__inner">
-          <h2 class="service-title">Turnkey Management</h2>
-          <p>Operational foundations monitoring until self-sufficiency is achieved.</p>
-        </div>
-      </article>
-    </section>
-
-    <section class="cta-footer">
-      <div class="container">
-        <h2 class="cta-h2 reveal">Ready to Build<br/>Something Lasting?</h2>
-        <a href="contact.html" class="cta-button reveal">Start a Conversation &rarr;</a>
-      </div>
-    </section>
   </main>
 
-  <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('is-visible'); });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+
+  <!-- ============================================================
+       FOOTER — transparent on #F9F9F9. Identical to about.html.
+       Logo left with mix-blend-mode: multiply. Copyright right.
+  ============================================================ -->
+  <footer class="site-footer" aria-label="Site footer">
+    <div class="container">
+      <div class="site-footer__inner">
+
+        <div class="site-footer__logo">
+          <img
+            src="assets/images/gli-logo.svg"
+            alt="Grant Leisure"
+            width="80"
+            height="27"
+            loading="lazy"
+          />
+        </div>
+
+        <p class="site-footer__copy">
+          &copy; <span id="footer-year"></span> Grant Leisure. All rights reserved.
+        </p>
+
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- JS — deferred, non-blocking. No inline handlers. const/let only. -->
+  <script defer>
+    (() => {
+      'use strict';
+
+      // ── Footer year ──────────────────────────────────────────────
+      const yearEl = document.getElementById('footer-year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      // ── Nav inversion over dark sections ─────────────────────────
+      // .services-dark-section → nav toggles .nav-over-dark.
+      // darkCount tracks multiple overlapping dark sections.
+      const darkSections = document.querySelectorAll('.services-dark-section');
+      const nav = document.querySelector('.site-nav');
+
+      if (nav && darkSections.length) {
+        let darkCount = 0;
+
+        const navObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              darkCount += entry.isIntersecting ? 1 : -1;
+              darkCount = Math.max(0, darkCount);
+              nav.classList.toggle('nav-over-dark', darkCount > 0);
+            });
+          },
+          { rootMargin: '-80px 0px 0px 0px', threshold: 0 }
+        );
+
+        darkSections.forEach((s) => navObserver.observe(s));
+      }
+
+      // ── Scroll-reveal via IntersectionObserver ───────────────────
+      // One-shot. Graceful fallback if IO unavailable.
+      const revealTargets = document.querySelectorAll('.reveal, .reveal-group');
+
+      if ('IntersectionObserver' in window && revealTargets.length) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            });
+          },
+          { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+        );
+        revealTargets.forEach((el) => observer.observe(el));
+      } else {
+        revealTargets.forEach((el) => el.classList.add('is-visible'));
+      }
+
+    })();
   </script>
+
 </body>
 </html>
