@@ -306,19 +306,25 @@
 
 
     /* ================================================================
-       SECTION 01 — ZERO-HERO HEADER
-       Pure white. padding-top: 140px. H1 in Playfair. Diptych below.
+       SECTION 01 — CLAY HEADER
+       Pure white. min-height: 100svh. Content bottom-left.
+       Matches about.html and team.html Clay header exactly.
     ================================================================ */
 
     .services-hero {
       background: #FFFFFF;
-      padding-top: 140px;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
       padding-bottom: var(--space-xl);
+      padding-top: 140px;
+      padding-inline: calc(var(--grid-gutter) * 2);
     }
 
     .services-hero__content {
-      padding-inline: calc(var(--grid-gutter) * 2);
       max-width: 1440px;
+      width: 100%;
       margin-inline: auto;
     }
 
@@ -327,7 +333,7 @@
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 0.625rem;
       font-weight: 600;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--color-slate);
       display: block;
@@ -767,7 +773,7 @@
     <section class="services-hero" aria-labelledby="services-headline">
       <div class="services-hero__content">
 
-        <span class="services-file-ref reveal">[ SERVICES ]</span>
+        <span class="services-file-ref">[ FILE_REF: SERVICES_GL_1980 ]</span>
 
         <h1 class="services-legacy-statement reveal" id="services-headline">
           From Concept to Operation.
