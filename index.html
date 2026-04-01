@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Grant Leisure — Global Registry of Strategic Advisory and Technical Compliance.">
+  <meta name="description" content="Grant Leisure — Primary Global Registry. Strategic advisory and technical compliance for world-class attractions." />
   <title>Grant Leisure — Primary Global Registry</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -12,7 +12,7 @@
 
   <style>
     /* ================================================================
-       MASTER TOKENS & TYPOGRAPHY
+       FONT SYSTEM — MASTER ALIGNMENT
     ================================================================ */
     @font-face {
       font-family: 'Playfair Display';
@@ -23,21 +23,20 @@
 
     :root {
       --color-green:         #5BAF7A;
-      --color-near-black:    #0A0A0A;
+      --color-near-black:    #111212;
       --color-white:         #FFFFFF;
       --color-off-white:     #F9F9F9;
       --color-slate:         #7A7F9A;
-      
+      --color-body-text:     #2E2F2F;
+
       --type-display:        clamp(3.5rem, 8vw, 6.5rem);
       --type-heading:        clamp(2.2rem, 5vw, 4rem);
       --type-body:           clamp(1rem, 1.2vw, 1.1rem);
-
-      --space-md:            2rem;
-      --space-lg:            4rem;
-      --space-xl:            7rem;
+      
+      --space-v-rhythm:      15vh; /* Non-negotiable Vertical Rhythm */
       --grid-gutter:         clamp(1.5rem, 5vw, 5rem);
-      --ease-out-expo:       cubic-bezier(0.16, 1, 0.3, 1);
       --dur-fast:            350ms;
+      --ease-out-expo:       cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -45,12 +44,13 @@
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       font-size: var(--type-body);
-      color: #2E2F2F;
+      color: var(--color-body-text);
       background-color: var(--color-white);
       line-height: 1.6;
       overflow-x: hidden;
     }
 
+    /* Furrion Spine Alignment */
     .spine-align {
       padding-left: calc(var(--grid-gutter) * 2);
       max-width: 1440px;
@@ -58,13 +58,13 @@
     }
 
     /* ================================================================
-       NAVIGATION
+       NAVIGATION — 1:1 COPY
     ================================================================ */
     .site-nav {
       position: fixed;
       inset-block-start: 0;
       inset-inline: 0;
-      z-index: 200;
+      z-index: 9999; /* Z-Index Lock */
       padding-block: 1rem;
       background: transparent;
       backdrop-filter: blur(10px);
@@ -72,10 +72,16 @@
       transition: all var(--dur-fast);
     }
 
-    .site-nav__inner { display: flex; align-items: center; justify-content: space-between; padding-inline: var(--grid-gutter); }
-    .site-nav__logo img { height: 48px; width: auto; mix-blend-mode: multiply; transition: filter 0.3s ease; }
+    .site-nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-inline: var(--grid-gutter);
+    }
 
-    .site-nav__links { display: flex; align-items: center; gap: var(--space-lg); list-style: none; }
+    .site-nav__logo img { height: 48px; width: auto; mix-blend-mode: multiply; }
+
+    .site-nav__links { display: flex; align-items: center; gap: 4rem; list-style: none; }
     @media (max-width: 767px) { .site-nav__links { display: none; } }
 
     .site-nav__links a {
@@ -86,65 +92,54 @@
       text-transform: uppercase;
       color: rgba(17, 18, 18, 0.7);
       text-decoration: none;
-      transition: color var(--dur-fast);
     }
 
-    /* Chameleon Inversion */
     .nav-over-dark .site-nav__links a { color: rgba(255, 255, 255, 0.9); }
     .nav-over-dark .site-nav__logo img { filter: brightness(0) invert(1); mix-blend-mode: normal; }
 
     /* ================================================================
-       HERO REGISTRY (FIG_00)
+       SECTIONS & GRID DISCIPLINE
     ================================================================ */
-    .hero-registry { min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: var(--space-xl); padding-top: 140px; }
-    .hero-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--color-slate); margin-bottom: var(--space-md); display: block; }
-    .hero-statement { font-family: 'Playfair Display', serif; font-weight: 900; font-size: var(--type-display); line-height: 0.95; color: var(--color-near-black); margin-bottom: var(--space-lg); }
-    .h1-accent { color: var(--color-green); }
+    section { padding-block: var(--space-v-rhythm); }
 
-    .exhibit-frame { border: 0.5px solid var(--color-green); overflow: hidden; background: #F2F2F2; }
-    .exhibit-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .exhibit-caption { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 600; text-transform: uppercase; color: var(--color-slate); margin-top: 1rem; display: block; }
+    .hero-registry { padding-top: 180px; min-height: 85svh; display: flex; flex-direction: column; justify-content: flex-end; }
+    .hero-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--color-slate); margin-bottom: 2rem; display: block; }
+    .hero-statement { font-family: 'Playfair Display', serif; font-weight: 900; font-size: var(--type-display); line-height: 0.95; color: var(--color-near-black); margin-bottom: 4rem; }
 
-    /* ================================================================
-       THE HOOK & NARRATIVE
-    ================================================================ */
-    .hook-section { background: var(--color-near-black); padding-block: var(--space-xl); color: var(--color-white); }
-    .hook-kicker { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 800; color: var(--color-green); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1rem; display: block; }
-    .hook-h2 { font-family: 'Barlow Condensed', sans-serif; font-size: var(--type-heading); font-weight: 800; text-transform: uppercase; line-height: 0.9; max-width: 20ch; }
-
-    .solution-narrative { background: var(--color-white); padding-block: var(--space-xl); }
-    .narrative-text { font-family: -apple-system, sans-serif; font-size: clamp(1.1rem, 1.8vw, 1.4rem); font-weight: 600; line-height: 1.5; color: var(--color-near-black); max-width: 800px; }
-
-    /* ================================================================
-       PARTNER REGISTRY (LOGO WALL)
-    ================================================================ */
-    .logo-grid { display: grid; grid-template-columns: repeat(5, 1fr); border: 0.5px solid rgba(17,18,18,0.1); }
-    @media (max-width: 767px) { .logo-grid { grid-template-columns: repeat(2, 1fr); } }
+    .exhibit-frame { border: 0.5px solid var(--color-green); aspect-ratio: 21 / 9; overflow: hidden; background: #F2F2F2; }
+    .exhibit-frame img { width: 100%; height: 100%; object-fit: cover; }
     
-    .logo-cell { aspect-ratio: 3 / 2; display: flex; align-items: center; justify-content: center; background: var(--color-white); border: 0.5px solid rgba(17,18,18,0.1); padding: 2rem; transition: all var(--dur-fast) ease; }
-    .logo-cell img { max-width: 100%; height: auto; filter: grayscale(1) opacity(0.6); transition: all var(--dur-fast); }
-    .logo-cell:hover { border-color: var(--color-green); z-index: 2; }
+    /* Partner Grid Discipline */
+    .logo-grid { display: grid; grid-template-columns: repeat(5, 1fr); border: 0.5px solid rgba(0,0,0,0.1); }
+    .logo-cell { 
+      aspect-ratio: 3 / 2; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      border: 0.25px solid rgba(0,0,0,0.1); 
+      background: #FFF; 
+      padding: 1.5rem;
+      transition: border-color var(--dur-fast);
+    }
+    .logo-cell img { max-width: 60%; max-height: 80px; width: auto; height: auto; object-fit: contain; filter: grayscale(1) opacity(0.6); transition: all var(--dur-fast); }
+    .logo-cell:hover { border-color: var(--color-green); z-index: 10; }
     .logo-cell:hover img { filter: grayscale(0) opacity(1); }
 
-    /* ================================================================
-       SECTOR REGISTRY (BENTO)
-    ================================================================ */
-    .sector-grid { display: grid; grid-template-columns: repeat(5, 1fr); border-top: 0.5px solid rgba(17,18,18,0.1); }
-    @media (max-width: 1024px) { .sector-grid { grid-template-columns: repeat(3, 1fr); } }
-    @media (max-width: 600px) { .sector-grid { grid-template-columns: 1fr; } }
+    /* Sector Stat Bento */
+    .stat-section { background: var(--color-near-black); padding-block: var(--space-v-rhythm); }
+    .stat-grid { display: grid; grid-template-columns: repeat(5, 1fr); border: 0.5px solid rgba(255,255,255,0.1); }
+    .stat-cell { padding: 3rem 2rem; border: 0.25px solid rgba(255,255,255,0.1); transition: background var(--dur-fast); }
+    .stat-cell:hover { background: rgba(255,255,255,0.03); }
+    .stat-number { font-family: 'Barlow Condensed', sans-serif; font-size: 3rem; font-weight: 800; color: var(--color-green); display: block; line-height: 1; margin-bottom: 0.5rem; }
+    .stat-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--color-slate); letter-spacing: 0.1em; }
 
-    .sector-cell { padding: var(--space-lg) var(--space-md); border: 0.5px solid rgba(17,18,18,0.1); transition: all var(--dur-fast) var(--ease-out-expo); background: #FFF; }
-    .sector-cell:hover { border-color: var(--color-green); background: var(--color-off-white); transform: translateX(5px); }
-    .sector-stat { font-family: 'Barlow Condensed', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--color-green); display: block; margin-bottom: 0.5rem; }
-    .sector-label { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-near-black); }
-
-    /* REVEAL LOGIC */
-    .reveal { opacity: 0; transform: translateY(20px); transition: all 0.8s var(--ease-out-expo); }
+    /* Reveal */
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s var(--ease-out-expo); }
     .reveal.is-visible { opacity: 1; transform: translateY(0); }
   </style>
 </head>
-<body>
 
+<body>
   <nav class="site-nav">
     <div class="site-nav__inner">
       <a href="index.html" class="site-nav__logo"><img src="assets/images/gli-logo.svg" alt="Grant Leisure" width="120" height="40"></a>
@@ -153,100 +148,86 @@
         <li><a href="team.html">Team</a></li>
         <li><a href="services.html">Services</a></li>
         <li><a href="projects.html">Projects</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="contact.html" style="color:var(--color-green); border:1px solid var(--color-green); padding:0.5em 1.2em;">Contact</a></li>
       </ul>
     </div>
   </nav>
 
   <main>
-    <header class="hero-registry">
+    <header class="hero-registry section">
       <div class="spine-align">
         <span class="hero-label reveal">[ GLOBAL_REGISTRY_ALPHA ]</span>
-        <h1 class="hero-statement reveal">Profit from our experience<span class="h1-accent">.</span></h1>
+        <h1 class="hero-statement reveal">Profit from our experience<span style="color:var(--color-green);">.</span></h1>
         <figure class="reveal">
-          <div class="exhibit-frame" style="aspect-ratio: 21 / 9;">
+          <div class="exhibit-frame">
             <img src="assets/images/attractions/london-eye.png" alt="London Eye Strategic Audit" width="1600" height="685">
           </div>
-          <figcaption class="exhibit-caption">FIG_00 // STRATEGIC SITE AUDIT // LONDON EYE, UK // TECHNICAL OVERLAY</figcaption>
+          <figcaption class="exhibit-caption" style="font-family:'Barlow Condensed'; font-size:10px; font-weight:600; text-transform:uppercase; color:var(--color-slate); margin-top:1rem; letter-spacing:0.1em;">
+            FIG_00 // STRATEGIC SITE AUDIT // LONDON EYE, UK // TECHNICAL OVERLAY
+          </figcaption>
         </figure>
       </div>
     </header>
 
-    <section class="hook-section dark-trigger">
+    <section id="dark-trigger" style="background:var(--color-near-black); color:#FFF;">
       <div class="spine-align">
-        <span class="hook-kicker reveal">Critical Intelligence</span>
-        <h2 class="hook-h2 reveal">90% of new visitor attractions fail within the first five years.</h2>
+        <span style="font-family:'Barlow Condensed'; font-size:11px; font-weight:800; color:var(--color-green); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:1rem; display:block;" class="reveal">Critical Intelligence</span>
+        <h2 style="font-family:'Barlow Condensed'; font-size:var(--type-heading); font-weight:800; text-transform:uppercase; line-height:0.9; max-width:20ch;" class="reveal">90% of new visitor attractions fail within the first five years.</h2>
       </div>
     </section>
 
-    <section class="solution-narrative">
+    <section class="section">
       <div class="spine-align">
-        <p class="narrative-text reveal">
-          Before committing significant capital to an increasingly competitive market—you need certainty. Grant Leisure provides the strategic roadmap, operational rigor, and technical compliance required to ensure long-term viability.
-        </p>
-      </div>
-    </section>
-
-    <section class="partner-registry" style="background: var(--color-off-white); padding-block: var(--space-xl);">
-      <div class="spine-align">
-        <span class="hero-label reveal">[ STRATEGIC_ALLIANCES // TIER_1_DESTINATIONS ]</span>
+        <span class="hero-label reveal" style="margin-bottom:2rem;">[ STRATEGIC_ALLIANCES // TIER_1_DESTINATIONS ]</span>
         <div class="logo-grid reveal">
           <div class="logo-cell"><img src="assets/images/logos/disney.png" alt="Disney"></div>
-          <div class="logo-cell"><img src="assets/images/logos/nbc-universal.png" alt="NBC Universal"></div>
+          <div class="logo-cell"><img src="assets/images/logos/nbc-universal.png" alt="NBC"></div>
           <div class="logo-cell"><img src="assets/images/logos/paramount.png" alt="Paramount"></div>
-          <div class="logo-cell"><img src="assets/images/logos/lego-land.png" alt="Lego Land"></div>
-          <div class="logo-cell"><img src="assets/images/logos/ferrari-world.png" alt="Ferrari World"></div>
+          <div class="logo-cell"><img src="assets/images/logos/lego-land.png" alt="Lego"></div>
+          <div class="logo-cell"><img src="assets/images/logos/ferrari-world.png" alt="Ferrari"></div>
           <div class="logo-cell"><img src="assets/images/logos/zsl.png" alt="ZSL"></div>
           <div class="logo-cell"><img src="assets/images/logos/english-heritage.png" alt="English Heritage"></div>
           <div class="logo-cell"><img src="assets/images/logos/sd-zoo.png" alt="San Diego Zoo"></div>
           <div class="logo-cell"><img src="assets/images/logos/v&a.png" alt="V&A"></div>
           <div class="logo-cell"><img src="assets/images/logos/harrahs.png" alt="Harrah's"></div>
-          <div class="logo-cell"><img src="assets/images/logos/anheuser-busch.png" alt="Anheuser-Busch"></div>
+          <div class="logo-cell"><img src="assets/images/logos/anheuser-busch.png" alt="Busch"></div>
           <div class="logo-cell"><img src="assets/images/logos/ocean-park.png" alt="Ocean Park"></div>
           <div class="logo-cell"><img src="assets/images/logos/blue-water.png" alt="Blue Water"></div>
-          <div class="logo-cell"><img src="assets/images/logos/pr.png" alt="Parques Reunidos"></div>
+          <div class="logo-cell"><img src="assets/images/logos/pr.png" alt="PR"></div>
           <div class="logo-cell"><img src="assets/images/logos/universal.png" alt="Universal"></div>
         </div>
       </div>
     </section>
 
-    <section class="sector-registry">
-      <div class="sector-grid">
-        <article class="sector-cell reveal">
-          <span class="sector-stat">65</span>
-          <h3 class="sector-label">Theme Parks</h3>
-        </article>
-        <article class="sector-cell reveal">
-          <span class="sector-stat">60+</span>
-          <h3 class="sector-label">Stately Homes</h3>
-        </article>
-        <article class="sector-cell reveal">
-          <span class="sector-stat">27</span>
-          <h3 class="sector-label">Zoological Institutions</h3>
-        </article>
-        <article class="sector-cell reveal">
-          <span class="sector-stat">35</span>
-          <h3 class="sector-label">Museums</h3>
-        </article>
-        <article class="sector-cell reveal">
-          <span class="sector-stat">5</span>
-          <h3 class="sector-label">World Heritage Sites</h3>
-        </article>
+    <section class="stat-section">
+      <div class="spine-align">
+        <div class="stat-grid reveal">
+          <div class="stat-cell"><span class="stat-number">65</span><span class="stat-label">Theme Parks</span></div>
+          <div class="stat-cell"><span class="stat-number">60+</span><span class="stat-label">Stately Homes</span></div>
+          <div class="stat-cell"><span class="stat-number">27</span><span class="stat-label">Zoo Inst.</span></div>
+          <div class="stat-cell"><span class="stat-number">35</span><span class="stat-label">Museums</span></div>
+          <div class="stat-cell"><span class="stat-number">5</span><span class="stat-label">UNESCO Sites</span></div>
+        </div>
       </div>
     </section>
   </main>
 
+  <footer style="background:var(--color-off-white); padding-block:4rem;">
+    <div class="container" style="display:flex; justify-content:space-between; align-items:center;">
+      <img src="assets/images/gli-logo.svg" alt="Grant Leisure" width="80" height="27" style="mix-blend-mode:multiply;">
+      <p style="font-family:'Barlow Condensed'; font-size:12px; color:rgba(17,18,18,0.4);">&copy; 2026 Grant Leisure. All rights reserved.</p>
+    </div>
+  </footer>
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Reveal
-      const revealObserver = new IntersectionObserver((entries) => {
+      const observer = new IntersectionObserver((entries) => {
         entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('is-visible'); });
       }, { threshold: 0.1 });
-      document.querySelectorAll('.reveal').forEach(r => revealObserver.observe(r));
+      document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
 
-      // Nav Chameleon
       const nav = document.querySelector('.site-nav');
-      const darkTrigger = document.querySelector('.dark-trigger');
+      const darkTrigger = document.getElementById('dark-trigger');
       const navObserver = new IntersectionObserver((entries) => {
         entries.forEach(e => { nav.classList.toggle('nav-over-dark', e.isIntersecting); });
       }, { threshold: 0, rootMargin: "-80px 0px 0px 0px" });
