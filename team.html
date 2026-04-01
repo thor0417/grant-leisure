@@ -6,6 +6,7 @@
   <meta name="description" content="Meet the Grant Leisure team — 50 years of expertise across themed entertainment, hospitality, and leisure attractions worldwide." />
   <title>Team — Grant Leisure</title>
 
+  <!-- Barlow Condensed — Layer 3: nav · kickers · names · titles · triggers -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -13,115 +14,73 @@
     rel="stylesheet"
   />
 
-  <!--
-    DEPLOYMENT: Remove the <style> block and uncomment these three links:
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/components.css">
-  -->
-
   <style>
-    /* PREVIEW ONLY — replace with external stylesheet links before deployment:
-       <link rel="stylesheet" href="css/base.css">
-       <link rel="stylesheet" href="css/layout.css">
-       <link rel="stylesheet" href="css/components.css">
-    */
-
 
     /* ================================================================
-       BASE.CSS — TOKENS · FONT-FACE · RESET · UTILITY ATOMS · REVEAL
+       FONT SYSTEM — THREE LAYERS, STRICTLY ENFORCED
+       Layer 1 — Playfair Display: H1 only
+       Layer 2 — System sans-serif: all bio body copy
+       Layer 3 — Barlow Condensed: nav · kickers · names · titles · triggers
     ================================================================ */
 
     @font-face {
-      font-family: 'Barlow Condensed';
+      font-family: 'Playfair Display';
       font-style: normal;
-      font-weight: 300;
+      font-weight: 900;
       font-display: swap;
-      src: url('assets/fonts/barlow-condensed-300.woff2') format('woff2');
+      src: url('assets/fonts/PlayfairDisplay-Black.ttf') format('truetype');
     }
     @font-face {
-      font-family: 'Barlow Condensed';
-      font-style: normal;
+      font-family: 'Playfair Display';
+      font-style: italic;
       font-weight: 400;
       font-display: swap;
-      src: url('assets/fonts/barlow-condensed-400.woff2') format('woff2');
+      src: url('assets/fonts/PlayfairDisplay-Italic.ttf') format('truetype');
     }
     @font-face {
-      font-family: 'Barlow Condensed';
+      font-family: 'Playfair Display';
       font-style: normal;
-      font-weight: 600;
+      font-weight: 500;
       font-display: swap;
-      src: url('assets/fonts/barlow-condensed-600.woff2') format('woff2');
+      src: url('assets/fonts/PlayfairDisplay-Medium.ttf') format('truetype');
     }
-    @font-face {
-      font-family: 'Barlow Condensed';
-      font-style: normal;
-      font-weight: 700;
-      font-display: swap;
-      src: url('assets/fonts/barlow-condensed-700.woff2') format('woff2');
-    }
-    @font-face {
-      font-family: 'Barlow Condensed';
-      font-style: normal;
-      font-weight: 800;
-      font-display: swap;
-      src: url('assets/fonts/barlow-condensed-800.woff2') format('woff2');
-    }
+
+
+    /* ================================================================
+       TOKENS
+    ================================================================ */
 
     :root {
-      /* ── Palette ──────────────────────────────────────────────── */
-      --color-green:         #5BAF7A;
-      --color-green-dark:    #3D8F5F;
-      --color-navy:          #3B4F8A;
-      --color-slate:         #7A7F9A;
-      --color-white:         #FFFFFF;
-      --color-near-black:    #111212;
-      --color-off-white:     #F7F7F5;
-      --color-body-text:     #2E2F2F;
-      --color-tourist-card:  #111212;
+      --color-green:      #5BAF7A;
+      --color-green-dark: #3D8F5F;
+      --color-navy:       #3B4F8A;
+      --color-slate:      #7A7F9A;
+      --color-white:      #FFFFFF;
+      --color-near-black: #111212;
+      --color-off-white:  #F9F9F9;
+      --color-body-text:  #2E2F2F;
 
-      /* ── Type scale ───────────────────────────────────────────── */
-      --type-display:        clamp(3rem, 7.5vw, 6.5rem);
-      --type-heading:        clamp(2.2rem, 5vw, 4rem);
-      --type-subheading:     clamp(1.4rem, 2.5vw, 2rem);
-      --type-credentials:    clamp(1rem, 2.4vw, 1.75rem);
-      --type-label:          0.75rem;
-      --type-org:            clamp(0.85rem, 1.5vw, 1.05rem);
-      --type-body:           clamp(1rem, 1.2vw, 1.1rem);
-      --type-caption:        0.8rem;
+      --space-xs:  0.5rem;
+      --space-sm:  1rem;
+      --space-md:  2rem;
+      --space-lg:  4rem;
+      --space-xl:  7rem;
+      --space-2xl: 12rem;
 
-      /* ── Spacing ──────────────────────────────────────────────── */
-      --space-xs:            0.5rem;
-      --space-sm:            1rem;
-      --space-md:            2rem;
-      --space-lg:            4rem;
-      --space-xl:            7rem;
-      --space-2xl:           12rem;
+      --grid-max:    1440px;
+      --grid-gutter: clamp(1.5rem, 5vw, 5rem);
 
-      /* ── Layout ───────────────────────────────────────────────── */
-      --grid-max:            1440px;
-      --grid-gutter:         clamp(1.5rem, 5vw, 5rem);
-      --grid-num-col:        140px;
-
-      /* ── Koyo number system ───────────────────────────────────── */
-      --num-size:            clamp(14rem, 28vw, 26rem);
-      --num-bleed:           -0.22em;
-
-      /* ── Team roster Koyo numbers — smaller, portrait shares col ─ */
-      --team-num-size:       clamp(8rem, 14vw, 14rem);
-
-      /* ── Tourist card ─────────────────────────────────────────── */
-      --tourist-margin:      clamp(1.5rem, 5vw, 5rem);
-      --tourist-padding:     clamp(3rem, 6vw, 6rem);
-      --tourist-ghost-bleed: -0.18em;
-
-      /* ── Motion ───────────────────────────────────────────────── */
-      --ease-out-expo:       cubic-bezier(0.16, 1, 0.3, 1);
-      --ease-in-out:         cubic-bezier(0.4, 0, 0.2, 1);
-      --dur-fast:            350ms;
-      --dur-med:             650ms;
-      --dur-slow:            1000ms;
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out:   cubic-bezier(0.4, 0, 0.2, 1);
+      --dur-fast:  350ms;
+      --dur-med:   650ms;
+      --dur-slow:  1000ms;
     }
+
+
+    /* ================================================================
+       RESET
+    ================================================================ */
 
     *, *::before, *::after {
       box-sizing: border-box;
@@ -135,13 +94,13 @@
       text-size-adjust: 100%;
     }
 
+    /* Layer 2: system sans-serif is the body default */
     body {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: var(--type-body);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: clamp(1rem, 1.2vw, 1.1rem);
       font-weight: 400;
       line-height: 1.6;
       color: var(--color-body-text);
-      /* Team page: off-white page surface — hero sits as a dark card on top */
       background-color: var(--color-off-white);
       overflow-x: hidden;
     }
@@ -164,36 +123,26 @@
       border: none;
       cursor: pointer;
       font: inherit;
+      padding: 0;
     }
 
-    /* ── Typography atoms ─────────────────────────────────────── */
-
-    .kicker {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--color-slate);
-      margin-bottom: var(--space-sm);
-    }
-
-    .kicker--green { color: var(--color-green); }
-    .kicker--white {
-      color: rgba(255, 255, 255, 0.95);
-      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
-    }
-
-    .kicker-rule {
-      display: block;
-      width: 100%;
+    /* Visually hidden — for screen-reader-only headings */
+    .sr-only {
+      position: absolute;
+      width: 1px;
       height: 1px;
-      background-color: currentColor;
-      opacity: 0.15;
-      margin-bottom: var(--space-md);
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
     }
 
-    /* ── Scroll-reveal system ─────────────────────────────────── */
+
+    /* ================================================================
+       SCROLL-REVEAL
+    ================================================================ */
 
     .reveal {
       opacity: 0;
@@ -216,20 +165,19 @@
         transform var(--dur-med) var(--ease-out-expo);
     }
 
-    .reveal-group.is-visible > *:nth-child(1)  { transition-delay: 0ms;   opacity: 1; transform: none; }
-    .reveal-group.is-visible > *:nth-child(2)  { transition-delay: 80ms;  opacity: 1; transform: none; }
-    .reveal-group.is-visible > *:nth-child(3)  { transition-delay: 160ms; opacity: 1; transform: none; }
-    .reveal-group.is-visible > *:nth-child(4)  { transition-delay: 240ms; opacity: 1; transform: none; }
-    .reveal-group.is-visible > *:nth-child(5)  { transition-delay: 320ms; opacity: 1; transform: none; }
-    .reveal-group.is-visible > *:nth-child(6)  { transition-delay: 400ms; opacity: 1; transform: none; }
-    .reveal-group.is-visible > *:nth-child(7)  { transition-delay: 480ms; opacity: 1; transform: none; }
-    .reveal-group.is-visible > *:nth-child(8)  { transition-delay: 560ms; opacity: 1; transform: none; }
-    .reveal-group.is-visible > *:nth-child(9)  { transition-delay: 640ms; opacity: 1; transform: none; }
-    .reveal-group.is-visible > *:nth-child(10) { transition-delay: 720ms; opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(1) { transition-delay: 0ms;   opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(2) { transition-delay: 80ms;  opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(3) { transition-delay: 160ms; opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(4) { transition-delay: 240ms; opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(5) { transition-delay: 320ms; opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(6) { transition-delay: 400ms; opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(7) { transition-delay: 480ms; opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(8) { transition-delay: 560ms; opacity: 1; transform: none; }
+    .reveal-group.is-visible > *:nth-child(9) { transition-delay: 640ms; opacity: 1; transform: none; }
 
 
     /* ================================================================
-       LAYOUT.CSS — CONTAINER · NAV · HERO · KOYO · CTA · FOOTER
+       LAYOUT
     ================================================================ */
 
     .container {
@@ -239,7 +187,12 @@
       padding-inline: var(--grid-gutter);
     }
 
-    /* ── Navigation ───────────────────────────────────────────── */
+
+    /* ================================================================
+       NAVIGATION — CHAMELEON GHOST OVERLAY
+       Always transparent. backdrop-filter blur. No solid state ever.
+       .nav-over-dark toggled by IntersectionObserver on dark sections.
+    ================================================================ */
 
     .site-nav {
       position: fixed;
@@ -247,37 +200,9 @@
       inset-inline: 0;
       z-index: 200;
       padding-block: var(--space-sm);
-      /* Off-white page surface: no dark gradient — transparent default */
       background: transparent;
-      transition:
-        background-color var(--dur-fast) var(--ease-in-out),
-        border-color     var(--dur-fast) var(--ease-in-out);
-    }
-
-    .site-nav.is-scrolled {
-      background-color: rgba(17, 18, 18, 0.95);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    /* When nav goes dark on scroll, links flip back to white */
-    .site-nav.is-scrolled .site-nav__links a {
-      color: rgba(255, 255, 255, 0.9);
-      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7);
-    }
-
-    .site-nav.is-scrolled .site-nav__links a:hover {
-      color: var(--color-white);
-    }
-
-    .site-nav.is-scrolled .site-nav__links a[aria-current="page"] {
-      color: var(--color-green);
-    }
-
-    .site-nav.is-scrolled .site-nav__links .nav-contact {
-      color: var(--color-green);
-      text-shadow: none;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     .site-nav__inner {
@@ -295,15 +220,7 @@
     .site-nav__logo img {
       height: 48px;
       width: auto;
-      /* multiply: baked-in white background disappears on light surface */
       mix-blend-mode: multiply;
-      background: transparent;
-    }
-
-    /* Scrolled: dark nav — switch to invert so logo reads white */
-    .site-nav.is-scrolled .site-nav__logo img {
-      mix-blend-mode: normal;
-      filter: brightness(0) invert(1);
     }
 
     .site-nav__links {
@@ -316,136 +233,24 @@
       .site-nav__links { display: none; }
     }
 
-    /* ── Hero ─────────────────────────────────────────────────── */
-
-    .hero {
-      position: relative;
-      height: 65svh;
-      min-height: 380px;
-      background-color: var(--color-near-black);
-      /* Contained card: sits on the off-white page surface.
-         margin-inline pulls it away from both viewport edges.
-         No border-radius, no box-shadow — sharp edges only. */
-      margin-inline: var(--grid-gutter);
-      /* Top margin clears the fixed nav height */
-      margin-top: 100px;
-      overflow: hidden;
-    }
-
-    .hero__midground-rule {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background-color: rgba(255, 255, 255, 0.05);
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    .hero__content {
-      position: absolute;
-      bottom: var(--space-lg);
-      left: var(--grid-gutter);
-      right: var(--grid-gutter);
-      z-index: 2;
-    }
-
-    /* ── Koyo section number system ───────────────────────────── */
-
-    .section-num-wrap {
-      position: relative;
-      overflow: visible;
-    }
-
-    .section-number {
-      display: block;
-      font-size: var(--num-size);
-      font-weight: 300;
-      line-height: 1;
-      letter-spacing: -0.05em;
-      color: var(--color-slate);
-      opacity: 0.15;
-      user-select: none;
-      margin-bottom: var(--num-bleed);
-      position: relative;
-      z-index: 10;
-    }
-
-    /* ── CTA close ────────────────────────────────────────────── */
-
-    .cta-close {
-      position: relative;
-      background-color: var(--color-near-black);
-      padding-top: var(--space-lg);
-      padding-bottom: var(--space-lg);
-      /* Contained card — matches hero card treatment */
-      margin-inline: var(--grid-gutter);
-      margin-bottom: var(--space-md);
-      border-top: none;
-      z-index: 2;
-    }
-
-    /* ── Footer ───────────────────────────────────────────────── */
-
-    .site-footer {
-      background-color: transparent;
-      border-top: none;
-      padding-block: var(--space-md);
-      margin-inline: 0;
-      margin-bottom: 0;
-    }
-
-    .site-footer__inner {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-md);
-      align-items: flex-start;
-    }
-
-    @media (min-width: 768px) {
-      .site-footer__inner {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        gap: var(--space-lg);
-      }
-    }
-
-    .site-footer__logo img {
-      height: 36px;
-      width: auto;
-      /* multiply: baked-in white background disappears on off-white surface */
-      mix-blend-mode: multiply;
-    }
-
-
-    /* ================================================================
-       COMPONENTS.CSS — DISCRETE UI COMPONENTS
-    ================================================================ */
-
-    /* ── Navigation components ────────────────────────────────── */
-
+    /* Layer 3: Barlow Condensed */
     .site-nav__links a {
-      font-size: 0.85rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      /* Dark links on off-white surface — no text-shadow needed */
       color: rgba(17, 18, 18, 0.7);
-      text-shadow: none;
       transition: color var(--dur-fast) var(--ease-in-out);
     }
 
     .site-nav__links a:hover { color: var(--color-near-black); }
-
     .site-nav__links a[aria-current="page"] { color: var(--color-green); }
 
     .site-nav__links .nav-contact {
       color: var(--color-green);
       border: 1px solid var(--color-green);
       padding: 0.45em calc(1em - 0.12em) 0.4em 1em;
-      text-shadow: none;
       transition:
         color            var(--dur-fast) var(--ease-in-out),
         background-color var(--dur-fast) var(--ease-in-out);
@@ -461,309 +266,348 @@
       outline-offset: 3px;
     }
 
-    /* ── Hero components ──────────────────────────────────────── */
-
-    .hero__rule {
-      display: block;
-      width: 48px;
-      height: 1px;
-      background-color: var(--color-green);
-      margin-bottom: var(--space-md);
+    /* Inversion over dark sections — toggled by JS observer */
+    .nav-over-dark .site-nav__links a {
+      color: rgba(255, 255, 255, 0.9);
     }
-
-    .hero__headline {
-      font-size: clamp(2.5rem, 5.5vw, 5rem);
-      font-weight: 800;
-      line-height: 0.95;
-      letter-spacing: -0.03em;
-      text-transform: uppercase;
-      color: var(--color-white);
-    }
-
-    .hero__headline-accent {
+    .nav-over-dark .site-nav__links a[aria-current="page"] {
       color: var(--color-green);
     }
-
-    /* ── CTA close components ─────────────────────────────────── */
-
-    .cta-close__top-rule {
-      display: block;
-      width: 48px;
-      height: 1px;
-      background-color: var(--color-green);
-      margin-bottom: var(--space-lg);
+    .nav-over-dark .site-nav__links .nav-contact {
+      color: var(--color-green);
+      border-color: var(--color-green);
     }
-
-    .cta-close__headline {
-      font-size: var(--type-heading);
-      font-weight: 800;
-      line-height: 1.0;
-      letter-spacing: -0.02em;
-      text-transform: uppercase;
-      color: var(--color-white);
-      margin-bottom: var(--space-md);
-      max-width: 20ch;
-    }
-
-    .cta-close__button {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-sm);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: var(--type-label);
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--color-white);
-      background-color: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.35);
-      padding: 1em calc(2em - 0.14em) 1em 2em;
-      cursor: pointer;
-      transition:
-        background-color var(--dur-fast) var(--ease-in-out),
-        border-color     var(--dur-fast) var(--ease-in-out),
-        color            var(--dur-fast) var(--ease-in-out);
-    }
-
-    .cta-close__button:hover {
-      background-color: var(--color-green-dark);
-      border-color: var(--color-green-dark);
-      color: var(--color-near-black);
-    }
-
-    .cta-close__button:focus-visible {
-      outline: 2px solid var(--color-green);
-      outline-offset: 3px;
-    }
-
-    .cta-close__button-arrow {
-      display: inline-block;
-      transition: transform var(--dur-fast) var(--ease-out-expo);
-    }
-
-    .cta-close__button:hover .cta-close__button-arrow {
-      transform: translateX(5px);
-    }
-
-    /* ── Footer components ────────────────────────────────────── */
-
-    .site-footer__copy {
-      font-size: var(--type-caption);
-      font-weight: 400;
-      letter-spacing: 0.04em;
-      /* Dark on off-white canvas — reversed from dark-page treatment */
-      color: rgba(17, 18, 18, 0.4);
+    .nav-over-dark .site-nav__logo img {
+      filter: brightness(0) invert(1);
+      mix-blend-mode: normal;
     }
 
 
     /* ================================================================
-       TEAM PAGE — SCOPED STYLES
-       All classes prefixed .team- to avoid collisions.
+       SECTION 01 — CLAY HEADER
+       Pure white. min-height: 80vh. Left-anchored. Green 2px spine.
     ================================================================ */
 
-    /* ── Hero — team variant ──────────────────────────────────── */
-
-    /* ── Roster section ───────────────────────────────────────── */
-
-    .team-roster {
+    .team-hero {
+      background: #FFFFFF;
+      min-height: 80vh;
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: var(--space-2xl);
+      padding-top: 120px;
       position: relative;
-      background-color: var(--color-off-white);
-      padding-top: var(--space-xl);
-      padding-bottom: var(--space-xl);
-      z-index: 2;
-      overflow: visible;
     }
 
-    /* Section intro header — kicker + heading before the rows */
-    .team-roster__header {
-      margin-bottom: var(--space-xl);
+    .team-hero__content {
+      padding-inline: calc(var(--grid-gutter) * 2);
+      max-width: 1440px;
+      width: 100%;
+      border-left: 2px solid var(--color-green);
+      padding-left: var(--space-xl);
     }
 
-    .team-roster__heading {
-      font-size: var(--type-heading);
-      font-weight: 800;
-      line-height: 1.0;
-      letter-spacing: -0.02em;
-      text-transform: uppercase;
-      color: var(--color-near-black);
-      margin-top: var(--space-sm);
-    }
-
-    /* ── Individual member row ────────────────────────────────── */
-
-    /* Each member is a full-width row.
-       Thin divider between rows — not above first row. */
-    .team-member {
-      position: relative;
-      overflow: visible;
-    }
-
-    .team-member + .team-member {
-      border-top: 1px solid rgba(44, 45, 45, 0.1);
-      padding-top: var(--space-lg);
-      margin-top: var(--space-lg);
-    }
-
-    /* Two-column grid:
-       Left: photo width only — no Koyo number column
-       Right: 1fr — all text content
-       Mobile: single column stacked */
-    .team-member__grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: var(--space-md) 0;
-      align-items: start;
-    }
-
-    @media (min-width: 768px) {
-      .team-member__grid {
-        grid-template-columns: 260px 1fr;
-        gap: 0 var(--space-lg);
-      }
-    }
-
-    /* Left column: photo only — no overflow needed without Koyo number */
-    .team-member__left {
-      position: relative;
-      min-height: 130px;
-    }
-
-    @media (min-width: 768px) {
-      .team-member__left {
-        min-height: 300px;
-      }
-    }
-
-    /* Photo and placeholder — shared dimensions and crop rule */
-    .team-member__photo-placeholder {
-      width: 130px;
-      height: 152px;
-      background: rgba(17, 18, 18, 0.06);
-      border: 1px solid rgba(17, 18, 18, 0.08);
-      object-fit: cover;
-    }
-
-    @media (min-width: 768px) {
-      .team-member__photo-placeholder {
-        width: 260px;
-        height: 300px;
-      }
-    }
-
-    /* Right column: all text content */
-    .team-member__content {
-      padding-top: 0;
-    }
-
-    @media (min-width: 768px) {
-      .team-member__content {
-        /* Slight top alignment offset to optically align with placeholder */
-        padding-top: 0.5rem;
-      }
-    }
-
-    /* Kicker line: one defining career anchor.
-       Standard kicker treatment — slate, tracked caps. */
-    .team-member__kicker {
-      display: block;
-      font-size: 0.85rem;
+    /* Layer 3: Barlow Condensed — file reference metadata */
+    .file-ref {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem;
       font-weight: 600;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--color-slate);
-      margin-bottom: var(--space-sm);
-    }
-
-    /* Member name: dominant. Heading weight, near-black. */
-    .team-member__name {
-      font-size: var(--type-heading);
-      font-weight: 800;
-      line-height: 0.95;
-      letter-spacing: -0.02em;
-      text-transform: uppercase;
-      color: var(--color-near-black);
-      margin-bottom: var(--space-sm);
-    }
-
-    /* Title: navy, tracked caps, label scale — trust signal */
-    .team-member__title {
-      font-size: var(--type-label);
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--color-navy);
-      margin-bottom: var(--space-md);
-    }
-
-    /* Green 2px accent rule — 40px, below title */
-    .team-member__accent-rule {
       display: block;
-      width: 40px;
-      height: 2px;
-      background-color: var(--color-green);
       margin-bottom: var(--space-md);
     }
 
-    /* Expand trigger: button element, label scale, slate.
-       Resets button defaults — uses font: inherit from global button reset. */
-    .team-member__trigger {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5em;
-      font-size: var(--type-label);
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--color-slate);
-      cursor: pointer;
-      padding: 0;
-      background: none;
-      border: none;
-      transition: color var(--dur-fast) var(--ease-in-out);
+    /* Layer 1: Playfair Display — H1 ONLY */
+    .team-legacy-statement {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 900;
+      font-size: clamp(3.5rem, 6vw, 5.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: var(--color-near-black);
+      max-width: 14ch;
     }
 
-    .team-member__trigger:hover {
+    .team-legacy-statement__accent {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
       color: var(--color-green);
     }
 
-    .team-member__trigger:focus-visible {
+
+    /* ================================================================
+       SECTION 02 — EXPERT GRID
+       #F9F9F9. 3-col desktop · 2-col tablet · 1-col mobile.
+    ================================================================ */
+
+    .team-grid-section {
+      background: #F9F9F9;
+      padding-block: var(--space-xl);
+    }
+
+    .team-grid-section__header {
+      margin-bottom: var(--space-lg);
+    }
+
+    /* Layer 3: Barlow Condensed — section label */
+    .team-grid-section__kicker {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-slate);
+      display: block;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      border: 0.5px solid #EEEEEE;
+    }
+
+    @media (min-width: 541px) {
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (min-width: 901px) {
+      .team-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* ── Member card ─────────────────────────────────────────── */
+
+    .member-card {
+      border: 0.5px solid #EEEEEE;
+      background: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      transition:
+        background     var(--dur-fast) var(--ease-in-out),
+        border-color   var(--dur-fast) var(--ease-in-out);
+      overflow: hidden;
+    }
+
+    .member-card.is-expanded {
+      background: #F9F9F9;
+      border-color: var(--color-green);
+    }
+
+    /* Photo — square crop */
+    .member-card__photo-wrap {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      background: #F0F0F0;
+    }
+
+    .member-card__photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: grayscale(100%);
+      transition:
+        transform var(--dur-med) var(--ease-out-expo),
+        filter    var(--dur-med) var(--ease-out-expo);
+      display: block;
+    }
+
+    /* Keith Robertson — face positioned higher in square crop */
+    .member-card__photo-wrap img.photo-top-20 {
+      object-position: center 20%;
+    }
+
+    .member-card:hover .member-card__photo-wrap img {
+      transform: scale(1.03);
+      filter: grayscale(60%);
+    }
+
+    /* Green tint overlay on hover */
+    .member-card__photo-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(91, 175, 122, 0);
+      transition: background var(--dur-med) var(--ease-out-expo);
+      pointer-events: none;
+    }
+
+    .member-card:hover .member-card__photo-wrap::after {
+      background: rgba(91, 175, 122, 0.08);
+    }
+
+    /* CSS placeholder — Scott Lange and Scott Wayne (no photo files) */
+    .member-card__placeholder {
+      aspect-ratio: 1 / 1;
+      background-color: #F5F5F5;
+      background-image:
+        linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
+      background-size: 24px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Layer 3: Barlow Condensed — initials */
+    .member-card__initials {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: rgba(17, 18, 18, 0.2);
+    }
+
+    /* Card content area */
+    .member-card__info {
+      padding: var(--space-md);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    /* Layer 3: Barlow Condensed — career kicker */
+    .member-card__kicker {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-slate);
+    }
+
+    /* Layer 3: Barlow Condensed — name */
+    .member-card__name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(1.3rem, 2vw, 1.75rem);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      color: var(--color-near-black);
+      line-height: 1.1;
+    }
+
+    /* Layer 3: Barlow Condensed — title */
+    .member-card__title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-green);
+    }
+
+    .member-card__accent-rule {
+      display: block;
+      width: 32px;
+      height: 2px;
+      background: var(--color-green);
+      margin-block: var(--space-xs);
+    }
+
+    /* Layer 3: Barlow Condensed — trigger */
+    .member-card__trigger {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-slate);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4em;
+      margin-top: var(--space-xs);
+      transition: color var(--dur-fast) var(--ease-in-out);
+    }
+
+    .member-card__trigger:hover { color: var(--color-green); }
+
+    .member-card__trigger:focus-visible {
       outline: 2px solid var(--color-green);
       outline-offset: 3px;
     }
 
-    /* Bio wrapper: max-height: 0 → collapsed.
-       .is-open sets max-height: 600px.
-       Background + border give the bio a distinct warm pocket
-       on the off-white roster surface. */
-    .team-member__bio-wrap {
+    /* Bio drawer — slides open with max-height + padding transition */
+    .member-card__bio-wrap {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 600ms var(--ease-out-expo);
-      background-color: #EEECEA;
-      padding: 0 var(--space-md) 0 calc(var(--space-md) + 2px);
-      margin-top: var(--space-sm);
-      border-left: 2px solid var(--color-navy);
+      transition:
+        max-height 600ms var(--ease-out-expo),
+        padding    400ms var(--ease-out-expo);
+      padding: 0 var(--space-md);
     }
 
-    .team-member__bio-wrap.is-open {
-      /* 600px is generous for all bios — none exceed ~5 lines */
-      max-height: 600px;
-      padding: var(--space-md) var(--space-md) var(--space-md) calc(var(--space-md) + 2px);
+    .member-card__bio-wrap.is-open {
+      max-height: 500px;
+      padding: var(--space-md);
+      border-top: 1px solid rgba(17, 18, 18, 0.08);
     }
 
-    /* Bio inner: padding-top creates breathing room inside the wrap.
-       Border-left lives on the wrap now — not repeated here. */
-    .team-member__bio {
-      padding-top: 0;
-      padding-bottom: 0;
-      margin-top: 0;
-    }
-
-    .team-member__bio p {
-      font-size: var(--type-body);
-      font-weight: 400;
-      line-height: 1.72;
+    /* Layer 2: system sans-serif — bio body copy */
+    .member-card__bio-text {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: clamp(0.9rem, 1.1vw, 1rem);
+      line-height: 1.7;
       color: var(--color-body-text);
+    }
+
+
+    /* ================================================================
+       FOOTER — Watermark logo. White background.
+    ================================================================ */
+
+    .site-footer {
+      background: #FFFFFF;
+      padding-block: var(--space-xl);
+      position: relative;
+      overflow: hidden;
+      border-top: 0.5px solid #EEEEEE;
+    }
+
+    /* Massive watermark — atmosphere only */
+    .site-footer::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/images/gli-logo.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 80%;
+      opacity: 0.05;
+      pointer-events: none;
+    }
+
+    .site-footer__inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Layer 3: Barlow Condensed — copyright */
+    .site-footer__copy {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(17, 18, 18, 0.4);
+    }
+
+    .site-footer__logo img {
+      height: 36px;
+      width: auto;
+      mix-blend-mode: multiply;
+      opacity: 0.5;
     }
 
   </style>
@@ -774,8 +618,9 @@
 
   <!-- ============================================================
        NAVIGATION
-       Fixed. Transparent over hero. .is-scrolled via JS at 80px.
+       Fixed. Always transparent. backdrop-filter: blur(10px).
        Team = aria-current="page". Contact = green bordered pill.
+       .nav-over-dark toggled by IntersectionObserver.
   ============================================================ -->
   <nav class="site-nav" aria-label="Primary navigation">
     <div class="container">
@@ -806,445 +651,292 @@
   <main id="main-content">
 
     <!-- ============================================================
-         SECTION 01 — HERO
-         Near-black contained card on off-white page surface.
-         No ghost number. No background image.
-         Layer 1: midground 1px horizontal rule
-         Layer 2: content pinned bottom-left
-         Green 48px rule above kicker.
-         Two-line headline — "Behind The Work." in green.
+         SECTION 01 — CLAY HEADER
+         Pure white. min-height: 80vh. Green 2px spine. H1 Playfair.
     ============================================================ -->
-    <section class="hero hero--team" aria-labelledby="hero-headline">
-
-      <!-- Layer 1: Midground architectural rule -->
-      <span class="hero__midground-rule" aria-hidden="true"></span>
-
-      <!-- Layer 2: Content — floor of the frame, left spine -->
-      <div class="hero__content">
-
-        <span class="hero__rule" aria-hidden="true"></span>
-        <span class="kicker kicker--white">The Team</span>
-
-        <h1 class="hero__headline" id="hero-headline">
-          The People<br />
-          <span class="hero__headline-accent">Behind The Work.</span>
+    <section class="team-hero" aria-labelledby="hero-headline">
+      <div class="team-hero__content">
+        <span class="file-ref">[ FILE_REF: TEAM_GL_1980 ]</span>
+        <h1 class="team-legacy-statement" id="hero-headline">
+          The <em class="team-legacy-statement__accent">Consortium</em>.
         </h1>
-
       </div>
-
     </section>
 
 
     <!-- ============================================================
-         SECTION 02 — ROSTER
-         Off-white. Nine team members as horizontal rows.
-         Left column: Koyo number (behind) + portrait placeholder
-         Right column: kicker · name · title · accent rule · trigger
-         Bio expands inline — one open at a time.
-         Members 08–09 (Scott Lange, Scott Wayne): no bio, no trigger.
+         SECTION 02 — EXPERT GRID
+         #F9F9F9. 3-col desktop · 2-col tablet · 1-col mobile.
+         01–07: photo + bio trigger. 08–09: CSS placeholder, no trigger.
     ============================================================ -->
-    <section class="team-roster" aria-labelledby="roster-heading">
+    <section class="team-grid-section" aria-labelledby="roster-heading">
       <div class="container">
 
-        <div class="team-roster__header reveal">
-          <span class="kicker kicker--green">Our People</span>
-          <h2 class="team-roster__heading" id="roster-heading">
-            The Roster
-          </h2>
+        <div class="team-grid-section__header reveal">
+          <span class="team-grid-section__kicker">Grant Leisure International</span>
+          <h2 id="roster-heading" class="sr-only">The Team</h2>
         </div>
 
-        <!-- ── 01 — Andy Grant ─────────────────────────────────── -->
-        <article class="team-member reveal" aria-label="Andy Grant — Chief Executive Officer">
-          <div class="team-member__grid">
+        <div class="team-grid reveal-group">
 
-            <div class="team-member__left" aria-hidden="true">
+          <!-- ── 01 — Andy Grant ────────────────────────────────── -->
+          <article class="member-card" aria-label="Andy Grant — Chief Executive Officer">
+
+            <div class="member-card__photo-wrap">
               <img
-                class="team-member__photo-placeholder"
                 src="assets/images/team/andy-grant.png"
                 alt="Andy Grant"
-                width="260"
-                height="300"
+                width="400"
+                height="400"
               />
             </div>
 
-            <div class="team-member__content">
-              <span class="team-member__kicker">50+ Years. Universal Studios to English Heritage.</span>
-              <h3 class="team-member__name">Andy Grant</h3>
-              <p class="team-member__title">Chief Executive Officer</p>
-              <span class="team-member__accent-rule" aria-hidden="true"></span>
-
+            <div class="member-card__info">
+              <span class="member-card__kicker">50+ YRS · UNIVERSAL TO ENGLISH HERITAGE</span>
+              <p class="member-card__name">Andy Grant</p>
+              <p class="member-card__title">Chief Executive Officer</p>
+              <span class="member-card__accent-rule" aria-hidden="true"></span>
               <button
-                class="team-member__trigger"
+                class="member-card__trigger"
                 aria-expanded="false"
                 aria-controls="bio-andy-grant"
-                data-member="andy-grant"
-              >
-                + Read Bio
-              </button>
-
-              <div
-                class="team-member__bio-wrap"
-                id="bio-andy-grant"
-                role="region"
-                aria-label="Andy Grant biography"
-              >
-                <div class="team-member__bio">
-                  <p>Andy's 50+ year career began at Universal Studios Hollywood, where he holds claim to being one of the park's first-ever studio tour guides. After climbing the ranks of Universal Studios to senior management, Andy went on to become the managing director for Busch Gardens, Squaw Valley Ski Resort, and the San Diego Zoo & Safari Park — and spent 12 years in charge of Leeds Castle in the United Kingdom. It was during Andy's tenure in London that Grant Leisure was founded and grew to become the foremost consultancy for the English Heritage and a globally recognized operator for the themed entertainment industry.</p>
-                </div>
-              </div>
+              >[ VIEW_DOSSIER + ]</button>
             </div>
 
-          </div>
-        </article>
+            <div class="member-card__bio-wrap" id="bio-andy-grant" role="region" aria-label="Andy Grant biography">
+              <p class="member-card__bio-text">Andy's 50+ year career began at Universal Studios Hollywood, where he holds claim to being one of the park's first-ever studio tour guides. After climbing the ranks of Universal Studios to senior management, Andy went on to become the managing director for Busch Gardens, Squaw Valley Ski Resort, and the San Diego Zoo &amp; Safari Park — and spent 12 years in charge of Leeds Castle in the United Kingdom. It was during Andy's tenure in London that Grant Leisure was founded and grew to become the foremost consultancy for the English Heritage and a globally recognized operator for the themed entertainment industry.</p>
+            </div>
 
-        <!-- ── 02 — Claus Frimand ─────────────────────────────── -->
-        <article class="team-member reveal" aria-label="Claus Frimand — Director Operations">
-          <div class="team-member__grid">
+          </article>
 
-            <div class="team-member__left" aria-hidden="true">
+          <!-- ── 02 — Claus Frimand ─────────────────────────────── -->
+          <article class="member-card" aria-label="Claus Frimand — Director Operations">
+
+            <div class="member-card__photo-wrap">
               <img
-                class="team-member__photo-placeholder"
                 src="assets/images/team/claus-frimand.png"
                 alt="Claus Frimand"
-                width="260"
-                height="300"
+                width="400"
+                height="400"
                 loading="lazy"
               />
             </div>
 
-            <div class="team-member__content">
-              <span class="team-member__kicker">35 Years. Ten Countries. Ferrari World to the Olympics.</span>
-              <h3 class="team-member__name">Claus Frimand</h3>
-              <p class="team-member__title">Director Operations</p>
-              <span class="team-member__accent-rule" aria-hidden="true"></span>
-
+            <div class="member-card__info">
+              <span class="member-card__kicker">35 YRS · TEN COUNTRIES · FERRARI WORLD</span>
+              <p class="member-card__name">Claus Frimand</p>
+              <p class="member-card__title">Director Operations</p>
+              <span class="member-card__accent-rule" aria-hidden="true"></span>
               <button
-                class="team-member__trigger"
+                class="member-card__trigger"
                 aria-expanded="false"
                 aria-controls="bio-claus-frimand"
-                data-member="claus-frimand"
-              >
-                + Read Bio
-              </button>
-
-              <div
-                class="team-member__bio-wrap"
-                id="bio-claus-frimand"
-                role="region"
-                aria-label="Claus Frimand biography"
-              >
-                <div class="team-member__bio">
-                  <p>Claus brings 35 years of experience in the service and leisure industry and has been an expat for over 25 years. He has lived in ten different countries working in Europe, the Middle East, and Asia on many high profile projects and was responsible for opening Ferrari World in Abu Dhabi. Claus's breadth of expertise and insight for recruitment and operations has been an asset to Grant Leisure, having worked for organizations such as IKEA, Disneyland Paris, the Olympics, EXPO 2000, Expo.02, and several international traveling exhibitions.</p>
-                </div>
-              </div>
+              >[ VIEW_DOSSIER + ]</button>
             </div>
 
-          </div>
-        </article>
+            <div class="member-card__bio-wrap" id="bio-claus-frimand" role="region" aria-label="Claus Frimand biography">
+              <p class="member-card__bio-text">Claus brings 35 years of experience in the service and leisure industry and has been an expat for over 25 years. He has lived in ten different countries working in Europe, the Middle East, and Asia on many high profile projects and was responsible for opening Ferrari World in Abu Dhabi. Claus's breadth of expertise and insight for recruitment and operations has been an asset to Grant Leisure, having worked for organizations such as IKEA, Disneyland Paris, the Olympics, EXPO 2000, Expo.02, and several international traveling exhibitions.</p>
+            </div>
 
-        <!-- ── 03 — Clive Jones ───────────────────────────────── -->
-        <article class="team-member reveal" aria-label="Clive Jones — Director Strategic Planning">
-          <div class="team-member__grid">
+          </article>
 
-            <div class="team-member__left" aria-hidden="true">
+          <!-- ── 03 — Clive Jones ───────────────────────────────── -->
+          <article class="member-card" aria-label="Clive Jones — Director Strategic Planning">
+
+            <div class="member-card__photo-wrap">
               <img
-                class="team-member__photo-placeholder"
                 src="assets/images/team/clive-jones.png"
                 alt="Clive Jones"
-                width="260"
-                height="300"
+                width="400"
+                height="400"
                 loading="lazy"
               />
             </div>
 
-            <div class="team-member__content">
-              <span class="team-member__kicker">Four Seasons. Aspen. Hong Kong. US National Park Service.</span>
-              <h3 class="team-member__name">Clive Jones</h3>
-              <p class="team-member__title">Director Strategic Planning</p>
-              <span class="team-member__accent-rule" aria-hidden="true"></span>
-
+            <div class="member-card__info">
+              <span class="member-card__kicker">FOUR SEASONS · ASPEN · HK · US NPS</span>
+              <p class="member-card__name">Clive Jones</p>
+              <p class="member-card__title">Director Strategic Planning</p>
+              <span class="member-card__accent-rule" aria-hidden="true"></span>
               <button
-                class="team-member__trigger"
+                class="member-card__trigger"
                 aria-expanded="false"
                 aria-controls="bio-clive-jones"
-                data-member="clive-jones"
-              >
-                + Read Bio
-              </button>
-
-              <div
-                class="team-member__bio-wrap"
-                id="bio-clive-jones"
-                role="region"
-                aria-label="Clive Jones biography"
-              >
-                <div class="team-member__bio">
-                  <p>Clive has evaluated investment programs and solicited investors and operators for major hotels, resorts, and casinos throughout Asia-Pacific, the Americas, and Europe. His expertise in market and investment analysis, development programming, and database marketing has earned him a sterling reputation within the attractions, hospitality, and tourism industries — having provided the economic planning for resorts such as Four Seasons Hualalai, Aspen Snowmass, Northstar Lake Tahoe, and Marriott Vacation Club, among many others. Complementing his private sector experience, Clive has also consulted to local, state and national tourism and recreation organizations. Notable clients include the US National Park Service, Hong Kong Tourism Board, Canadian Tourism Board, the state of California, and the city of San Francisco.</p>
-                </div>
-              </div>
+              >[ VIEW_DOSSIER + ]</button>
             </div>
 
-          </div>
-        </article>
+            <div class="member-card__bio-wrap" id="bio-clive-jones" role="region" aria-label="Clive Jones biography">
+              <p class="member-card__bio-text">Clive has evaluated investment programs and solicited investors and operators for major hotels, resorts, and casinos throughout Asia-Pacific, the Americas, and Europe. His expertise in market and investment analysis, development programming, and database marketing has earned him a sterling reputation within the attractions, hospitality, and tourism industries — having provided the economic planning for resorts such as Four Seasons Hualalai, Aspen Snowmass, Northstar Lake Tahoe, and Marriott Vacation Club, among many others. Complementing his private sector experience, Clive has also consulted to local, state and national tourism and recreation organizations. Notable clients include the US National Park Service, Hong Kong Tourism Board, Canadian Tourism Board, the state of California, and the city of San Francisco.</p>
+            </div>
 
-        <!-- ── 04 — Keith Robertson ───────────────────────────── -->
-        <article class="team-member reveal" aria-label="Keith Robertson — Director Rides, Shows & Attractions">
-          <div class="team-member__grid">
+          </article>
 
-            <div class="team-member__left" aria-hidden="true">
+          <!-- ── 04 — Keith Robertson ───────────────────────────── -->
+          <article class="member-card" aria-label="Keith Robertson — Director Rides, Shows &amp; Attractions">
+
+            <div class="member-card__photo-wrap">
               <img
-                class="team-member__photo-placeholder"
                 src="assets/images/team/keith-robertson.png"
                 alt="Keith Robertson"
-                width="260"
-                height="300"
+                width="400"
+                height="400"
                 loading="lazy"
-                style="object-position: center 20%;"
+                class="photo-top-20"
               />
             </div>
 
-            <div class="team-member__content">
-              <span class="team-member__kicker">40 Years. Theme Parks. Engineering. Global Operations.</span>
-              <h3 class="team-member__name">Keith Robertson</h3>
-              <p class="team-member__title">Director Rides, Shows &amp; Attractions</p>
-              <span class="team-member__accent-rule" aria-hidden="true"></span>
-
+            <div class="member-card__info">
+              <span class="member-card__kicker">40 YRS · THEME PARKS · ENGINEERING</span>
+              <p class="member-card__name">Keith Robertson</p>
+              <p class="member-card__title">Director Rides, Shows &amp; Attractions</p>
+              <span class="member-card__accent-rule" aria-hidden="true"></span>
               <button
-                class="team-member__trigger"
+                class="member-card__trigger"
                 aria-expanded="false"
                 aria-controls="bio-keith-robertson"
-                data-member="keith-robertson"
-              >
-                + Read Bio
-              </button>
-
-              <div
-                class="team-member__bio-wrap"
-                id="bio-keith-robertson"
-                role="region"
-                aria-label="Keith Robertson biography"
-              >
-                <div class="team-member__bio">
-                  <p>Keith is a well-rounded senior executive with over 40 years of international project management experience in design, engineering, and operations for the development of major electrical power systems, commercial, industrial and residential construction, theme parks, water parks, tourism, and hospitality. His high-energy approach and diversified experience in strategic planning, training, staffing, maintenance, and operations has proven invaluable for his clients as he continues driving innovative engineering and management solutions.</p>
-                </div>
-              </div>
+              >[ VIEW_DOSSIER + ]</button>
             </div>
 
-          </div>
-        </article>
+            <div class="member-card__bio-wrap" id="bio-keith-robertson" role="region" aria-label="Keith Robertson biography">
+              <p class="member-card__bio-text">Keith is a well-rounded senior executive with over 40 years of international project management experience in design, engineering, and operations for the development of major electrical power systems, commercial, industrial and residential construction, theme parks, water parks, tourism, and hospitality. His high-energy approach and diversified experience in strategic planning, training, staffing, maintenance, and operations has proven invaluable for his clients as he continues driving innovative engineering and management solutions.</p>
+            </div>
 
-        <!-- ── 05 — Robert Liljenwall ─────────────────────────── -->
-        <article class="team-member reveal" aria-label="Robert Liljenwall — Senior Vice President Marketing & Branding">
-          <div class="team-member__grid">
+          </article>
 
-            <div class="team-member__left" aria-hidden="true">
+          <!-- ── 05 — Robert Liljenwall ─────────────────────────── -->
+          <article class="member-card" aria-label="Robert Liljenwall — SVP Marketing &amp; Branding">
+
+            <div class="member-card__photo-wrap">
               <img
-                class="team-member__photo-placeholder"
                 src="assets/images/team/robert-liljenwall.png"
                 alt="Robert Liljenwall"
-                width="260"
-                height="300"
+                width="400"
+                height="400"
                 loading="lazy"
               />
             </div>
 
-            <div class="team-member__content">
-              <span class="team-member__kicker">Disney. Themed Entertainment. Marketing &amp; Branding.</span>
-              <h3 class="team-member__name">Robert Liljenwall</h3>
-              <p class="team-member__title">Senior Vice President Marketing &amp; Branding</p>
-              <span class="team-member__accent-rule" aria-hidden="true"></span>
-
+            <div class="member-card__info">
+              <span class="member-card__kicker">DISNEY · THEMED ENTERTAINMENT</span>
+              <p class="member-card__name">Robert Liljenwall</p>
+              <p class="member-card__title">SVP Marketing &amp; Branding</p>
+              <span class="member-card__accent-rule" aria-hidden="true"></span>
               <button
-                class="team-member__trigger"
+                class="member-card__trigger"
                 aria-expanded="false"
                 aria-controls="bio-robert-liljenwall"
-                data-member="robert-liljenwall"
-              >
-                + Read Bio
-              </button>
-
-              <div
-                class="team-member__bio-wrap"
-                id="bio-robert-liljenwall"
-                role="region"
-                aria-label="Robert Liljenwall biography"
-              >
-                <div class="team-member__bio">
-                  <p>Robert has been a long-time principal of Grant Leisure — serving as head of its marketing and branding services and providing initial concept and creative direction for a broad spectrum of leisure attractions, visitor services, and integrated marketing communications programs. His career as a themed entertainment industry executive began with Disney and he has since worked on leisure and entertainment projects spanning a variety of themed attractions, zoological parks, resorts, film studios, themed entertainment centers, and new urban developments. Robert is an expert with developing a project's customer marketing matrix, identifying how best to serve visitors, maximize revenue streams, and ensure the highest degree of customer satisfaction.</p>
-                </div>
-              </div>
+              >[ VIEW_DOSSIER + ]</button>
             </div>
 
-          </div>
-        </article>
+            <div class="member-card__bio-wrap" id="bio-robert-liljenwall" role="region" aria-label="Robert Liljenwall biography">
+              <p class="member-card__bio-text">Robert has been a long-time principal of Grant Leisure — serving as head of its marketing and branding services and providing initial concept and creative direction for a broad spectrum of leisure attractions, visitor services, and integrated marketing communications programs. His career as a themed entertainment industry executive began with Disney and he has since worked on leisure and entertainment projects spanning a variety of themed attractions, zoological parks, resorts, film studios, themed entertainment centers, and new urban developments. Robert is an expert with developing a project's customer marketing matrix, identifying how best to serve visitors, maximize revenue streams, and ensure the highest degree of customer satisfaction.</p>
+            </div>
 
-        <!-- ── 06 — Raul Rios ─────────────────────────────────── -->
-        <article class="team-member reveal" aria-label="Raul Rios — Director Consulting Operations, Europe">
-          <div class="team-member__grid">
+          </article>
 
-            <div class="team-member__left" aria-hidden="true">
+          <!-- ── 06 — Raul Rios ─────────────────────────────────── -->
+          <article class="member-card" aria-label="Raul Rios — Director Consulting Operations, Europe">
+
+            <div class="member-card__photo-wrap">
               <img
-                class="team-member__photo-placeholder"
                 src="assets/images/team/raul-rios.png"
                 alt="Raul Rios"
-                width="260"
-                height="300"
+                width="400"
+                height="400"
                 loading="lazy"
               />
             </div>
 
-            <div class="team-member__content">
-              <span class="team-member__kicker">Ferrari World. NBC Universal. Olympic Park Legacy Company.</span>
-              <h3 class="team-member__name">Raul Rios</h3>
-              <p class="team-member__title">Director Consulting Operations, Europe</p>
-              <span class="team-member__accent-rule" aria-hidden="true"></span>
-
+            <div class="member-card__info">
+              <span class="member-card__kicker">FERRARI WORLD · NBC UNIVERSAL · BBC</span>
+              <p class="member-card__name">Raul Rios</p>
+              <p class="member-card__title">Director Consulting Operations, Europe</p>
+              <span class="member-card__accent-rule" aria-hidden="true"></span>
               <button
-                class="team-member__trigger"
+                class="member-card__trigger"
                 aria-expanded="false"
                 aria-controls="bio-raul-rios"
-                data-member="raul-rios"
-              >
-                + Read Bio
-              </button>
-
-              <div
-                class="team-member__bio-wrap"
-                id="bio-raul-rios"
-                role="region"
-                aria-label="Raul Rios biography"
-              >
-                <div class="team-member__bio">
-                  <p>Raul brings over 15 years of industry experience and manages the consulting back-office for Grant Leisure's operations outside the US. Initially acting as Director of Projects and Commercial Controller, he was later appointed as Director for an international marketing services group. As MD of the German subsidiaries he was responsible for their successful restructuring, merger and change process. Working as a consultant, his input ranges from preparing financial feasibilities, business and operational plans, and overseeing attraction construction projects for a number of international clients including Olympic Park Legacy Company, Ferrari World Abu Dhabi, Carlsberg, NBC Universal (UK), Sylt Aquarium, Westfield and BBC.</p>
-                </div>
-              </div>
+              >[ VIEW_DOSSIER + ]</button>
             </div>
 
-          </div>
-        </article>
+            <div class="member-card__bio-wrap" id="bio-raul-rios" role="region" aria-label="Raul Rios biography">
+              <p class="member-card__bio-text">Raul brings over 15 years of industry experience and manages the consulting back-office for Grant Leisure's operations outside the US. Initially acting as Director of Projects and Commercial Controller, he was later appointed as Director for an international marketing services group. As MD of the German subsidiaries he was responsible for their successful restructuring, merger and change process. Working as a consultant, his input ranges from preparing financial feasibilities, business and operational plans, and overseeing attraction construction projects for a number of international clients including Olympic Park Legacy Company, Ferrari World Abu Dhabi, Carlsberg, NBC Universal (UK), Sylt Aquarium, Westfield and BBC.</p>
+            </div>
 
-        <!-- ── 07 — Philip Kwong ──────────────────────────────── -->
-        <article class="team-member reveal" aria-label="Philip Kwong — Compliance & Operations Consultant">
-          <div class="team-member__grid">
+          </article>
 
-            <div class="team-member__left" aria-hidden="true">
+          <!-- ── 07 — Philip Kwong ──────────────────────────────── -->
+          <article class="member-card" aria-label="Philip Kwong — Compliance &amp; Operations Consultant">
+
+            <div class="member-card__photo-wrap">
               <img
-                class="team-member__photo-placeholder"
                 src="assets/images/team/philip-kwong.png"
                 alt="Philip Kwong"
-                width="260"
-                height="300"
+                width="400"
+                height="400"
                 loading="lazy"
               />
             </div>
 
-            <div class="team-member__content">
-              <span class="team-member__kicker">ISO IWA 37. UL Canada. Compliance &amp; Operations.</span>
-              <h3 class="team-member__name">Philip Kwong</h3>
-              <p class="team-member__title">Compliance &amp; Operations Consultant</p>
-              <span class="team-member__accent-rule" aria-hidden="true"></span>
-
+            <div class="member-card__info">
+              <span class="member-card__kicker">ISO IWA 37 · UL CANADA</span>
+              <p class="member-card__name">Philip Kwong</p>
+              <p class="member-card__title">Compliance &amp; Operations Consultant</p>
+              <span class="member-card__accent-rule" aria-hidden="true"></span>
               <button
-                class="team-member__trigger"
+                class="member-card__trigger"
                 aria-expanded="false"
                 aria-controls="bio-philip-kwong"
-                data-member="philip-kwong"
-              >
-                + Read Bio
-              </button>
-
-              <div
-                class="team-member__bio-wrap"
-                id="bio-philip-kwong"
-                role="region"
-                aria-label="Philip Kwong biography"
-              >
-                <div class="team-member__bio">
-                  <p>Philip is a compliance and operations consultant with eight years of experience in highly regulated and emerging industries. Having held leadership roles in the development of international standards bodies, including Vice Convener of ISO IWA 37 and Chair of UL Canada's TG 4400-2, he has contributed to regulatory frameworks, worked with publicly traded companies, and taken complex projects from inception through to completion.</p>
-                </div>
-              </div>
+              >[ VIEW_DOSSIER + ]</button>
             </div>
 
-          </div>
-        </article>
-
-        <!-- ── 08 — Scott Lange — no bio, no trigger ─────────── -->
-        <article class="team-member reveal" aria-label="Scott Lange — Grant Leisure Team Member">
-          <div class="team-member__grid">
-
-            <div class="team-member__left" aria-hidden="true">
-              <div class="team-member__photo-placeholder"></div>
+            <div class="member-card__bio-wrap" id="bio-philip-kwong" role="region" aria-label="Philip Kwong biography">
+              <p class="member-card__bio-text">Philip is a compliance and operations consultant with eight years of experience in highly regulated and emerging industries. Having held leadership roles in the development of international standards bodies, including Vice Convener of ISO IWA 37 and Chair of UL Canada's TG 4400-2, he has contributed to regulatory frameworks, worked with publicly traded companies, and taken complex projects from inception through to completion.</p>
             </div>
 
-            <div class="team-member__content">
-              <span class="team-member__kicker">Grant Leisure Team Member</span>
-              <h3 class="team-member__name">Scott Lange</h3>
-              <p class="team-member__title">TBD</p>
-              <span class="team-member__accent-rule" aria-hidden="true"></span>
+          </article>
+
+          <!-- ── 08 — Scott Lange — CSS placeholder, no trigger ─── -->
+          <article class="member-card" aria-label="Scott Lange — Grant Leisure Team Member">
+
+            <div class="member-card__placeholder" aria-hidden="true">
+              <span class="member-card__initials">SL</span>
             </div>
 
-          </div>
-        </article>
-
-        <!-- ── 09 — Scott Wayne — no bio, no trigger ─────────── -->
-        <article class="team-member reveal" aria-label="Scott Wayne — Grant Leisure Team Member">
-          <div class="team-member__grid">
-
-            <div class="team-member__left" aria-hidden="true">
-              <div class="team-member__photo-placeholder"></div>
+            <div class="member-card__info">
+              <span class="member-card__kicker">GRANT LEISURE</span>
+              <p class="member-card__name">Scott Lange</p>
+              <p class="member-card__title">TBD</p>
+              <span class="member-card__accent-rule" aria-hidden="true"></span>
             </div>
 
-            <div class="team-member__content">
-              <span class="team-member__kicker">Grant Leisure Team Member</span>
-              <h3 class="team-member__name">Scott Wayne</h3>
-              <p class="team-member__title">TBD</p>
-              <span class="team-member__accent-rule" aria-hidden="true"></span>
+          </article>
+
+          <!-- ── 09 — Scott Wayne — CSS placeholder, no trigger ─── -->
+          <article class="member-card" aria-label="Scott Wayne — Grant Leisure Team Member">
+
+            <div class="member-card__placeholder" aria-hidden="true">
+              <span class="member-card__initials">SW</span>
             </div>
 
-          </div>
-        </article>
+            <div class="member-card__info">
+              <span class="member-card__kicker">GRANT LEISURE</span>
+              <p class="member-card__name">Scott Wayne</p>
+              <p class="member-card__title">TBD</p>
+              <span class="member-card__accent-rule" aria-hidden="true"></span>
+            </div>
 
+          </article>
+
+        </div><!-- /.team-grid -->
       </div><!-- /.container -->
-    </section>
-
-
-    <!-- ============================================================
-         SECTION 03 — CTA CLOSE
-         Exact copy of services.html CTA close.
-         Near-black. Kicker: Est. 1980 · Global.
-         Headline: Ready to Build / Something Lasting?
-         Button: Start a Conversation → links to contact.html
-    ============================================================ -->
-    <section class="cta-close" aria-labelledby="cta-headline">
-      <div class="container">
-
-        <span class="cta-close__top-rule reveal" aria-hidden="true"></span>
-        <span class="kicker kicker--green reveal">Est. 1980 &#183; Global</span>
-
-        <h2 class="cta-close__headline reveal" id="cta-headline">
-          Ready to Build<br />Something Lasting?
-        </h2>
-
-        <a
-          href="contact.html"
-          class="cta-close__button reveal"
-          aria-label="Start a conversation with Grant Leisure"
-        >
-          Start a Conversation
-          <span class="cta-close__button-arrow" aria-hidden="true">&#8594;</span>
-        </a>
-
-      </div>
     </section>
 
   </main>
 
 
   <!-- ============================================================
-       FOOTER
-       Near-black. Logo left · Copyright right.
-       Mobile: stacked. Desktop: single horizontal row.
-       Year injected by JS.
+       FOOTER — Watermark logo. White background. Logo left · copy right.
   ============================================================ -->
   <footer class="site-footer" aria-label="Site footer">
     <div class="container">
@@ -1278,22 +970,27 @@
       const yearEl = document.getElementById('footer-year');
       if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-      // ── Nav scroll state ─────────────────────────────────────────
-      // 80px clears nav height — prevents flicker at very top of page
-      const nav = document.querySelector('.site-nav');
-      if (nav) {
-        const onScroll = () => {
-          const scrolled = window.scrollY > 80;
-          nav.classList.toggle('is-scrolled', scrolled);
-        };
-        window.addEventListener('scroll', onScroll, { passive: true });
-        onScroll();
+      // ── Nav inversion over dark sections ─────────────────────────
+      // No dark sections on this page currently — observer ready if added
+      const teamDarkSections = document.querySelectorAll('.team-dark-section');
+      const teamNav = document.querySelector('.site-nav');
+      if (teamNav && teamDarkSections.length) {
+        let darkCount = 0;
+        const teamNavObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              darkCount += entry.isIntersecting ? 1 : -1;
+              darkCount = Math.max(0, darkCount);
+              teamNav.classList.toggle('nav-over-dark', darkCount > 0);
+            });
+          },
+          { rootMargin: '-80px 0px 0px 0px', threshold: 0 }
+        );
+        teamDarkSections.forEach((s) => teamNavObserver.observe(s));
       }
 
-      // ── Scroll-reveal via IntersectionObserver ───────────────────
-      // One-shot. Graceful fallback if IO unavailable.
+      // ── Scroll reveal ─────────────────────────────────────────────
       const revealTargets = document.querySelectorAll('.reveal, .reveal-group');
-
       if ('IntersectionObserver' in window && revealTargets.length) {
         const observer = new IntersectionObserver(
           (entries) => {
@@ -1307,53 +1004,50 @@
         );
         revealTargets.forEach((el) => observer.observe(el));
       } else {
-        // Graceful fallback — reveal everything immediately
         revealTargets.forEach((el) => el.classList.add('is-visible'));
       }
 
-      // ── Bio accordion ────────────────────────────────────────────
-      // One bio open at a time. Smooth max-height transition.
-      // aria-expanded toggled on trigger. Trigger text swaps.
-      const triggers = document.querySelectorAll('.team-member__trigger');
-
-      // Track currently open bio wrap — null when all closed
-      let openWrap = null;
+      // ── Bio drawer accordion ──────────────────────────────────────
+      // One drawer open at a time. Trigger text swaps. aria-expanded toggled.
+      const triggers = document.querySelectorAll('.member-card__trigger');
+      let openCard = null;
       let openTrigger = null;
 
-      const closeBio = (wrap, trigger) => {
+      const closeDrawer = (wrap, trigger) => {
         wrap.classList.remove('is-open');
+        wrap.closest('.member-card').classList.remove('is-expanded');
+        trigger.textContent = '[ VIEW_DOSSIER + ]';
         trigger.setAttribute('aria-expanded', 'false');
-        trigger.textContent = '+ Read Bio';
       };
 
-      const openBio = (wrap, trigger) => {
+      const openDrawer = (wrap, trigger) => {
         wrap.classList.add('is-open');
+        wrap.closest('.member-card').classList.add('is-expanded');
+        trigger.textContent = '[ CLOSE_DOSSIER − ]';
         trigger.setAttribute('aria-expanded', 'true');
-        trigger.textContent = '− Close';
       };
 
       triggers.forEach((trigger) => {
         trigger.addEventListener('click', () => {
-          const controlsId = trigger.getAttribute('aria-controls');
-          const wrap = document.getElementById(controlsId);
+          const card = trigger.closest('.member-card');
+          const wrap = card.querySelector('.member-card__bio-wrap');
           if (!wrap) return;
 
-          const isCurrentlyOpen = wrap.classList.contains('is-open');
+          const isOpen = wrap.classList.contains('is-open');
 
-          // Close whatever is currently open (if anything)
-          if (openWrap && openTrigger) {
-            closeBio(openWrap, openTrigger);
+          // Close currently open drawer first
+          if (openCard && openTrigger) {
+            closeDrawer(openCard, openTrigger);
           }
 
-          if (isCurrentlyOpen) {
-            // Clicked the open one — it's already been closed above.
-            // Clear tracking state.
-            openWrap = null;
+          if (isOpen) {
+            // Was open — already closed above, clear state
+            openCard = null;
             openTrigger = null;
           } else {
-            // Open the clicked bio
-            openBio(wrap, trigger);
-            openWrap = wrap;
+            // Open the clicked card
+            openDrawer(wrap, trigger);
+            openCard = wrap;
             openTrigger = trigger;
           }
         });
