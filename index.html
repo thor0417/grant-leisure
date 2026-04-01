@@ -58,209 +58,199 @@
     }
 
     /* ================================================================
-       1. ZERO-HERO PROTOCOL
+       NAVIGATION
     ================================================================ */
-    .hero-registry {
-      min-height: 65svh;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding-bottom: var(--space-xl);
-      padding-top: 140px;
+    .site-nav {
+      position: fixed;
+      inset-block-start: 0;
+      inset-inline: 0;
+      z-index: 200;
+      padding-block: 1rem;
+      background: transparent;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: all var(--dur-fast);
     }
 
-    .hero-label {
+    .site-nav__inner { display: flex; align-items: center; justify-content: space-between; padding-inline: var(--grid-gutter); }
+    .site-nav__logo img { height: 48px; width: auto; mix-blend-mode: multiply; transition: filter 0.3s ease; }
+
+    .site-nav__links { display: flex; align-items: center; gap: var(--space-lg); list-style: none; }
+    @media (max-width: 767px) { .site-nav__links { display: none; } }
+
+    .site-nav__links a {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 10px;
+      font-size: 0.9rem;
       font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--color-slate);
-      margin-bottom: var(--space-md);
-      display: block;
-    }
-
-    .hero-statement {
-      font-family: 'Playfair Display', serif;
-      font-weight: 900;
-      font-size: var(--type-display);
-      line-height: 0.95;
-      color: var(--color-near-black);
-      max-width: 12ch;
-    }
-
-    /* ================================================================
-       2. THE HOOK — CHAMELEON TRIGGER
-    ================================================================ */
-    .hook-section {
-      background: var(--color-near-black);
-      padding-block: var(--space-xl);
-      color: var(--color-white);
-    }
-
-    .hook-kicker {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 11px;
-      font-weight: 800;
-      color: var(--color-green);
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      margin-bottom: 1rem;
-      display: block;
+      color: rgba(17, 18, 18, 0.7);
+      text-decoration: none;
+      transition: color var(--dur-fast);
     }
 
-    .hook-h2 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: var(--type-heading);
-      font-weight: 800;
-      text-transform: uppercase;
-      line-height: 0.9;
-      max-width: 20ch;
-    }
+    /* Chameleon Inversion */
+    .nav-over-dark .site-nav__links a { color: rgba(255, 255, 255, 0.9); }
+    .nav-over-dark .site-nav__logo img { filter: brightness(0) invert(1); mix-blend-mode: normal; }
 
     /* ================================================================
-       3. SECTOR REGISTRY — BENTO
+       HERO REGISTRY (FIG_00)
     ================================================================ */
-    .sector-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      border-top: 0.5px solid rgba(17,18,18,0.1);
-      background: var(--color-white);
-    }
+    .hero-registry { min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: var(--space-xl); padding-top: 140px; }
+    .hero-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--color-slate); margin-bottom: var(--space-md); display: block; }
+    .hero-statement { font-family: 'Playfair Display', serif; font-weight: 900; font-size: var(--type-display); line-height: 0.95; color: var(--color-near-black); margin-bottom: var(--space-lg); }
+    .h1-accent { color: var(--color-green); }
 
+    .exhibit-frame { border: 0.5px solid var(--color-green); overflow: hidden; background: #F2F2F2; }
+    .exhibit-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .exhibit-caption { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 600; text-transform: uppercase; color: var(--color-slate); margin-top: 1rem; display: block; }
+
+    /* ================================================================
+       THE HOOK & NARRATIVE
+    ================================================================ */
+    .hook-section { background: var(--color-near-black); padding-block: var(--space-xl); color: var(--color-white); }
+    .hook-kicker { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 800; color: var(--color-green); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1rem; display: block; }
+    .hook-h2 { font-family: 'Barlow Condensed', sans-serif; font-size: var(--type-heading); font-weight: 800; text-transform: uppercase; line-height: 0.9; max-width: 20ch; }
+
+    .solution-narrative { background: var(--color-white); padding-block: var(--space-xl); }
+    .narrative-text { font-family: -apple-system, sans-serif; font-size: clamp(1.1rem, 1.8vw, 1.4rem); font-weight: 600; line-height: 1.5; color: var(--color-near-black); max-width: 800px; }
+
+    /* ================================================================
+       PARTNER REGISTRY (LOGO WALL)
+    ================================================================ */
+    .logo-grid { display: grid; grid-template-columns: repeat(5, 1fr); border: 0.5px solid rgba(17,18,18,0.1); }
+    @media (max-width: 767px) { .logo-grid { grid-template-columns: repeat(2, 1fr); } }
+    
+    .logo-cell { aspect-ratio: 3 / 2; display: flex; align-items: center; justify-content: center; background: var(--color-white); border: 0.5px solid rgba(17,18,18,0.1); padding: 2rem; transition: all var(--dur-fast) ease; }
+    .logo-cell img { max-width: 100%; height: auto; filter: grayscale(1) opacity(0.6); transition: all var(--dur-fast); }
+    .logo-cell:hover { border-color: var(--color-green); z-index: 2; }
+    .logo-cell:hover img { filter: grayscale(0) opacity(1); }
+
+    /* ================================================================
+       SECTOR REGISTRY (BENTO)
+    ================================================================ */
+    .sector-grid { display: grid; grid-template-columns: repeat(5, 1fr); border-top: 0.5px solid rgba(17,18,18,0.1); }
     @media (max-width: 1024px) { .sector-grid { grid-template-columns: repeat(3, 1fr); } }
     @media (max-width: 600px) { .sector-grid { grid-template-columns: 1fr; } }
 
-    .sector-cell {
-      padding: var(--space-lg) var(--space-md);
-      border: 0.5px solid rgba(17,18,18,0.1);
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      transition: all var(--dur-fast) var(--ease-out-expo);
-    }
-
-    .sector-cell:hover { border-color: var(--color-green); background: var(--color-off-white); }
-
-    .sector-icon {
-      width: 24px;
-      height: 24px;
-      border: 0.5px solid var(--color-green);
-      background: #EEEEEC;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .sector-label {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-
-    /* ================================================================
-       4. MAP EXHIBIT — FIG_05
-    ================================================================ */
-    .map-exhibit { padding-block: var(--space-xl); background: var(--color-off-white); }
-
-    .exhibit-frame {
-      border: 0.5px solid var(--color-green);
-      aspect-ratio: 21 / 9;
-      background: var(--color-near-black);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .exhibit-placeholder {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--color-green);
-      letter-spacing: 0.2em;
-    }
-
-    .exhibit-caption {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 10px;
-      font-weight: 600;
-      text-transform: uppercase;
-      color: var(--color-slate);
-      margin-top: 1rem;
-      display: block;
-    }
+    .sector-cell { padding: var(--space-lg) var(--space-md); border: 0.5px solid rgba(17,18,18,0.1); transition: all var(--dur-fast) var(--ease-out-expo); background: #FFF; }
+    .sector-cell:hover { border-color: var(--color-green); background: var(--color-off-white); transform: translateX(5px); }
+    .sector-stat { font-family: 'Barlow Condensed', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--color-green); display: block; margin-bottom: 0.5rem; }
+    .sector-label { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-near-black); }
 
     /* REVEAL LOGIC */
     .reveal { opacity: 0; transform: translateY(20px); transition: all 0.8s var(--ease-out-expo); }
     .reveal.is-visible { opacity: 1; transform: translateY(0); }
-
   </style>
 </head>
 <body>
 
-  <nav id="nav-master" class="site-nav" style="position:fixed; width:100%; z-index:1000; height:80px;"></nav>
+  <nav class="site-nav">
+    <div class="site-nav__inner">
+      <a href="index.html" class="site-nav__logo"><img src="assets/images/gli-logo.svg" alt="Grant Leisure" width="120" height="40"></a>
+      <ul class="site-nav__links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
 
   <main>
     <header class="hero-registry">
       <div class="spine-align">
         <span class="hero-label reveal">[ GLOBAL_REGISTRY_ALPHA ]</span>
-        <h1 class="hero-statement reveal">Profit from our experience.</h1>
+        <h1 class="hero-statement reveal">Profit from our experience<span class="h1-accent">.</span></h1>
+        <figure class="reveal">
+          <div class="exhibit-frame" style="aspect-ratio: 21 / 9;">
+            <img src="assets/images/attractions/london-eye.png" alt="London Eye Strategic Audit" width="1600" height="685">
+          </div>
+          <figcaption class="exhibit-caption">FIG_00 // STRATEGIC SITE AUDIT // LONDON EYE, UK // TECHNICAL OVERLAY</figcaption>
+        </figure>
       </div>
     </header>
 
-    <section class="hook-section hook-trigger">
+    <section class="hook-section dark-trigger">
       <div class="spine-align">
         <span class="hook-kicker reveal">Critical Intelligence</span>
         <h2 class="hook-h2 reveal">90% of new visitor attractions fail within the first five years.</h2>
       </div>
     </section>
 
-    <section class="sector-registry">
-      <div class="sector-grid">
-        <article class="sector-cell reveal">
-          <div class="sector-icon"><img src="assets/images/icons/themed-ent.svg" alt="" width="16" height="16"></div>
-          <h3 class="sector-label">Themed Entertainment</h3>
-        </article>
-        <article class="sector-cell reveal">
-          <div class="sector-icon"><img src="assets/images/icons/heritage.svg" alt="" width="16" height="16"></div>
-          <h3 class="sector-label">Cultural Heritage</h3>
-        </article>
-        <article class="sector-cell reveal">
-          <div class="sector-icon"><img src="assets/images/icons/urban.svg" alt="" width="16" height="16"></div>
-          <h3 class="sector-label">Urban Regeneration</h3>
-        </article>
-        <article class="sector-cell reveal">
-          <div class="sector-icon"><img src="assets/images/icons/resort.svg" alt="" width="16" height="16"></div>
-          <h3 class="sector-label">Resort Development</h3>
-        </article>
-        <article class="sector-cell reveal">
-          <div class="sector-icon"><img src="assets/images/icons/wildlife.svg" alt="" width="16" height="16"></div>
-          <h3 class="sector-label">Wildlife & Conservation</h3>
-        </article>
+    <section class="solution-narrative">
+      <div class="spine-align">
+        <p class="narrative-text reveal">
+          Before committing significant capital to an increasingly competitive market—you need certainty. Grant Leisure provides the strategic roadmap, operational rigor, and technical compliance required to ensure long-term viability.
+        </p>
       </div>
     </section>
 
-    <section class="map-exhibit">
+    <section class="partner-registry" style="background: var(--color-off-white); padding-block: var(--space-xl);">
       <div class="spine-align">
-        <figure class="reveal">
-          <div class="exhibit-frame">
-            <span class="exhibit-placeholder">ASSET: INTELLIGENCE_PLOT_MAP</span>
-          </div>
-          <figcaption class="exhibit-caption">FIG_05 // MARKET PENETRATION // 2,500+ PROJECTS COMPLETED // 35 COUNTRIES</figcaption>
-        </figure>
+        <span class="hero-label reveal">[ STRATEGIC_ALLIANCES // TIER_1_DESTINATIONS ]</span>
+        <div class="logo-grid reveal">
+          <div class="logo-cell"><img src="assets/images/logos/disney.png" alt="Disney"></div>
+          <div class="logo-cell"><img src="assets/images/logos/nbc-universal.png" alt="NBC Universal"></div>
+          <div class="logo-cell"><img src="assets/images/logos/paramount.png" alt="Paramount"></div>
+          <div class="logo-cell"><img src="assets/images/logos/lego-land.png" alt="Lego Land"></div>
+          <div class="logo-cell"><img src="assets/images/logos/ferrari-world.png" alt="Ferrari World"></div>
+          <div class="logo-cell"><img src="assets/images/logos/zsl.png" alt="ZSL"></div>
+          <div class="logo-cell"><img src="assets/images/logos/english-heritage.png" alt="English Heritage"></div>
+          <div class="logo-cell"><img src="assets/images/logos/sd-zoo.png" alt="San Diego Zoo"></div>
+          <div class="logo-cell"><img src="assets/images/logos/v&a.png" alt="V&A"></div>
+          <div class="logo-cell"><img src="assets/images/logos/harrahs.png" alt="Harrah's"></div>
+          <div class="logo-cell"><img src="assets/images/logos/anheuser-busch.png" alt="Anheuser-Busch"></div>
+          <div class="logo-cell"><img src="assets/images/logos/ocean-park.png" alt="Ocean Park"></div>
+          <div class="logo-cell"><img src="assets/images/logos/blue-water.png" alt="Blue Water"></div>
+          <div class="logo-cell"><img src="assets/images/logos/pr.png" alt="Parques Reunidos"></div>
+          <div class="logo-cell"><img src="assets/images/logos/universal.png" alt="Universal"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sector-registry">
+      <div class="sector-grid">
+        <article class="sector-cell reveal">
+          <span class="sector-stat">65</span>
+          <h3 class="sector-label">Theme Parks</h3>
+        </article>
+        <article class="sector-cell reveal">
+          <span class="sector-stat">60+</span>
+          <h3 class="sector-label">Stately Homes</h3>
+        </article>
+        <article class="sector-cell reveal">
+          <span class="sector-stat">27</span>
+          <h3 class="sector-label">Zoological Institutions</h3>
+        </article>
+        <article class="sector-cell reveal">
+          <span class="sector-stat">35</span>
+          <h3 class="sector-label">Museums</h3>
+        </article>
+        <article class="sector-cell reveal">
+          <span class="sector-stat">5</span>
+          <h3 class="sector-label">World Heritage Sites</h3>
+        </article>
       </div>
     </section>
   </main>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const observer = new IntersectionObserver((entries) => {
+      // Reveal
+      const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('is-visible'); });
       }, { threshold: 0.1 });
-      document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+      document.querySelectorAll('.reveal').forEach(r => revealObserver.observe(r));
+
+      // Nav Chameleon
+      const nav = document.querySelector('.site-nav');
+      const darkTrigger = document.querySelector('.dark-trigger');
+      const navObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => { nav.classList.toggle('nav-over-dark', e.isIntersecting); });
+      }, { threshold: 0, rootMargin: "-80px 0px 0px 0px" });
+      if(darkTrigger) navObserver.observe(darkTrigger);
     });
   </script>
 </body>
