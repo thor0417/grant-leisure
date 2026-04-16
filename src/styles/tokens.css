@@ -1,0 +1,135 @@
+/* =============================================================================
+   tokens.css -- Grant Leisure "Visible Dominance" v2
+   THE single source of truth for all design values.
+   No other file may hardcode a color, font, spacing, or motion value.
+   Import this file first in global.css.
+   ============================================================================= */
+
+:root {
+
+  /* ---------------------------------------------------------------------------
+     COLOR
+     Non-negotiable brand palette per "Institutional Dominance" brief v2.
+  --------------------------------------------------------------------------- */
+
+  --gl-green:  #5C9387; /* Primary action -- key section backgrounds, signal elements */
+  --gl-blue:   #5871A5; /* Heritage anchor -- secondary headers, sub-navigation       */
+  --gl-white:  #FFFFFF; /* Base -- primary background and high-contrast text           */
+  --gl-navy:   #323E48; /* Command -- body copy and primary navigation links           */
+
+  /* Derived surface variants -- do not introduce new hex values */
+  --gl-green-dark:  #4a7a6e; /* Hover state for green surfaces  */
+  --gl-blue-dark:   #46598a; /* Hover state for blue surfaces   */
+  --gl-navy-light:  #4a5a68; /* Secondary text on dark surfaces */
+  --gl-grey-soft:   #f4f5f6; /* Off-white section alternates    */
+
+
+  /* ---------------------------------------------------------------------------
+     TYPOGRAPHY
+  --------------------------------------------------------------------------- */
+
+  --font-header: 'Fraunces', serif;   /* All section headers -- archival authority */
+  --font-body:   'Inter', sans-serif; /* Body copy, stats, data -- maximum legibility */
+
+
+  /* ---------------------------------------------------------------------------
+     TYPE SCALE
+     Built with clamp() for fluid scaling between mobile (360px) and desktop (1440px).
+     Minimum enforced for 70-80yo demographic legibility requirement.
+  --------------------------------------------------------------------------- */
+
+  --text-display: clamp(3.5rem,  8vw,  7rem);    /* Hero headline only            */
+  --text-h1:      clamp(2.5rem,  5vw,  4.5rem);  /* Primary section headers       */
+  --text-h2:      clamp(1.75rem, 3vw,  2.75rem); /* Sub-section headers           */
+  --text-h3:      clamp(1.25rem, 2vw,  1.75rem); /* Card and component headers    */
+  --text-body-lg: clamp(1.125rem,1.5vw,1.375rem);/* Lead paragraphs -- min 18px   */
+  --text-body:    clamp(1rem,    1.25vw,1.125rem);/* Standard body copy            */
+  --text-sm:      0.875rem;                       /* Labels, captions, legal       */
+
+  /* Line height */
+  --leading-tight:  1.2;  /* Display and large headers */
+  --leading-normal: 1.5;  /* Sub-headers               */
+  --leading-loose:  1.7;  /* Body copy -- senior legibility requirement */
+
+  /* Letter spacing */
+  --tracking-tight:  -0.02em; /* Display headers */
+  --tracking-normal:  0;
+  --tracking-wide:    0.08em; /* Eyebrow labels and counters */
+  --tracking-widest:  0.15em; /* All-caps section labels */
+
+
+  /* ---------------------------------------------------------------------------
+     SPACING
+     Base unit: 1rem = 16px
+  --------------------------------------------------------------------------- */
+
+  --space-xs:   0.5rem;   /*  8px */
+  --space-sm:   1rem;     /* 16px */
+  --space-md:   2rem;     /* 32px */
+  --space-lg:   4rem;     /* 64px */
+  --space-xl:   8rem;     /* 128px */
+  --space-2xl:  12rem;    /* 192px */
+
+  /* Section vertical padding -- generous for senior hit-state comfort */
+  --section-pad-y: clamp(4rem, 8vw, 10rem);
+
+  /* Minimum touch target -- WCAG 2.1 / senior demographic requirement */
+  --hit-min: 48px;
+
+
+  /* ---------------------------------------------------------------------------
+     LAYOUT
+  --------------------------------------------------------------------------- */
+
+  --container-max:  1440px;
+  --container-pad:  clamp(1.5rem, 5vw, 6rem); /* Horizontal gutter */
+  --grid-cols:      12;
+  --grid-gap:       clamp(1rem, 2vw, 2rem);
+
+
+  /* ---------------------------------------------------------------------------
+     BORDER RADIUS
+  --------------------------------------------------------------------------- */
+
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   16px;
+  --radius-full: 9999px;
+
+
+  /* ---------------------------------------------------------------------------
+     Z-INDEX STACK
+  --------------------------------------------------------------------------- */
+
+  --z-base:    1;
+  --z-overlay: 10;
+  --z-nav:     100;
+  --z-modal:   1000;
+
+
+  /* ---------------------------------------------------------------------------
+     MOTION
+     --ease-stellar is the signature easing for all "Power Scroll" transitions.
+     Inspired by spring physics -- fast start, smooth settle.
+  --------------------------------------------------------------------------- */
+
+  --ease-stellar:     cubic-bezier(0.16, 1, 0.3, 1); /* Signature GLI transition easing */
+  --ease-standard:    cubic-bezier(0.4, 0, 0.2, 1);  /* General UI transitions          */
+  --ease-in:          cubic-bezier(0.4, 0, 1, 1);    /* Elements leaving the viewport   */
+  --ease-out:         cubic-bezier(0, 0, 0.2, 1);    /* Elements entering the viewport  */
+
+  --duration-fast:    0.3s; /* Hover states, micro-interactions  */
+  --duration-default: 0.6s; /* Section reveals, card transitions */
+  --duration-slow:    1.2s; /* Hero and full-bleed sequences     */
+
+
+  /* ---------------------------------------------------------------------------
+     SHADOW
+  --------------------------------------------------------------------------- */
+
+  --shadow-sm:  0 1px 3px rgba(50, 62, 72, 0.12);
+  --shadow-md:  0 4px 16px rgba(50, 62, 72, 0.16);
+  --shadow-lg:  0 16px 48px rgba(50, 62, 72, 0.20);
+  --shadow-xl:  0 32px 80px rgba(50, 62, 72, 0.24);
+
+}
