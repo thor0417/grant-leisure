@@ -1,0 +1,628 @@
+/* =============================================================
+   components.css
+   Scope: #hero, #logic, #about, #proof, #reach
+   Session 2 -- Grant Leisure "Visible Dominance" v2
+   All color values via CSS custom properties from tokens.css.
+   Mobile-first. min-width breakpoints scale up.
+   No magic numbers without explanatory comments.
+   ============================================================= */
+
+
+/* =============================================================
+   NAV
+   Sticky. Glass effect on scroll (class .is-scrolled added by JS).
+   48px min height for senior touch targets.
+   ============================================================= */
+
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav);
+  /* Transparent over hero video by default */
+  background: transparent;
+  transition: background var(--duration-default) var(--ease-stellar),
+              box-shadow var(--duration-default) var(--ease-stellar);
+}
+
+.site-nav.is-scrolled {
+  background: var(--gl-navy);
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.18); /* Elevation cue -- not decorative */
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* 20px minimum side breathing room on small screens */
+  padding: 0 clamp(1.25rem, 4vw, 3rem);
+  /* 72px nav height -- comfortably above 48px minimum touch target */
+  height: 72px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.nav-logo img {
+  display: block;
+}
+
+/* Mobile hamburger -- hidden on desktop */
+.nav-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 48px;
+  height: 48px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 8px;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--gl-white);
+  border-radius: 2px;
+  transition: transform var(--duration-fast) var(--ease-stellar),
+              opacity var(--duration-fast) var(--ease-stellar);
+}
+
+/* Hamburger open state -- JS adds .is-open to .nav-toggle */
+.nav-toggle.is-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nav-toggle.is-open span:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle.is-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Nav links: stacked on mobile, hidden until toggle fired */
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 72px; /* aligns flush under nav bar */
+  left: 0;
+  right: 0;
+  background: var(--gl-navy);
+  list-style: none;
+  margin: 0;
+  padding: 1rem 0 2rem;
+  transform: translateY(-110%);
+  transition: transform var(--duration-default) var(--ease-stellar);
+  z-index: var(--z-overlay);
+}
+
+/* JS adds .is-open to ul.nav-links when toggle fires */
+.nav-links.is-open {
+  transform: translateY(0);
+}
+
+.nav-links li {
+  display: flex;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  /* 56px tall -- above 48px minimum */
+  min-height: 56px;
+  padding: 0 clamp(1.25rem, 4vw, 3rem);
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--gl-white);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-stellar);
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: var(--gl-green);
+}
+
+/* CTA pill -- CONTACT */
+.nav-link.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem clamp(1.25rem, 4vw, 3rem);
+  padding: 0 2rem;
+  min-height: 48px;
+  width: auto;
+  background: var(--gl-green);
+  color: var(--gl-white);
+  border-radius: 4px;
+  transition: background var(--duration-fast) var(--ease-stellar);
+}
+
+.nav-link.nav-cta:hover,
+.nav-link.nav-cta:focus-visible {
+  background: var(--gl-blue);
+  color: var(--gl-white);
+}
+
+@media (min-width: 768px) {
+  .nav-toggle { display: none; }
+
+  .nav-links {
+    flex-direction: row;
+    align-items: center;
+    position: static;
+    background: transparent;
+    padding: 0;
+    gap: clamp(1rem, 2vw, 2.5rem);
+    transform: none;
+    transition: none;
+  }
+
+  .nav-links li { display: block; }
+
+  .nav-link {
+    min-height: 48px;
+    padding: 0;
+    width: auto;
+  }
+
+  .nav-link.nav-cta {
+    margin: 0;
+    padding: 0 1.5rem;
+  }
+}
+
+
+/* =============================================================
+   01 // HERO
+   Full-bleed video. h1 centered over overlay. Scroll cue below.
+   ============================================================= */
+
+#hero {
+  position: relative;
+  width: 100%;
+  /* 100svh -- safe area aware on iOS; fallback 100vh */
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-base);
+}
+
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Slight desaturation so text remains legible without over-darkening */
+  filter: saturate(1.15) brightness(0.72);
+}
+
+/* Dark gradient overlay -- top is lighter (nav), bottom is darker (text anchor) */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(50, 62, 72, 0.35) 0%,   /* --gl-navy at 35% -- nav zone */
+    rgba(50, 62, 72, 0.15) 40%,  /* mid -- let video breathe */
+    rgba(26, 26, 26, 0.60) 100%  /* deep anchor at base for headline */
+  );
+}
+
+.hero-content {
+  position: relative;
+  z-index: var(--z-overlay);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 clamp(1.25rem, 5vw, 4rem);
+  /* Push content slightly above center for visual balance */
+  margin-top: -6vh;
+}
+
+.hero-headline {
+  font-family: var(--font-header);
+  /* clamp: 52px mobile -- scales to 120px at 1440px wide */
+  font-size: clamp(3.25rem, 8vw + 1rem, 7.5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--gl-white);
+  text-transform: uppercase;
+  /* Crisp rendering on video backgrounds */
+  -webkit-font-smoothing: antialiased;
+  /* Subtle text shadow for legibility on any frame of video */
+  text-shadow: 0 4px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Scroll cue -- animated vertical line */
+.hero-scroll-cue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: clamp(2rem, 4vh, 3.5rem);
+  min-height: 48px; /* touch target */
+  min-width: 48px;
+}
+
+.scroll-cue-line {
+  display: block;
+  width: 2px;
+  /* 48px line -- clear visual cue without crowding */
+  height: 48px;
+  background: var(--gl-white);
+  opacity: 0.7;
+  animation: scrollPulse 2s var(--ease-stellar) infinite;
+  transform-origin: top center;
+}
+
+@keyframes scrollPulse {
+  0%   { transform: scaleY(0); opacity: 0; }
+  40%  { transform: scaleY(1); opacity: 0.7; }
+  100% { transform: scaleY(1); opacity: 0; }
+}
+
+
+/* =============================================================
+   02 // LOGIC
+   Psychological stop-point. Dark navy surface. Large stat left.
+   Statement right. No section label.
+   ============================================================= */
+
+#logic {
+  background: var(--gl-navy);
+  /* Section padding uses the clamp token from tokens.css */
+  padding: var(--section-pad-y) clamp(1.25rem, 5vw, 4rem);
+}
+
+.logic-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+/* Oversized "90%" -- the visual anchor of the section */
+.logic-stat {
+  font-family: var(--font-header);
+  /* 120px mobile minimum -- must dominate the screen */
+  font-size: clamp(7.5rem, 20vw, 16rem);
+  font-weight: 900;
+  line-height: 0.9;
+  color: var(--gl-green);
+  letter-spacing: -0.04em;
+  margin: 0;
+  /* Pulls left edge flush -- optical alignment with body text */
+  margin-left: -0.05em;
+}
+
+.logic-text {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2vw, 1.75rem);
+}
+
+.logic-statement {
+  font-family: var(--font-header);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--gl-white);
+  margin: 0;
+}
+
+.logic-resolve {
+  font-family: var(--font-body);
+  font-size: clamp(1.125rem, 1.5vw, 1.375rem);
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--gl-green);
+  margin: 0;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+  .logic-inner {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: clamp(3rem, 6vw, 6rem);
+  }
+
+  /* Stat takes a fixed proportion of the row */
+  .logic-stat {
+    flex: 0 0 auto;
+    /* 40% of row width at mid breakpoint */
+    width: clamp(180px, 30vw, 340px);
+  }
+
+  .logic-text {
+    flex: 1;
+    /* Vertically center the text block against the oversized number */
+    padding-top: clamp(0.5rem, 2vw, 2rem);
+  }
+}
+
+
+/* =============================================================
+   03 // ABOUT
+   White surface. Text left. Tourist photo right.
+   Visible h2: "WE'VE BEEN MAKING PEOPLE SMILE SINCE 1982"
+   ============================================================= */
+
+#about {
+  background: var(--gl-white);
+  padding: var(--section-pad-y) clamp(1.25rem, 5vw, 4rem);
+}
+
+.about-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.5rem, 5vw, 5rem);
+}
+
+.about-text {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.about-heading {
+  font-family: var(--font-header);
+  font-size: clamp(2rem, 4vw + 0.5rem, 3.75rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--gl-navy);
+  margin: 0;
+  /* Green accent underline -- signals "start" of the brand story */
+  padding-bottom: clamp(1rem, 2vw, 1.5rem);
+  border-bottom: 4px solid var(--gl-green);
+}
+
+.about-origin {
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  line-height: 1.7;
+  color: var(--gl-black);
+  margin: 0;
+}
+
+.about-narrative {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.7;
+  color: var(--gl-black);
+  margin: 0;
+  /* Slightly muted against the origin paragraph */
+  opacity: 0.85;
+}
+
+.about-figure {
+  margin: 0;
+  /* Rounded corners -- human, warm -- contrasts the hard data of #proof */
+  border-radius: 8px;
+  overflow: hidden;
+  /* Elevation lifts the photo off the white background */
+  box-shadow: 0 16px 64px rgba(50, 62, 72, 0.12);
+}
+
+.about-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+@media (min-width: 900px) {
+  .about-inner {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .about-text {
+    /* Text takes 55% -- dominant because it carries the brand story */
+    flex: 0 0 55%;
+  }
+
+  .about-figure {
+    flex: 1;
+    /* Max height to prevent the photo from becoming a poster */
+    max-height: 560px;
+  }
+
+  .about-figure img {
+    height: 100%;
+    max-height: 560px;
+  }
+}
+
+
+/* =============================================================
+   04 // PROOF
+   Green surface. 6-icon grid. Scale summary below.
+   No section label.
+   ============================================================= */
+
+#proof {
+  background: var(--gl-green);
+  padding: var(--section-pad-y) clamp(1.25rem, 5vw, 4rem);
+}
+
+.proof-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3rem, 5vw, 5rem);
+}
+
+/* 2-column grid on mobile, 3-col mid, 6-col desktop */
+.proof-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(2rem, 4vw, 3.5rem);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 600px) {
+  .proof-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .proof-grid {
+    /* All 6 items in one row at desktop -- horizontal read like a counter */
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+.proof-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+}
+
+.proof-item img {
+  /* 64px icon -- WCAG-safe size, not a touch target so no 48px rule applies */
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  /* White tint to unify icons on the green background */
+  filter: brightness(0) invert(1);
+}
+
+.proof-number {
+  font-family: var(--font-header);
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--gl-white);
+  letter-spacing: -0.03em;
+}
+
+.proof-label {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--gl-white);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+/* Scale summary bar -- 43 Countries | 5 Continents | 2,500+ Projects */
+.proof-scale {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+  /* Separator line above to visually anchor the summary */
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+  padding-top: clamp(2rem, 3vw, 2.5rem);
+}
+
+.proof-scale-item {
+  font-family: var(--font-header);
+  font-size: clamp(1.125rem, 2.5vw, 1.75rem);
+  font-weight: 700;
+  color: var(--gl-white);
+  letter-spacing: -0.01em;
+}
+
+.proof-scale-divider {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.5);
+  user-select: none;
+}
+
+
+/* =============================================================
+   05 // REACH
+   Dark navy surface. Map full-width. Country copy centered below.
+   No section label.
+   ============================================================= */
+
+#reach {
+  background: var(--gl-navy);
+  padding: var(--section-pad-y) clamp(1.25rem, 5vw, 4rem);
+}
+
+.reach-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.5rem, 4vw, 4rem);
+}
+
+.reach-map {
+  margin: 0;
+  /* Negative horizontal margin bleeds map to near-full viewport width */
+  margin-left: clamp(-1.25rem, -5vw, -4rem);
+  margin-right: clamp(-1.25rem, -5vw, -4rem);
+  overflow: hidden;
+}
+
+.reach-map img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* Vibrant saturation boost per brief: "high-saturation map" */
+  filter: saturate(1.4) brightness(1.05);
+}
+
+.reach-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.reach-countries {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  font-weight: 600;
+  line-height: 1.8;
+  color: var(--gl-green);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.reach-statement {
+  font-family: var(--font-header);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--gl-white);
+  margin: 0;
+  max-width: 680px; /* Constrains line length for senior readability */
+}
