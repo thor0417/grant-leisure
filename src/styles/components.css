@@ -286,8 +286,11 @@
 
 #logic {
   background: var(--gl-navy);
-  /* Section padding uses the clamp token from tokens.css */
   padding: var(--section-pad-y) clamp(1.25rem, 5vw, 4rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
 }
 
 .logic-inner {
@@ -301,15 +304,14 @@
 /* Oversized "90%" -- the visual anchor of the section */
 .logic-stat {
   font-family: var(--font-header);
-  /* 120px mobile minimum -- must dominate the screen */
   font-size: clamp(7.5rem, 20vw, 16rem);
   font-weight: 900;
   line-height: 0.9;
   color: var(--gl-green);
   letter-spacing: -0.04em;
   margin: 0;
-  /* Pulls left edge flush -- optical alignment with body text */
   margin-left: -0.05em;
+  white-space: nowrap;
 }
 
 .logic-text {
@@ -336,6 +338,7 @@
   margin: 0;
   letter-spacing: 0.02em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 @media (min-width: 768px) {
