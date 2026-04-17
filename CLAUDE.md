@@ -1,6 +1,6 @@
 # CLAUDE.md -- Grant Leisure "Visible Dominance" v2
 # Master Context Document -- Paste into every new chat session at the start.
-# Last Updated: 2026
+# Last Updated: 2026-04-17
 
 ---
 
@@ -9,21 +9,30 @@
 - Client: Grant Leisure International (GLI)
 - Project: "Visible Dominance" Power Scroll Rebuild
 - Version: 2.0
-- Stack: React, Tailwind CSS, Framer Motion
-- Approach: Option A Hybrid -- Tailwind for layout/spacing, CSS custom properties for brand tokens
-- Repo Structure: Vite + React scaffold
+- Repo: thor0417/grant-leisure
+- Stack: HTML + CSS + Vanilla JS + GSAP (via CDN)
+- Workflow: Files produced by Claude, created in text editor, pushed via GitHub Desktop
+- No terminal. No npm. No React. No build tools.
+
+---
+
+## WHY THIS STACK
+
+HTML/CSS/Vanilla JS was chosen deliberately over React/Vite for three reasons:
+1. Matches the user's existing workflow -- text editor + GitHub Desktop
+2. Lower token cost per session -- lean files, no component wrapper syntax
+3. GSAP via CDN handles all scroll animations without installation
 
 ---
 
 ## FOLDER STRUCTURE
 
 ```
-project-root/
+grant-leisure/
 ├── public/
 │   └── assets/
 │       ├── fonts/
 │       └── images/
-│           ├── attractions/
 │           ├── icons/
 │           │   ├── icon-fair.png
 │           │   ├── icon-homes.png
@@ -31,221 +40,209 @@ project-root/
 │           │   ├── icon-parks.png
 │           │   ├── icon-world-heritage.png
 │           │   └── icon-zoo.png
-│           ├── logos/
-│           │   ├── Universal.png
-│           │   ├── V&A.png
-│           │   ├── ZSL.png
-│           │   ├── anheuser-busch.png
-│           │   ├── bluewater.png
-│           │   ├── cesars-entertainment.png
-│           │   ├── disney-parks.png
-│           │   ├── english-heritage.png
-│           │   ├── ferrari-world.png
-│           │   ├── lego.png
-│           │   ├── merlin-entertainment.png
-│           │   ├── nbc-universal.png
-│           │   ├── ocean-park.png
-│           │   ├── paramount.png
-│           │   ├── parques-reunidos.png
-│           │   ├── sd-zoo.png
-│           │   └── village-roadshow.png
+│           ├── logos/          (17 partner logo files)
 │           ├── maps/
 │           │   └── map.png
-│           ├── team/
-│           │   ├── andrew-coates.png
-│           │   ├── andy-grant.png
-│           │   ├── claus-frimand.png
-│           │   ├── clive-jones.png
-│           │   ├── edmund-rowley-williams.jpg
-│           │   ├── keith-robertson.png
-│           │   ├── philip-kwong.png
-│           │   ├── raul-rios.png
-│           │   └── robert-liljenwall.png
+│           ├── team/           (9 headshot files)
 │           ├── gli-logo.png
 │           ├── gli-logo.svg
 │           └── tourist.jpg
 ├── src/
-│   ├── styles/
-│   │   ├── tokens.css        <-- ALL design tokens live here. Never duplicate values.
-│   │   ├── typography.css    <-- Font-face declarations and type scale only.
-│   │   └── global.css        <-- Reset, base element styles, token imports.
-│   ├── components/
-│   │   ├── Hero.jsx
-│   │   ├── Logic.jsx
-│   │   ├── About.jsx
-│   │   ├── Proof.jsx
-│   │   ├── Reach.jsx
-│   │   ├── Expertise.jsx
-│   │   ├── Validation.jsx
-│   │   ├── Leadership.jsx
-│   │   ├── Engage.jsx
-│   │   └── Footer.jsx
-│   ├── pages/
-│   │   └── Projects.jsx
-│   ├── App.jsx
-│   └── main.jsx
-├── tailwind.config.js
+│   └── styles/
+│       ├── tokens.css
+│       ├── typography.css
+│       └── global.css
+├── js/
+│   └── main.js
 ├── index.html
 └── CLAUDE.md
 ```
 
 ---
 
-## SECTION ID MAP
+## SECTION MAP
 
-| ID          | Section Name     | Component File   | Chat Owner  |
-|-------------|------------------|------------------|-------------|
-| #hero       | 01 Hero          | Hero.jsx         | Index Chat A |
-| #logic      | 02 The Logic     | Logic.jsx        | Index Chat A |
-| #about      | 03 About         | About.jsx        | Index Chat A |
-| #proof      | 04 The Proof     | Proof.jsx        | Index Chat A |
-| #reach      | 05 The Reach     | Reach.jsx        | Index Chat A |
-| #expertise  | 06 The Expertise | Expertise.jsx    | Index Chat B |
-| #validation | 07 Validation    | Validation.jsx   | Index Chat B |
-| #leadership | 08 Leadership    | Leadership.jsx   | Index Chat B |
-| #engage     | 09 Engage        | Engage.jsx       | Index Chat B |
-| #footer     | 11 Footer        | Footer.jsx       | Index Chat B |
+CRITICAL: Section IDs are internal code labels only.
+They never appear as headings on the live site.
+The "Visitor Sees" column is the law.
+
+| ID            | Visitor Sees                                               | Visible Header |
+|---------------|------------------------------------------------------------|----------------|
+| #hero         | "PROFIT FROM OUR EXPERIENCE." -- full bleed video          | No             |
+| #logic        | "90% of operational failures..." -- statement only         | No             |
+| #about        | "WE'VE BEEN MAKING PEOPLE SMILE SINCE 1982" is the header  | Yes            |
+| #proof        | Numbers and icons -- visual speaks for itself              | No             |
+| #reach        | Map + country list -- visual speaks for itself             | No             |
+| #expertise    | "SERVICES" -- visitor needs context                        | Yes            |
+| #validation   | Partner logos -- single trust line above only              | Minimal        |
+| #leadership   | "THE TEAM" -- visitor needs context                        | Yes            |
+| #testimonials | Quotes flow -- no header, words land on their own          | No             |
+| #engage       | "OUR GLOBAL EXPERIENCE IN YOUR BACK POCKET" is the header  | Yes            |
+| #footer       | Legal line only                                            | No             |
 
 ---
 
-## DESIGN TOKEN REFERENCE
+## DESIGN TOKENS
 
-All token values live in /src/styles/tokens.css.
-This section lists token NAMES only for reference. Never hardcode values in components.
+All values live in src/styles/tokens.css.
+Never hardcode any of these values anywhere else.
 
-### Color Tokens
-- --gl-green      (Primary action, key section backgrounds)
-- --gl-blue       (Heritage anchor, secondary headers)
-- --gl-white      (Base background, high-contrast text)
-- --gl-navy       (Body copy, primary navigation)
+### Color
+- --gl-green:  #5C9387   (primary action, key section backgrounds)
+- --gl-blue:   #5871A5   (heritage anchor, secondary headers)
+- --gl-white:  #FFFFFF   (base background, high-contrast text)
+- --gl-navy:   #323E48   (navigation, dark surface text)
+- --gl-black:  #1A1A1A   (body copy on white -- not pure black, senior-friendly)
 
-### Typography Tokens
-- --font-header   (Fraunces -- all section headers)
-- --font-body     (Inter -- body copy, stats, data)
+### Typography
+- --font-header: 'Fraunces', serif
+- --font-body:   'Inter', sans-serif
 
-### Type Scale Tokens
-- --text-display  (Hero and oversized display headers)
+### Type Scale
+- --text-display  (Hero headline only -- largest on page)
 - --text-h1       (Primary section headers)
 - --text-h2       (Sub-section headers)
 - --text-h3       (Card and component headers)
 - --text-body-lg  (Lead paragraphs -- minimum 18px)
 - --text-body     (Standard body copy)
-- --text-sm       (Labels, captions)
+- --text-sm       (Labels, captions, legal)
 
-### Spacing Tokens
+### Spacing
 - --space-xs through --space-2xl
-- --section-pad-y (Vertical section padding via clamp)
+- --section-pad-y (vertical section padding via clamp)
 
-### Z-Index Tokens
+### Z-Index
 - --z-base / --z-overlay / --z-nav / --z-modal
 
-### Motion Tokens
+### Motion
 - --ease-stellar / --duration-default / --duration-fast
+
+---
+
+## VISUAL REFERENCES
+
+Three sources inform every visual decision.
+
+1. OLD GRANT LEISURE SITE (screenshots in project files)
+   Purpose: colour continuity, existing brand DNA, Bob's approval.
+   Note: #5C9387 green and #5871A5 blue must be honoured throughout.
+
+2. STELLAR MEDIA CORP (screenshot in project files)
+   Purpose: layout energy, section pacing, dark/light alternation.
+   Note: Large verb-first headers. Bold stats. Clean team cards.
+
+3. BRIEF v1 -- "Institutional Dominance"
+   Purpose: tone, copy rules, verb-first headers, demographic requirements.
 
 ---
 
 ## CODING HARD RULES
 
-These rules are non-negotiable on every line of every file in this project.
-
-1.  NEVER hardcode color hex values -- always reference CSS custom properties
-2.  NEVER base64-encode images -- always use /public/assets/ paths
+1.  NEVER hardcode color hex values -- always CSS custom properties
+2.  NEVER base64-encode images -- always /assets/images/ paths
 3.  NEVER use var -- const and let only
-4.  NEVER use inline onclick handlers in HTML -- addEventListener only
+4.  NEVER use inline onclick handlers -- addEventListener only
 5.  NEVER use a div where a semantic element exists
 6.  ONE h1 per page -- always
-7.  Every img tag requires width, height, and alt attributes
-8.  Lazy-load all below-fold images with loading="lazy"
-9.  All fetch calls must be wrapped in try/catch
-10. Mobile-first CSS -- base styles target small screens, min-width queries scale up
-11. Minimum 48px touch targets on ALL interactive elements (senior demographic requirement)
-12. Every section header leads with a verb: PROFIT, ELIMINATE, MAXIMIZE, SECURE, etc.
-13. No em dashes anywhere -- use double hyphens in copy and comments
-14. No magic numbers in CSS without an explanatory comment on the same line
-15. DRY principle -- no repeated utility patterns, no redundant blocks across components
+7.  Every img requires width, height, and alt
+8.  Lazy-load all below-fold images: loading="lazy"
+9.  All fetch calls wrapped in try/catch
+10. Mobile-first CSS -- base styles small, min-width queries scale up
+11. Minimum 48px touch targets on ALL interactive elements
+12. Every visible section header leads with a verb
+13. No em dashes anywhere -- double hyphens only
+14. No magic numbers in CSS without an explanatory comment
+15. DRY -- no repeated patterns, no redundant blocks
 
 ---
 
 ## DEMOGRAPHIC REQUIREMENT
 
-Target user: Senior stakeholder, 70-80 years old.
-
-- Minimum body font size: 18px (1.125rem)
-- Display headers: 80px+ on desktop, set via clamp() for fluid scaling
-- All interactive hit-states: minimum 48x48px touch target
-- High contrast required on all colored backgrounds (WCAG AA minimum 4.5:1)
-- Generous line-height: minimum 1.6 on body copy
-
----
-
-## ASSET REFERENCE
-
-| Asset              | Path                                                                                           |
-|--------------------|-----------------------------------------------------------------------------------------------|
-| Hero video         | https://res.cloudinary.com/dyceiucla/video/upload/f_auto,q_auto/v1776321502/hero.mp4_r5srrb.mp4 |
-| GLI Logo SVG       | /assets/images/gli-logo.svg                                                                   |
-| GLI Logo PNG       | /assets/images/gli-logo.png                                                                   |
-| Tourist photo      | /assets/images/tourist.jpg                                                                    |
-| Map                | /assets/images/maps/map.png                                                                   |
-| Icons directory    | /assets/images/icons/                                                                         |
-| Partner logos dir  | /assets/images/logos/                                                                         |
-| Team photos dir    | /assets/images/team/                                                                          |
+Target: Senior stakeholder, 70-80 years old.
+- Minimum body font: 18px
+- Display headers: 80px+ desktop via clamp()
+- Touch targets: 48x48px minimum
+- Line height: 1.6 minimum on body copy
+- Contrast: WCAG AA minimum 4.5:1
 
 ---
 
-## SECTION COPY REFERENCE
+## GSAP CDN
 
-### Section 01 -- Hero
-- Headline: PROFIT FROM OUR EXPERIENCE.
+Paste before closing body tag in index.html. No install required.
 
-### Section 02 -- The Logic
-- Impact Statement: 90% of operational failures are a result of improper planning.
-- Solution copy: We eliminate the guesswork. We secure the profit.
+```html
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+```
 
-### Section 03 -- About
-- Headline: WE'VE BEEN MAKING PEOPLE SMILE SINCE 1982
-- Origin: In 1980, Andy Grant awoke with a vision that would redefine the industry: the "Tourist"
-  as the primary consideration. We transitioned from conceptual dreaming to an experiential
-  approach that ensures every visitor's need is met.
-- Narrative: Grant Leisure is a global consortium of entertainment and attractions executives
-  with decades of experience as developers and operators. When it comes to running visitor
-  attractions, our team has seen it all.
+---
 
-### Section 04 -- The Proof (Counter Values + Icon Mapping)
-| Counter Value | Label                  | Icon File                |
-|---------------|------------------------|--------------------------|
-| 65+           | Theme Parks            | icon-parks.png           |
-| 60+           | Stately Homes          | icon-homes.png           |
-| 27            | Zoological Institutions| icon-zoo.png             |
-| 35            | Museums                | icon-museums.png         |
-| 5             | World Heritage Sites   | icon-world-heritage.png  |
-| 2             | World Expositions      | icon-fair.png            |
+## ASSET PATHS
 
-- Scale Summary: 43 Countries. 5 Continents. 2,500+ Projects.
+| Asset         | Path                                                                                             |
+|---------------|--------------------------------------------------------------------------------------------------|
+| Hero video    | https://res.cloudinary.com/dyceiucla/video/upload/f_auto,q_auto/v1776321502/hero.mp4_r5srrb.mp4 |
+| GLI Logo SVG  | /assets/images/gli-logo.svg                                                                      |
+| Tourist photo | /assets/images/tourist.jpg                                                                       |
+| Map           | /assets/images/maps/map.png                                                                      |
+| Icons         | /assets/images/icons/                                                                            |
+| Logos         | /assets/images/logos/                                                                            |
+| Team          | /assets/images/team/                                                                             |
 
-### Section 05 -- The Reach
-- Copy: From Canada, USA, UK, Europe, Africa, UAE, Malaysia, China, Japan, Australia.
-  Our influence is etched into the world's most iconic skylines.
+---
 
-### Section 06 -- The Expertise (Services)
-- Market Analysis: Determining demand through surgical evaluation of occupancy, absorption,
-  and revenue trends.
-- Development Planning: Balancing economic planning with physical design to optimize
-  amenities and facility sizing.
-- Financial Feasibility: Investor-grade modeling for cash flow projections and sensitivity testing.
-- Funding Assistance: Securing capital through a sovereign network of global investors
-  and financiers.
-- Operational Planning: Bespoke optimization of visitor circulation, marketing, and
-  staff training.
-- Turn-Key Management: Direct executive oversight from pre-opening through long-term
-  stabilization.
+## COPY REFERENCE
 
-### Section 07 -- Validation
-- Headline: TRUSTED BY THE WORLD'S MOST ACCLAIMED BRANDS AND ATTRACTIONS.
-- 17 partner logos in /assets/images/logos/
+### #hero
+PROFIT FROM OUR EXPERIENCE.
 
-### Section 08 -- Leadership
-Display order is final. Do not reorder.
+### #logic
+90% of operational failures are a result of improper planning.
+We eliminate the guesswork. We secure the profit.
+
+### #about
+Header: WE'VE BEEN MAKING PEOPLE SMILE SINCE 1982
+In 1980, Andy Grant awoke with a vision that would redefine the industry: the "Tourist"
+as the primary consideration. We transitioned from conceptual dreaming to an experiential
+approach that ensures every visitor's need is met.
+Grant Leisure is a global consortium of entertainment and attractions executives with
+decades of experience as developers and operators.
+
+### #proof
+65+ Theme Parks | icon-parks.png
+60+ Stately Homes | icon-homes.png
+27 Zoological Institutions | icon-zoo.png
+35 Museums | icon-museums.png
+5 World Heritage Sites | icon-world-heritage.png
+2 World Expositions | icon-fair.png
+Scale: 43 Countries. 5 Continents. 2,500+ Projects.
+
+### #reach
+From Canada, USA, UK, Europe, Africa, UAE, Malaysia, China, Japan, Australia.
+Our influence is etched into the world's most iconic skylines.
+
+### #expertise
+Header: SERVICES
+Market Analysis -- Determining demand through surgical evaluation of occupancy,
+absorption, and revenue trends.
+Development Planning -- Balancing economic planning with physical design to optimize
+amenities and facility sizing.
+Financial Feasibility -- Investor-grade modeling for cash flow projections
+and sensitivity testing.
+Funding Assistance -- Securing capital through a sovereign network of global
+investors and financiers.
+Operational Planning -- Bespoke optimization of visitor circulation, marketing,
+and staff training.
+Turn-Key Management -- Direct executive oversight from pre-opening through
+long-term stabilization.
+
+### #validation
+TRUSTED BY THE WORLD'S MOST ACCLAIMED BRANDS AND ATTRACTIONS.
+17 partner logos in /assets/images/logos/
+
+### #leadership
+Header: THE TEAM
 1. Robert Liljenwall -- Managing Director
 2. Keith Robertson -- Co-Managing Director
 3. Andy Grant -- Founder Emeritus and Director
@@ -256,24 +253,38 @@ Display order is final. Do not reorder.
 8. Andrew Coates -- Director Zoological Operations
 9. Edmund Rowley Williams -- Director Business Development
 
-### Section 09 -- Engage
-- Left column: OUR GLOBAL EXPERIENCE IN YOUR BACK POCKET. Don't like waiting? Neither do we.
-- Right column: Contact form -- Name, Email, Phone, Message fields.
+### #testimonials
+No header. Quotes only.
+Chris Mather, Chief Executive Officer -- "I have been working with Grant Leisure for
+over 30 years and can personally testify to their unparalleled track record in
+translating creative concepts into feasible and profitable projects."
+Larry Wyatt, VP Planning and Development -- "His instinct and attention to detail
+in large-scale land-planning for leisure destinations is second to none."
+Pat Janikowski AIA NCARB, President -- "Andy is able to gauge the needs of the client
+in any situation and develop programs that are both functional and cost-effective."
+Brian Edwards, Founder and Chairman -- "Our collaboration was truly an experience due
+to Andrew's unique understanding of operations and how technology could enhance
+the guest experience."
 
-### Section 11 -- Footer
-- Legal: 2026 Grant Leisure. All Rights Reserved.
+### #engage
+Header: OUR GLOBAL EXPERIENCE IN YOUR BACK POCKET
+Don't like waiting? Neither do we.
+Form: Name, Email, Phone, Message
+
+### #footer
+2026 Grant Leisure. All Rights Reserved.
 
 ---
 
-## PRODUCTION CHAT SCOPE
+## SESSION SCOPE
 
-Replace the bracketed line below when opening each new chat:
-
+Replace this line when opening each chat:
 [ THIS CHAT IS RESPONSIBLE FOR: insert scope here ]
 
-Example scopes:
-- "CSS Foundation Chat: tokens.css, typography.css, global.css, tailwind.config.js only."
-- "Index Chat A: Hero.jsx, Logic.jsx, About.jsx, Proof.jsx, Reach.jsx"
-- "Index Chat B: Expertise.jsx, Validation.jsx, Leadership.jsx, Engage.jsx, Footer.jsx"
-- "JS Chat: main.js scroll triggers, counter animation, marquee loop, form handling, video poster logic."
-- "Projects Chat: Projects.jsx and any page-specific styles."
+| Session   | Scope                                                                    |
+|-----------|--------------------------------------------------------------------------|
+| Session 1 | tokens.css (verify), typography.css, global.css, index.html, main.js    |
+| Session 2 | #hero, #logic, #about, #proof, #reach                                   |
+| Session 3 | #expertise, #validation, #leadership, #testimonials, #engage, #footer   |
+| Session 4 | JS -- scroll triggers, counters, marquee, form handling                  |
+| Session 5 | Projects page -- standalone route                                        |
