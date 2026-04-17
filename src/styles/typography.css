@@ -1,0 +1,321 @@
+/* ==========================================================================
+   TYPOGRAPHY.CSS -- Grant Leisure "Visible Dominance" v2
+   Scope: Font loading, type scale, and typographic rules only.
+   Dependencies: tokens.css must be loaded before this file.
+   Last Updated: 2026-04-17
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   01. FONT LOADING
+   Source: Google Fonts variable axes for Fraunces (display) + Inter (body).
+   Fraunces: wght 300-900, opsz 9-144 (optical size unlocks true display cuts).
+   Inter: wght 300-700 -- covers all body, UI, and stat copy needs.
+   -------------------------------------------------------------------------- */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+
+/* --------------------------------------------------------------------------
+   02. TYPE SCALE DEFINITIONS
+   All --text-* tokens are defined here using clamp().
+   Format: clamp( floor, fluid-midpoint, ceiling )
+   Floor is the mobile minimum; ceiling is the large-desktop maximum.
+   The fluid midpoint uses viewport width (vw) to interpolate smoothly.
+   Senior stakeholder requirement: body minimum 18px, display minimum 56px.
+   -------------------------------------------------------------------------- */
+
+:root {
+
+  /* Display -- Hero headline only. One instance per page. */
+  --text-display: clamp(3.5rem, 8vw, 7.5rem);
+  /* = clamp(56px, 8vw, 120px) */
+
+  /* H1 -- Primary section headers (About, Services, Team, Engage). */
+  --text-h1: clamp(2.5rem, 5vw, 5rem);
+  /* = clamp(40px, 5vw, 80px) */
+
+  /* H2 -- Sub-section headers and the Logic impact statement. */
+  --text-h2: clamp(1.75rem, 3.5vw, 3.25rem);
+  /* = clamp(28px, 3.5vw, 52px) */
+
+  /* H3 -- Card headers, service titles, team names. */
+  --text-h3: clamp(1.25rem, 2vw, 1.75rem);
+  /* = clamp(20px, 2vw, 28px) */
+
+  /* Body Large -- Lead paragraphs, Logic sub-copy, About narrative. */
+  --text-body-lg: clamp(1.125rem, 1.5vw, 1.375rem);
+  /* = clamp(18px, 1.5vw, 22px) -- floor honours senior minimum */
+
+  /* Body -- Standard body copy, service descriptions, testimonial text. */
+  --text-body: clamp(1rem, 1.25vw, 1.25rem);
+  /* = clamp(16px, 1.25vw, 20px) */
+
+  /* Small -- Labels, team titles, legal line, form field labels. */
+  --text-sm: clamp(0.75rem, 1vw, 0.9375rem);
+  /* = clamp(12px, 1vw, 15px) */
+
+}
+
+
+/* --------------------------------------------------------------------------
+   03. BASE TYPOGRAPHIC DEFAULTS
+   Applied to html/body. All downstream elements inherit from here.
+   -------------------------------------------------------------------------- */
+
+html {
+  /* Prevent text inflation on mobile WebKit -- critical for senior readability */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  font-size: 100%; /* = 16px browser default -- never override this */
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: 1.65; /* Slightly above 1.6 minimum for senior comfort */
+  color: var(--gl-black);
+
+  /* Optical rendering: subpixel on desktop, grayscale on OLED mobile */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-optical-sizing: auto; /* Activates Fraunces opsz axis when applied */
+}
+
+
+/* --------------------------------------------------------------------------
+   04. HEADING STYLES
+   All headings use Fraunces. Fraunces is a variable font -- optical size
+   axis (opsz) is set per heading level to trigger the correct optical cut:
+   - Display/H1: opsz 144 (maximum optical display setting, tightest spacing)
+   - H2: opsz 72
+   - H3: opsz 36
+   Letter-spacing: negative at display scale for optical tightness.
+   -------------------------------------------------------------------------- */
+
+h1, h2, h3, h4 {
+  font-family: var(--font-header);
+  font-weight: 700;
+  line-height: 1.05; /* Tight line-height for oversized Verb-First headers */
+  color: var(--gl-navy);
+  text-wrap: balance; /* Modern browsers: prevents awkward single-word wraps */
+  margin: 0; /* Global reset -- spacing handled by layout/components */
+}
+
+/* Hero display headline -- single instance, full power */
+.text-display {
+  font-family: var(--font-header);
+  font-size: var(--text-display);
+  font-weight: 800;
+  font-variation-settings: 'opsz' 144; /* Maximum optical display cut */
+  line-height: 0.95; /* Ultra-tight at hero scale -- optically correct */
+  letter-spacing: -0.03em; /* Negative tracking prevents visual gapping at 120px */
+  color: var(--gl-white);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--text-h1);
+  font-weight: 700;
+  font-variation-settings: 'opsz' 144;
+  letter-spacing: -0.025em;
+}
+
+h2 {
+  font-size: var(--text-h2);
+  font-weight: 700;
+  font-variation-settings: 'opsz' 72;
+  letter-spacing: -0.015em;
+}
+
+h3 {
+  font-size: var(--text-h3);
+  font-weight: 600;
+  font-variation-settings: 'opsz' 36;
+  letter-spacing: -0.01em;
+}
+
+h4 {
+  font-family: var(--font-body); /* H4 drops to Inter -- structural, not display */
+  font-size: var(--text-body-lg);
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.3;
+}
+
+
+/* --------------------------------------------------------------------------
+   05. BODY COPY UTILITIES
+   Reusable classes for lead paragraphs, standard body, and small text.
+   -------------------------------------------------------------------------- */
+
+.text-body-lg {
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  font-weight: 400;
+  line-height: 1.7; /* Wider leading for long-form senior readability */
+  color: var(--gl-black);
+}
+
+.text-body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--gl-black);
+}
+
+.text-sm {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--gl-black);
+}
+
+
+/* --------------------------------------------------------------------------
+   06. CONTEXTUAL MODIFIERS
+   Applied as additional classes. Never override --gl-* tokens here.
+   -------------------------------------------------------------------------- */
+
+/* On-dark surfaces -- hero, Logic section, green/navy backgrounds */
+.text-on-dark {
+  color: var(--gl-white);
+}
+
+/* Accent label above section headers (e.g., "SINCE 1982" eyebrow text) */
+.text-eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.15em; /* Wide tracking = institutional, not decorative */
+  text-transform: uppercase;
+  color: var(--gl-green);
+  line-height: 1.4;
+}
+
+/* The Logic impact stat -- Fraunces at H2 scale, not a heading element */
+.text-impact {
+  font-family: var(--font-header);
+  font-size: var(--text-h2);
+  font-weight: 700;
+  font-variation-settings: 'opsz' 72;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  color: var(--gl-white);
+  text-wrap: balance;
+}
+
+/* Proof section counters (65+, 43, 2500+) -- Inter bold for data legibility */
+.text-stat {
+  font-family: var(--font-body);
+  font-size: var(--text-h1);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--gl-navy);
+}
+
+/* Stat labels beneath counters */
+.text-stat-label {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gl-navy);
+  line-height: 1.4;
+}
+
+/* Team member name */
+.text-name {
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--gl-navy);
+}
+
+/* Team member title */
+.text-title {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--gl-blue);
+}
+
+/* Testimonial quote -- Fraunces italic for human warmth */
+.text-quote {
+  font-family: var(--font-header);
+  font-style: italic;
+  font-size: var(--text-body-lg);
+  font-weight: 400;
+  font-variation-settings: 'opsz' 36;
+  line-height: 1.6;
+  color: var(--gl-navy);
+}
+
+/* Testimonial attribution */
+.text-attribution {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gl-green);
+}
+
+/* Navigation links */
+.text-nav {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* Legal / footer line */
+.text-legal {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--gl-white);
+  opacity: 0.6; /* Recedes without disappearing -- accessible at 60% on dark bg */
+}
+
+
+/* --------------------------------------------------------------------------
+   07. LINK DEFAULTS
+   Bare minimum -- components.css will handle hover states and decorations.
+   -------------------------------------------------------------------------- */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Focus visible for keyboard nav -- WCAG AA */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--gl-green);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+
+/* --------------------------------------------------------------------------
+   08. STRONG / EM
+   -------------------------------------------------------------------------- */
+
+strong {
+  font-weight: 700;
+}
+
+em {
+  font-style: italic;
+}
