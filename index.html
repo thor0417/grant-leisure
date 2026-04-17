@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Grant Leisure International -- Global consultancy for leisure attractions, theme parks, resorts, and visitor destinations." />
+  <title>Grant Leisure International</title>
+
+  <!-- Google Fonts: Fraunces (headers) + Inter (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Design system: tokens first, then typography, then global, then components -->
+  <link rel="stylesheet" href="src/styles/tokens.css" />
+  <link rel="stylesheet" href="src/styles/typography.css" />
+  <link rel="stylesheet" href="src/styles/global.css" />
+  <link rel="stylesheet" href="src/styles/components.css" />
+</head>
+
+<body>
+
+  <!-- ============================================================
+       NAV
+       Sticky top bar. Logo left. Links right. CONTACT is CTA button.
+  ============================================================ -->
+  <header class="site-nav" role="banner">
+    <nav class="nav-inner" aria-label="Primary navigation">
+      <a href="#hero" class="nav-logo" aria-label="Grant Leisure International -- home">
+        <img
+          src="/assets/images/gli-logo.svg"
+          alt="Grant Leisure International logo"
+          width="140"
+          height="48"
+        />
+      </a>
+      <button class="nav-toggle" aria-controls="nav-links" aria-expanded="false" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="nav-links" role="list">
+        <li><a href="#about" class="nav-link">ABOUT</a></li>
+        <li><a href="#expertise" class="nav-link">SERVICES</a></li>
+        <li><a href="projects.html" class="nav-link">PROJECTS</a></li>
+        <li><a href="#engage" class="nav-link nav-cta">CONTACT</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ============================================================
+         01 // HERO
+         Full-bleed video. One h1. Scroll cue.
+         No section header visible per SECTION MAP.
+    ============================================================ -->
+    <section id="hero" aria-label="Hero">
+      <div class="hero-media" aria-hidden="true">
+        <video
+          class="hero-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="none"
+          aria-hidden="true"
+        >
+          <source
+            src="https://res.cloudinary.com/dyceiucla/video/upload/f_auto,q_auto/v1776321502/hero.mp4_r5srrb.mp4"
+            type="video/mp4"
+          />
+        </video>
+        <div class="hero-overlay" aria-hidden="true"></div>
+      </div>
+
+      <div class="hero-content">
+        <h1 class="hero-headline">PROFIT FROM<br />OUR EXPERIENCE.</h1>
+        <a href="#logic" class="hero-scroll-cue" aria-label="Scroll to next section">
+          <span class="scroll-cue-line" aria-hidden="true"></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         02 // LOGIC
+         Psychological stop-point. Statement only. No visible header.
+         No section label per SECTION MAP.
+    ============================================================ -->
+    <section id="logic" aria-label="Why planning matters">
+      <div class="logic-inner">
+        <p class="logic-stat">90%</p>
+        <div class="logic-text">
+          <p class="logic-statement">of operational failures are a result of improper planning.</p>
+          <p class="logic-resolve">We eliminate the guesswork.<br />We secure the profit.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         03 // ABOUT
+         Visible header: "WE'VE BEEN MAKING PEOPLE SMILE SINCE 1982"
+         Tourist photo + two paragraphs.
+    ============================================================ -->
+    <section id="about" aria-labelledby="about-heading">
+      <div class="about-inner">
+        <div class="about-text">
+          <h2 id="about-heading" class="about-heading">
+            WE'VE BEEN MAKING PEOPLE SMILE SINCE 1982
+          </h2>
+          <p class="about-origin">
+            In 1980, Andy Grant awoke with a vision that would redefine the industry:
+            the "Tourist" as the primary consideration. We transitioned from conceptual
+            dreaming to an experiential approach that ensures every visitor's need is met.
+          </p>
+          <p class="about-narrative">
+            Grant Leisure is a global consortium of entertainment and attractions
+            executives with decades of experience as developers and operators.
+            When it comes to running visitor attractions, our team has seen it all.
+          </p>
+        </div>
+        <figure class="about-figure">
+          <img
+            src="/assets/images/tourist.jpg"
+            alt="Andy Grant's original Tourist illustration -- the founding concept of Grant Leisure"
+            width="560"
+            height="640"
+            loading="lazy"
+          />
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         04 // PROOF
+         Numerical dominance. Icons + counters + scale summary.
+         No visible header per SECTION MAP.
+    ============================================================ -->
+    <section id="proof" aria-label="Track record by the numbers">
+      <div class="proof-inner">
+        <ul class="proof-grid" role="list">
+
+          <li class="proof-item">
+            <img
+              src="/assets/images/icons/icon-parks.png"
+              alt=""
+              width="64"
+              height="64"
+              loading="lazy"
+              aria-hidden="true"
+            />
+            <span class="proof-number" data-target="65" data-suffix="+">0+</span>
+            <span class="proof-label">Theme Parks</span>
+          </li>
+
+          <li class="proof-item">
+            <img
+              src="/assets/images/icons/icon-homes.png"
+              alt=""
+              width="64"
+              height="64"
+              loading="lazy"
+              aria-hidden="true"
+            />
+            <span class="proof-number" data-target="60" data-suffix="+">0+</span>
+            <span class="proof-label">Stately Homes</span>
+          </li>
+
+          <li class="proof-item">
+            <img
+              src="/assets/images/icons/icon-zoo.png"
+              alt=""
+              width="64"
+              height="64"
+              loading="lazy"
+              aria-hidden="true"
+            />
+            <span class="proof-number" data-target="27" data-suffix="">0</span>
+            <span class="proof-label">Zoological Institutions</span>
+          </li>
+
+          <li class="proof-item">
+            <img
+              src="/assets/images/icons/icon-museums.png"
+              alt=""
+              width="64"
+              height="64"
+              loading="lazy"
+              aria-hidden="true"
+            />
+            <span class="proof-number" data-target="35" data-suffix="">0</span>
+            <span class="proof-label">Museums</span>
+          </li>
+
+          <li class="proof-item">
+            <img
+              src="/assets/images/icons/icon-world-heritage.png"
+              alt=""
+              width="64"
+              height="64"
+              loading="lazy"
+              aria-hidden="true"
+            />
+            <span class="proof-number" data-target="5" data-suffix="">0</span>
+            <span class="proof-label">World Heritage Sites</span>
+          </li>
+
+          <li class="proof-item">
+            <img
+              src="/assets/images/icons/icon-fair.png"
+              alt=""
+              width="64"
+              height="64"
+              loading="lazy"
+              aria-hidden="true"
+            />
+            <span class="proof-number" data-target="2" data-suffix="">0</span>
+            <span class="proof-label">World Expositions</span>
+          </li>
+
+        </ul>
+
+        <div class="proof-scale">
+          <span class="proof-scale-item">43 Countries</span>
+          <span class="proof-scale-divider" aria-hidden="true">--</span>
+          <span class="proof-scale-item">5 Continents</span>
+          <span class="proof-scale-divider" aria-hidden="true">--</span>
+          <span class="proof-scale-item">2,500+ Projects</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         05 // REACH
+         Map image + country copy. No visible header per SECTION MAP.
+    ============================================================ -->
+    <section id="reach" aria-label="Global reach">
+      <div class="reach-inner">
+        <figure class="reach-map">
+          <img
+            src="/assets/images/maps/map.png"
+            alt="World map showing Grant Leisure project locations across 43 countries and 5 continents"
+            width="1200"
+            height="600"
+            loading="lazy"
+          />
+        </figure>
+        <div class="reach-copy">
+          <p class="reach-countries">
+            Canada. USA. UK. Europe. Africa. UAE.<br />
+            Malaysia. China. Japan. Australia.
+          </p>
+          <p class="reach-statement">
+            Our influence is etched into the world's most iconic skylines.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         STUBS: Sessions 3 and beyond.
+         IDs are in place. No content yet.
+    ============================================================ -->
+    <section id="expertise" aria-label="Services -- coming in Session 3"></section>
+    <section id="validation" aria-label="Partner logos -- coming in Session 3"></section>
+    <section id="leadership" aria-label="Team -- coming in Session 3"></section>
+    <section id="testimonials" aria-label="Testimonials -- coming in Session 3"></section>
+    <section id="engage" aria-label="Contact -- coming in Session 3"></section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER STUB
+       Session 3 will populate this.
+  ============================================================ -->
+  <footer id="footer" role="contentinfo"></footer>
+
+  <!-- GSAP + ScrollTrigger via CDN -- no install required -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Main JS deferred -- handles scroll triggers, counters, nav toggle -->
+  <script src="js/main.js" defer></script>
+
+</body>
+</html>
