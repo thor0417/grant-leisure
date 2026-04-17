@@ -1,0 +1,471 @@
+/* ==========================================================================
+   GLOBAL.CSS -- Grant Leisure "Visible Dominance" v2
+   Scope: Resets, base layout primitives, section scaffolding, and
+          accessibility/motion utilities only.
+   Dependencies: tokens.css then typography.css must load before this file.
+   Load order in index.html: tokens.css > typography.css > global.css
+   Last Updated: 2026-04-17
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   01. MODERN CSS RESET
+   Based on Andy Bell's reset with additions for senior-demographic targets.
+   -------------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove list styles on ul/ol with a list role -- preserves semantics */
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+html {
+  scroll-behavior: smooth;
+
+  /* Respect reduced-motion preference -- overridden below in @media query */
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--gl-white);
+
+  /* Prevent horizontal overflow from marquee or wide elements */
+  overflow-x: hidden;
+}
+
+/* Images and media are block by default -- eliminates inline baseline gap */
+img,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* Inherit fonts for all form elements -- browser default breaks Inter */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove built-in form appearance for custom styling in components.css */
+input,
+textarea,
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 0; /* iOS rounds inputs by default -- this resets it */
+}
+
+/* Prevent text overflow on any element */
+p,
+h1,
+h2,
+h3,
+h4,
+li {
+  overflow-wrap: break-word;
+}
+
+
+/* --------------------------------------------------------------------------
+   02. ROOT SPACING & SECTION SCAFFOLD
+   --section-pad-y: the single variable that governs all section vertical
+   padding. Clamp from 64px mobile to 140px desktop. No magic numbers.
+   -------------------------------------------------------------------------- */
+
+:root {
+  /* Vertical section breathing room -- all sections consume this token */
+  --section-pad-y: clamp(4rem, 10vw, 8.75rem);
+  /* = clamp(64px, 10vw, 140px) */
+
+  /* Horizontal page gutter -- applied via .container */
+  --page-gutter: clamp(1.25rem, 5vw, 5rem);
+  /* = clamp(20px, 5vw, 80px) */
+
+  /* Max content width -- constrains readability on ultra-wide displays */
+  --max-width: 1400px;
+
+  /* Nav height -- used to offset anchor scroll targets */
+  --nav-height: 72px;
+}
+
+
+/* --------------------------------------------------------------------------
+   03. LAYOUT PRIMITIVES
+   .container -- the single centering wrapper used by every section.
+   .section    -- semantic scaffold applied to every <section> on the page.
+   -------------------------------------------------------------------------- */
+
+/* Centered, max-width container with fluid gutters */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--page-gutter);
+}
+
+/* Full-width section base -- all sections extend this */
+.section {
+  width: 100%;
+  padding-block: var(--section-pad-y);
+  position: relative; /* Establishes stacking context for absolute children */
+}
+
+/* Full-bleed variant -- no container padding. Used for #hero, #reach map */
+.section--full-bleed {
+  padding-inline: 0;
+  padding-block: 0;
+}
+
+/* Dark surface sections: #logic, #reach, #footer */
+.section--dark {
+  background-color: var(--gl-navy);
+  color: var(--gl-white);
+}
+
+/* Green surface sections: #proof, #validation tagline */
+.section--green {
+  background-color: var(--gl-green);
+  color: var(--gl-white);
+}
+
+/* Blue surface sections: reserved for #leadership header bar */
+.section--blue {
+  background-color: var(--gl-blue);
+  color: var(--gl-white);
+}
+
+
+/* --------------------------------------------------------------------------
+   04. NAVIGATION
+   Sticky top nav. z-index from tokens. Height locked to --nav-height.
+   -------------------------------------------------------------------------- */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-height);
+  z-index: var(--z-nav);
+  display: flex;
+  align-items: center;
+  padding-inline: var(--page-gutter);
+
+  /* Starts transparent over hero video -- JS adds .nav--scrolled class */
+  background-color: transparent;
+  transition: background-color var(--duration-default) var(--ease-stellar),
+              box-shadow var(--duration-default) var(--ease-stellar);
+}
+
+/* Applied by main.js when page scrolls past hero */
+.nav--scrolled {
+  background-color: var(--gl-navy);
+  box-shadow: 0 2px 24px rgb(0 0 0 / 0.18);
+}
+
+.nav__logo {
+  flex-shrink: 0;
+  margin-right: auto;
+}
+
+.nav__logo img {
+  height: 40px; /* Fixed height -- width auto-scales with aspect ratio */
+  width: auto;
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  list-style: none;
+}
+
+/* Hide nav links on mobile -- hamburger handled in components.css */
+@media (max-width: 767px) {
+  .nav__links {
+    display: none;
+  }
+}
+
+.nav__link {
+  color: var(--gl-white);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
+
+  /* 48px minimum touch target -- senior requirement */
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  padding-inline: 0.25rem;
+
+  transition: color var(--duration-fast) var(--ease-stellar);
+}
+
+.nav__link:hover {
+  color: var(--gl-green);
+}
+
+/* CTA button in nav */
+.nav__cta {
+  min-height: 48px;
+  padding: 0 1.5rem;
+  background-color: var(--gl-green);
+  color: var(--gl-white);
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: background-color var(--duration-fast) var(--ease-stellar);
+}
+
+.nav__cta:hover {
+  background-color: var(--gl-blue);
+}
+
+
+/* --------------------------------------------------------------------------
+   05. ANCHOR SCROLL OFFSET
+   Compensates for fixed nav height when jumping to section IDs.
+   Applied to every section that is a scroll target.
+   -------------------------------------------------------------------------- */
+
+section[id] {
+  scroll-margin-top: var(--nav-height);
+}
+
+
+/* --------------------------------------------------------------------------
+   06. SECTION HEADER BLOCK
+   Reusable heading pattern: optional eyebrow + h1/h2 + optional lead.
+   Used by #about, #expertise, #leadership, #engage.
+   -------------------------------------------------------------------------- */
+
+.section-header {
+  margin-bottom: clamp(2.5rem, 5vw, 5rem);
+}
+
+.section-header--center {
+  text-align: center;
+  max-width: 780px;
+  margin-inline: auto;
+  margin-bottom: clamp(2.5rem, 5vw, 5rem);
+}
+
+.section-header__eyebrow {
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.section-header__lead {
+  margin-top: 1.25rem;
+  max-width: 65ch; /* Optimal reading line length for body copy */
+}
+
+
+/* --------------------------------------------------------------------------
+   07. DIVIDER
+   A single 1px rule used sparingly between light-surface sub-sections.
+   -------------------------------------------------------------------------- */
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--gl-navy);
+  opacity: 0.1;
+  border: none;
+  margin-block: 0;
+}
+
+
+/* --------------------------------------------------------------------------
+   08. BUTTONS
+   Base button styles. Component variants live in components.css.
+   All buttons meet the 48px minimum touch target.
+   -------------------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0 2rem;
+  border: 2px solid transparent;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color var(--duration-fast) var(--ease-stellar),
+              color var(--duration-fast) var(--ease-stellar),
+              border-color var(--duration-fast) var(--ease-stellar);
+}
+
+/* Primary: solid green fill */
+.btn--primary {
+  background-color: var(--gl-green);
+  color: var(--gl-white);
+  border-color: var(--gl-green);
+}
+
+.btn--primary:hover {
+  background-color: transparent;
+  color: var(--gl-green);
+}
+
+/* Ghost: outline only -- used on dark backgrounds */
+.btn--ghost {
+  background-color: transparent;
+  color: var(--gl-white);
+  border-color: var(--gl-white);
+}
+
+.btn--ghost:hover {
+  background-color: var(--gl-white);
+  color: var(--gl-navy);
+}
+
+
+/* --------------------------------------------------------------------------
+   09. GSAP ANIMATION ENTRY STATES
+   Elements that GSAP will animate in use these classes as their initial
+   (hidden) state. GSAP overwrites transform/opacity on scroll trigger.
+   JS in main.js targets [data-reveal] and animates from these values.
+   -------------------------------------------------------------------------- */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(40px);
+  /* GSAP will tween opacity to 1 and translateY to 0 on scroll */
+}
+
+[data-reveal="left"] {
+  opacity: 0;
+  transform: translateX(-60px);
+}
+
+[data-reveal="right"] {
+  opacity: 0;
+  transform: translateX(60px);
+}
+
+[data-reveal="scale"] {
+  opacity: 0;
+  transform: scale(0.92);
+}
+
+
+/* --------------------------------------------------------------------------
+   10. REDUCED MOTION
+   All transforms and transitions disabled for users who prefer it.
+   GSAP reads this via ScrollTrigger -- no JS changes needed.
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  /* Freeze all GSAP entry states -- elements render at final visible state */
+  [data-reveal],
+  [data-reveal="left"],
+  [data-reveal="right"],
+  [data-reveal="scale"] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   11. FOCUS MANAGEMENT
+   Skip-to-content link for keyboard users. Visually hidden until focused.
+   -------------------------------------------------------------------------- */
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: calc(var(--z-modal) + 1);
+  padding: 0.75rem 1.5rem;
+  background-color: var(--gl-green);
+  color: var(--gl-white);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  text-decoration: none;
+  transition: top var(--duration-fast) var(--ease-stellar);
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+
+/* --------------------------------------------------------------------------
+   12. VISUALLY HIDDEN UTILITY
+   Hides content visually while keeping it accessible to screen readers.
+   Use for icon-only buttons, decorative labels, ARIA descriptions.
+   -------------------------------------------------------------------------- */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+
+/* --------------------------------------------------------------------------
+   13. LOADING STATE
+   Body gets .is-loading on DOMContentLoaded, removed when GSAP is ready.
+   Prevents flash of unstyled [data-reveal] elements.
+   -------------------------------------------------------------------------- */
+
+body.is-loading [data-reveal],
+body.is-loading [data-reveal="left"],
+body.is-loading [data-reveal="right"],
+body.is-loading [data-reveal="scale"] {
+  /* Hold hidden state until GSAP initialises -- prevents layout flash */
+  visibility: hidden;
+}
