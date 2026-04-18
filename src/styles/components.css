@@ -1093,21 +1093,22 @@
 /* -- Left Column: Copy + Contact ------------------------- */
 .engage__heading {
   font-family: var(--font-header);
-  font-size: var(--text-h2);
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
   color: var(--gl-navy);
-  line-height: 1.1;
-  margin-block-end: var(--space-lg);
-  max-width: 16ch;
+  line-height: 1.2;
+  margin-block-end: var(--space-md);
 }
 .engage__contact {
   font-style: normal;
 }
 .engage__address {
   font-family: var(--font-body);
-  font-size: var(--text-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
   color: var(--gl-black);
-  line-height: 1.7;
-  margin-block-end: var(--space-md);
+  line-height: 1.6;
+  margin-block-end: var(--space-sm);
+  white-space: nowrap;
 }
 .engage__contact-row {
   display: flex;
