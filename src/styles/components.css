@@ -826,7 +826,8 @@
 /* Pause on reduced motion -- accessibility hard rule */
 @media (prefers-reduced-motion: reduce) {
   .marquee__track {
-  animation: marquee-scroll 80s linear infinite;
+    animation: none;
+  }
 }
 
 /* -- Marquee Track --------------------------------------- */
@@ -841,7 +842,7 @@
   padding-block: 0;
 
   /* Each track animates independently -- duplicate creates seamless loop */
-  animation: marquee-scroll 40s linear infinite;
+  animation: marquee-scroll 80s linear infinite;
 
   /* 40s -- comfortable read speed for 17 logos without feeling sluggish */
   will-change: transform;
@@ -871,6 +872,15 @@
 .marquee__item img[src=""],
 .marquee__item img:not([src]) {
   display: none;
+}
+
+.marquee__item img {
+  height: 60px;
+  width: auto;
+  min-width: 80px;
+  object-fit: contain;
+  filter: grayscale(100%) opacity(0.5);
+  transition: filter var(--duration-fast) var(--ease-stellar);
 }
 
 .marquee__item img:hover {
