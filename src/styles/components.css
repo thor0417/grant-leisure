@@ -1091,7 +1091,7 @@
 /* -- Left Column: Copy + Contact ------------------------- */
 .engage__heading {
   font-family: var(--font-header);
-  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+  font-size: var(--text-h1);
   color: var(--gl-navy);
   line-height: 1.2;
   margin-block-end: var(--space-md);
