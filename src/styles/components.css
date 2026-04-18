@@ -1067,14 +1067,13 @@
 
 /* ============================================================
    #ENGAGE -- Contact Section
-   Green surface. Two-column desktop. Form right, copy left.
+   White surface. Two-column desktop. Copy left, form right.
    ============================================================ */
-
 #engage {
-  background-color: var(--gl-green);
+  background-color: var(--gl-white);
   padding-block: var(--section-pad-y);
+  border-top: 1px solid rgba(50, 62, 72, 0.12);
 }
-
 .engage__inner {
   max-width: 1200px;
   margin-inline: auto;
@@ -1083,50 +1082,84 @@
   grid-template-columns: 1fr;
   gap: var(--space-xl);
 }
-
 @media (min-width: 64rem) {
   .engage__inner {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1.4fr;
     align-items: start;
     gap: var(--space-2xl);
   }
 }
 
-/* -- Left Column: Copy ----------------------------------- */
-
-.engage__eyebrow {
-  font-family: var(--font-body);
-  font-size: var(--text-sm);
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  color: rgba(255, 255, 255, 0.70);
-  text-transform: uppercase;
-  margin-block-end: var(--space-sm);
-}
-
+/* -- Left Column: Copy + Contact ------------------------- */
 .engage__heading {
   font-family: var(--font-header);
   font-size: var(--text-h1);
-  color: var(--gl-white);
+  color: var(--gl-navy);
   line-height: 1.1;
-  margin-block-end: var(--space-md);
-  max-width: 18ch;
+  margin-block-end: var(--space-lg);
+  max-width: 16ch;
 }
-
-.engage__subtext {
+.engage__contact {
+  font-style: normal;
+}
+.engage__address {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--gl-black);
+  line-height: 1.7;
+  margin-block-end: var(--space-md);
+}
+.engage__contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+.engage__contact-label {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gl-green);
+  display: block;
+  margin-block-end: 2px;
+}
+.engage__contact-link {
   font-family: var(--font-body);
   font-size: var(--text-body-lg);
-  color: rgba(255, 255, 255, 0.85);
-  line-height: 1.6;
-  margin: 0;
+  color: var(--gl-navy);
+  text-decoration: none;
+  font-weight: 600;
+}
+.engage__contact-link:hover {
+  color: var(--gl-green);
 }
 
 /* -- Right Column: Form ---------------------------------- */
-
 .engage-form {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: var(--space-md);
+  background-color: var(--gl-white);
+}
+
+/* Name and Email sit side by side. Phone spans full. */
+.form-field--name   { grid-column: 1; }
+.form-field--email  { grid-column: 2; }
+.form-field--phone  { grid-column: 1 / -1; }
+.form-field--message { grid-column: 1 / -1; }
+.form-field--submit  { grid-column: 1 / -1; }
+
+/* Stack to single column on mobile */
+@media (max-width: 40rem) {
+  .engage-form {
+    grid-template-columns: 1fr;
+  }
+  .form-field--name,
+  .form-field--email { grid-column: 1; }
 }
 
 .form-field {
@@ -1134,50 +1167,40 @@
   flex-direction: column;
   gap: var(--space-xs);
 }
-
 .form-label {
   font-family: var(--font-body);
   font-size: var(--text-sm);
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: var(--gl-white);
+  color: var(--gl-navy);
   text-transform: uppercase;
 }
-
 .form-input {
   font-family: var(--font-body);
-  font-size: var(--text-body);
+  font-size: 1rem; /* 16px minimum -- prevents iOS zoom on focus */
   color: var(--gl-navy);
   background-color: var(--gl-white);
-  border: 2px solid transparent;
+  border: 1.5px solid rgba(50, 62, 72, 0.25);
   border-radius: 4px;
-  /* 56px height -- well above 48px minimum touch target */
-  height: 56px;
+  height: 56px; /* above 48px minimum touch target */
   padding-inline: var(--space-md);
   width: 100%;
   transition: border-color var(--duration-fast) var(--ease-stellar);
-  /* Prevent iOS zoom on focus -- font must be 16px minimum */
-  font-size: 1rem;
 }
-
 .form-input:focus {
   outline: none;
-  border-color: var(--gl-navy);
+  border-color: var(--gl-green);
 }
-
 .form-input:focus-visible {
-  outline: 3px solid var(--gl-navy);
+  outline: 3px solid var(--gl-green);
   outline-offset: 2px;
 }
-
 .form-input--textarea {
   height: auto;
   padding-block: var(--space-md);
   resize: vertical;
-  /* Minimum textarea height -- 5 rows approximate */
-  min-height: 148px;
+  min-height: 148px; /* ~5 rows */
 }
-
 .form-submit {
   font-family: var(--font-body);
   font-size: var(--text-body);
@@ -1185,25 +1208,21 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--gl-white);
-  background-color: var(--gl-navy);
+  background-color: var(--gl-green);
   border: none;
   border-radius: 4px;
-  /* 56px -- above 48px minimum touch target */
-  height: 56px;
+  height: 56px; /* above 48px minimum touch target */
   padding-inline: var(--space-xl);
   cursor: pointer;
   align-self: flex-start;
-  /* Minimum 48px wide even on small screens */
   min-width: 48px;
   transition: background-color var(--duration-fast) var(--ease-stellar);
 }
-
 .form-submit:hover {
-  background-color: var(--gl-blue);
+  background-color: var(--gl-navy);
 }
-
 .form-submit:focus-visible {
-  outline: 3px solid var(--gl-white);
+  outline: 3px solid var(--gl-green);
   outline-offset: 3px;
 }
 
