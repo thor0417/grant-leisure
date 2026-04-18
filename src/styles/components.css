@@ -682,9 +682,9 @@
   .bento {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto auto;
+    align-items: start;
   }
 
-  /* Feature card spans full right column to anchor the grid */
   .bento__card--feature {
     grid-column: 3;
     grid-row: 1 / 3;
@@ -804,9 +804,9 @@
 
 .marquee {
   display: flex;
+  flex-direction: row;
   width: 100%;
   overflow: hidden;
-  /* Edge fade -- masks logos at viewport edges for polish */
   -webkit-mask-image: linear-gradient(
     to right,
     transparent 0%,
