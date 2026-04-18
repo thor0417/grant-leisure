@@ -769,7 +769,7 @@
 
 /* ============================================================
    #VALIDATION -- Partner Logo Marquee
-   White surface. CSS-only infinite scroll. Logos grey at rest.
+   White surface. JS-driven infinite scroll. Logos grey at rest.
    ============================================================ */
 
 #validation {
@@ -796,8 +796,6 @@
   text-transform: uppercase;
 }
 
-/* -- Marquee Container ------------------------------------ */
-
 .marquee {
   display: flex;
   flex-direction: row;
@@ -819,12 +817,6 @@
   );
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .marquee__track {
-    animation: none;
-  }
-}
-
 .marquee__track {
   display: flex;
   flex-direction: row;
@@ -834,48 +826,27 @@
   list-style: none;
   margin: 0;
   padding-block: 0;
-  animation: marquee-scroll 80s linear infinite;
   will-change: transform;
   flex-shrink: 0;
-  width: max-content;
 }
-
-.marquee__track:hover,
-.marquee:hover .marquee__track {
-  animation-play-state: paused;
-}
-
-@keyframes marquee-scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
-}
-
-/* -- Logo Items ------------------------------------------ */
 
 .marquee__item {
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  min-width: 48px;
-}
-
-.marquee__item img[src=""],
-.marquee__item img:not([src]) {
-  display: none;
 }
 
 .marquee__item img {
-  height: 80px;
+  height: 60px;
   width: auto;
   object-fit: contain;
   filter: grayscale(100%) opacity(0.6);
-  transition: filter var(--duration-fast) var(--ease-stellar);
+  transition: filter 0.3s ease;
 }
 
 .marquee__item img[alt="NBC Universal"] {
-  height: 40px;
+  height: 35px;
 }
 
 .marquee__item img:hover {
