@@ -826,8 +826,7 @@
 /* Pause on reduced motion -- accessibility hard rule */
 @media (prefers-reduced-motion: reduce) {
   .marquee__track {
-    animation: none;
-  }
+  animation: marquee-scroll 80s linear infinite;
 }
 
 /* -- Marquee Track --------------------------------------- */
@@ -855,7 +854,7 @@
 
 @keyframes marquee-scroll {
   from { transform: translateX(0); }
-  to   { transform: translateX(-100%); }
+  to   { transform: translateX(-50%); }
 }
 
 /* -- Logo Items ------------------------------------------ */
@@ -865,18 +864,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 48px; /* 48px -- minimum touch target honoured even on decorative items */
+  overflow: hidden;
+  min-width: 48px;
 }
 
-.marquee__item img {
-  height: 48px;
-  width: auto;
-  max-width: 140px;
-  object-fit: contain;
-
-  /* Greyscale at rest -- institutional restraint */
-  filter: grayscale(100%) opacity(0.5);
-  transition: filter var(--duration-fast) var(--ease-stellar);
+.marquee__item img[src=""],
+.marquee__item img:not([src]) {
+  display: none;
 }
 
 .marquee__item img:hover {
