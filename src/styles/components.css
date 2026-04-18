@@ -686,11 +686,6 @@
     align-items: stretch;
   }
 }
-  .bento__card--feature {
-    grid-column: 3;
-    grid-row: 1 / 3;
-  }
-}
 
 /* -- Bento Card Base -------------------------------------- */
 
