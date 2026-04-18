@@ -411,12 +411,10 @@
 
 .about-narrative {
   font-family: var(--font-body);
-  font-size: var(--text-body);
+  font-size: var(--text-body-lg);
   line-height: 1.7;
   color: var(--gl-black);
   margin: 0;
-  /* Slightly muted against the origin paragraph */
-  opacity: 0.85;
 }
 
 .about-figure {
@@ -660,7 +658,7 @@
   font-size: var(--text-h1);
   color: var(--gl-white);
   line-height: 1.1;
-  margin-block-end: var(--space-xl);
+  margin-block-end: var(--space-lg);
   max-width: 16ch;
 }
 
@@ -889,7 +887,7 @@
   font-size: var(--text-h1);
   color: var(--gl-navy);
   line-height: 1.1;
-  margin-block-end: var(--space-xl);
+  margin-block-end: var(--space-lg);
 }
 
 /* -- Team Grid ------------------------------------------- */
@@ -1126,7 +1124,7 @@
 }
 .engage__contact-link {
   font-family: var(--font-body);
-  font-size: var(--text-body);
+  font-size: var(--text-sm);
   color: var(--gl-navy);
   text-decoration: none;
   font-weight: 600;
