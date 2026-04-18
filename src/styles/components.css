@@ -855,3 +855,212 @@
 .marquee__item img:hover {
   filter: grayscale(0%) opacity(1);
 }
+
+/* ============================================================
+   #LEADERSHIP -- Team Grid
+   White surface. 1 col mobile, 2 col tablet, 3 col desktop.
+   ============================================================ */
+
+#leadership {
+  background-color: var(--gl-white);
+  padding-block: var(--section-pad-y);
+  /* Top border separates from #validation white surface */
+  border-top: 1px solid rgba(50, 62, 72, 0.10);
+}
+
+.leadership__inner {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--space-lg);
+}
+
+.leadership__eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--gl-green);
+  text-transform: uppercase;
+  margin-block-end: var(--space-sm);
+}
+
+.leadership__heading {
+  font-family: var(--font-header);
+  font-size: var(--text-h1);
+  color: var(--gl-navy);
+  line-height: 1.1;
+  margin-block-end: var(--space-xl);
+}
+
+/* -- Team Grid ------------------------------------------- */
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 48rem) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 72rem) {
+  .team-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* -- Team Card ------------------------------------------- */
+
+.team-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--gl-white);
+  border: 1px solid rgba(50, 62, 72, 0.10);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: box-shadow var(--duration-fast) var(--ease-stellar),
+              transform var(--duration-fast) var(--ease-stellar);
+}
+
+.team-card:hover {
+  box-shadow: 0 8px 32px rgba(50, 62, 72, 0.12);
+  transform: translateY(-4px);
+}
+
+.team-card__img-wrap {
+  width: 100%;
+  /* Square crop -- consistent across all headshots */
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background-color: rgba(50, 62, 72, 0.06);
+}
+
+.team-card__img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  /* Subtle warm tone for daylight saturation brief */
+  filter: saturate(1.1);
+  transition: transform var(--duration-default) var(--ease-stellar);
+}
+
+.team-card:hover .team-card__img-wrap img {
+  transform: scale(1.04);
+}
+
+.team-card__body {
+  padding: var(--space-md) var(--space-lg);
+  border-top: 3px solid var(--gl-green);
+}
+
+.team-card__name {
+  font-family: var(--font-header);
+  font-size: var(--text-h3);
+  color: var(--gl-navy);
+  line-height: 1.2;
+  margin-block-end: var(--space-xs);
+}
+
+.team-card__title {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--gl-green);
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+/* ============================================================
+   #TESTIMONIALS -- Client Quotes
+   Navy surface. No header. Four quotes in staggered grid.
+   ============================================================ */
+
+#testimonials {
+  background-color: var(--gl-navy);
+  padding-block: var(--section-pad-y);
+}
+
+.testimonials__inner {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--space-lg);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+}
+
+@media (min-width: 48rem) {
+  .testimonials__inner {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl) var(--space-2xl);
+  }
+}
+
+/* -- Individual Testimonial ------------------------------ */
+
+.testimonial {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin: 0;
+  padding: 0;
+  /* Left border signal -- green line anchors each quote */
+  border-left: 3px solid var(--gl-green);
+  padding-left: var(--space-lg);
+}
+
+/* Decorative opening quote mark */
+.testimonial::before {
+  content: '\201C'; /* Unicode left double quotation mark */
+  font-family: var(--font-header);
+  font-size: clamp(4rem, 8vw, 7rem);
+  line-height: 0.8;
+  color: var(--gl-green);
+  display: block;
+  margin-block-end: var(--space-xs);
+  opacity: 0.6;
+}
+
+.testimonial__quote {
+  margin: 0;
+  padding: 0;
+}
+
+.testimonial__quote p {
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  font-style: italic;
+}
+
+/* -- Attribution ----------------------------------------- */
+
+.testimonial__attribution {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin-block-start: var(--space-sm);
+}
+
+.testimonial__name {
+  font-family: var(--font-header);
+  font-size: var(--text-h3);
+  color: var(--gl-white);
+  line-height: 1.2;
+}
+
+.testimonial__title {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--gl-green);
+  text-transform: uppercase;
+}
