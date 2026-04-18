@@ -832,15 +832,15 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 4rem;
-  padding-inline: 2rem;
+  gap: 5rem;
+  padding-inline: 2.5rem;
   list-style: none;
   margin: 0;
   padding-block: 0;
   animation: marquee-scroll 80s linear infinite;
   will-change: transform;
   flex-shrink: 0;
-  min-width: 100%;
+  width: max-content;
 }
 
 .marquee__track:hover,
