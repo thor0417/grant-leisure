@@ -847,6 +847,11 @@
   transition: filter 0.3s ease;
 }
 
+.marquee__item img[alt="NBC Universal"] {
+  opacity: 1;
+  filter: grayscale(0%) opacity(1);
+}
+
 .marquee__item img:hover {
   filter: grayscale(0%) opacity(1);
 }
