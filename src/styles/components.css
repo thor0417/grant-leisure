@@ -1091,11 +1091,10 @@
 /* -- Left Column: Copy + Contact ------------------------- */
 .engage__heading {
   font-family: var(--font-header);
-  font-size: var(--text-h1);
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
   color: var(--gl-navy);
-  line-height: 1.1;
+  line-height: 1.2;
   margin-block-end: var(--space-md);
-  white-space: nowrap;
   padding-block-end: var(--space-md);
   border-bottom: 3px solid var(--gl-green);
 }
