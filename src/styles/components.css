@@ -1082,7 +1082,7 @@
 }
 @media (min-width: 64rem) {
   .engage__inner {
-    grid-template-columns: 1fr 1.4fr;
+    grid-template-columns: 1.2fr 1fr;
     align-items: start;
     gap: var(--space-2xl);
   }
@@ -1091,13 +1091,17 @@
 /* -- Left Column: Copy + Contact ------------------------- */
 .engage__heading {
   font-family: var(--font-header);
-  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-size: var(--text-h1);
   color: var(--gl-navy);
-  line-height: 1.2;
+  line-height: 1.1;
   margin-block-end: var(--space-md);
+  white-space: nowrap;
+  padding-block-end: var(--space-md);
+  border-bottom: 3px solid var(--gl-green);
 }
 .engage__contact {
   font-style: normal;
+  padding-block-start: var(--space-sm);
 }
 .engage__address {
   font-family: var(--font-body);
