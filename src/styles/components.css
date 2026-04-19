@@ -749,6 +749,71 @@
   margin-block-start: var(--space-md);
 }
 
+/* -- Bento Expand Panel ---------------------------------- */
+
+.bento__expand {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: rgba(255, 255, 255, 0.80);
+  line-height: 1.7;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-block-start: var(--space-sm);
+  padding-block-start: var(--space-sm);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.4s var(--ease-stellar),
+              opacity 0.3s var(--ease-stellar),
+              margin 0.3s var(--ease-stellar);
+  margin-block-start: 0;
+  padding-block-start: 0;
+  border-top: none;
+}
+
+/* JS removes hidden and adds is-open */
+.bento__expand.is-open {
+  max-height: 600px;
+  opacity: 1;
+  margin-block-start: var(--space-sm);
+  padding-block-start: var(--space-sm);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.bento__expand p {
+  margin: 0;
+}
+
+/* -- Bento Toggle Button --------------------------------- */
+
+.bento__toggle {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gl-green);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  align-self: flex-start;
+  margin-block-start: var(--space-sm);
+  min-height: 48px; /* touch target */
+  transition: color var(--duration-fast) var(--ease-stellar);
+}
+
+.bento__toggle:hover {
+  color: var(--gl-white);
+}
+
+.bento__toggle:focus-visible {
+  outline: 3px solid var(--gl-green);
+  outline-offset: 4px;
+}
+
 /* ============================================================
    #VALIDATION -- Partner Logo Marquee
    White surface. JS-driven infinite scroll. Logos grey at rest.

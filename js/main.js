@@ -60,6 +60,28 @@ if (navToggle && navLinks) {
   });
 }
 
+/* -- Bento cards: expand on click ------------------------- */
+
+const bentoToggles = document.querySelectorAll('.bento__toggle');
+
+bentoToggles.forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    const targetId = btn.getAttribute('aria-controls');
+    const panel = document.getElementById(targetId);
+    const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+    if (isOpen) {
+      panel.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.textContent = 'Read More';
+    } else {
+      panel.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+      btn.textContent = 'Close';
+    }
+  });
+});
+
 /* -- Proof counters: animate on scroll -------------------- */
 
 const proofNumbers = document.querySelectorAll('.proof-number');
