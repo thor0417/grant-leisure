@@ -573,8 +573,8 @@
 .reach-map {
   margin: 0;
   /* Negative horizontal margin bleeds map to near-full viewport width */
-  margin-left: clamp(-1.25rem, -5vw, -4rem);
-  margin-right: clamp(-1.25rem, -5vw, -4rem);
+  max-width: 900px;
+  margin-inline: auto;
   overflow: hidden;
 }
 
