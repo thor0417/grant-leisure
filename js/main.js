@@ -60,7 +60,179 @@ if (navToggle && navLinks) {
   });
 }
 
-/* -- Service modals --------------------------------------- */
+/* -- Team carousel ---------------------------------------- */
+
+const teamTrack = document.getElementById('team-carousel-track');
+const teamPrev = document.getElementById('team-prev');
+const teamNext = document.getElementById('team-next');
+
+if (teamTrack && teamPrev && teamNext) {
+  const teamCards = teamTrack.querySelectorAll('.team-card');
+  let teamIndex = 0;
+
+  function getTeamVisible() {
+    return window.innerWidth >= 768 ? 3 : 1;
+  }
+
+  function getTeamMax() {
+    return Math.max(0, teamCards.length - getTeamVisible());
+  }
+
+  function updateTeamCarousel() {
+    const cardWidth = teamCards[0].offsetWidth + parseInt(getComputedStyle(teamTrack).gap || '0');
+    teamTrack.style.transform = 'translateX(-' + (teamIndex * cardWidth) + 'px)';
+    teamPrev.disabled = teamIndex === 0;
+    teamNext.disabled = teamIndex >= getTeamMax();
+  }
+
+  teamPrev.addEventListener('click', function () {
+    if (teamIndex > 0) { teamIndex--; updateTeamCarousel(); }
+  });
+
+  teamNext.addEventListener('click', function () {
+    if (teamIndex < getTeamMax()) { teamIndex++; updateTeamCarousel(); }
+  });
+
+  window.addEventListener('resize', function () {
+    teamIndex = Math.min(teamIndex, getTeamMax());
+    updateTeamCarousel();
+  });
+
+  updateTeamCarousel();
+}
+
+/* -- Bio modal -------------------------------------------- */
+
+const bioData = {
+  'bio-01': {
+    name: 'Robert Liljenwall',
+    title: 'Managing Director',
+    body: '<p>Robert has been a long-time principal of Grant Leisure, serving as head of its marketing and branding services and providing initial concept and creative direction for a broad spectrum of leisure attractions, visitor services, and integrated marketing communications programs.</p><p>His career as a themed entertainment industry executive began with Disney and he has since worked on leisure and entertainment projects spanning a variety of themed attractions, zoological parks, resorts, film studios, themed entertainment centers, and new urban developments.</p><p>Robert is an expert with developing a project\'s customer marketing matrix, identifying how best to serve visitors, maximize revenue streams, and ensure the highest degree of customer satisfaction.</p>'
+  },
+  'bio-02': {
+    name: 'Keith Robertson',
+    title: 'Co-Managing Director',
+    body: '<p>Keith is a well-rounded senior executive with over 40 years of international project management experience in design, engineering, and operations for the development of major electrical power systems, commercial, industrial and residential construction, theme parks, water parks, tourism, and hospitality.</p><p>His high-energy approach and diversified experience in strategic planning, training, staffing, maintenance, and operations has proven invaluable for his clients as he continues driving innovative engineering and management solutions.</p>'
+  },
+  'bio-03': {
+    name: 'Andy Grant',
+    title: 'Founder Emeritus and Director',
+    body: '<p>Andy\'s 50+ year career began at Universal Studios Hollywood, where he holds claim to being one of the park\'s first-ever studio tour guides.</p><p>After climbing the ranks of Universal Studios to senior management, Andy went on to become the managing director for Busch Gardens, Squaw Valley Ski Resort, and the San Diego Zoo and Safari Park -- and spent 12 years in charge of Leeds Castle in the United Kingdom.</p><p>It was during Andy\'s tenure in London that Grant Leisure was founded and grew to become the foremost consultancy for English Heritage and a globally recognized operator for the themed entertainment industry.</p>'
+  },
+  'bio-04': {
+    name: 'Raul Rios',
+    title: 'Director Consulting Operations, Europe',
+    body: '<p>Raul brings over 15 years of industry experience and manages the consulting back-office for Grant Leisure\'s operations outside the US. Initially acting as Director of Projects and Commercial Controller, he was later appointed as Director for an international marketing services group.</p><p>Working as a consultant, his input ranges from preparing financial feasibilities, business and operational plans, and overseeing attraction construction projects for clients including Olympic Park Legacy Company, Ferrari World Abu Dhabi, Carlsberg, NBC Universal, and BBC.</p>'
+  },
+  'bio-05': {
+    name: 'Clive Jones',
+    title: 'Director Strategic Planning',
+    body: '<p>Clive has evaluated investment programs and solicited investors and operators for major hotels, resorts, and casinos throughout Asia-Pacific, the Americas, and Europe. His expertise in market and investment analysis, development programming, and database marketing has earned him a sterling reputation within the attractions, hospitality, and tourism industries.</p><p>Notable clients include the US National Park Service, Hong Kong Tourism Board, Canadian Tourism Board, the state of California, and the city of San Francisco. His ability to create market-driven value for clients is the common denominator across all his successful assignments.</p>'
+  },
+  'bio-06': {
+    name: 'Claus Frimand',
+    title: 'Director Operations',
+    body: '<p>Claus brings 35 years of experience in the service and leisure industry and has been an expat for over 25 years, living in ten different countries working across Europe, the Middle East, and Asia. He was responsible for opening Ferrari World in Abu Dhabi.</p><p>His breadth of expertise and insight for recruitment and operations has been an asset to Grant Leisure, having worked for organizations such as IKEA, Disneyland Paris, the Olympics, EXPO 2000, and several international traveling exhibitions.</p>'
+  },
+  'bio-07': {
+    name: 'Philip Kwong',
+    title: 'Compliance and Operations Consultant',
+    body: '<p>Philip Kwong is a compliance and operations consultant with eight years of experience in highly regulated and emerging industries. Having held leadership roles in the development of international standards bodies, including Vice Convener of ISO IWA 37 and Chair of UL Canada\'s TG 4400-2, he has contributed to regulatory frameworks, worked with publicly traded companies, and taken complex projects from inception through to completion.</p>'
+  },
+  'bio-08': {
+    name: 'Andrew Coates',
+    title: 'Director Zoological Operations',
+    body: '<p>Andrew delivers hands-on operational experience paired with an architectural background, working across the full range of disciplines in the visitor attractions industry.</p><p>Beginning his career as Operations Manager for the Zoological Society of London, he moved on to become a Director for Grant Leisure Group, Managing Director for MICE Group, and CEO for WARGM Co. Ltd, a UK charity organization for ensuring the long-term sustainability of the Royal Gunpowder Mills. Andrew is known for his pragmatic approach, able to balance the various tensions impacting projects to ensure results-driven solutions.</p>'
+  },
+  'bio-09': {
+    name: 'Edmund Rowley Williams',
+    title: 'Director Business Development',
+    body: '<p>Edmund has enjoyed over 25 years as a business development and management consultant, specializing in improving access to cultural visitor destinations. He has led over 150 projects for Grant Leisure, with clients ranging from leisure enterprises and financial institutions to non-profit and government agencies such as Tate Modern, Victoria and Albert Museum, Windsor Castle, the London Eye, Legoland, and Babelsberg Studios.</p><p>Several of Edmund\'s projects including Our Dynamic Earth, The Royal Armouries, and Tower of London have involved multi-year assignments engaging all stages of planning, development, and operations.</p>'
+  }
+};
+
+const bioOverlay = document.getElementById('bio-modal-overlay');
+const bioClose = document.getElementById('bio-modal-close');
+const bioModalNumber = document.getElementById('bio-modal-number');
+const bioModalTitle = document.getElementById('bio-modal-title');
+const bioModalBody = document.getElementById('bio-modal-body');
+
+function openBioModal(id) {
+  const data = bioData[id];
+  if (!data) return;
+  bioModalNumber.textContent = data.title;
+  bioModalTitle.textContent = data.name;
+  bioModalBody.innerHTML = data.body;
+  bioOverlay.classList.add('is-open');
+  bioOverlay.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  bioClose.focus();
+}
+
+function closeBioModal() {
+  bioOverlay.classList.remove('is-open');
+  bioOverlay.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+if (bioOverlay) {
+  document.querySelectorAll('.team-card__bio-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      openBioModal(btn.getAttribute('data-bio'));
+    });
+  });
+
+  bioClose.addEventListener('click', closeBioModal);
+
+  bioOverlay.addEventListener('click', function (e) {
+    if (e.target === bioOverlay) closeBioModal();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { closeBioModal(); closeModal(); }
+  });
+}
+
+/* -- Testimonials carousel -------------------------------- */
+
+const testimonialItems = document.querySelectorAll('.testimonial');
+const testPrev = document.getElementById('test-prev');
+const testNext = document.getElementById('test-next');
+const dotsContainer = document.getElementById('testimonials-dots');
+
+if (testimonialItems.length && testPrev && testNext) {
+  let testIndex = 0;
+
+  testimonialItems.forEach(function (_, i) {
+    const dot = document.createElement('button');
+    dot.classList.add('testimonials__dot');
+    dot.setAttribute('aria-label', 'Go to testimonial ' + (i + 1));
+    if (i === 0) dot.classList.add('is-active');
+    dot.addEventListener('click', function () { goToTestimonial(i); });
+    dotsContainer.appendChild(dot);
+  });
+
+  function goToTestimonial(index) {
+    testimonialItems[testIndex].classList.remove('is-active');
+    dotsContainer.children[testIndex].classList.remove('is-active');
+    testIndex = index;
+    testimonialItems[testIndex].classList.add('is-active');
+    dotsContainer.children[testIndex].classList.add('is-active');
+    testPrev.disabled = testIndex === 0;
+    testNext.disabled = testIndex === testimonialItems.length - 1;
+  }
+
+  testimonialItems[0].classList.add('is-active');
+  testPrev.disabled = true;
+
+  testPrev.addEventListener('click', function () {
+    if (testIndex > 0) goToTestimonial(testIndex - 1);
+  });
+
+  testNext.addEventListener('click', function () {
+    if (testIndex < testimonialItems.length - 1) goToTestimonial(testIndex + 1);
+  });
+}
 
 const serviceData = {
   'modal-01': {

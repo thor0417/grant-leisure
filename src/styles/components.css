@@ -1012,25 +1012,19 @@
 
 /* -- Team Grid ------------------------------------------- */
 
-.team-grid {
-  display: grid;
-  grid-template-columns: 1fr;
+/* -- Team Carousel --------------------------------------- */
+
+.team-carousel {
+  overflow: hidden;
+  position: relative;
+}
+
+.team-carousel__track {
+  display: flex;
   gap: var(--space-lg);
+  transition: transform var(--duration-default) var(--ease-stellar);
+  will-change: transform;
 }
-
-@media (min-width: 48rem) {
-  .team-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 72rem) {
-  .team-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* -- Team Card ------------------------------------------- */
 
 .team-card {
   display: flex;
@@ -1039,8 +1033,15 @@
   border: 1px solid rgba(50, 62, 72, 0.10);
   border-radius: 4px;
   overflow: hidden;
+  flex: 0 0 100%;
   transition: box-shadow var(--duration-fast) var(--ease-stellar),
               transform var(--duration-fast) var(--ease-stellar);
+}
+
+@media (min-width: 48rem) {
+  .team-card {
+    flex: 0 0 calc(33.333% - var(--space-lg) * 2 / 3);
+  }
 }
 
 .team-card:hover {
@@ -1050,7 +1051,6 @@
 
 .team-card__img-wrap {
   width: 100%;
-  /* Square crop -- consistent across all headshots */
   aspect-ratio: 1 / 1;
   overflow: hidden;
   background-color: rgba(50, 62, 72, 0.06);
@@ -1061,7 +1061,6 @@
   height: 100%;
   object-fit: cover;
   object-position: center top;
-  /* Subtle warm tone for daylight saturation brief */
   filter: saturate(1.1);
   transition: transform var(--duration-default) var(--ease-stellar);
 }
@@ -1073,6 +1072,9 @@
 .team-card__body {
   padding: var(--space-md) var(--space-lg);
   border-top: 3px solid var(--gl-green);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
 }
 
 .team-card__name {
@@ -1080,7 +1082,7 @@
   font-size: var(--text-h3);
   color: var(--gl-navy);
   line-height: 1.2;
-  margin-block-end: var(--space-xs);
+  margin: 0;
 }
 
 .team-card__title {
@@ -1091,11 +1093,76 @@
   color: var(--gl-green);
   text-transform: uppercase;
   line-height: 1.4;
+  margin: 0;
+}
+
+.team-card__bio-btn {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gl-navy);
+  background: none;
+  border: 1px solid rgba(50, 62, 72, 0.25);
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  align-self: flex-start;
+  margin-block-start: var(--space-sm);
+  min-height: 48px;
+  transition: border-color var(--duration-fast) var(--ease-stellar),
+              color var(--duration-fast) var(--ease-stellar);
+}
+
+.team-card__bio-btn:hover {
+  border-color: var(--gl-green);
+  color: var(--gl-green);
+}
+
+.team-card__bio-btn:focus-visible {
+  outline: 3px solid var(--gl-green);
+  outline-offset: 2px;
+}
+
+/* -- Carousel Controls ----------------------------------- */
+
+.team-carousel__controls {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-block-start: var(--space-lg);
+}
+
+.carousel-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid var(--gl-green);
+  background: none;
+  color: var(--gl-green);
+  font-size: 1.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--duration-fast) var(--ease-stellar),
+              color var(--duration-fast) var(--ease-stellar);
+}
+
+.carousel-btn:hover {
+  background-color: var(--gl-green);
+  color: var(--gl-white);
+}
+
+.carousel-btn:focus-visible {
+  outline: 3px solid var(--gl-green);
+  outline-offset: 3px;
 }
 
 /* ============================================================
-   #TESTIMONIALS -- Client Quotes
-   Navy surface. No header. Four quotes in staggered grid.
+   #TESTIMONIALS -- Single quote carousel
+   Navy surface. One quote at a time. Arrow navigation.
    ============================================================ */
 
 #testimonials {
@@ -1103,38 +1170,33 @@
   padding-block: var(--section-pad-y);
 }
 
-.testimonials__inner {
-  max-width: 1200px;
+.testimonials__carousel {
+  max-width: 900px;
   margin-inline: auto;
   padding-inline: var(--space-lg);
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-xl);
 }
 
-@media (min-width: 48rem) {
-  .testimonials__inner {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-xl) var(--space-2xl);
-  }
+.testimonials__track {
+  position: relative;
+  overflow: hidden;
 }
-
-/* -- Individual Testimonial ------------------------------ */
 
 .testimonial {
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: var(--space-md);
   margin: 0;
   padding: 0;
-  /* Left border signal -- green line anchors each quote */
   border-left: 3px solid var(--gl-green);
   padding-left: var(--space-lg);
 }
 
-/* Decorative opening quote mark */
+.testimonial.is-active {
+  display: flex;
+}
+
 .testimonial::before {
-  content: '\201C'; /* Unicode left double quotation mark */
+  content: '\201C';
   font-family: var(--font-header);
   font-size: clamp(4rem, 8vw, 7rem);
   line-height: 0.8;
@@ -1158,8 +1220,6 @@
   font-style: italic;
 }
 
-/* -- Attribution ----------------------------------------- */
-
 .testimonial__attribution {
   display: flex;
   flex-direction: column;
@@ -1172,6 +1232,44 @@
   font-size: var(--text-h3);
   color: var(--gl-white);
   line-height: 1.2;
+}
+
+.testimonial__title {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--gl-green);
+  text-transform: uppercase;
+}
+
+.testimonials__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-block-start: var(--space-lg);
+}
+
+.testimonials__dots {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.testimonials__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.30);
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-stellar);
+  padding: 0;
+  min-height: unset;
+}
+
+.testimonials__dot.is-active {
+  background-color: var(--gl-green);
 }
 
 .testimonial__title {
