@@ -301,7 +301,7 @@
 }
 .logic-stat {
   font-family: var(--font-header);
-  font-size: clamp(5rem, 12vw, 10rem);
+  font-size: clamp(6rem, 16vw, 13rem);
   font-weight: 900;
   line-height: 0.9;
   color: var(--gl-green);
@@ -336,14 +336,16 @@
   .logic-inner {
     flex-direction: row;
     align-items: center;
-    gap: clamp(2rem, 4vw, 4rem);
+    justify-content: center;
+    gap: clamp(2rem, 3vw, 3rem);
   }
   .logic-stat {
     flex: 0 0 auto;
-    width: clamp(200px, 28vw, 360px);
+    width: clamp(240px, 32vw, 420px);
   }
   .logic-text {
     flex: 1;
+    max-width: 560px;
   }
 }
 
