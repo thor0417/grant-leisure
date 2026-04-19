@@ -434,12 +434,12 @@
   .about-figure {
     flex: 1;
     /* Max height to prevent the photo from becoming a poster */
-    max-height: 560px;
+    max-height: 420px;
   }
 
   .about-figure img {
     height: 100%;
-    max-height: 560px;
+    max-height: 420px;
   }
 }
 
