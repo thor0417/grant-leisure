@@ -336,11 +336,11 @@
   .logic-inner {
     flex-direction: row;
     align-items: center;
-    gap: clamp(4rem, 8vw, 8rem);
+    gap: clamp(2rem, 4vw, 4rem);
   }
   .logic-stat {
     flex: 0 0 auto;
-    width: clamp(160px, 22vw, 280px);
+    width: clamp(200px, 28vw, 360px);
   }
   .logic-text {
     flex: 1;
