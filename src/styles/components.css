@@ -301,13 +301,12 @@
 }
 .logic-stat {
   font-family: var(--font-header);
-  font-size: clamp(7.5rem, 20vw, 16rem);
+  font-size: clamp(5rem, 12vw, 10rem);
   font-weight: 900;
   line-height: 0.9;
   color: var(--gl-green);
   letter-spacing: -0.04em;
   margin: 0;
-  margin-left: -0.05em;
   white-space: nowrap;
 }
 .logic-text {
@@ -337,11 +336,11 @@
   .logic-inner {
     flex-direction: row;
     align-items: center;
-    gap: clamp(3rem, 6vw, 6rem);
+    gap: clamp(4rem, 8vw, 8rem);
   }
   .logic-stat {
     flex: 0 0 auto;
-    width: clamp(180px, 30vw, 340px);
+    width: clamp(160px, 22vw, 280px);
   }
   .logic-text {
     flex: 1;
