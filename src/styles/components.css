@@ -292,7 +292,6 @@
   justify-content: center;
   min-height: 60vh;
 }
-
 .logic-inner {
   max-width: 1200px;
   margin: 0 auto;
@@ -300,8 +299,6 @@
   flex-direction: column;
   gap: clamp(1.5rem, 3vw, 2.5rem);
 }
-
-/* Oversized "90%" -- the visual anchor of the section */
 .logic-stat {
   font-family: var(--font-header);
   font-size: clamp(7.5rem, 20vw, 16rem);
@@ -313,13 +310,11 @@
   margin-left: -0.05em;
   white-space: nowrap;
 }
-
 .logic-text {
   display: flex;
   flex-direction: column;
   gap: clamp(1rem, 2vw, 1.75rem);
 }
-
 .logic-statement {
   font-family: var(--font-header);
   font-size: clamp(1.5rem, 3vw, 2.5rem);
@@ -328,37 +323,28 @@
   color: var(--gl-white);
   margin: 0;
 }
-
 .logic-resolve {
   font-family: var(--font-body);
-  font-size: clamp(1.125rem, 1.5vw, 1.375rem);
+  font-size: var(--text-body-lg);
   font-weight: 500;
   line-height: 1.6;
   color: var(--gl-green);
   margin: 0;
   letter-spacing: 0.02em;
   text-transform: uppercase;
-  white-space: nowrap;
 }
-
 @media (min-width: 768px) {
   .logic-inner {
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     gap: clamp(3rem, 6vw, 6rem);
   }
-
-  /* Stat takes a fixed proportion of the row */
   .logic-stat {
     flex: 0 0 auto;
-    /* 40% of row width at mid breakpoint */
     width: clamp(180px, 30vw, 340px);
   }
-
   .logic-text {
     flex: 1;
-    /* Vertically center the text block against the oversized number */
-    padding-top: clamp(0.5rem, 2vw, 2rem);
   }
 }
 
