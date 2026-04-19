@@ -20,24 +20,24 @@
   left: 0;
   right: 0;
   z-index: var(--z-nav);
-  /* Transparent over hero video by default */
   background: transparent;
   transition: background var(--duration-default) var(--ease-stellar),
+              backdrop-filter var(--duration-default) var(--ease-stellar),
               box-shadow var(--duration-default) var(--ease-stellar);
 }
 
 .site-nav.is-scrolled {
-  background: var(--gl-navy);
-  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.18); /* Elevation cue -- not decorative */
+  background: rgba(50, 62, 72, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.18);
 }
 
 .nav-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* 20px minimum side breathing room on small screens */
   padding: 0 clamp(1.25rem, 4vw, 3rem);
-  /* 72px nav height -- comfortably above 48px minimum touch target */
   height: 72px;
   max-width: 1440px;
   margin: 0 auto;
@@ -71,7 +71,6 @@
               opacity var(--duration-fast) var(--ease-stellar);
 }
 
-/* Hamburger open state -- JS adds .is-open to .nav-toggle */
 .nav-toggle.is-open span:nth-child(1) {
   transform: translateY(7px) rotate(45deg);
 }
@@ -82,15 +81,15 @@
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* Nav links: stacked on mobile, hidden until toggle fired */
+/* Nav links: stacked on mobile */
 .nav-links {
   display: flex;
   flex-direction: column;
   position: fixed;
-  top: 72px; /* aligns flush under nav bar */
+  top: 72px;
   left: 0;
   right: 0;
-  background: var(--gl-navy);
+  background: rgba(50, 62, 72, 0.96);
   list-style: none;
   margin: 0;
   padding: 1rem 0 2rem;
@@ -99,7 +98,6 @@
   z-index: var(--z-overlay);
 }
 
-/* JS adds .is-open to ul.nav-links when toggle fires */
 .nav-links.is-open {
   transform: translateY(0);
 }
@@ -111,7 +109,6 @@
 .nav-link {
   display: flex;
   align-items: center;
-  /* 56px tall -- above 48px minimum */
   min-height: 56px;
   padding: 0 clamp(1.25rem, 4vw, 3rem);
   width: 100%;
@@ -129,7 +126,7 @@
   color: var(--gl-green);
 }
 
-/* CTA pill -- CONTACT */
+/* Ghost CTA pill -- CONTACT */
 .nav-link.nav-cta {
   display: inline-flex;
   align-items: center;
@@ -138,16 +135,20 @@
   padding: 0 2rem;
   min-height: 48px;
   width: auto;
-  background: var(--gl-green);
+  background: transparent;
   color: var(--gl-white);
+  border: 1.5px solid var(--gl-white);
   border-radius: 4px;
-  transition: background var(--duration-fast) var(--ease-stellar);
+  transition: background var(--duration-fast) var(--ease-stellar),
+              border-color var(--duration-fast) var(--ease-stellar),
+              color var(--duration-fast) var(--ease-stellar);
 }
 
 .nav-link.nav-cta:hover,
 .nav-link.nav-cta:focus-visible {
-  background: var(--gl-blue);
-  color: var(--gl-white);
+  background: var(--gl-white);
+  border-color: var(--gl-white);
+  color: var(--gl-navy);
 }
 
 @media (min-width: 768px) {
@@ -1198,12 +1199,12 @@
 .testimonial::before {
   content: '\201C';
   font-family: var(--font-header);
-  font-size: clamp(4rem, 8vw, 7rem);
-  line-height: 0.8;
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  line-height: 1;
   color: var(--gl-green);
   display: block;
-  margin-block-end: var(--space-xs);
-  opacity: 0.6;
+  margin-block-end: 0;
+  opacity: 0.7;
 }
 
 .testimonial__quote {
@@ -1243,7 +1244,13 @@
   text-transform: uppercase;
 }
 
-.testimonials__controls {
+.testimonial__company {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.50);
+  letter-spacing: 0.04em;
+}
   display: flex;
   align-items: center;
   justify-content: center;
