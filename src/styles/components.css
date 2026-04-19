@@ -649,20 +649,20 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-md);
-  align-items: start;
+  align-items: stretch;
 }
 
 @media (min-width: 48rem) {
   .bento {
     grid-template-columns: repeat(2, 1fr);
-    align-items: start;
+    align-items: stretch;
   }
 }
 
 @media (min-width: 72rem) {
   .bento {
     grid-template-columns: repeat(3, 1fr);
-    align-items: start;
+    align-items: stretch;
   }
 }
 
@@ -672,7 +672,7 @@
   background-color: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 4px;
-  min-height: 280px;
+  height: 100%;
   padding: var(--space-lg);
   display: flex;
   flex-direction: column;
@@ -749,43 +749,6 @@
   margin-block-start: var(--space-md);
 }
 
-/* -- Bento Expand Panel ---------------------------------- */
-
-.bento__expand {
-  font-family: var(--font-body);
-  font-size: var(--text-body);
-  color: rgba(255, 255, 255, 0.80);
-  line-height: 1.7;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
-  margin-block-start: var(--space-sm);
-  padding-block-start: var(--space-sm);
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-  overflow: hidden;
-  max-height: 0;
-  opacity: 0;
-  transition: max-height 0.4s var(--ease-stellar),
-              opacity 0.3s var(--ease-stellar),
-              margin 0.3s var(--ease-stellar);
-  margin-block-start: 0;
-  padding-block-start: 0;
-  border-top: none;
-}
-
-/* JS removes hidden and adds is-open */
-.bento__expand.is-open {
-  max-height: 1000px;
-  opacity: 1;
-  margin-block-start: var(--space-sm);
-  padding-block-start: var(--space-sm);
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.bento__expand p {
-  margin: 0;
-}
-
 /* -- Bento Toggle Button --------------------------------- */
 
 .bento__toggle {
@@ -796,22 +759,130 @@
   text-transform: uppercase;
   color: var(--gl-green);
   background: none;
-  border: none;
-  padding: 0;
+  border: 1px solid var(--gl-green);
+  border-radius: 4px;
+  padding: 0.6rem 1.25rem;
   cursor: pointer;
   align-self: flex-start;
-  margin-block-start: var(--space-sm);
-  min-height: 48px; /* touch target */
-  transition: color var(--duration-fast) var(--ease-stellar);
+  margin-block-start: auto;
+  min-height: 48px;
+  transition: background-color var(--duration-fast) var(--ease-stellar),
+              color var(--duration-fast) var(--ease-stellar);
 }
 
 .bento__toggle:hover {
+  background-color: var(--gl-green);
   color: var(--gl-white);
 }
 
 .bento__toggle:focus-visible {
   outline: 3px solid var(--gl-green);
   outline-offset: 4px;
+}
+
+/* ============================================================
+   SERVICE MODAL
+   Full-screen overlay. Navy surface. Slides up on open.
+   ============================================================ */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(26, 26, 26, 0.85);
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--duration-default) var(--ease-stellar),
+              visibility var(--duration-default) var(--ease-stellar);
+}
+
+.modal-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal {
+  background-color: var(--gl-navy);
+  border-top: 4px solid var(--gl-green);
+  border-radius: 4px;
+  padding: var(--space-lg);
+  max-width: 680px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  transform: translateY(24px);
+  transition: transform var(--duration-default) var(--ease-stellar);
+}
+
+.modal-overlay.is-open .modal {
+  transform: translateY(0);
+}
+
+.modal__close {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  background: none;
+  border: none;
+  color: var(--gl-white);
+  font-size: 1.25rem;
+  cursor: pointer;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color var(--duration-fast) var(--ease-stellar);
+}
+
+.modal__close:hover {
+  background-color: rgba(255, 255, 255, 0.10);
+}
+
+.modal__close:focus-visible {
+  outline: 3px solid var(--gl-green);
+  outline-offset: 2px;
+}
+
+.modal__number {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--gl-green);
+  display: block;
+  margin-block-end: var(--space-sm);
+}
+
+.modal__title {
+  font-family: var(--font-header);
+  font-size: var(--text-h2);
+  color: var(--gl-white);
+  line-height: 1.2;
+  margin: 0;
+  margin-block-end: var(--space-md);
+  padding-block-end: var(--space-md);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.modal__body {
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.7;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.modal__body p {
+  margin: 0;
 }
 
 /* ============================================================
