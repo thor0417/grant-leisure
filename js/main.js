@@ -76,7 +76,7 @@ const serviceData = {
   'modal-03': {
     number: '03',
     title: 'Financial Feasibility',
-    body: '<p>Grant Leisure has created proprietary financial models for preparing cash flow and income projections, determining financial rates of return, and sensitivity testing of multi-use community development, income properties, and portfolio disposition programs.</p><p>Our feasibility studies cover land development projects such as new towns, resort communities, and residential developments -- as well as income-producing properties including hotel, office, retail, and residential uses. Model users range from small investment syndicates to large development corporations.</p>'
+    body: '<p>Grant Leisure has created proprietary financial models for preparing cash flow and income projections, determining financial rates of return, and sensitivity testing of multi-use community development, income properties, and portfolio disposition programs.</p><p>Our feasibility studies cover land development projects such as new towns, resort communities, and residential developments - as well as income-producing properties including hotel, office, retail, and residential uses. Model users range from small investment syndicates to large development corporations.</p>'
   },
   'modal-04': {
     number: '04',
@@ -90,8 +90,8 @@ const serviceData = {
   },
   'modal-06': {
     number: '06',
-    title: 'Turn-Key Management',
-    body: '<p>Clients profit from the opportunity to utilize Grant Leisure\'s decades of operating experience and apply it to the policies and procedures that will become the operational foundation for their venture.</p><p>We recruit executive staff as needed and consult with the selected operating team as to best practices from Pre-Opening preparation through Grand Opening and beyond. Team members are reserved for 2 years following opening to monitor operations and make needed adjustments towards stabilization.</p>'
+    title: 'Turnkey Management',
+    body: '<p>Clients profit from the opportunity to utilize Grant Leisure\'s decades of operating experience and apply it to the policies and procedures that will become the operational foundation for their venture.</p><p>We recruit executive staff as needed and consult with the selected operating team on best practices from Pre&#8209;Opening preparation through Grand Opening and beyond. Team members are reserved for 2 years following opening to monitor operations and make adjustments towards stabilization.</p>'
   }
 };
 
