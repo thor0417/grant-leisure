@@ -1202,7 +1202,7 @@
   line-height: 1;
   color: var(--gl-green);
   display: block;
-  margin-block-end: var(--space-xs);
+  margin-block-end: 0;
   opacity: 0.7;
 }
 
