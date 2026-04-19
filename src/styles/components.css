@@ -406,10 +406,8 @@
 
 .about-figure {
   margin: 0;
-  /* Rounded corners -- human, warm -- contrasts the hard data of #proof */
   border-radius: 8px;
   overflow: hidden;
-  /* Elevation lifts the photo off the white background */
   box-shadow: 0 16px 64px rgba(50, 62, 72, 0.12);
 }
 
@@ -417,30 +415,25 @@
   display: block;
   width: 100%;
   height: auto;
-  object-fit: cover;
 }
 
 @media (min-width: 900px) {
   .about-inner {
     flex-direction: row;
-    align-items: stretch;
+    align-items: center;
   }
 
   .about-text {
-    /* Text takes 55% -- dominant because it carries the brand story */
     flex: 0 0 55%;
   }
 
   .about-figure {
     flex: 1;
-    min-height: 520px;
   }
 
   .about-figure img {
     width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center center;
+    height: auto;
   }
 }
 
