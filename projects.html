@@ -3,1074 +3,1022 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Grant Leisure International. A global portfolio of landmark attractions, resorts, and cultural institutions built over four decades." />
-  <title>Projects | Grant Leisure International</title>
+  <meta name="description" content="Grant Leisure International -- Project portfolio spanning theme parks, resorts, zoological institutions, museums, and world heritage sites across 43 countries." />
+  <title>Projects -- Grant Leisure International</title>
 
-  <!-- Shared design system -- load order is non-negotiable -->
+  <!-- Design system: tokens first, then typography, then global, then components -->
   <link rel="stylesheet" href="src/styles/tokens.css" />
   <link rel="stylesheet" href="src/styles/typography.css" />
   <link rel="stylesheet" href="src/styles/global.css" />
   <link rel="stylesheet" href="src/styles/components.css" />
 
-  <!-- Page-scoped styles -->
   <style>
-    /* ============================================================
-       projects.css (inlined) -- Attractions archive
-       Scope: page hero, editorial grid, cinematic rows, accordion
-       All values via tokens. Mobile-first. No magic numbers.
-       ============================================================ */
+    /* =============================================================
+       projects.css (inline, scoped to projects.html only)
+       No values hardcoded -- all via tokens.css custom properties.
+       Mobile-first. min-width breakpoints scale up.
+       No magic numbers without explanatory comments.
+       ============================================================= */
 
-    /* ----------------------------------------------------------
-       PAGE HERO
-       Dark navy band. No video. Category nav below headline.
-       72px top offset compensates for fixed site nav.
-    ---------------------------------------------------------- */
+    /* --- Page header strip ---------------------------------------- */
 
-    .projects-hero {
-      background-color: var(--gl-navy);
-      color: var(--gl-white);
-      padding-top: calc(72px + var(--section-pad-y)); /* 72px = --nav-height */
-      padding-bottom: var(--section-pad-y);
+    .projects-header {
+      padding-top: 72px; /* Exact nav height -- prevents content sliding under fixed nav */
+      background: var(--gl-navy);
     }
 
-    .projects-hero__eyebrow {
-      display: block;
+    .projects-header-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: clamp(2rem, 4vw, 3rem) clamp(1.25rem, 4vw, 3rem) 0;
+    }
+
+    .projects-eyebrow {
       font-family: var(--font-body);
       font-size: var(--text-sm);
-      font-weight: 600;
       letter-spacing: var(--tracking-widest);
-      text-transform: uppercase;
       color: var(--gl-green);
-      margin-bottom: var(--space-md);
+      text-transform: uppercase;
+      margin-bottom: var(--space-xs);
     }
 
-    .projects-hero__h1 {
+    .projects-h1 {
       font-family: var(--font-header);
-      font-size: var(--text-display);
+      font-size: var(--text-h1);
+      color: var(--gl-white);
+      font-weight: 400;
       line-height: var(--leading-tight);
-      letter-spacing: var(--tracking-tight);
-      max-width: 14ch;
-      margin-bottom: var(--space-xl);
+      margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
     }
 
-    /* Category filter tabs */
-    .projects-hero__cats {
+    /* --- Category pill navigation --------------------------------- */
+
+    .category-nav {
       display: flex;
+      gap: var(--space-xs);
       flex-wrap: wrap;
-      gap: var(--space-sm);
-      list-style: none;
+      /* Sits flush at the bottom of the header strip */
+      padding-bottom: 0;
     }
 
-    .cat-tab {
-      display: inline-flex;
-      align-items: center;
-      min-height: 48px; /* Senior touch target */
-      padding: 0 1.5rem;
+    .category-pill {
       font-family: var(--font-body);
       font-size: var(--text-sm);
-      font-weight: 600;
+      font-weight: 500;
       letter-spacing: var(--tracking-wide);
       text-transform: uppercase;
-      text-decoration: none;
-      border: 2px solid rgba(255, 255, 255, 0.25);
       color: var(--gl-white);
-      cursor: pointer;
       background: transparent;
-      transition: background-color var(--duration-fast) var(--ease-stellar),
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+      border-radius: var(--radius-full);
+      /* 48px height -- senior touch target requirement */
+      padding: 0 1.5rem;
+      height: 48px;
+      cursor: pointer;
+      transition: background var(--duration-fast) var(--ease-stellar),
                   border-color var(--duration-fast) var(--ease-stellar),
                   color var(--duration-fast) var(--ease-stellar);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
     }
 
-    .cat-tab--active,
-    .cat-tab:hover {
-      background-color: var(--gl-green);
+    .category-pill:hover {
+      border-color: var(--gl-green);
+      color: var(--gl-green);
+    }
+
+    .category-pill.is-active {
+      background: var(--gl-green);
       border-color: var(--gl-green);
       color: var(--gl-white);
     }
 
-    /* Coming-soon tabs: muted, non-interactive */
-    .cat-tab--soon {
-      opacity: 0.4;
-      cursor: default;
-      pointer-events: none;
+    /* --- Projects grid -------------------------------------------- */
+
+    .projects-grid {
+      background: var(--gl-white);
     }
 
-    /* ----------------------------------------------------------
-       ARCHIVE BODY
-       White surface. Contains all row types.
-    ---------------------------------------------------------- */
-
-    .projects-archive {
-      background-color: var(--gl-white);
-    }
-
-    /* ----------------------------------------------------------
-       STANDARD EDITORIAL ROW (rows 1, 2, 4, 5, 7, 8)
-       Staggered: odd = image-left / text-right
-                  even = text-left / image-right
-       On mobile: image always stacks above text.
-    ---------------------------------------------------------- */
+    /* --- Editorial row (standard left/right) ---------------------- */
 
     .project-row {
-      padding-block: var(--section-pad-y);
-      border-bottom: 1px solid rgba(50, 62, 72, 0.08);
-    }
-
-    .project-row__inner {
       display: grid;
       grid-template-columns: 1fr;
-      gap: var(--space-xl);
-      align-items: center;
+      border-bottom: 1px solid rgba(50, 62, 72, 0.12);
     }
 
     @media (min-width: 768px) {
-      .project-row__inner {
-        /* 55 / 45 split -- image side is dominant but not overwhelming */
-        grid-template-columns: 55fr 45fr;
-        gap: clamp(2rem, 4vw, 5rem);
+      .project-row {
+        /* 55% image, 45% text -- image carries the visual weight */
+        grid-template-columns: 55% 45%;
+        min-height: 400px;
       }
 
-      /* Even rows: text comes first in DOM order but is visually right-shifted.
-         Using order property avoids duplicating HTML. */
-      .project-row--reverse .project-row__image {
+      /* Reverse layout -- text left, image right */
+      .project-row.is-reversed .project-image-block {
         order: 2;
       }
-      .project-row--reverse .project-row__text {
+      .project-row.is-reversed .project-text-block {
         order: 1;
+        border-left: none;
+        border-right: 1px solid rgba(50, 62, 72, 0.12);
       }
     }
 
-    .project-row__image {
+    .project-image-block {
       position: relative;
       overflow: hidden;
-      /* 16:10 aspect ratio -- wide enough to feel editorial */
-      aspect-ratio: 16 / 10;
+      /* 280px mobile, scales up via grid on desktop */
+      min-height: 280px;
     }
 
-    .project-row__image img {
+    @media (min-width: 768px) {
+      .project-image-block {
+        min-height: 400px;
+      }
+    }
+
+    .project-image-block img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
+      display: block;
       transition: transform var(--duration-slow) var(--ease-stellar);
     }
 
-    /* Subtle scale on row hover -- not the accordion trigger */
-    .project-row:hover .project-row__image img {
+    .project-row:hover .project-image-block img {
       transform: scale(1.03);
     }
 
-    /* Country label overlaid on image bottom-left */
-    .project-row__location {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      padding: var(--space-xs) var(--space-sm);
-      background-color: var(--gl-green);
-      font-family: var(--font-body);
-      font-size: var(--text-sm);
-      font-weight: 600;
-      letter-spacing: var(--tracking-wide);
-      text-transform: uppercase;
-      color: var(--gl-white);
-    }
-
-    .project-row__text {
+    .project-text-block {
+      padding: clamp(2rem, 4vw, 3.5rem);
       display: flex;
       flex-direction: column;
-      gap: var(--space-md);
+      justify-content: center;
+      border-left: 1px solid rgba(50, 62, 72, 0.12);
+      background: var(--gl-white);
     }
 
-    .project-row__eyebrow {
+    .project-location {
       font-family: var(--font-body);
       font-size: var(--text-sm);
-      font-weight: 600;
       letter-spacing: var(--tracking-widest);
-      text-transform: uppercase;
       color: var(--gl-green);
+      text-transform: uppercase;
+      margin-bottom: var(--space-xs);
     }
 
-    .project-row__title {
+    .project-title {
       font-family: var(--font-header);
       font-size: var(--text-h2);
+      font-weight: 400;
+      color: var(--gl-navy);
       line-height: var(--leading-tight);
-      color: var(--gl-navy);
+      margin-bottom: var(--space-md);
     }
 
-    .project-row__summary {
+    .project-teaser {
       font-family: var(--font-body);
-      font-size: var(--text-body-lg);
+      font-size: var(--text-body);
+      color: var(--gl-navy);
       line-height: var(--leading-loose);
-      color: var(--gl-navy);
-      /* Show only first ~3 lines before accordion opens */
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      transition: none; /* max-height transition is on the accordion panel */
+      /* Hard cap at one sentence -- no ellipsis ever */
+      margin-bottom: var(--space-lg);
+      opacity: 0.75;
     }
 
-    /* When accordion is open, release the clamp */
-    .project-row.is-open .project-row__summary {
-      display: block;
-      -webkit-line-clamp: unset;
-      overflow: visible;
-    }
-
-    /* Accordion trigger -- text link only. No border, no background, no box. */
-    .accordion-trigger {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.375rem;
-      min-height: 48px; /* Senior touch target */
-      padding: 0;
-      background: none;
-      border: none;
-      cursor: pointer;
+    /* READ THE BRIEF trigger -- text link only, zero box, zero border */
+    .project-trigger {
       font-family: var(--font-body);
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
+      font-size: var(--text-sm);
+      font-weight: 500;
+      letter-spacing: var(--tracking-wide);
       text-transform: uppercase;
       color: var(--gl-green);
-      transition: opacity var(--duration-fast) var(--ease-stellar);
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      /* 48px touch target height via padding */
+      min-height: 48px;
+      transition: gap var(--duration-fast) var(--ease-stellar),
+                  opacity var(--duration-fast) var(--ease-stellar);
+      text-decoration: none;
     }
 
-    .accordion-trigger:hover {
-      opacity: 0.75;
+    .project-trigger:hover {
+      gap: 0.75rem;
+      opacity: 0.8;
     }
 
-    /* Arrow character -- rotated 45deg when open to become an X-axis close signal */
-    .accordion-trigger__arrow {
+    .project-trigger-arrow {
       display: inline-block;
       transition: transform var(--duration-fast) var(--ease-stellar);
-      font-style: normal;
     }
 
-    .accordion-trigger__label--open  { display: none; }
-    .accordion-trigger__label--close { display: none; }
-
-    .project-row:not(.is-open) .accordion-trigger__label--open  { display: inline; }
-    .project-row.is-open       .accordion-trigger__label--close { display: inline; }
-
-    /* Cinematic rows: trigger sits inside the overlay -- keep green */
-    .cinematic__text .accordion-trigger {
-      color: var(--gl-green);
-      border: none;
-      padding-bottom: 0;
-    }
-
-    .cinematic__text .accordion-trigger:hover {
-      opacity: 0.75;
-    }
-
-    /* Accordion panel -- the full project detail */
-    .accordion-panel {
+    /* Accordion panel -- drops below the full row, never overlaps image */
+    .project-panel {
+      grid-column: 1 / -1; /* Spans full row width */
       max-height: 0;
       overflow: hidden;
-      /* max-height transition creates the smooth expand effect.
-         1200ms matches --duration-slow for a cinematic feel. */
-      transition: max-height 0.7s var(--ease-stellar);
+      background: var(--gl-navy);
+      border-left: 3px solid var(--gl-green);
+      transition: max-height var(--duration-slow) var(--ease-stellar);
     }
 
-    .project-row.is-open .accordion-panel {
-      /* Large enough value to never clip content -- actual height varies */
+    .project-panel.is-open {
+      /* 600px cap handles the longest writeup comfortably */
       max-height: 600px;
     }
 
-    .accordion-panel__body {
-      padding-top: var(--space-md);
+    .project-panel-inner {
+      padding: clamp(2rem, 4vw, 3rem) clamp(2rem, 4vw, 3.5rem);
+    }
+
+    .project-panel p {
       font-family: var(--font-body);
-      font-size: var(--text-body-lg);
+      font-size: var(--text-body);
+      color: var(--gl-white);
       line-height: var(--leading-loose);
-      color: var(--gl-navy);
+      max-width: 72ch; /* Optimal line length for readability */
     }
 
-    /* ----------------------------------------------------------
-       CINEMATIC ROW (every 3rd project: rows 3, 6, 9)
-       Full-width image. Text overlaid on a dark scrim.
-       On mobile: text drops below image.
-    ---------------------------------------------------------- */
+    .project-panel p + p {
+      margin-top: var(--space-md);
+    }
 
-    .project-row--cinematic {
-      padding-block: 0;
-      border-bottom: none;
+    .project-close {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--gl-white);
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      min-height: 48px;
+      margin-top: var(--space-lg);
+      opacity: 0.7;
+      transition: opacity var(--duration-fast) var(--ease-stellar),
+                  gap var(--duration-fast) var(--ease-stellar);
+    }
+
+    .project-close:hover {
+      opacity: 1;
+      gap: 0.75rem;
+    }
+
+    /* --- Cinematic row (full-bleed) ------------------------------- */
+
+    .project-row-cinematic {
       position: relative;
-      /* overflow must NOT be hidden here -- accordion panel must clear the image block */
+      /* 70vh minimum -- fills the screen with intent */
+      min-height: clamp(500px, 70vh, 800px);
+      display: flex;
+      flex-direction: column;
+      border-bottom: 1px solid rgba(50, 62, 72, 0.12);
+      overflow: hidden;
     }
 
-    .cinematic__image {
-      position: relative;
-      /* 21:9 cinematic ratio on desktop */
-      aspect-ratio: 21 / 9;
-      overflow: hidden; /* clip the photo only, not the article */
+    .cinematic-image-wrap {
+      position: absolute;
+      inset: 0;
+      z-index: var(--z-base);
     }
 
-    @media (max-width: 767px) {
-      .cinematic__image {
-        aspect-ratio: 4 / 3;
-      }
-    }
-
-    .cinematic__image img {
+    .cinematic-image-wrap img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
+      display: block;
       transition: transform var(--duration-slow) var(--ease-stellar);
     }
 
-    .project-row--cinematic:hover .cinematic__image img {
-      transform: scale(1.04);
+    .project-row-cinematic:hover .cinematic-image-wrap img {
+      transform: scale(1.03);
     }
 
-    /* Dark gradient scrim -- corrected opacity for legibility */
-    .cinematic__scrim {
+    /* Left-to-right gradient scrim -- text lifts off image with real weight */
+    .cinematic-image-wrap::after {
+      content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to right, rgba(50,62,72,0.65) 0%, transparent 60%);
+      background: linear-gradient(
+        to right,
+        rgba(20, 28, 35, 0.82) 0%,
+        rgba(20, 28, 35, 0.55) 40%,
+        transparent 70%
+      );
     }
 
-    @media (max-width: 767px) {
-      .cinematic__scrim {
-        background: linear-gradient(
-          to top,
-          rgba(50, 62, 72, 0.95) 0%,
-          rgba(50, 62, 72, 0.3) 70%,
-          transparent 100%
-        );
-      }
-    }
-
-    /* Text overlaid inside the image on desktop */
-    .cinematic__text {
-      position: absolute;
-      top: 50%;
-      left: var(--page-gutter);
-      transform: translateY(-50%);
-      max-width: 520px;
-      color: var(--gl-white);
+    .cinematic-content {
+      position: relative;
+      z-index: var(--z-overlay);
+      padding: clamp(3rem, 6vw, 5rem) clamp(2rem, 5vw, 4rem);
+      max-width: 600px; /* Text never competes with image on right half */
       display: flex;
       flex-direction: column;
-      gap: var(--space-md);
+      justify-content: flex-end;
+      min-height: inherit;
     }
 
-    @media (max-width: 767px) {
-      .cinematic__text {
-        position: relative;
-        top: auto;
-        left: auto;
-        transform: none;
-        max-width: 100%;
-        background-color: var(--gl-navy);
-        color: var(--gl-white);
-        padding: var(--space-xl) var(--page-gutter);
-      }
-    }
-
-    .cinematic__eyebrow {
+    .cinematic-location {
+      display: inline-block;
       font-family: var(--font-body);
       font-size: var(--text-sm);
-      font-weight: 600;
+      font-weight: 500;
       letter-spacing: var(--tracking-widest);
       text-transform: uppercase;
-      color: var(--gl-green);
-    }
-
-    .cinematic__title {
-      font-family: var(--font-header);
-      font-size: var(--text-h1);
-      line-height: var(--leading-tight);
       color: var(--gl-white);
-      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
-    }
-
-    .cinematic__summary {
-      font-family: var(--font-body);
-      font-size: var(--text-body-lg);
-      line-height: var(--leading-loose);
-      color: rgba(255, 255, 255, 0.85);
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .project-row--cinematic.is-open .cinematic__summary {
-      display: block;
-      -webkit-line-clamp: unset;
-      overflow: visible;
-    }
-
-    /* Cinematic accordion panel -- drops below the image block, never overlaps it */
-    .cinematic__accordion-panel {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.7s var(--ease-stellar);
-      background-color: var(--gl-navy);
-      color: var(--gl-white);
-      border-left: 3px solid var(--gl-green);
-    }
-
-    .project-row--cinematic.is-open .cinematic__accordion-panel {
-      max-height: 600px;
-    }
-
-    .cinematic__accordion-body {
-      padding: 2rem 2.5rem;
-      max-width: var(--max-width);
-      margin-inline: auto;
-      font-family: var(--font-body);
-      font-size: var(--text-body-lg);
-      line-height: var(--leading-loose);
-      color: var(--gl-white);
-    }
-
-    /* Location badge on cinematic rows -- fit-content, never full-width */
-    .cinematic__location {
-      display: inline-block;
+      background: var(--gl-green);
+      /* fit-content -- pill hugs the text, never stretches full width */
       width: fit-content;
-      padding: var(--space-xs) var(--space-sm);
-      background-color: var(--gl-green);
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-sm);
+      margin-bottom: var(--space-md);
+    }
+
+    .cinematic-title {
+      font-family: var(--font-header);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 400;
+      color: var(--gl-white);
+      line-height: var(--leading-tight);
+      margin-bottom: var(--space-md);
+      /* Dual-layer shadow -- spread for lift, tight for crispness */
+      text-shadow:
+        0 2px 24px rgba(0, 0, 0, 0.6),
+        0 1px 4px rgba(0, 0, 0, 0.85);
+    }
+
+    .cinematic-teaser {
+      font-family: var(--font-body);
+      font-size: var(--text-body-lg);
+      color: rgba(255, 255, 255, 0.9);
+      line-height: var(--leading-loose);
+      margin-bottom: var(--space-lg);
+      /* Same dual-layer shadow for legibility on complex photography */
+      text-shadow:
+        0 1px 12px rgba(0, 0, 0, 0.5),
+        0 1px 3px rgba(0, 0, 0, 0.7);
+      max-width: 52ch;
+    }
+
+    /* READ THE BRIEF on cinematic rows -- white, no box */
+    .cinematic-trigger {
       font-family: var(--font-body);
       font-size: var(--text-sm);
-      font-weight: 600;
+      font-weight: 500;
       letter-spacing: var(--tracking-wide);
       text-transform: uppercase;
       color: var(--gl-white);
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      min-height: 48px;
+      transition: gap var(--duration-fast) var(--ease-stellar),
+                  opacity var(--duration-fast) var(--ease-stellar);
     }
 
-    /* ----------------------------------------------------------
-       SECTION DIVIDER BETWEEN ROWS
-    ---------------------------------------------------------- */
-
-    .project-row + .project-row {
-      /* Border already on .project-row via border-bottom -- handled there */
+    .cinematic-trigger:hover {
+      gap: 0.75rem;
+      opacity: 0.8;
     }
 
-    /* ----------------------------------------------------------
-       FOOTER -- minimal, matches index.html
-    ---------------------------------------------------------- */
+    /* Cinematic accordion -- drops below the full cinematic row */
+    .cinematic-panel {
+      position: relative;
+      z-index: var(--z-overlay);
+      max-height: 0;
+      overflow: hidden;
+      background: var(--gl-navy);
+      border-left: 3px solid var(--gl-green);
+      transition: max-height var(--duration-slow) var(--ease-stellar);
+    }
+
+    .cinematic-panel.is-open {
+      max-height: 600px;
+    }
+
+    .cinematic-panel-inner {
+      padding: clamp(2rem, 4vw, 3rem) clamp(2rem, 4vw, 3.5rem);
+    }
+
+    .cinematic-panel p {
+      font-family: var(--font-body);
+      font-size: var(--text-body);
+      color: var(--gl-white);
+      line-height: var(--leading-loose);
+      max-width: 72ch;
+    }
+
+    .cinematic-panel p + p {
+      margin-top: var(--space-md);
+    }
+
+    .cinematic-close {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--gl-white);
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      min-height: 48px;
+      margin-top: var(--space-lg);
+      opacity: 0.7;
+      transition: opacity var(--duration-fast) var(--ease-stellar),
+                  gap var(--duration-fast) var(--ease-stellar);
+    }
+
+    .cinematic-close:hover {
+      opacity: 1;
+      gap: 0.75rem;
+    }
+
+    /* --- Footer --------------------------------------------------- */
 
     .projects-footer {
-      background-color: var(--gl-navy);
-      color: rgba(255, 255, 255, 0.5);
+      background: var(--gl-navy);
+      padding: var(--space-xl) clamp(1.25rem, 4vw, 3rem);
       text-align: center;
-      padding-block: var(--space-xl);
     }
 
     .projects-footer p {
       font-family: var(--font-body);
       font-size: var(--text-sm);
+      color: rgba(255, 255, 255, 0.45);
       letter-spacing: var(--tracking-wide);
       text-transform: uppercase;
     }
 
-    /* ----------------------------------------------------------
-       CONTAINER OVERRIDE FOR EDITORIAL ROWS
-       Standard rows need the page gutter.
-       Cinematic rows break out of it (handled inline).
-    ---------------------------------------------------------- */
+    /* --- GSAP reveal states --------------------------------------- */
+    /* Initial hidden state -- GSAP animates these in on scroll */
 
-    .project-row:not(.project-row--cinematic) > .container {
-      /* Inherits from global.css .container -- no override needed */
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(32px);
+    }
+
+    [data-reveal="left"] {
+      opacity: 0;
+      transform: translateX(-48px);
+    }
+
+    [data-reveal="right"] {
+      opacity: 0;
+      transform: translateX(48px);
+    }
+
+    /* Reduced motion -- skip transforms, respect user preference */
+    @media (prefers-reduced-motion: reduce) {
+      [data-reveal],
+      [data-reveal="left"],
+      [data-reveal="right"] {
+        opacity: 1;
+        transform: none;
+      }
     }
 
   </style>
 </head>
 
-<body class="is-loading">
+<body>
 
-  <a href="#main-content" class="skip-link">Skip to content</a>
-
-  <!-- ============================================================
-       NAVIGATION
-       Shared component. is-scrolled applied immediately via JS
-       since there is no hero video on this page.
-       Links back to index.html anchors.
-  ============================================================ -->
-  <nav class="site-nav is-scrolled" aria-label="Primary navigation">
-    <div class="nav-inner">
-
-      <a href="index.html" class="nav-logo" aria-label="Grant Leisure International. Return to home.">
+  <!-- NAV: Identical to index.html. is-scrolled applied on load -- no video to scroll past. -->
+  <header class="site-nav is-scrolled" role="banner">
+    <nav class="nav-inner" aria-label="Primary navigation">
+      <a href="index.html" class="nav-logo" aria-label="Grant Leisure International -- home">
         <img
           src="public/assets/images/gli-logo.png"
           alt="Grant Leisure International logo"
           width="120"
-          height="40"
+          height="41"
         />
       </a>
-
-      <button
-        class="nav-toggle"
-        aria-expanded="false"
-        aria-controls="nav-menu"
-        aria-label="Open navigation menu"
-      >
-        <span></span>
-        <span></span>
-        <span></span>
+      <button class="nav-toggle" aria-controls="nav-links" aria-expanded="false" aria-label="Open menu">
+        <span></span><span></span><span></span>
       </button>
-
-      <ul class="nav-links" id="nav-menu" role="list">
-        <li><a class="nav-link" href="index.html#about">About</a></li>
-        <li><a class="nav-link" href="index.html#expertise">Services</a></li>
-        <li><a class="nav-link nav-link--active" href="projects.html" aria-current="page">Projects</a></li>
-        <li><a class="nav-link" href="index.html#leadership">Team</a></li>
-        <li><a class="nav-link nav-cta" href="index.html#engage">Contact Us</a></li>
+      <ul class="nav-links" id="nav-links" role="list">
+        <li><a href="index.html#about" class="nav-link">ABOUT</a></li>
+        <li><a href="index.html#expertise" class="nav-link">SERVICES</a></li>
+        <li><a href="index.html#leadership" class="nav-link">TEAM</a></li>
+        <li><a href="projects.html" class="nav-link">PROJECTS</a></li>
+        <li><a href="index.html#engage" class="nav-link nav-cta">CONTACT</a></li>
       </ul>
-
-    </div>
-  </nav>
-
-  <!-- ============================================================
-       PAGE HERO
-       Category title + filter tabs.
-       Other categories disabled until approved.
-  ============================================================ -->
-  <header class="projects-hero" id="main-content">
-    <div class="container">
-
-      <span class="projects-hero__eyebrow">The Portfolio</span>
-
-      <h1 class="projects-hero__h1" data-reveal>
-        DELIVERED<br />ACROSS THE<br />WORLD.
-      </h1>
-
-      <ul class="projects-hero__cats" role="list" aria-label="Project categories">
-        <li>
-          <a href="projects.html" class="cat-tab cat-tab--active" aria-current="page">
-            Attractions
-          </a>
-        </li>
-        <li>
-          <span class="cat-tab cat-tab--soon" aria-disabled="true" title="Coming soon">
-            Resorts
-          </span>
-        </li>
-        <li>
-          <span class="cat-tab cat-tab--soon" aria-disabled="true" title="Coming soon">
-            Zoological
-          </span>
-        </li>
-        <li>
-          <span class="cat-tab cat-tab--soon" aria-disabled="true" title="Coming soon">
-            Museums
-          </span>
-        </li>
-        <li>
-          <span class="cat-tab cat-tab--soon" aria-disabled="true" title="Coming soon">
-            Heritage
-          </span>
-        </li>
-      </ul>
-
-    </div>
+    </nav>
   </header>
 
-  <!-- ============================================================
-       ATTRACTIONS ARCHIVE
-       9 projects. Layout pattern:
-         Row 1 (London Eye):      standard, image-left
-         Row 2 (Ferrari World):   standard, image-right  (--reverse)
-         Row 3 (Ocean Park):      cinematic (full-bleed)
-         Row 4 (Our Dynamic Earth): standard, image-left
-         Row 5 (Legoland):        standard, image-right  (--reverse)
-         Row 6 (Olympic Spirit):  cinematic (full-bleed)
-         Row 7 (Downton Abbey):   standard, image-left
-         Row 8 (Granada Studio):  standard, image-right  (--reverse)
-         Row 9 (Bluewater):       cinematic (full-bleed)
-  ============================================================ -->
-  <main class="projects-archive" aria-label="Attractions portfolio">
+  <main id="main-content">
 
-    <!-- --------------------------------------------------------
-         ROW 1 -- THE LONDON EYE (image-left)
-    -------------------------------------------------------- -->
-    <article class="project-row" id="london-eye" data-project>
-      <div class="container">
-        <div class="project-row__inner">
+    <!-- PAGE HEADER: Logo strip + category pill nav only. No hero. No empty space. -->
+    <div class="projects-header">
+      <div class="projects-header-inner">
+        <p class="projects-eyebrow">Grant Leisure International</p>
+        <h1 class="projects-h1">Selected Works</h1>
+        <nav class="category-nav" aria-label="Project categories">
+          <a href="projects.html#attractions" class="category-pill is-active" data-category="attractions">Attractions</a>
+          <a href="projects.html#resorts"     class="category-pill" data-category="resorts">Resorts</a>
+          <a href="projects.html#zoological"  class="category-pill" data-category="zoological">Zoological</a>
+          <a href="projects.html#museums"     class="category-pill" data-category="museums">Museums</a>
+          <a href="projects.html#heritage"    class="category-pill" data-category="heritage">Heritage</a>
+        </nav>
+      </div>
+    </div>
 
-          <figure class="project-row__image" data-reveal="left">
-            <img
-              src="public/assets/images/projects/attractions/london-eye.png"
-              alt="The London Eye observation wheel on the South Bank of the River Thames"
-              width="880"
-              height="550"
-              loading="eager"
-            />
-            <figcaption class="project-row__location">London, United Kingdom</figcaption>
-          </figure>
+    <!-- PROJECTS GRID -->
+    <section class="projects-grid" aria-label="Project portfolio" id="attractions">
 
-          <div class="project-row__text" data-reveal="right">
-            <span class="project-row__eyebrow">Attractions</span>
-            <h2 class="project-row__title">The London Eye</h2>
-            <p class="project-row__summary">
-              Europe's tallest observation wheel and the single most visited attraction in the United Kingdom.
-            </p>
-
-            <div class="accordion-panel" role="region" aria-label="London Eye full detail">
-              <p class="accordion-panel__body">
-                Opposite the Houses of Parliament on the South Bank of the River Thames, the London Eye defines the capital's skyline. Grant Leisure was commissioned by British Airways to provide a feasibility analysis, corporate hospitality and sponsorship program, and operating strategy. Grant Leisure additionally managed both the tender process and selection of an operator. Following the London Eye's success, observation wheels have grown significantly in popularity, many of which are modelled after their predecessor.
-              </p>
-            </div>
-
-            <button class="accordion-trigger" aria-expanded="false" aria-controls="london-eye">
-              <span class="accordion-trigger__label--open"><span class="accordion-trigger__arrow" aria-hidden="true">&#8594;</span> READ THE BRIEF</span>
-              <span class="accordion-trigger__label--close"><span class="accordion-trigger__arrow" aria-hidden="true">&#8593;</span> CLOSE</span>
+      <!-- ============================================================
+           ROW 01 -- THE LONDON EYE
+           Editorial row. Image left, text right.
+           ============================================================ -->
+      <article class="project-row" data-project="london-eye">
+        <div class="project-image-block" data-reveal="left">
+          <img
+            src="public/assets/images/projects/attractions/london-eye.png"
+            alt="The London Eye observation wheel on the South Bank of the River Thames at dusk"
+            width="880"
+            height="400"
+            loading="lazy"
+          />
+        </div>
+        <div class="project-text-block" data-reveal>
+          <p class="project-location">London, United Kingdom</p>
+          <h2 class="project-title">The London Eye</h2>
+          <p class="project-teaser">Europe's tallest observation wheel and the single most visited attraction in the United Kingdom.</p>
+          <button class="project-trigger" aria-expanded="false" aria-controls="panel-london-eye">
+            <span class="project-trigger-arrow" aria-hidden="true">&#8594;</span>
+            Read the Brief
+          </button>
+        </div>
+        <div class="project-panel" id="panel-london-eye" role="region" aria-label="London Eye project details">
+          <div class="project-panel-inner">
+            <p>Opposite the Houses of Parliament, on the South Bank of the River Thames, stands the London Eye. With its panoramic views, the London Eye is currently Europe's tallest observation wheel and the single most visited attraction in the United Kingdom.</p>
+            <p>Grant Leisure was commissioned by British Airways to provide a feasibility analysis, corporate hospitality and sponsorship program, and operating strategy, and additionally managed both the tender process and selection of an operator. Following the London Eye's success, observation wheels have significantly grown in popularity, many of which are modeled after their predecessor.</p>
+            <button class="project-close" aria-label="Close London Eye details">
+              <span aria-hidden="true">&#8593;</span>
+              Close
             </button>
           </div>
-
         </div>
-      </div>
-    </article>
+      </article>
 
-    <!-- --------------------------------------------------------
-         ROW 2 -- FERRARI WORLD (image-right)
-    -------------------------------------------------------- -->
-    <article class="project-row project-row--reverse" id="ferrari-world" data-project>
-      <div class="container">
-        <div class="project-row__inner">
-
-          <figure class="project-row__image" data-reveal="right">
-            <img
-              src="public/assets/images/projects/attractions/ferrari-world.png"
-              alt="Ferrari World theme park under its iconic red roof in Abu Dhabi"
-              width="880"
-              height="550"
-              loading="lazy"
-            />
-            <figcaption class="project-row__location">Abu Dhabi, UAE</figcaption>
-          </figure>
-
-          <div class="project-row__text" data-reveal="left">
-            <span class="project-row__eyebrow">Attractions</span>
-            <h2 class="project-row__title">Ferrari World</h2>
-            <p class="project-row__summary">
-              The first branded theme park in the United Arab Emirates, built on an exclusive worldwide rights agreement secured by Grant Leisure.
-            </p>
-
-            <div class="accordion-panel" role="region" aria-label="Ferrari World full detail">
-              <p class="accordion-panel__body">
-                Grant Leisure was commissioned by Aldar to develop the economic feasibility and concept plan and to secure the worldwide rights for Ferrari World. Boasting over 20 themed attractions and adventures, all under the complex's signature red roof, guests are treated to a taste of being behind the wheel of the world's most prestigious sports car. Ferrari World is a global destination and the defining example of branded leisure development in the Gulf region.
-              </p>
-            </div>
-
-            <button class="accordion-trigger" aria-expanded="false" aria-controls="ferrari-world">
-              <span class="accordion-trigger__label--open"><span class="accordion-trigger__arrow" aria-hidden="true">&#8594;</span> READ THE BRIEF</span>
-              <span class="accordion-trigger__label--close"><span class="accordion-trigger__arrow" aria-hidden="true">&#8593;</span> CLOSE</span>
+      <!-- ============================================================
+           ROW 02 -- FERRARI WORLD
+           Editorial row. Image right, text left (reversed).
+           ============================================================ -->
+      <article class="project-row is-reversed" data-project="ferrari-world">
+        <div class="project-image-block" data-reveal="right">
+          <img
+            src="public/assets/images/projects/attractions/ferrari-world.png"
+            alt="Ferrari World Abu Dhabi -- the iconic red roof of the world's first Ferrari-branded theme park"
+            width="880"
+            height="400"
+            loading="lazy"
+          />
+        </div>
+        <div class="project-text-block" data-reveal>
+          <p class="project-location">Abu Dhabi, United Arab Emirates</p>
+          <h2 class="project-title">Ferrari World</h2>
+          <p class="project-teaser">The first branded theme park in the United Arab Emirates, built on an exclusive worldwide rights agreement secured by Grant Leisure.</p>
+          <button class="project-trigger" aria-expanded="false" aria-controls="panel-ferrari-world">
+            <span class="project-trigger-arrow" aria-hidden="true">&#8594;</span>
+            Read the Brief
+          </button>
+        </div>
+        <div class="project-panel" id="panel-ferrari-world" role="region" aria-label="Ferrari World project details">
+          <div class="project-panel-inner">
+            <p>Grant Leisure was commissioned by Aldar to develop the economic feasibility and concept plan, and secure the worldwide rights for Ferrari World. Ferrari World is a global destination and the first branded theme park in the United Arab Emirates.</p>
+            <p>Boasting over 20 themed attractions and adventures, all under the complex's signature red roof, guests are treated to a taste of being behind the wheel of the world's most prestigious sports car.</p>
+            <button class="project-close" aria-label="Close Ferrari World details">
+              <span aria-hidden="true">&#8593;</span>
+              Close
             </button>
           </div>
-
         </div>
-      </div>
-    </article>
+      </article>
 
-    <!-- --------------------------------------------------------
-         ROW 3 -- OCEAN PARK (cinematic -- full-bleed)
-    -------------------------------------------------------- -->
-    <article class="project-row project-row--cinematic" id="ocean-park" data-project>
-
-      <div class="cinematic__image">
-        <img
-          src="public/assets/images/projects/attractions/ocean-park.png"
-          alt="Ocean Park Hong Kong overlooking the South China Sea"
-          width="1920"
-          height="823"
-          loading="lazy"
-        />
-        <div class="cinematic__scrim" aria-hidden="true"></div>
-
-        <div class="cinematic__text">
-          <span class="cinematic__eyebrow">Attractions</span>
-          <h2 class="cinematic__title">Ocean Park</h2>
-          <span class="cinematic__location">Hong Kong, China</span>
-          <p class="cinematic__summary">
-            Grant Leisure redeveloped Ocean Park's master plan and reversed visitor decline through surgical infrastructure recommendations.
-          </p>
-
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="ocean-park">
-              <span class="accordion-trigger__label--open"><span class="accordion-trigger__arrow" aria-hidden="true">&#8594;</span> READ THE BRIEF</span>
-              <span class="accordion-trigger__label--close"><span class="accordion-trigger__arrow" aria-hidden="true">&#8593;</span> CLOSE</span>
-            </button>
+      <!-- ============================================================
+           ROW 03 -- OCEAN PARK
+           Cinematic row. Full bleed. Dark scrim. Text overlaid.
+           ============================================================ -->
+      <article class="project-row-cinematic" data-project="ocean-park">
+        <div class="cinematic-image-wrap">
+          <img
+            src="public/assets/images/projects/attractions/ocean-park.png"
+            alt="Ocean Park Hong Kong -- aerial cable cars above the park's marine-themed attractions"
+            width="1440"
+            height="800"
+            loading="lazy"
+          />
         </div>
-      </div>
-
-      <div class="cinematic__accordion-panel" role="region" aria-label="Ocean Park full detail">
-        <div class="cinematic__accordion-body">
-          Grant Leisure was involved with the redevelopment of Ocean Park's master plan following its first year of operation, presenting recommendations to stem declines in visitor numbers. One notable recommendation connected the bird sanctuary to the Oceanarium with a funicular and improved cable car. That infrastructure decision has heavily contributed to the park's sustained success and visitor growth decade over decade.
+        <div class="cinematic-content" data-reveal>
+          <span class="cinematic-location">Hong Kong, China</span>
+          <h2 class="cinematic-title">Ocean Park</h2>
+          <p class="cinematic-teaser">Grant Leisure reconnected a world-class marine park to its audience through a master plan that became the foundation of its sustained growth.</p>
+          <button class="cinematic-trigger" aria-expanded="false" aria-controls="panel-ocean-park">
+            <span aria-hidden="true">&#8594;</span>
+            Read the Brief
+          </button>
         </div>
-      </div>
-
-    </article>
-
-    <!-- --------------------------------------------------------
-         ROW 4 -- OUR DYNAMIC EARTH (image-left)
-    -------------------------------------------------------- -->
-    <article class="project-row" id="dynamic-earth" data-project>
-      <div class="container">
-        <div class="project-row__inner">
-
-          <figure class="project-row__image" data-reveal="left">
-            <img
-              src="public/assets/images/projects/attractions/our-dynamic-earth.png"
-              alt="Our Dynamic Earth visitor attraction in Edinburgh, Scotland"
-              width="880"
-              height="550"
-              loading="lazy"
-            />
-            <figcaption class="project-row__location">Edinburgh, United Kingdom</figcaption>
-          </figure>
-
-          <div class="project-row__text" data-reveal="right">
-            <span class="project-row__eyebrow">Attractions</span>
-            <h2 class="project-row__title">Our Dynamic Earth</h2>
-            <p class="project-row__summary">
-              The largest visitor attraction ever built in Scotland, taking guests on a journey through Earth's past, present, and future.
-            </p>
-
-            <div class="accordion-panel" role="region" aria-label="Our Dynamic Earth full detail">
-              <p class="accordion-panel__body">
-                Dynamic Earth is an edutainment experience addressing issues of population growth, concepts of time, and the realities of climate change. Visitors stand face-to-face with extinct dinosaurs, feel the heat of a tropical rainforest, and fly over glaciers in prehistoric Scotland through a series of interactive exhibits including a 4-D experience. Grant Leisure was retained by the City of Edinburgh to provide the economic feasibility, pre-opening planning, recruitment, training, marketing, and finance for the project.
-              </p>
-            </div>
-
-            <button class="accordion-trigger" aria-expanded="false" aria-controls="dynamic-earth">
-              <span class="accordion-trigger__label--open"><span class="accordion-trigger__arrow" aria-hidden="true">&#8594;</span> READ THE BRIEF</span>
-              <span class="accordion-trigger__label--close"><span class="accordion-trigger__arrow" aria-hidden="true">&#8593;</span> CLOSE</span>
+        <div class="cinematic-panel" id="panel-ocean-park" role="region" aria-label="Ocean Park project details">
+          <div class="cinematic-panel-inner">
+            <p>Grant Leisure was involved with the redevelopment of Ocean Park's master plan following its first year of operation, presenting recommendations to stem declines in visitor numbers.</p>
+            <p>One such notable recommendation included connecting the bird sanctuary to the Oceanarium with a funicular and improved cable car, which has heavily contributed to the park's current success and sustained visitor growth decade over decade.</p>
+            <button class="cinematic-close" aria-label="Close Ocean Park details">
+              <span aria-hidden="true">&#8593;</span>
+              Close
             </button>
           </div>
-
         </div>
-      </div>
-    </article>
+      </article>
 
-    <!-- --------------------------------------------------------
-         ROW 5 -- LEGOLAND (image-right)
-    -------------------------------------------------------- -->
-    <article class="project-row project-row--reverse" id="legoland" data-project>
-      <div class="container">
-        <div class="project-row__inner">
-
-          <figure class="project-row__image" data-reveal="right">
-            <img
-              src="public/assets/images/projects/attractions/lego-land.png"
-              alt="Legoland theme park featuring Lego brick sculptures and rides"
-              width="880"
-              height="550"
-              loading="lazy"
-            />
-            <figcaption class="project-row__location">Windsor, UK / San Diego, USA</figcaption>
-          </figure>
-
-          <div class="project-row__text" data-reveal="left">
-            <span class="project-row__eyebrow">Attractions</span>
-            <h2 class="project-row__title">Legoland</h2>
-            <p class="project-row__summary">
-              Grant Leisure conducted the complete economic feasibility for the first Legoland in Windsor and guided its expansion into the United States.
-            </p>
-
-            <div class="accordion-panel" role="region" aria-label="Legoland full detail">
-              <p class="accordion-panel__body">
-                Legoland Windsor opened in 1996. Grant Leisure provided management assistance in recruitment, training, and marketing. The original site was an old safari park whose 400 animals Grant Leisure was responsible for safely relocating. Following Windsor's success, Grant Leisure was commissioned to conduct a comparable analysis and site evaluation for Legoland California. Grant Leisure has continued to advise Legoland over the years, making recommendations for management, group sales, and market research.
-              </p>
-            </div>
-
-            <button class="accordion-trigger" aria-expanded="false" aria-controls="legoland">
-              <span class="accordion-trigger__label--open"><span class="accordion-trigger__arrow" aria-hidden="true">&#8594;</span> READ THE BRIEF</span>
-              <span class="accordion-trigger__label--close"><span class="accordion-trigger__arrow" aria-hidden="true">&#8593;</span> CLOSE</span>
+      <!-- ============================================================
+           ROW 04 -- OUR DYNAMIC EARTH
+           Editorial row. Image left, text right.
+           ============================================================ -->
+      <article class="project-row" data-project="our-dynamic-earth">
+        <div class="project-image-block" data-reveal="left">
+          <img
+            src="public/assets/images/projects/attractions/our-dynamic-earth.png"
+            alt="Our Dynamic Earth visitor attraction in Edinburgh -- the striking white tensile roof structure"
+            width="880"
+            height="400"
+            loading="lazy"
+          />
+        </div>
+        <div class="project-text-block" data-reveal>
+          <p class="project-location">Edinburgh, United Kingdom</p>
+          <h2 class="project-title">Our Dynamic Earth</h2>
+          <p class="project-teaser">The largest visitor attraction ever built in Scotland, taking guests on a journey through Earth's past, present, and future.</p>
+          <button class="project-trigger" aria-expanded="false" aria-controls="panel-dynamic-earth">
+            <span class="project-trigger-arrow" aria-hidden="true">&#8594;</span>
+            Read the Brief
+          </button>
+        </div>
+        <div class="project-panel" id="panel-dynamic-earth" role="region" aria-label="Our Dynamic Earth project details">
+          <div class="project-panel-inner">
+            <p>Our Dynamic Earth is one of the largest visitor attractions ever built in Scotland. The attraction takes guests on a journey through Earth's past, present, and future through a series of interactive exhibits utilizing innovative technology, including a 4-D experience.</p>
+            <p>Grant Leisure was retained by the City of Edinburgh to provide the economic feasibility, pre-opening planning, recruitment, training, marketing, and finance for the largest visitor attraction ever built in Scotland.</p>
+            <button class="project-close" aria-label="Close Our Dynamic Earth details">
+              <span aria-hidden="true">&#8593;</span>
+              Close
             </button>
           </div>
-
         </div>
-      </div>
-    </article>
+      </article>
 
-    <!-- --------------------------------------------------------
-         ROW 6 -- THE OLYMPIC SPIRIT (cinematic -- full-bleed)
-    -------------------------------------------------------- -->
-    <article class="project-row project-row--cinematic" id="olympic-spirit" data-project>
-
-      <div class="cinematic__image">
-        <img
-          src="public/assets/images/projects/attractions/olympic-spirit.png"
-          alt="The Olympic Spirit edutainment center with interactive sporting exhibits"
-          width="1920"
-          height="823"
-          loading="lazy"
-        />
-        <div class="cinematic__scrim" aria-hidden="true"></div>
-
-        <div class="cinematic__text">
-          <span class="cinematic__eyebrow">Attractions</span>
-          <h2 class="cinematic__title">The Olympic Spirit</h2>
-          <span class="cinematic__location">Munich, Germany / Toronto, Canada</span>
-          <p class="cinematic__summary">
-            Grant Leisure held an exclusive worldwide licensing agreement with the International Olympic Committee for a themed edutainment attraction that won the 2005 TEA Award for Outstanding Achievement.
-          </p>
-
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="olympic-spirit">
-              <span class="accordion-trigger__label--open"><span class="accordion-trigger__arrow" aria-hidden="true">&#8594;</span> READ THE BRIEF</span>
-              <span class="accordion-trigger__label--close"><span class="accordion-trigger__arrow" aria-hidden="true">&#8593;</span> CLOSE</span>
-            </button>
+      <!-- ============================================================
+           ROW 05 -- LEGOLAND
+           Editorial row. Image right, text left (reversed).
+           ============================================================ -->
+      <article class="project-row is-reversed" data-project="legoland">
+        <div class="project-image-block" data-reveal="right">
+          <img
+            src="public/assets/images/projects/attractions/lego-land.png"
+            alt="Legoland Windsor -- the park's colourful entrance and brick-built landscape"
+            width="880"
+            height="400"
+            loading="lazy"
+          />
         </div>
-      </div>
-
-      <div class="cinematic__accordion-panel" role="region" aria-label="Olympic Spirit full detail">
-        <div class="cinematic__accordion-body">
-          In the early 2000s, Grant Leisure signed an exclusive worldwide licensing agreement with the International Olympic Committee for the development of The Olympic Spirit, a themed visitor attraction and edutainment center. Through computer simulation and innovative staging techniques, visitors experienced the Olympics through interactive sporting activities and friendly competition. The project won the 2005 TEA Award for Outstanding Achievement and the 2005 Innovation Award, presented by the Tourism Federation of Ontario.
+        <div class="project-text-block" data-reveal>
+          <p class="project-location">Windsor, UK / San Diego, USA</p>
+          <h2 class="project-title">Legoland</h2>
+          <p class="project-teaser">Grant Leisure conducted the complete economic feasibility for the first Legoland in Windsor and guided its expansion into the United States.</p>
+          <button class="project-trigger" aria-expanded="false" aria-controls="panel-legoland">
+            <span class="project-trigger-arrow" aria-hidden="true">&#8594;</span>
+            Read the Brief
+          </button>
         </div>
-      </div>
-
-    </article>
-
-    <!-- --------------------------------------------------------
-         ROW 7 -- DOWNTON ABBEY: THE EXHIBITION (image-left)
-    -------------------------------------------------------- -->
-    <article class="project-row" id="downton-abbey" data-project>
-      <div class="container">
-        <div class="project-row__inner">
-
-          <figure class="project-row__image" data-reveal="left">
-            <img
-              src="public/assets/images/projects/attractions/downton-abbey.png"
-              alt="Downton Abbey: The Exhibition touring show"
-              width="880"
-              height="550"
-              loading="lazy"
-            />
-            <figcaption class="project-row__location">USA Tour</figcaption>
-          </figure>
-
-          <div class="project-row__text" data-reveal="right">
-            <span class="project-row__eyebrow">Attractions</span>
-            <h2 class="project-row__title">Downton Abbey: The Exhibition</h2>
-            <p class="project-row__summary">
-              Grant Leisure was retained to manage the tender process and development of Downton Abbey as a unique traveling exhibition across the United States.
-            </p>
-
-            <div class="accordion-panel" role="region" aria-label="Downton Abbey full detail">
-              <p class="accordion-panel__body">
-                Grant Leisure has a long history of providing consulting services for Universal Studios. In 2015, Grant Leisure was commissioned to conduct a Feasibility Analysis for the implementation of a significant NBC/Universal intellectual property as both a visitor attraction and traveling exhibition. Grant Leisure was subsequently retained to assist with managing the tender process and development of this intellectual property as a unique traveling exhibition across the United States.
-              </p>
-            </div>
-
-            <button class="accordion-trigger" aria-expanded="false" aria-controls="downton-abbey">
-              <span class="accordion-trigger__label--open"><span class="accordion-trigger__arrow" aria-hidden="true">&#8594;</span> READ THE BRIEF</span>
-              <span class="accordion-trigger__label--close"><span class="accordion-trigger__arrow" aria-hidden="true">&#8593;</span> CLOSE</span>
+        <div class="project-panel" id="panel-legoland" role="region" aria-label="Legoland project details">
+          <div class="project-panel-inner">
+            <p>Grant Leisure conducted the complete economic feasibility for the first Legoland in Windsor, which opened in 1996, thereafter providing management assistance in recruitment, training, and marketing. The original site was an old safari park whose 400 animals Grant Leisure was responsible for safely relocating.</p>
+            <p>Following Legoland Windsor's success, Grant Leisure was commissioned to conduct a comparable analysis and site evaluation for Legoland California. Grant Leisure has continued to advise Legoland over the years, making recommendations for management, group sales, and market research.</p>
+            <button class="project-close" aria-label="Close Legoland details">
+              <span aria-hidden="true">&#8593;</span>
+              Close
             </button>
           </div>
-
         </div>
-      </div>
-    </article>
+      </article>
 
-    <!-- --------------------------------------------------------
-         ROW 8 -- GRANADA STUDIO TOURS (image-right)
-    -------------------------------------------------------- -->
-    <article class="project-row project-row--reverse" id="granada-studio" data-project>
-      <div class="container">
-        <div class="project-row__inner">
-
-          <figure class="project-row__image" data-reveal="right">
-            <img
-              src="public/assets/images/projects/attractions/granada-studio.png"
-              alt="Granada Studio Tours entertainment complex in Castlefield, Manchester"
-              width="880"
-              height="550"
-              loading="lazy"
-            />
-            <figcaption class="project-row__location">Manchester, United Kingdom</figcaption>
-          </figure>
-
-          <div class="project-row__text" data-reveal="left">
-            <span class="project-row__eyebrow">Attractions</span>
-            <h2 class="project-row__title">Granada Studio Tours</h2>
-            <p class="project-row__summary">
-              Grant Leisure initiated, conceived, and built Granada Studio Tours from the ground up, serving on the Board of Directors for three years to guarantee results.
-            </p>
-
-            <div class="accordion-panel" role="region" aria-label="Granada Studio Tours full detail">
-              <p class="accordion-panel__body">
-                The Granada Studio Tour was an entertainment complex based on the ITV programming portfolio in Castlefield, Manchester, which ran from 1988 to 1999. Grant Leisure initiated the project, created the concept, conducted the feasibility study, supervised architecture and construction, and provided all pre-development services. Grant Leisure was appointed to the Board of Directors for three years to guarantee results. The Coronation Street tour proved so successful it was temporarily reopened by popular demand from 2014 to 2015.
-              </p>
-            </div>
-
-            <button class="accordion-trigger" aria-expanded="false" aria-controls="granada-studio">
-              <span class="accordion-trigger__label--open"><span class="accordion-trigger__arrow" aria-hidden="true">&#8594;</span> READ THE BRIEF</span>
-              <span class="accordion-trigger__label--close"><span class="accordion-trigger__arrow" aria-hidden="true">&#8593;</span> CLOSE</span>
+      <!-- ============================================================
+           ROW 06 -- DOWNTON ABBEY: THE EXHIBITION
+           Cinematic row. Full bleed. Dark scrim. Text overlaid.
+           ============================================================ -->
+      <article class="project-row-cinematic" data-project="downton-abbey">
+        <div class="cinematic-image-wrap">
+          <img
+            src="public/assets/images/projects/attractions/downtown-abbey.png"
+            alt="Downton Abbey: The Exhibition -- the travelling experience bringing the beloved series to life"
+            width="1440"
+            height="800"
+            loading="lazy"
+          />
+        </div>
+        <div class="cinematic-content" data-reveal>
+          <span class="cinematic-location">USA Tour</span>
+          <h2 class="cinematic-title">Downton Abbey:<br>The Exhibition</h2>
+          <p class="cinematic-teaser">Grant Leisure managed the tender process and development of one of television's most celebrated properties as a unique traveling exhibition across the United States.</p>
+          <button class="cinematic-trigger" aria-expanded="false" aria-controls="panel-downton-abbey">
+            <span aria-hidden="true">&#8594;</span>
+            Read the Brief
+          </button>
+        </div>
+        <div class="cinematic-panel" id="panel-downton-abbey" role="region" aria-label="Downton Abbey project details">
+          <div class="cinematic-panel-inner">
+            <p>Grant Leisure has a long history of providing consulting services for Universal Studios. In 2015 Grant Leisure was commissioned to conduct a feasibility analysis for the implementation of a significant NBC/Universal intellectual property as both a visitor attraction and traveling exhibition.</p>
+            <p>Grant Leisure has now been retained to assist with managing the tender process and development of this intellectual property as a unique traveling exhibition in the United States.</p>
+            <button class="cinematic-close" aria-label="Close Downton Abbey details">
+              <span aria-hidden="true">&#8593;</span>
+              Close
             </button>
           </div>
-
         </div>
-      </div>
-    </article>
+      </article>
 
-    <!-- --------------------------------------------------------
-         ROW 9 -- BLUEWATER (cinematic -- full-bleed)
-    -------------------------------------------------------- -->
-    <article class="project-row project-row--cinematic" id="bluewater" data-project>
-
-      <div class="cinematic__image">
-        <img
-          src="public/assets/images/projects/attractions/bluewater-shopping.png"
-          alt="Bluewater Shopping Centre in Kent, UK. 240 acres of retail and leisure."
-          width="1920"
-          height="823"
-          loading="lazy"
-        />
-        <div class="cinematic__scrim" aria-hidden="true"></div>
-
-        <div class="cinematic__text">
-          <span class="cinematic__eyebrow">Attractions</span>
-          <h2 class="cinematic__title">Bluewater Shopping Centre</h2>
-          <span class="cinematic__location">Kent, United Kingdom</span>
-          <p class="cinematic__summary">
-            The first retail center in the United Kingdom to feature integrated leisure. Today it serves over 42 million guests annually.
-          </p>
-
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="bluewater">
-              <span class="accordion-trigger__label--open"><span class="accordion-trigger__arrow" aria-hidden="true">&#8594;</span> READ THE BRIEF</span>
-              <span class="accordion-trigger__label--close"><span class="accordion-trigger__arrow" aria-hidden="true">&#8593;</span> CLOSE</span>
+      <!-- ============================================================
+           ROW 07 -- THE OLYMPIC SPIRIT
+           Editorial row. Image left, text right.
+           ============================================================ -->
+      <article class="project-row" data-project="olympic-spirit">
+        <div class="project-image-block" data-reveal="left">
+          <img
+            src="public/assets/images/projects/attractions/olympic-spirit.png"
+            alt="The Olympic Spirit attraction -- an immersive edutainment experience celebrating the Olympic Games"
+            width="880"
+            height="400"
+            loading="lazy"
+          />
+        </div>
+        <div class="project-text-block" data-reveal>
+          <p class="project-location">Munich, Germany / Toronto, Canada</p>
+          <h2 class="project-title">The Olympic Spirit</h2>
+          <p class="project-teaser">Grant Leisure secured an exclusive worldwide licensing agreement with the International Olympic Committee for a themed visitor attraction and edutainment center.</p>
+          <button class="project-trigger" aria-expanded="false" aria-controls="panel-olympic-spirit">
+            <span class="project-trigger-arrow" aria-hidden="true">&#8594;</span>
+            Read the Brief
+          </button>
+        </div>
+        <div class="project-panel" id="panel-olympic-spirit" role="region" aria-label="The Olympic Spirit project details">
+          <div class="project-panel-inner">
+            <p>In the early 2000s Grant Leisure signed an exclusive worldwide licensing agreement with the International Olympic Committee for the development of a themed visitor attraction and edutainment center, The Olympic Spirit. Through the use of computer simulation and innovative staging techniques, visitors were offered a taste of the Olympics through interactive sporting activities and friendly competition.</p>
+            <p>The Olympic Spirit won a number of prestigious awards, including the 2005 TEA Award for Outstanding Achievement and the 2005 Innovation Award, presented by the Tourism Federation of Ontario.</p>
+            <button class="project-close" aria-label="Close The Olympic Spirit details">
+              <span aria-hidden="true">&#8593;</span>
+              Close
             </button>
+          </div>
         </div>
-      </div>
+      </article>
 
-      <div class="cinematic__accordion-panel" role="region" aria-label="Bluewater full detail">
-        <div class="cinematic__accordion-body">
-          Bluewater sits on 240 acres of land in East Kent. The property features 26 acres of lakes, botanical gardens, walking trails, pavilions, and fountains throughout the heart of its retail center. Grant Leisure was commissioned by Shearwater Developments to conduct a feasibility study for the development of leisure elements for the shopping center. Today, Bluewater serves over 42 million guests annually and remains the first retail center in the United Kingdom to feature integrated leisure elements alongside the shopping experience.
+      <!-- ============================================================
+           ROW 08 -- GRANADA STUDIO TOURS
+           Editorial row. Image right, text left (reversed).
+           ============================================================ -->
+      <article class="project-row is-reversed" data-project="granada-studio">
+        <div class="project-image-block" data-reveal="right">
+          <img
+            src="public/assets/images/projects/attractions/granada-studio.png"
+            alt="Granada Studio Tours Manchester -- the iconic Coronation Street set open to the public"
+            width="880"
+            height="400"
+            loading="lazy"
+          />
         </div>
-      </div>
+        <div class="project-text-block" data-reveal>
+          <p class="project-location">Manchester, United Kingdom</p>
+          <h2 class="project-title">Granada Studio Tours</h2>
+          <p class="project-teaser">Grant Leisure initiated, conceived, and built Granada Studio Tours from the ground up, serving on the Board of Directors for three years to guarantee results.</p>
+          <button class="project-trigger" aria-expanded="false" aria-controls="panel-granada">
+            <span class="project-trigger-arrow" aria-hidden="true">&#8594;</span>
+            Read the Brief
+          </button>
+        </div>
+        <div class="project-panel" id="panel-granada" role="region" aria-label="Granada Studio Tours project details">
+          <div class="project-panel-inner">
+            <p>The Granada Studio Tour was an entertainment complex based on the ITV programming portfolio in Castlefield, Manchester, which ran from 1988 to 1999.</p>
+            <p>Grant Leisure initiated the project, created the concept, conducted the feasibility study, supervised architecture and construction, provided pre-development services, and was appointed to the Board of Directors for three years to guarantee results. The Coronation Street tour of the studios was so successful that it was temporarily reopened by popular demand from 2014 to 2015.</p>
+            <button class="project-close" aria-label="Close Granada Studio Tours details">
+              <span aria-hidden="true">&#8593;</span>
+              Close
+            </button>
+          </div>
+        </div>
+      </article>
 
-    </article>
+      <!-- ============================================================
+           ROW 09 -- BLUEWATER SHOPPING CENTRE
+           Cinematic row. Full bleed. Dark scrim. Text overlaid.
+           ============================================================ -->
+      <article class="project-row-cinematic" data-project="bluewater">
+        <div class="cinematic-image-wrap">
+          <img
+            src="public/assets/images/projects/attractions/bluewater-shopping.png"
+            alt="Bluewater Shopping Centre Kent -- the landmark glass and steel retail destination at dusk"
+            width="1440"
+            height="800"
+            loading="lazy"
+          />
+        </div>
+        <div class="cinematic-content" data-reveal>
+          <span class="cinematic-location">Kent, United Kingdom</span>
+          <h2 class="cinematic-title">Bluewater<br>Shopping Centre</h2>
+          <p class="cinematic-teaser">Grant Leisure pioneered the model for integrated leisure within retail, a formula now serving over 42 million guests annually.</p>
+          <button class="cinematic-trigger" aria-expanded="false" aria-controls="panel-bluewater">
+            <span aria-hidden="true">&#8594;</span>
+            Read the Brief
+          </button>
+        </div>
+        <div class="cinematic-panel" id="panel-bluewater" role="region" aria-label="Bluewater Shopping Centre project details">
+          <div class="cinematic-panel-inner">
+            <p>Bluewater sits on 240 acres of land in East Kent. The property features 26 acres of lakes, botanical gardens, walking trails, pavilions, and fountains throughout the heart of its retail center.</p>
+            <p>Grant Leisure was commissioned by Shearwater Developments to conduct a feasibility study for the development of leisure elements for the shopping center. Today, Bluewater serves over 42 million guests annually and is the first retail center in the United Kingdom to feature integrated leisure elements with the shopping experience.</p>
+            <button class="cinematic-close" aria-label="Close Bluewater details">
+              <span aria-hidden="true">&#8593;</span>
+              Close
+            </button>
+          </div>
+        </div>
+      </article>
+
+    </section>
 
   </main>
 
-  <!-- ============================================================
-       FOOTER
-  ============================================================ -->
-  <footer class="projects-footer">
-    <p>&copy; 2026 Grant Leisure. All Rights Reserved.</p>
+  <!-- FOOTER -->
+  <footer class="projects-footer" role="contentinfo">
+    <p>2026 Grant Leisure International. All Rights Reserved.</p>
   </footer>
 
-  <!-- GSAP -- no install required -->
+  <!-- GSAP CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 
   <script>
-    /* ============================================================
-       projects.js (inlined)
+    /* =============================================================
+       projects.js -- scoped to projects.html only
        Responsibilities:
-         1. Remove .is-loading body class on ready
-         2. Nav hamburger toggle
-         3. Accordion expand/collapse per project row
-         4. GSAP scroll reveals (reuses global [data-reveal] system)
-       No inline handlers. const/let only. No var.
-    ============================================================ */
+       1. Mobile nav toggle (identical to main.js pattern)
+       2. Accordion open/close for editorial and cinematic rows
+       3. GSAP scroll reveals on window load
+       ============================================================= */
 
-    document.addEventListener('DOMContentLoaded', () => {
+    /* --- 1. Mobile nav toggle ------------------------------------- */
 
-      /* ----------------------------------------------------------
-         1. LOADING GUARD
-         Unhide [data-reveal] elements once JS has initialised.
-      ---------------------------------------------------------- */
-      document.body.classList.remove('is-loading');
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks  = document.querySelector('.nav-links');
 
-
-      /* ----------------------------------------------------------
-         2. NAV HAMBURGER
-      ---------------------------------------------------------- */
-      const navToggle = document.querySelector('.nav-toggle');
-      const navMenu   = document.querySelector('.nav-links');
-
-      if (navToggle && navMenu) {
-        navToggle.addEventListener('click', () => {
-          const isOpen = navToggle.classList.toggle('is-open');
-          navToggle.setAttribute('aria-expanded', String(isOpen));
-          navMenu.classList.toggle('is-visible', isOpen);
-        });
-      }
-
-
-      /* ----------------------------------------------------------
-         3. ACCORDION
-         Each .project-row contains one .accordion-trigger.
-         Toggling .is-open on the article drives all CSS transitions.
-      ---------------------------------------------------------- */
-      const projectRows = document.querySelectorAll('[data-project]');
-
-      projectRows.forEach((row) => {
-        const trigger = row.querySelector('.accordion-trigger');
-        if (!trigger) return;
-
-        trigger.addEventListener('click', () => {
-          const isOpen = row.classList.toggle('is-open');
-          trigger.setAttribute('aria-expanded', String(isOpen));
-        });
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        const isOpen = navToggle.classList.toggle('is-open');
+        navToggle.setAttribute('aria-expanded', isOpen);
+        navLinks.classList.toggle('is-open');
       });
+    }
 
+    /* --- 2. Accordion logic --------------------------------------- */
+    /* Single listener on the grid -- catches all trigger and close buttons */
 
-      /* ----------------------------------------------------------
-         4. GSAP SCROLL REVEALS
-         Waits for GSAP scripts to load (deferred), then wires
-         ScrollTrigger to every [data-reveal] element.
-         Falls back gracefully if GSAP is blocked.
-      ---------------------------------------------------------- */
-      const initGSAP = () => {
-        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-          /* GSAP unavailable -- force all elements to visible immediately */
-          document.querySelectorAll('[data-reveal]').forEach((el) => {
-            el.style.opacity   = '1';
-            el.style.transform = 'none';
-          });
+    const grid = document.querySelector('.projects-grid');
+
+    if (grid) {
+      grid.addEventListener('click', (e) => {
+
+        /* OPEN: .project-trigger or .cinematic-trigger */
+        const trigger = e.target.closest('.project-trigger, .cinematic-trigger');
+        if (trigger) {
+          const panelId = trigger.getAttribute('aria-controls');
+          const panel   = document.getElementById(panelId);
+          if (!panel) return;
+
+          const isOpen = panel.classList.toggle('is-open');
+          trigger.setAttribute('aria-expanded', isOpen);
+
+          /* Scroll panel into view smoothly after it opens */
+          if (isOpen) {
+            setTimeout(() => {
+              panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 400); /* Wait for CSS transition to begin */
+          }
           return;
         }
 
-        gsap.registerPlugin(ScrollTrigger);
+        /* CLOSE: .project-close or .cinematic-close */
+        const closeBtn = e.target.closest('.project-close, .cinematic-close');
+        if (closeBtn) {
+          const panel = closeBtn.closest('.project-panel, .cinematic-panel');
+          if (!panel) return;
 
-        const prefersReducedMotion = window.matchMedia(
-          '(prefers-reduced-motion: reduce)'
-        ).matches;
+          panel.classList.remove('is-open');
 
-        /* Set all reveal elements to their final state first.
-           This prevents any above-fold element from staying invisible
-           if ScrollTrigger never fires for it. */
-        document.querySelectorAll('[data-reveal]').forEach((el) => {
-          gsap.set(el, { opacity: 1, x: 0, y: 0, scale: 1 });
+          /* Find the trigger for this panel and reset its aria state */
+          const panelId = panel.id;
+          const trigger = grid.querySelector(`[aria-controls="${panelId}"]`);
+          if (trigger) trigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+
+    /* --- 3. GSAP scroll reveals ----------------------------------- */
+    /* Graceful degradation: if GSAP fails to load, elements remain visible */
+
+    function initGSAP() {
+      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      /* Respect reduced-motion user preference */
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) {
+        /* Remove hidden state from all reveal elements immediately */
+        document.querySelectorAll('[data-reveal]').forEach(el => {
+          el.style.opacity = '1';
+          el.style.transform = 'none';
         });
+        return;
+      }
 
-        if (prefersReducedMotion) return;
-
-        /* Map direction to from-state only -- gsap.from() against the set final state */
-        const getFromVars = (el) => {
-          const dir = el.dataset.reveal;
-          if (dir === 'left')  return { opacity: 0, x: -60, y: 0 };
-          if (dir === 'right') return { opacity: 0, x:  60, y: 0 };
-          if (dir === 'scale') return { opacity: 0, scale: 0.92, y: 0 };
-          return { opacity: 0, x: 0, y: 40 };
-        };
-
-        document.querySelectorAll('[data-reveal]').forEach((el) => {
-          gsap.from(el, {
-            ...getFromVars(el),
+      /* Fade up -- default reveal */
+      gsap.utils.toArray('[data-reveal]:not([data-reveal="left"]):not([data-reveal="right"])').forEach(el => {
+        gsap.fromTo(el,
+          { opacity: 0, y: 32 },
+          {
+            opacity: 1,
+            y: 0,
             duration: 0.9,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: el,
-              start: 'top 90%',   /* 90% catches more elements before they scroll past */
-              toggleActions: 'play none none none',
-            },
-          });
-        });
-      };
+              start: 'top 88%',
+              toggleActions: 'play none none none'
+            }
+          }
+        );
+      });
 
-      /* GSAP scripts are deferred -- wait for window load */
-      if (document.readyState === 'complete') {
-        initGSAP();
-      } else {
-        window.addEventListener('load', initGSAP);
-      }
+      /* Slide in from left */
+      gsap.utils.toArray('[data-reveal="left"]').forEach(el => {
+        gsap.fromTo(el,
+          { opacity: 0, x: -48 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 88%',
+              toggleActions: 'play none none none'
+            }
+          }
+        );
+      });
 
-    });
+      /* Slide in from right */
+      gsap.utils.toArray('[data-reveal="right"]').forEach(el => {
+        gsap.fromTo(el,
+          { opacity: 0, x: 48 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 88%',
+              toggleActions: 'play none none none'
+            }
+          }
+        );
+      });
+    }
+
+    window.addEventListener('load', initGSAP);
+
   </script>
 
 </body>
