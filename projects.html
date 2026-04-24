@@ -30,7 +30,7 @@
     .projects-header-inner {
       max-width: 1440px;
       margin: 0 auto;
-      padding: clamp(2rem, 4vw, 3rem) clamp(1.25rem, 4vw, 3rem) 0;
+      padding: clamp(1.5rem, 3vw, 2rem) clamp(1.25rem, 4vw, 3rem);
     }
 
     .projects-eyebrow {
@@ -57,7 +57,6 @@
       display: flex;
       gap: var(--space-xs);
       flex-wrap: wrap;
-      /* Sits flush at the bottom of the header strip */
       padding-bottom: 0;
     }
 
@@ -106,13 +105,14 @@
       display: grid;
       grid-template-columns: 1fr;
       border-bottom: 1px solid rgba(50, 62, 72, 0.12);
+      margin-bottom: 0; /* Rows stack flush -- border-bottom is the only separator */
     }
 
     @media (min-width: 768px) {
       .project-row {
         /* 55% image, 45% text -- image carries the visual weight */
         grid-template-columns: 55% 45%;
-        min-height: 400px;
+        min-height: unset; /* Height driven by fixed image block below */
       }
 
       /* Reverse layout -- text left, image right */
@@ -131,11 +131,13 @@
       overflow: hidden;
       /* 280px mobile, scales up via grid on desktop */
       min-height: 280px;
+      outline: 1px solid rgba(50, 62, 72, 0.1); /* Edge definition -- not decorative */
     }
 
     @media (min-width: 768px) {
       .project-image-block {
-        min-height: 400px;
+        height: 480px; /* Fixed -- prevents aspect ratio differences between source images */
+        min-height: unset;
       }
     }
 
@@ -535,9 +537,9 @@
     <!-- PAGE HEADER: Logo strip + category pill nav only. No hero. No empty space. -->
     <div class="projects-header">
       <div class="projects-header-inner">
-        <p class="projects-eyebrow">Grant Leisure International</p>
-        <h1 class="projects-h1">Selected Works</h1>
-        <nav class="category-nav" aria-label="Project categories">
+    <!-- Visually hidden h1 -- satisfies one-h1-per-page rule without cluttering the UI -->
+    <h1 class="sr-only">Grant Leisure International -- Project Portfolio</h1>
+      <nav class="category-nav" aria-label="Project categories">
           <a href="projects.html#attractions" class="category-pill is-active" data-category="attractions">Attractions</a>
           <a href="projects.html#resorts"     class="category-pill" data-category="resorts">Resorts</a>
           <a href="projects.html#zoological"  class="category-pill" data-category="zoological">Zoological</a>
