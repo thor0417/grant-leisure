@@ -1,6 +1,6 @@
 # CLAUDE.md -- Grant Leisure "Visible Dominance" v2
 # Master Context Document -- Paste into every new chat session at the start.
-# Last Updated: 2026-04-17
+# Last Updated: 2026-04-24
 
 ---
 
@@ -32,6 +32,12 @@ grant-leisure/
 ├── public/
 │   └── assets/
 │       ├── fonts/
+│       │   ├── InstrumentSerif-Regular.ttf
+│       │   ├── InstrumentSerif-Italic.ttf
+│       │   ├── InterTight-Regular.ttf
+│       │   ├── InterTight-Medium.ttf
+│       │   ├── InterTight-Black.ttf
+│       │   └── InterTight-Italic.ttf
 │       └── images/
 │           ├── icons/
 │           │   ├── icon-fair.png
@@ -45,13 +51,13 @@ grant-leisure/
 │           │   └── map.png
 │           ├── team/           (9 headshot files)
 │           ├── gli-logo.png
-│           ├── gli-logo.svg
 │           └── tourist.jpg
 ├── src/
 │   └── styles/
 │       ├── tokens.css
 │       ├── typography.css
-│       └── global.css
+│       ├── global.css
+│       └── components.css
 ├── js/
 │   └── main.js
 ├── index.html
@@ -95,8 +101,8 @@ Never hardcode any of these values anywhere else.
 - --gl-black:  #1A1A1A   (body copy on white -- not pure black, senior-friendly)
 
 ### Typography
-- --font-header: 'Fraunces', serif
-- --font-body:   'Inter', sans-serif
+- --font-header: 'Instrument Serif', serif (local TTF -- InstrumentSerif-Regular.ttf, InstrumentSerif-Italic.ttf)
+- --font-body:   'Inter Tight', sans-serif (local TTF -- InterTight-Regular.ttf, InterTight-Medium.ttf, InterTight-Black.ttf, InterTight-Italic.ttf)
 
 ### Type Scale
 - --text-display  (Hero headline only -- largest on page)
@@ -183,12 +189,13 @@ Paste before closing body tag in index.html. No install required.
 | Asset         | Path                                                                                             |
 |---------------|--------------------------------------------------------------------------------------------------|
 | Hero video    | https://res.cloudinary.com/dyceiucla/video/upload/f_auto,q_auto/v1776321502/hero.mp4_r5srrb.mp4 |
-| GLI Logo SVG  | /assets/images/gli-logo.svg                                                                      |
-| Tourist photo | /assets/images/tourist.jpg                                                                       |
-| Map           | /assets/images/maps/map.png                                                                      |
-| Icons         | /assets/images/icons/                                                                            |
-| Logos         | /assets/images/logos/                                                                            |
-| Team          | /assets/images/team/                                                                             |
+| GLI Logo PNG  | public/assets/images/gli-logo.png                                                                |
+| Tourist photo | public/assets/images/tourist.jpg                                                                 |
+| Map           | public/assets/images/maps/map.png                                                                |
+| Icons         | public/assets/images/icons/                                                                      |
+| Logos         | public/assets/images/logos/                                                                      |
+| Team          | public/assets/images/team/                                                                       |
+| Fonts         | public/assets/fonts/ (served as assets/fonts/ on GitHub Pages)                                   |
 
 ---
 
@@ -267,8 +274,10 @@ to Andrew's unique understanding of operations and how technology could enhance
 the guest experience."
 
 ### #engage
-Header: OUR GLOBAL EXPERIENCE IN YOUR BACK POCKET
-Don't like waiting? Neither do we.
+Header: Don't like waiting? Neither do we.
+Address: 418 Wenham Road, Pasadena, CA 91107
+R. Liljenwall: 626-298-3709
+K. Robertson: 702-497-4459
 Form: Name, Email, Phone, Message
 
 ### #footer
@@ -276,15 +285,35 @@ Form: Name, Email, Phone, Message
 
 ---
 
-## SESSION SCOPE
+## CURRENT SITE STATUS
 
-Replace this line when opening each chat:
-[ THIS CHAT IS RESPONSIBLE FOR: insert scope here ]
+LIVE at https://thor0417.github.io/grant-leisure/
+
+All 11 sections built and approved by client:
+#hero, #logic, #about, #proof, #reach, #expertise,
+#validation, #leadership, #testimonials, #engage, #footer
+
+Active features:
+- Ghost nav with blur-on-scroll
+- Service modal popups (6 services with full writeups)
+- Team carousel (3-up desktop, 1-up mobile) with bio modals
+- Testimonials carousel with dot navigation
+- Marquee logo strip (17 partner logos)
+- Proof counter animation (GSAP, wired)
+
+Pending post-approval:
+- Projects page (projects.html -- separate route)
+- GSAP scroll triggers and parallax motion pass
+- Mobile audit
+- Logo replacements (NBC Universal, Bluewater, Busch)
+
+---
+
+## SESSION SCOPE
 
 | Session   | Scope                                                                    |
 |-----------|--------------------------------------------------------------------------|
-| Session 1 | tokens.css (verify), typography.css, global.css, index.html, main.js    |
-| Session 2 | #hero, #logic, #about, #proof, #reach                                   |
-| Session 3 | #expertise, #validation, #leadership, #testimonials, #engage, #footer   |
-| Session 4 | JS -- scroll triggers, counters, marquee, form handling                  |
-| Session 5 | Projects page -- standalone route                                        |
+| Edit Chat | Targeted fixes -- HTML, CSS, JS edits only. No full rewrites.            |
+| Projects  | projects.html -- strategy, architecture, and build                       |
+| Motion    | GSAP scroll triggers, parallax, counter animations, section transitions  |
+| Mobile    | Full mobile audit -- after motion pass is complete                       |
