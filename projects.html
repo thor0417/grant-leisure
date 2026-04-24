@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Grant Leisure International -- A global portfolio of landmark attractions, resorts, and cultural institutions built over four decades." />
-  <title>Projects -- Grant Leisure International</title>
+  <meta name="description" content="Grant Leisure International. A global portfolio of landmark attractions, resorts, and cultural institutions built over four decades." />
+  <title>Projects | Grant Leisure International</title>
 
   <!-- Shared design system -- load order is non-negotiable -->
   <link rel="stylesheet" href="src/styles/tokens.css" />
@@ -217,70 +217,34 @@
       overflow: visible;
     }
 
-    /* Expand trigger button */
+    /* Accordion trigger -- text link only. No border, no background, no box. */
     .accordion-trigger {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.375rem;
       min-height: 48px; /* Senior touch target */
       padding: 0;
       background: none;
       border: none;
       cursor: pointer;
       font-family: var(--font-body);
-      font-size: var(--text-sm);
+      font-size: 13px;
       font-weight: 600;
-      letter-spacing: var(--tracking-wide);
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--gl-navy);
-      transition: color var(--duration-fast) var(--ease-stellar);
+      color: var(--gl-green);
+      transition: opacity var(--duration-fast) var(--ease-stellar);
     }
 
     .accordion-trigger:hover {
-      color: var(--gl-green);
+      opacity: 0.75;
     }
 
-    .accordion-trigger__icon {
+    /* Arrow character -- rotated 45deg when open to become an X-axis close signal */
+    .accordion-trigger__arrow {
       display: inline-block;
-      width: 20px;
-      height: 20px;
-      position: relative;
-      flex-shrink: 0;
-    }
-
-    /* Plus icon built from CSS -- no image dependency */
-    .accordion-trigger__icon::before,
-    .accordion-trigger__icon::after {
-      content: '';
-      position: absolute;
-      background-color: currentColor;
-      border-radius: 2px;
-      transition: transform var(--duration-fast) var(--ease-stellar),
-                  opacity var(--duration-fast) var(--ease-stellar);
-    }
-
-    /* Horizontal bar */
-    .accordion-trigger__icon::before {
-      width: 100%;
-      height: 2px;
-      top: 50%;
-      left: 0;
-      transform: translateY(-50%);
-    }
-
-    /* Vertical bar -- rotates to 0deg (flat) on open */
-    .accordion-trigger__icon::after {
-      width: 2px;
-      height: 100%;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    /* When open: collapse the vertical bar */
-    .project-row.is-open .accordion-trigger__icon::after {
-      transform: translateX(-50%) rotate(90deg);
-      opacity: 0;
+      transition: transform var(--duration-fast) var(--ease-stellar);
+      font-style: normal;
     }
 
     .accordion-trigger__label--open  { display: none; }
@@ -288,6 +252,17 @@
 
     .project-row:not(.is-open) .accordion-trigger__label--open  { display: inline; }
     .project-row.is-open       .accordion-trigger__label--close { display: inline; }
+
+    /* Cinematic rows: trigger sits inside the overlay -- keep green */
+    .cinematic__text .accordion-trigger {
+      color: var(--gl-green);
+      border: none;
+      padding-bottom: 0;
+    }
+
+    .cinematic__text .accordion-trigger:hover {
+      opacity: 0.75;
+    }
 
     /* Accordion panel -- the full project detail */
     .accordion-panel {
@@ -321,14 +296,14 @@
       padding-block: 0;
       border-bottom: none;
       position: relative;
-      overflow: hidden;
+      /* overflow must NOT be hidden here -- accordion panel must clear the image block */
     }
 
     .cinematic__image {
       position: relative;
-      /* 9:5 cinematic ratio on desktop -- taller than editorial rows */
+      /* 21:9 cinematic ratio on desktop */
       aspect-ratio: 21 / 9;
-      overflow: hidden;
+      overflow: hidden; /* clip the photo only, not the article */
     }
 
     @media (max-width: 767px) {
@@ -349,22 +324,15 @@
       transform: scale(1.04);
     }
 
-    /* Dark gradient scrim -- text legibility on photo */
+    /* Dark gradient scrim -- corrected opacity for legibility */
     .cinematic__scrim {
       position: absolute;
       inset: 0;
-      /* Left-to-right gradient: opaque left, transparent right on desktop */
-      background: linear-gradient(
-        to right,
-        rgba(50, 62, 72, 0.88) 0%,
-        rgba(50, 62, 72, 0.5) 50%,
-        rgba(50, 62, 72, 0.1) 100%
-      );
+      background: linear-gradient(to right, rgba(50,62,72,0.65) 0%, transparent 60%);
     }
 
     @media (max-width: 767px) {
       .cinematic__scrim {
-        /* On mobile: bottom-up gradient since text drops below */
         background: linear-gradient(
           to top,
           rgba(50, 62, 72, 0.95) 0%,
@@ -414,6 +382,7 @@
       font-size: var(--text-h1);
       line-height: var(--leading-tight);
       color: var(--gl-white);
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
     }
 
     .cinematic__summary {
@@ -433,13 +402,14 @@
       overflow: visible;
     }
 
-    /* Cinematic accordion panel -- rendered below the image block */
+    /* Cinematic accordion panel -- drops below the image block, never overlaps it */
     .cinematic__accordion-panel {
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.7s var(--ease-stellar);
       background-color: var(--gl-navy);
       color: var(--gl-white);
+      border-left: 3px solid var(--gl-green);
     }
 
     .project-row--cinematic.is-open .cinematic__accordion-panel {
@@ -447,18 +417,19 @@
     }
 
     .cinematic__accordion-body {
-      padding: var(--space-xl) var(--page-gutter);
+      padding: 2rem 2.5rem;
       max-width: var(--max-width);
       margin-inline: auto;
       font-family: var(--font-body);
       font-size: var(--text-body-lg);
       line-height: var(--leading-loose);
-      color: rgba(255, 255, 255, 0.85);
+      color: var(--gl-white);
     }
 
-    /* Location badge on cinematic rows */
+    /* Location badge on cinematic rows -- fit-content, never full-width */
     .cinematic__location {
       display: inline-block;
+      width: fit-content;
       padding: var(--space-xs) var(--space-sm);
       background-color: var(--gl-green);
       font-family: var(--font-body);
@@ -469,21 +440,8 @@
       color: var(--gl-white);
     }
 
-    /* Cinematic trigger button -- white on dark overlay */
-    .cinematic__text .accordion-trigger {
-      color: var(--gl-white);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-      padding-bottom: 0.25rem;
-    }
-
-    .cinematic__text .accordion-trigger:hover {
-      color: var(--gl-green);
-      border-bottom-color: var(--gl-green);
-    }
-
     /* ----------------------------------------------------------
        SECTION DIVIDER BETWEEN ROWS
-       1px rule at 8% opacity -- subtle, not decorative.
     ---------------------------------------------------------- */
 
     .project-row + .project-row {
@@ -534,7 +492,7 @@
   <nav class="site-nav is-scrolled" aria-label="Primary navigation">
     <div class="nav-inner">
 
-      <a href="index.html" class="nav-logo" aria-label="Grant Leisure International -- home">
+      <a href="index.html" class="nav-logo" aria-label="Grant Leisure International. Return to home.">
         <img
           src="public/assets/images/gli-logo.png"
           alt="Grant Leisure International logo"
@@ -647,19 +605,18 @@
             <span class="project-row__eyebrow">Attractions</span>
             <h2 class="project-row__title">The London Eye</h2>
             <p class="project-row__summary">
-              Opposite the Houses of Parliament, on the South Bank of the River Thames, stands the London Eye. With its panoramic views, the London Eye is currently Europe's tallest observation wheel and the single most visited attraction in the United Kingdom.
+              Europe's tallest observation wheel and the single most visited attraction in the United Kingdom.
             </p>
 
             <div class="accordion-panel" role="region" aria-label="London Eye full detail">
               <p class="accordion-panel__body">
-                Grant Leisure was commissioned by British Airways to provide a feasibility analysis, corporate hospitality and sponsorship program, and operating strategy -- additionally managing both the tender process and selection of an operator. Following the London Eye's success, observation wheels have significantly grown in popularity, many of which are modeled after their predecessor.
+                Opposite the Houses of Parliament on the South Bank of the River Thames, the London Eye defines the capital's skyline. Grant Leisure was commissioned by British Airways to provide a feasibility analysis, corporate hospitality and sponsorship program, and operating strategy. Grant Leisure additionally managed both the tender process and selection of an operator. Following the London Eye's success, observation wheels have grown significantly in popularity, many of which are modelled after their predecessor.
               </p>
             </div>
 
             <button class="accordion-trigger" aria-expanded="false" aria-controls="london-eye">
-              <span class="accordion-trigger__icon" aria-hidden="true"></span>
-              <span class="accordion-trigger__label--open">Read the brief</span>
-              <span class="accordion-trigger__label--close">Close</span>
+              <span class="accordion-trigger__label--open"><span class="accordion-trigger__arrow" aria-hidden="true">&#8594;</span> READ THE BRIEF</span>
+              <span class="accordion-trigger__label--close"><span class="accordion-trigger__arrow" aria-hidden="true">&#8593;</span> CLOSE</span>
             </button>
           </div>
 
@@ -689,19 +646,18 @@
             <span class="project-row__eyebrow">Attractions</span>
             <h2 class="project-row__title">Ferrari World</h2>
             <p class="project-row__summary">
-              Grant Leisure was commissioned by Aldar to develop the economic feasibility and concept plan, and secure the worldwide rights for Ferrari World -- the first branded theme park in the United Arab Emirates.
+              The first branded theme park in the United Arab Emirates, built on an exclusive worldwide rights agreement secured by Grant Leisure.
             </p>
 
             <div class="accordion-panel" role="region" aria-label="Ferrari World full detail">
               <p class="accordion-panel__body">
-                Boasting over 20 themed attractions and adventures, all under the complex's signature red roof, guests are treated to a taste of being behind the wheel of the world's most prestigious sports car. Ferrari World stands as a global destination and a landmark example of branded leisure development in the Gulf region.
+                Grant Leisure was commissioned by Aldar to develop the economic feasibility and concept plan and to secure the worldwide rights for Ferrari World. Boasting over 20 themed attractions and adventures, all under the complex's signature red roof, guests are treated to a taste of being behind the wheel of the world's most prestigious sports car. Ferrari World is a global destination and the defining example of branded leisure development in the Gulf region.
               </p>
             </div>
 
             <button class="accordion-trigger" aria-expanded="false" aria-controls="ferrari-world">
-              <span class="accordion-trigger__icon" aria-hidden="true"></span>
-              <span class="accordion-trigger__label--open">Read the brief</span>
-              <span class="accordion-trigger__label--close">Close</span>
+              <span class="accordion-trigger__label--open"><span class="accordion-trigger__arrow" aria-hidden="true">&#8594;</span> READ THE BRIEF</span>
+              <span class="accordion-trigger__label--close"><span class="accordion-trigger__arrow" aria-hidden="true">&#8593;</span> CLOSE</span>
             </button>
           </div>
 
@@ -729,20 +685,19 @@
           <h2 class="cinematic__title">Ocean Park</h2>
           <span class="cinematic__location">Hong Kong, China</span>
           <p class="cinematic__summary">
-            Grant Leisure was involved with the redevelopment of Ocean Park's master plan following its first year of operation -- presenting recommendations to stem visitor decline and unlock the park's full potential.
+            Grant Leisure redeveloped Ocean Park's master plan and reversed visitor decline through surgical infrastructure recommendations.
           </p>
 
           <button class="accordion-trigger" aria-expanded="false" aria-controls="ocean-park">
-            <span class="accordion-trigger__icon" aria-hidden="true"></span>
-            <span class="accordion-trigger__label--open">Read the brief</span>
-            <span class="accordion-trigger__label--close">Close</span>
-          </button>
+              <span class="accordion-trigger__label--open"><span class="accordion-trigger__arrow" aria-hidden="true">&#8594;</span> READ THE BRIEF</span>
+              <span class="accordion-trigger__label--close"><span class="accordion-trigger__arrow" aria-hidden="true">&#8593;</span> CLOSE</span>
+            </button>
         </div>
       </div>
 
       <div class="cinematic__accordion-panel" role="region" aria-label="Ocean Park full detail">
         <div class="cinematic__accordion-body">
-          One such notable recommendation included connecting the bird sanctuary to the Oceanarium with a funicular and improved cable car -- an intervention that has heavily contributed to the park's current success and sustained visitor growth decade over decade.
+          Grant Leisure was involved with the redevelopment of Ocean Park's master plan following its first year of operation, presenting recommendations to stem declines in visitor numbers. One notable recommendation connected the bird sanctuary to the Oceanarium with a funicular and improved cable car. That infrastructure decision has heavily contributed to the park's sustained success and visitor growth decade over decade.
         </div>
       </div>
 
@@ -770,19 +725,18 @@
             <span class="project-row__eyebrow">Attractions</span>
             <h2 class="project-row__title">Our Dynamic Earth</h2>
             <p class="project-row__summary">
-              One of the largest visitor attractions ever built in Scotland -- Dynamic Earth takes guests on a journey through Earth's past, present, and future through interactive exhibits utilizing innovative technology, including a 4-D experience.
+              The largest visitor attraction ever built in Scotland, taking guests on a journey through Earth's past, present, and future.
             </p>
 
             <div class="accordion-panel" role="region" aria-label="Our Dynamic Earth full detail">
               <p class="accordion-panel__body">
-                Grant Leisure was retained by the City of Edinburgh to provide the economic feasibility, pre-opening planning, recruitment, training, marketing, and finance for the attraction. An edutainment experience addressing issues of population growth, concepts of time, and the realities of climate change -- Dynamic Earth stands as Scotland's most ambitious cultural infrastructure project of its era.
+                Dynamic Earth is an edutainment experience addressing issues of population growth, concepts of time, and the realities of climate change. Visitors stand face-to-face with extinct dinosaurs, feel the heat of a tropical rainforest, and fly over glaciers in prehistoric Scotland through a series of interactive exhibits including a 4-D experience. Grant Leisure was retained by the City of Edinburgh to provide the economic feasibility, pre-opening planning, recruitment, training, marketing, and finance for the project.
               </p>
             </div>
 
             <button class="accordion-trigger" aria-expanded="false" aria-controls="dynamic-earth">
-              <span class="accordion-trigger__icon" aria-hidden="true"></span>
-              <span class="accordion-trigger__label--open">Read the brief</span>
-              <span class="accordion-trigger__label--close">Close</span>
+              <span class="accordion-trigger__label--open"><span class="accordion-trigger__arrow" aria-hidden="true">&#8594;</span> READ THE BRIEF</span>
+              <span class="accordion-trigger__label--close"><span class="accordion-trigger__arrow" aria-hidden="true">&#8593;</span> CLOSE</span>
             </button>
           </div>
 
@@ -812,19 +766,18 @@
             <span class="project-row__eyebrow">Attractions</span>
             <h2 class="project-row__title">Legoland</h2>
             <p class="project-row__summary">
-              Grant Leisure conducted the complete economic feasibility for the first Legoland in Windsor, which opened in 1996 -- thereafter providing management assistance in recruitment, training, and marketing.
+              Grant Leisure conducted the complete economic feasibility for the first Legoland in Windsor and guided its expansion into the United States.
             </p>
 
             <div class="accordion-panel" role="region" aria-label="Legoland full detail">
               <p class="accordion-panel__body">
-                The original site was an old safari park whose 400 animals Grant Leisure was responsible for safely relocating. Following Legoland Windsor's success, Grant Leisure was commissioned to conduct a comparable analysis and site evaluation for Legoland California. Grant Leisure has continued to advise Legoland over the years, making recommendations for management, group sales, and market research.
+                Legoland Windsor opened in 1996. Grant Leisure provided management assistance in recruitment, training, and marketing. The original site was an old safari park whose 400 animals Grant Leisure was responsible for safely relocating. Following Windsor's success, Grant Leisure was commissioned to conduct a comparable analysis and site evaluation for Legoland California. Grant Leisure has continued to advise Legoland over the years, making recommendations for management, group sales, and market research.
               </p>
             </div>
 
             <button class="accordion-trigger" aria-expanded="false" aria-controls="legoland">
-              <span class="accordion-trigger__icon" aria-hidden="true"></span>
-              <span class="accordion-trigger__label--open">Read the brief</span>
-              <span class="accordion-trigger__label--close">Close</span>
+              <span class="accordion-trigger__label--open"><span class="accordion-trigger__arrow" aria-hidden="true">&#8594;</span> READ THE BRIEF</span>
+              <span class="accordion-trigger__label--close"><span class="accordion-trigger__arrow" aria-hidden="true">&#8593;</span> CLOSE</span>
             </button>
           </div>
 
@@ -852,20 +805,19 @@
           <h2 class="cinematic__title">The Olympic Spirit</h2>
           <span class="cinematic__location">Munich, Germany / Toronto, Canada</span>
           <p class="cinematic__summary">
-            Grant Leisure signed an exclusive worldwide licensing agreement with the International Olympic Committee -- developing a themed visitor attraction and edutainment center that brought the Olympic experience to the public.
+            Grant Leisure held an exclusive worldwide licensing agreement with the International Olympic Committee for a themed edutainment attraction that won the 2005 TEA Award for Outstanding Achievement.
           </p>
 
           <button class="accordion-trigger" aria-expanded="false" aria-controls="olympic-spirit">
-            <span class="accordion-trigger__icon" aria-hidden="true"></span>
-            <span class="accordion-trigger__label--open">Read the brief</span>
-            <span class="accordion-trigger__label--close">Close</span>
-          </button>
+              <span class="accordion-trigger__label--open"><span class="accordion-trigger__arrow" aria-hidden="true">&#8594;</span> READ THE BRIEF</span>
+              <span class="accordion-trigger__label--close"><span class="accordion-trigger__arrow" aria-hidden="true">&#8593;</span> CLOSE</span>
+            </button>
         </div>
       </div>
 
       <div class="cinematic__accordion-panel" role="region" aria-label="Olympic Spirit full detail">
         <div class="cinematic__accordion-body">
-          Through the use of computer simulation and innovative staging techniques, visitors were offered a taste of the Olympics through interactive sporting activities and friendly competition. The Olympic Spirit won a number of prestigious awards -- including the 2005 TEA Award for Outstanding Achievement and the 2005 Innovation Award, presented by the Tourism Federation of Ontario.
+          In the early 2000s, Grant Leisure signed an exclusive worldwide licensing agreement with the International Olympic Committee for the development of The Olympic Spirit, a themed visitor attraction and edutainment center. Through computer simulation and innovative staging techniques, visitors experienced the Olympics through interactive sporting activities and friendly competition. The project won the 2005 TEA Award for Outstanding Achievement and the 2005 Innovation Award, presented by the Tourism Federation of Ontario.
         </div>
       </div>
 
@@ -893,19 +845,18 @@
             <span class="project-row__eyebrow">Attractions</span>
             <h2 class="project-row__title">Downton Abbey: The Exhibition</h2>
             <p class="project-row__summary">
-              Grant Leisure was commissioned to conduct a Feasibility Analysis for the implementation of a significant NBC/Universal intellectual property as both a visitor attraction and traveling exhibition across the United States.
+              Grant Leisure was retained to manage the tender process and development of Downton Abbey as a unique traveling exhibition across the United States.
             </p>
 
             <div class="accordion-panel" role="region" aria-label="Downton Abbey full detail">
               <p class="accordion-panel__body">
-                Grant Leisure has a long history of providing consulting services for Universal Studios. Following the 2015 feasibility engagement, Grant Leisure was retained to assist with managing the tender process and development of this intellectual property as a unique traveling exhibition -- bringing one of television's most beloved properties to audiences across the country.
+                Grant Leisure has a long history of providing consulting services for Universal Studios. In 2015, Grant Leisure was commissioned to conduct a Feasibility Analysis for the implementation of a significant NBC/Universal intellectual property as both a visitor attraction and traveling exhibition. Grant Leisure was subsequently retained to assist with managing the tender process and development of this intellectual property as a unique traveling exhibition across the United States.
               </p>
             </div>
 
             <button class="accordion-trigger" aria-expanded="false" aria-controls="downton-abbey">
-              <span class="accordion-trigger__icon" aria-hidden="true"></span>
-              <span class="accordion-trigger__label--open">Read the brief</span>
-              <span class="accordion-trigger__label--close">Close</span>
+              <span class="accordion-trigger__label--open"><span class="accordion-trigger__arrow" aria-hidden="true">&#8594;</span> READ THE BRIEF</span>
+              <span class="accordion-trigger__label--close"><span class="accordion-trigger__arrow" aria-hidden="true">&#8593;</span> CLOSE</span>
             </button>
           </div>
 
@@ -935,19 +886,18 @@
             <span class="project-row__eyebrow">Attractions</span>
             <h2 class="project-row__title">Granada Studio Tours</h2>
             <p class="project-row__summary">
-              Grant Leisure initiated the project, created the concept, conducted the feasibility study, supervised architecture and construction, provided pre-development services, and was appointed to the Board of Directors for 3 years to guarantee results.
+              Grant Leisure initiated, conceived, and built Granada Studio Tours from the ground up, serving on the Board of Directors for three years to guarantee results.
             </p>
 
             <div class="accordion-panel" role="region" aria-label="Granada Studio Tours full detail">
               <p class="accordion-panel__body">
-                Based on the ITV programming portfolio in Castlefield, Manchester, the Granada Studio Tour ran from 1988--1999. The Coronation Street tour of the studios proved so successful it was temporarily reopened by popular demand from 2014 to 2015 -- a testament to the enduring power of the original concept.
+                The Granada Studio Tour was an entertainment complex based on the ITV programming portfolio in Castlefield, Manchester, which ran from 1988 to 1999. Grant Leisure initiated the project, created the concept, conducted the feasibility study, supervised architecture and construction, and provided all pre-development services. Grant Leisure was appointed to the Board of Directors for three years to guarantee results. The Coronation Street tour proved so successful it was temporarily reopened by popular demand from 2014 to 2015.
               </p>
             </div>
 
             <button class="accordion-trigger" aria-expanded="false" aria-controls="granada-studio">
-              <span class="accordion-trigger__icon" aria-hidden="true"></span>
-              <span class="accordion-trigger__label--open">Read the brief</span>
-              <span class="accordion-trigger__label--close">Close</span>
+              <span class="accordion-trigger__label--open"><span class="accordion-trigger__arrow" aria-hidden="true">&#8594;</span> READ THE BRIEF</span>
+              <span class="accordion-trigger__label--close"><span class="accordion-trigger__arrow" aria-hidden="true">&#8593;</span> CLOSE</span>
             </button>
           </div>
 
@@ -963,7 +913,7 @@
       <div class="cinematic__image">
         <img
           src="public/assets/images/projects/attractions/bluewater-shopping.png"
-          alt="Bluewater Shopping Centre in Kent, UK -- 240 acres of retail and leisure"
+          alt="Bluewater Shopping Centre in Kent, UK. 240 acres of retail and leisure."
           width="1920"
           height="823"
           loading="lazy"
@@ -975,20 +925,19 @@
           <h2 class="cinematic__title">Bluewater Shopping Centre</h2>
           <span class="cinematic__location">Kent, United Kingdom</span>
           <p class="cinematic__summary">
-            Grant Leisure was commissioned by Shearwater Developments to conduct a feasibility study for the development of leisure elements for the shopping center -- pioneering a model that is now the industry standard.
+            The first retail center in the United Kingdom to feature integrated leisure. Today it serves over 42 million guests annually.
           </p>
 
           <button class="accordion-trigger" aria-expanded="false" aria-controls="bluewater">
-            <span class="accordion-trigger__icon" aria-hidden="true"></span>
-            <span class="accordion-trigger__label--open">Read the brief</span>
-            <span class="accordion-trigger__label--close">Close</span>
-          </button>
+              <span class="accordion-trigger__label--open"><span class="accordion-trigger__arrow" aria-hidden="true">&#8594;</span> READ THE BRIEF</span>
+              <span class="accordion-trigger__label--close"><span class="accordion-trigger__arrow" aria-hidden="true">&#8593;</span> CLOSE</span>
+            </button>
         </div>
       </div>
 
       <div class="cinematic__accordion-panel" role="region" aria-label="Bluewater full detail">
         <div class="cinematic__accordion-body">
-          Bluewater sits on 240 acres of land in East Kent. The property features 26 acres of lakes, botanical gardens, walking trails, pavilions, and fountains throughout the heart of its retail center. Today, Bluewater serves over 42 million guests annually and is the first retail center in the United Kingdom to feature integrated leisure elements with the shopping experience.
+          Bluewater sits on 240 acres of land in East Kent. The property features 26 acres of lakes, botanical gardens, walking trails, pavilions, and fountains throughout the heart of its retail center. Grant Leisure was commissioned by Shearwater Developments to conduct a feasibility study for the development of leisure elements for the shopping center. Today, Bluewater serves over 42 million guests annually and remains the first retail center in the United Kingdom to feature integrated leisure elements alongside the shopping experience.
         </div>
       </div>
 
@@ -1068,36 +1017,36 @@
       ---------------------------------------------------------- */
       const initGSAP = () => {
         if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-          /* GSAP not available -- CSS fallback: make everything visible */
+          /* GSAP unavailable -- force all elements to visible immediately */
           document.querySelectorAll('[data-reveal]').forEach((el) => {
-            el.style.opacity    = '1';
-            el.style.transform  = 'none';
+            el.style.opacity   = '1';
+            el.style.transform = 'none';
           });
           return;
         }
 
         gsap.registerPlugin(ScrollTrigger);
 
-        /* Respect prefers-reduced-motion */
         const prefersReducedMotion = window.matchMedia(
           '(prefers-reduced-motion: reduce)'
         ).matches;
 
-        if (prefersReducedMotion) {
-          document.querySelectorAll('[data-reveal]').forEach((el) => {
-            gsap.set(el, { opacity: 1, x: 0, y: 0, scale: 1 });
-          });
-          return;
-        }
+        /* Set all reveal elements to their final state first.
+           This prevents any above-fold element from staying invisible
+           if ScrollTrigger never fires for it. */
+        document.querySelectorAll('[data-reveal]').forEach((el) => {
+          gsap.set(el, { opacity: 1, x: 0, y: 0, scale: 1 });
+        });
 
-        /* Map data-reveal attribute to GSAP fromVars */
+        if (prefersReducedMotion) return;
+
+        /* Map direction to from-state only -- gsap.from() against the set final state */
         const getFromVars = (el) => {
           const dir = el.dataset.reveal;
-          if (dir === 'left')  return { opacity: 0, x: -60 };
-          if (dir === 'right') return { opacity: 0, x:  60 };
-          if (dir === 'scale') return { opacity: 0, scale: 0.92 };
-          /* Default: fade up */
-          return { opacity: 0, y: 40 };
+          if (dir === 'left')  return { opacity: 0, x: -60, y: 0 };
+          if (dir === 'right') return { opacity: 0, x:  60, y: 0 };
+          if (dir === 'scale') return { opacity: 0, scale: 0.92, y: 0 };
+          return { opacity: 0, x: 0, y: 40 };
         };
 
         document.querySelectorAll('[data-reveal]').forEach((el) => {
@@ -1107,7 +1056,7 @@
             ease: 'power3.out',
             scrollTrigger: {
               trigger: el,
-              start: 'top 88%',
+              start: 'top 90%',   /* 90% catches more elements before they scroll past */
               toggleActions: 'play none none none',
             },
           });
