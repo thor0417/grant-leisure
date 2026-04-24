@@ -28,8 +28,8 @@
      TYPOGRAPHY
   --------------------------------------------------------------------------- */
 
-  --font-header: 'Fraunces', serif;   /* All section headers -- archival authority */
-  --font-body:   'Inter', sans-serif; /* Body copy, stats, data -- maximum legibility */
+  --font-header: 'Instrument Serif', serif;   /* All section headers */
+  --font-body:   'Inter Tight', sans-serif;   /* Body copy, stats, data -- maximum legibility */
 
 
   /* ---------------------------------------------------------------------------

@@ -8,12 +8,57 @@
 
 /* --------------------------------------------------------------------------
    01. FONT LOADING
-   Source: Google Fonts variable axes for Fraunces (display) + Inter (body).
-   Fraunces: wght 300-900, opsz 9-144 (optical size unlocks true display cuts).
-   Inter: wght 300-700 -- covers all body, UI, and stat copy needs.
+   Instrument Serif: local TTF files -- Regular and Italic only.
+   Inter Tight: local TTF files -- covers all body, UI, and stat copy needs.
    -------------------------------------------------------------------------- */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600;700&display=swap');
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('public/assets/fonts/InstrumentSerif-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('public/assets/fonts/InstrumentSerif-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter Tight';
+  src: url('public/assets/fonts/InterTight-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter Tight';
+  src: url('public/assets/fonts/InterTight-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter Tight';
+  src: url('public/assets/fonts/InterTight-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter Tight';
+  src: url('public/assets/fonts/InterTight-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
 
 
 /* --------------------------------------------------------------------------
@@ -80,7 +125,7 @@ body {
   /* Optical rendering: subpixel on desktop, grayscale on OLED mobile */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-optical-sizing: auto; /* Activates Fraunces opsz axis when applied */
+  font-optical-sizing: auto;
 }
 
 
@@ -107,33 +152,29 @@ h1, h2, h3, h4 {
 .text-display {
   font-family: var(--font-header);
   font-size: var(--text-display);
-  font-weight: 800;
-  font-variation-settings: 'opsz' 144; /* Maximum optical display cut */
-  line-height: 0.95; /* Ultra-tight at hero scale -- optically correct */
-  letter-spacing: -0.03em; /* Negative tracking prevents visual gapping at 120px */
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
   color: var(--gl-white);
   text-wrap: balance;
 }
 
 h1 {
   font-size: var(--text-h1);
-  font-weight: 700;
-  font-variation-settings: 'opsz' 144;
-  letter-spacing: -0.025em;
+  font-weight: 400;
+  letter-spacing: -0.02em;
 }
 
 h2 {
   font-size: var(--text-h2);
-  font-weight: 700;
-  font-variation-settings: 'opsz' 72;
-  letter-spacing: -0.015em;
+  font-weight: 400;
+  letter-spacing: -0.01em;
 }
 
 h3 {
   font-size: var(--text-h3);
-  font-weight: 600;
-  font-variation-settings: 'opsz' 36;
-  letter-spacing: -0.01em;
+  font-weight: 400;
+  letter-spacing: -0.005em;
 }
 
 h4 {
@@ -196,13 +237,12 @@ h4 {
   line-height: 1.4;
 }
 
-/* The Logic impact stat -- Fraunces at H2 scale, not a heading element */
+/* The Logic impact stat -- Instrument Serif at H2 scale */
 .text-impact {
   font-family: var(--font-header);
   font-size: var(--text-h2);
-  font-weight: 700;
-  font-variation-settings: 'opsz' 72;
-  letter-spacing: -0.015em;
+  font-weight: 400;
+  letter-spacing: -0.01em;
   line-height: 1.15;
   color: var(--gl-white);
   text-wrap: balance;
@@ -247,13 +287,12 @@ h4 {
   color: var(--gl-blue);
 }
 
-/* Testimonial quote -- Fraunces italic for human warmth */
+/* Testimonial quote -- Instrument Serif italic for human warmth */
 .text-quote {
   font-family: var(--font-header);
   font-style: italic;
   font-size: var(--text-body-lg);
   font-weight: 400;
-  font-variation-settings: 'opsz' 36;
   line-height: 1.6;
   color: var(--gl-navy);
 }
