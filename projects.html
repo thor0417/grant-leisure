@@ -74,6 +74,10 @@
       flex-direction: column; /* Flush stacking -- no gaps */
     }
 
+    .projects-grid > article:first-child {
+      padding-top: 72px; /* Offsets fixed nav height so first cinematic row is not obscured */
+    }
+
     /* --- Editorial row -------------------------------------------- */
 
     .project-row {
@@ -96,6 +100,9 @@
         order: 1;
         border-left: none;
         border-right: 1px solid rgba(50, 62, 72, 0.12);
+      }
+     .project-row.is-reversed .project-panel {
+       order: 3; /* Forces panel below both columns regardless of visual reorder */
       }
     }
 
@@ -238,7 +245,7 @@
 
     .project-row-cinematic {
       position: relative;
-      min-height: clamp(500px, 70vh, 800px); /* Full viewport presence on desktop */
+      min-height: clamp(500px, 56.25vw, 900px); /* 56.25vw = 16:9 ratio at full viewport width */
       display: flex;
       flex-direction: column;
       border-bottom: 1px solid rgba(50, 62, 72, 0.12);
@@ -256,7 +263,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center center; /* Subject stays centered -- no top/bottom crop */
+      object-position: center center; /* Anchors to top -- preserves subject on tall images */
       display: block;
       transition: transform var(--duration-slow) var(--ease-stellar);
     }
@@ -272,9 +279,9 @@
       inset: 0;
       background: linear-gradient(
         to top,
-        rgba(20, 28, 35, 0.92) 0%,
-        rgba(20, 28, 35, 0.55) 45%,
-        transparent 75%
+        rgba(50, 62, 72, 0.75) 0%,
+        rgba(50, 62, 72, 0.40) 25%,
+        transparent 60%
       );
     }
 
@@ -506,6 +513,7 @@
             width="1440"
             height="800"
             loading="lazy"
+	  style="object-position: center 30%;"
           />
         </div>
         <div class="cinematic-content" data-reveal>
@@ -784,6 +792,35 @@
           </div>
         </div>
       </article>
+<!-- ROW 10: THE STRAT -- Cinematic -->
+<article class="project-row-cinematic" data-project="the-strat">
+  <div class="cinematic-image-wrap">
+    <img
+      src="public/assets/images/projects/attractions/the-strat.jpg"
+      alt="The Strat tower rising 1,149 feet above the Las Vegas Strip"
+      width="1440"
+      height="800"
+      loading="lazy"
+    />
+  </div>
+  <div class="cinematic-content" data-reveal>
+    <span class="cinematic-location">Las Vegas, Nevada</span>
+    <h2 class="cinematic-title">The Strat</h2>
+    <p class="cinematic-teaser">One of Las Vegas's most iconic landmarks, standing 1,149 feet above the Strip as the tallest freestanding observation tower in the United States.</p>
+    <button class="cinematic-trigger" aria-expanded="false" aria-controls="panel-the-strat">
+      <span aria-hidden="true">&#8594;</span>
+      Read the Brief
+    </button>
+  </div>
+  <div class="cinematic-panel" id="panel-the-strat" role="region" aria-label="The Strat project details">
+    <div class="cinematic-panel-inner">
+      <button class="cinematic-close" aria-label="Close The Strat details">
+        <span aria-hidden="true">&#8593;</span>
+        Close
+      </button>
+    </div>
+  </div>
+</article>
 
     </section>
 
