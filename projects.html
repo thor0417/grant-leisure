@@ -19,8 +19,6 @@
        No magic numbers without explanatory comments.
        ============================================================= */
 
-    /* --- Page header strip ---------------------------------------- */
-
     .projects-header {
       padding-top: 72px; /* Exact nav height -- prevents content sliding under fixed nav */
       background: var(--gl-navy);
@@ -31,8 +29,6 @@
       margin: 0 auto;
       padding: clamp(1.5rem, 3vw, 2rem) clamp(1.25rem, 4vw, 3rem);
     }
-
-    /* --- Category pill navigation --------------------------------- */
 
     .category-nav {
       display: flex;
@@ -51,7 +47,7 @@
       border: 1.5px solid rgba(255, 255, 255, 0.3);
       border-radius: var(--radius-full);
       padding: 0 1.5rem;
-      height: 48px; /* Senior touch target requirement */
+      height: 48px; /* Senior touch target */
       cursor: pointer;
       transition: background var(--duration-fast) var(--ease-stellar),
                   border-color var(--duration-fast) var(--ease-stellar),
@@ -72,12 +68,10 @@
       color: var(--gl-white);
     }
 
-    /* --- Projects grid -------------------------------------------- */
-
     .projects-grid {
       background: var(--gl-white);
       display: flex;
-      flex-direction: column; /* Flush stacking -- no gaps between rows */
+      flex-direction: column; /* Flush stacking -- no gaps */
     }
 
     /* --- Editorial row -------------------------------------------- */
@@ -91,7 +85,7 @@
 
     @media (min-width: 768px) {
       .project-row {
-        grid-template-columns: 50% 50%; /* Equal split -- image contained, not cropped */
+        grid-template-columns: 50% 50%;
       }
 
       .project-row.is-reversed .project-image-block {
@@ -105,27 +99,17 @@
       }
     }
 
-    /* --- Editorial image block ------------------------------------ */
-
     .project-image-block {
       position: relative;
       overflow: hidden;
-      min-height: 280px; /* Mobile floor */
-      background: var(--gl-grey-soft); /* Neutral bg visible while image loads or for contain gaps */
-      outline: 1px solid rgba(50, 62, 72, 0.08);
-    }
-
-    @media (min-width: 768px) {
-      .project-image-block {
-        height: 480px; /* Fixed -- all editorial rows identical height */
-      }
+      aspect-ratio: 4 / 3; /* Fills column -- no thumbnail, no border, no padding */
     }
 
     .project-image-block img {
       width: 100%;
       height: 100%;
-      object-fit: contain; /* Image never cropped on editorial rows */
-      object-position: center;
+      object-fit: cover;
+      object-position: center center;
       display: block;
       transition: transform var(--duration-slow) var(--ease-stellar);
     }
@@ -134,8 +118,6 @@
       transform: scale(1.03);
     }
 
-    /* --- Editorial text block ------------------------------------- */
-
     .project-text-block {
       padding: clamp(2rem, 4vw, 3.5rem);
       display: flex;
@@ -143,7 +125,6 @@
       justify-content: center;
       border-left: 1px solid rgba(50, 62, 72, 0.12);
       background: var(--gl-white);
-      min-height: 480px; /* Matches image block -- prevents row collapse */
     }
 
     .project-location {
@@ -173,7 +154,6 @@
       opacity: 0.75;
     }
 
-    /* READ THE BRIEF -- text link only, zero box, zero border */
     .project-trigger {
       font-family: var(--font-body);
       font-size: var(--text-sm);
@@ -199,7 +179,6 @@
       opacity: 0.8;
     }
 
-    /* Editorial accordion panel -- spans full row width, drops below image */
     .project-panel {
       grid-column: 1 / -1;
       max-height: 0;
@@ -210,7 +189,7 @@
     }
 
     .project-panel.is-open {
-      max-height: 600px; /* Generous cap -- handles longest writeup */
+      max-height: 600px;
     }
 
     .project-panel-inner {
@@ -255,11 +234,11 @@
       gap: 0.75rem;
     }
 
-    /* --- Cinematic row (full-bleed) ------------------------------- */
+    /* --- Cinematic row -------------------------------------------- */
 
     .project-row-cinematic {
       position: relative;
-      min-height: clamp(500px, 70vh, 800px);
+      min-height: clamp(500px, 70vh, 800px); /* Full viewport presence on desktop */
       display: flex;
       flex-direction: column;
       border-bottom: 1px solid rgba(50, 62, 72, 0.12);
@@ -276,8 +255,8 @@
     .cinematic-image-wrap img {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* Cover -- cinematic rows are full-bleed by design */
-      object-position: center;
+      object-fit: cover;
+      object-position: center center; /* Subject stays centered -- no top/bottom crop */
       display: block;
       transition: transform var(--duration-slow) var(--ease-stellar);
     }
@@ -286,7 +265,7 @@
       transform: scale(1.03);
     }
 
-    /* Bottom-third gradient scrim -- text lifts off image */
+    /* Bottom-third gradient scrim -- text lifts off image with real weight */
     .cinematic-image-wrap::after {
       content: '';
       position: absolute;
@@ -350,7 +329,6 @@
       max-width: 56ch;
     }
 
-    /* READ THE BRIEF on cinematic rows -- white, no box */
     .cinematic-trigger {
       font-family: var(--font-body);
       font-size: var(--text-sm);
@@ -375,7 +353,6 @@
       opacity: 0.8;
     }
 
-    /* Cinematic accordion panel */
     .cinematic-panel {
       position: relative;
       z-index: var(--z-overlay);
@@ -552,39 +529,7 @@
         </div>
       </article>
 
-      <!-- ROW 02: FERRARI WORLD -- Cinematic -->
-      <article class="project-row-cinematic" data-project="ferrari-world">
-        <div class="cinematic-image-wrap">
-          <img
-            src="public/assets/images/projects/attractions/ferrari-world.png"
-            alt="Ferrari World Abu Dhabi -- aerial view of the iconic red roof of the world's first Ferrari-branded theme park"
-            width="1440"
-            height="800"
-            loading="lazy"
-          />
-        </div>
-        <div class="cinematic-content" data-reveal>
-          <span class="cinematic-location">Abu Dhabi, United Arab Emirates</span>
-          <h2 class="cinematic-title">Ferrari World</h2>
-          <p class="cinematic-teaser">The first branded theme park in the United Arab Emirates, built on an exclusive worldwide rights agreement secured by Grant Leisure.</p>
-          <button class="cinematic-trigger" aria-expanded="false" aria-controls="panel-ferrari-world">
-            <span aria-hidden="true">&#8594;</span>
-            Read the Brief
-          </button>
-        </div>
-        <div class="cinematic-panel" id="panel-ferrari-world" role="region" aria-label="Ferrari World project details">
-          <div class="cinematic-panel-inner">
-            <p>Grant Leisure was commissioned by Aldar to develop the economic feasibility and concept plan, and secure the worldwide rights for Ferrari World. Ferrari World is a global destination and the first branded theme park in the United Arab Emirates.</p>
-            <p>Boasting over 20 themed attractions and adventures, all under the complex's signature red roof, guests are treated to a taste of being behind the wheel of the world's most prestigious sports car.</p>
-            <button class="cinematic-close" aria-label="Close Ferrari World details">
-              <span aria-hidden="true">&#8593;</span>
-              Close
-            </button>
-          </div>
-        </div>
-      </article>
-
-      <!-- ROW 03: OCEAN PARK -- Editorial, text left, image right -->
+      <!-- ROW 02: OCEAN PARK -- Editorial, text left, image right -->
       <article class="project-row is-reversed" data-project="ocean-park">
         <div class="project-image-block" data-reveal="right">
           <img
@@ -616,7 +561,7 @@
         </div>
       </article>
 
-      <!-- ROW 04: OUR DYNAMIC EARTH -- Editorial, image left, text right -->
+      <!-- ROW 03: OUR DYNAMIC EARTH -- Editorial, image left, text right -->
       <article class="project-row" data-project="our-dynamic-earth">
         <div class="project-image-block" data-reveal="left">
           <img
@@ -641,6 +586,38 @@
             <p>Our Dynamic Earth is one of the largest visitor attractions ever built in Scotland. The attraction takes guests on a journey through Earth's past, present, and future through a series of interactive exhibits utilizing innovative technology, including a 4-D experience.</p>
             <p>Grant Leisure was retained by the City of Edinburgh to provide the economic feasibility, pre-opening planning, recruitment, training, marketing, and finance for the largest visitor attraction ever built in Scotland.</p>
             <button class="project-close" aria-label="Close Our Dynamic Earth details">
+              <span aria-hidden="true">&#8593;</span>
+              Close
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- ROW 04: FERRARI WORLD -- Cinematic -->
+      <article class="project-row-cinematic" data-project="ferrari-world">
+        <div class="cinematic-image-wrap">
+          <img
+            src="public/assets/images/projects/attractions/ferrari-world.png"
+            alt="Ferrari World Abu Dhabi -- aerial view of the iconic red roof of the world's first Ferrari-branded theme park"
+            width="1440"
+            height="800"
+            loading="lazy"
+          />
+        </div>
+        <div class="cinematic-content" data-reveal>
+          <span class="cinematic-location">Abu Dhabi, United Arab Emirates</span>
+          <h2 class="cinematic-title">Ferrari World</h2>
+          <p class="cinematic-teaser">The first branded theme park in the United Arab Emirates, built on an exclusive worldwide rights agreement secured by Grant Leisure.</p>
+          <button class="cinematic-trigger" aria-expanded="false" aria-controls="panel-ferrari-world">
+            <span aria-hidden="true">&#8594;</span>
+            Read the Brief
+          </button>
+        </div>
+        <div class="cinematic-panel" id="panel-ferrari-world" role="region" aria-label="Ferrari World project details">
+          <div class="cinematic-panel-inner">
+            <p>Grant Leisure was commissioned by Aldar to develop the economic feasibility and concept plan, and secure the worldwide rights for Ferrari World. Ferrari World is a global destination and the first branded theme park in the United Arab Emirates.</p>
+            <p>Boasting over 20 themed attractions and adventures, all under the complex's signature red roof, guests are treated to a taste of being behind the wheel of the world's most prestigious sports car.</p>
+            <button class="cinematic-close" aria-label="Close Ferrari World details">
               <span aria-hidden="true">&#8593;</span>
               Close
             </button>
@@ -680,39 +657,7 @@
         </div>
       </article>
 
-      <!-- ROW 06: DOWNTON ABBEY -- Cinematic -->
-      <article class="project-row-cinematic" data-project="downton-abbey">
-        <div class="cinematic-image-wrap">
-          <img
-            src="public/assets/images/projects/attractions/downtown-abbey.png"
-            alt="Downton Abbey: The Exhibition -- the travelling experience bringing the beloved series to life"
-            width="1440"
-            height="800"
-            loading="lazy"
-          />
-        </div>
-        <div class="cinematic-content" data-reveal>
-          <span class="cinematic-location">USA Tour</span>
-          <h2 class="cinematic-title">Downton Abbey:<br>The Exhibition</h2>
-          <p class="cinematic-teaser">Grant Leisure managed the tender process and development of one of television's most celebrated properties as a unique traveling exhibition across the United States.</p>
-          <button class="cinematic-trigger" aria-expanded="false" aria-controls="panel-downton-abbey">
-            <span aria-hidden="true">&#8594;</span>
-            Read the Brief
-          </button>
-        </div>
-        <div class="cinematic-panel" id="panel-downton-abbey" role="region" aria-label="Downton Abbey project details">
-          <div class="cinematic-panel-inner">
-            <p>Grant Leisure has a long history of providing consulting services for Universal Studios. In 2015 Grant Leisure was commissioned to conduct a feasibility analysis for the implementation of a significant NBC/Universal intellectual property as both a visitor attraction and traveling exhibition.</p>
-            <p>Grant Leisure has now been retained to assist with managing the tender process and development of this intellectual property as a unique traveling exhibition in the United States.</p>
-            <button class="cinematic-close" aria-label="Close Downton Abbey details">
-              <span aria-hidden="true">&#8593;</span>
-              Close
-            </button>
-          </div>
-        </div>
-      </article>
-
-      <!-- ROW 07: THE OLYMPIC SPIRIT -- Editorial, image left, text right -->
+      <!-- ROW 06: THE OLYMPIC SPIRIT -- Editorial, image left, text right -->
       <article class="project-row" data-project="olympic-spirit">
         <div class="project-image-block" data-reveal="left">
           <img
@@ -737,6 +682,38 @@
             <p>In the early 2000s Grant Leisure signed an exclusive worldwide licensing agreement with the International Olympic Committee for the development of a themed visitor attraction and edutainment center, The Olympic Spirit. Through the use of computer simulation and innovative staging techniques, visitors were offered a taste of the Olympics through interactive sporting activities and a chance to engage in friendly competition.</p>
             <p>The Olympic Spirit won a number of prestigious awards, including the 2005 TEA Award for Outstanding Achievement and the 2005 Innovation Award, presented by the Tourism Federation of Ontario.</p>
             <button class="project-close" aria-label="Close The Olympic Spirit details">
+              <span aria-hidden="true">&#8593;</span>
+              Close
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- ROW 07: DOWNTON ABBEY -- Cinematic -->
+      <article class="project-row-cinematic" data-project="downton-abbey">
+        <div class="cinematic-image-wrap">
+          <img
+            src="public/assets/images/projects/attractions/downtown-abbey.png"
+            alt="Downton Abbey: The Exhibition -- the travelling experience bringing the beloved series to life"
+            width="1440"
+            height="800"
+            loading="lazy"
+          />
+        </div>
+        <div class="cinematic-content" data-reveal>
+          <span class="cinematic-location">USA Tour</span>
+          <h2 class="cinematic-title">Downton Abbey:<br>The Exhibition</h2>
+          <p class="cinematic-teaser">Grant Leisure managed the tender process and development of one of television's most celebrated properties as a unique traveling exhibition across the United States.</p>
+          <button class="cinematic-trigger" aria-expanded="false" aria-controls="panel-downton-abbey">
+            <span aria-hidden="true">&#8594;</span>
+            Read the Brief
+          </button>
+        </div>
+        <div class="cinematic-panel" id="panel-downton-abbey" role="region" aria-label="Downton Abbey project details">
+          <div class="cinematic-panel-inner">
+            <p>Grant Leisure has a long history of providing consulting services for Universal Studios. In 2015 Grant Leisure was commissioned to conduct a feasibility analysis for the implementation of a significant NBC/Universal intellectual property as both a visitor attraction and traveling exhibition.</p>
+            <p>Grant Leisure has now been retained to assist with managing the tender process and development of this intellectual property as a unique traveling exhibition in the United States.</p>
+            <button class="cinematic-close" aria-label="Close Downton Abbey details">
               <span aria-hidden="true">&#8593;</span>
               Close
             </button>
@@ -776,7 +753,7 @@
         </div>
       </article>
 
-      <!-- ROW 09: BLUEWATER SHOPPING CENTRE -- Editorial, image left, text right -->
+      <!-- ROW 09: BLUEWATER -- Editorial, image left, text right -->
       <article class="project-row" data-project="bluewater">
         <div class="project-image-block" data-reveal="left">
           <img
@@ -828,8 +805,6 @@
        4. GSAP scroll reveals
        ============================================================= */
 
-    /* --- 1. Ghost nav --------------------------------------------- */
-
     const siteNav     = document.querySelector('.site-nav');
     const headerStrip = document.querySelector('.projects-header');
 
@@ -843,8 +818,6 @@
       navObserver.observe(headerStrip);
     }
 
-    /* --- 2. Mobile nav toggle ------------------------------------- */
-
     const navToggle = document.querySelector('.nav-toggle');
     const navLinks  = document.querySelector('.nav-links');
 
@@ -855,8 +828,6 @@
         navLinks.classList.toggle('is-open');
       });
     }
-
-    /* --- 3. Accordion --------------------------------------------- */
 
     const grid = document.querySelector('.projects-grid');
 
@@ -894,8 +865,6 @@
       });
     }
 
-    /* --- 4. GSAP scroll reveals ----------------------------------- */
-
     function initGSAP() {
       if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
@@ -904,8 +873,8 @@
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReducedMotion) {
         document.querySelectorAll('[data-reveal]').forEach(el => {
-          el.style.opacity    = '1';
-          el.style.transform  = 'none';
+          el.style.opacity   = '1';
+          el.style.transform = 'none';
         });
         return;
       }
