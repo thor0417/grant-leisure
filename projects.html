@@ -1059,6 +1059,42 @@
         }
       });
     }
+/* -- Category filter ------------------------------------------ */
+
+    (function () {
+      const pills    = document.querySelectorAll('.category-pill');
+      const sections = document.querySelectorAll('.projects-grid');
+
+      function filterTo(category) {
+        /* Show only the section whose id matches, hide all others */
+        sections.forEach(section => {
+          if (section.id === category) {
+            section.removeAttribute('hidden');
+          } else {
+            section.setAttribute('hidden', '');
+          }
+        });
+
+        /* Update active pill styling */
+        pills.forEach(pill => {
+          const isActive = pill.getAttribute('data-category') === category;
+          pill.classList.toggle('is-active', isActive);
+        });
+      }
+
+      /* Intercept pill clicks -- prevent anchor scroll, run filter instead */
+      pills.forEach(pill => {
+        pill.addEventListener('click', (e) => {
+          e.preventDefault();
+          filterTo(pill.getAttribute('data-category'));
+          /* Scroll to top of project grid so user sees the filtered results */
+          document.querySelector('.projects-header').scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+
+      /* Default state on load -- show Attractions only */
+      filterTo('attractions');
+    }());
 
     function initGSAP() {
       if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
