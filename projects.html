@@ -1024,61 +1024,53 @@
       });
     }
 
-    const grid = document.querySelector('.projects-grid');
+    /* -- Accordion: delegated to document so all sections respond -- */
+    document.addEventListener('click', (e) => {
 
-    if (grid) {
-      grid.addEventListener('click', (e) => {
+      const trigger = e.target.closest('.project-trigger, .cinematic-trigger');
+      if (trigger) {
+        const panelId = trigger.getAttribute('aria-controls');
+        const panel   = document.getElementById(panelId);
+        if (!panel) return;
 
-        const trigger = e.target.closest('.project-trigger, .cinematic-trigger');
-        if (trigger) {
-          const panelId = trigger.getAttribute('aria-controls');
-          const panel   = document.getElementById(panelId);
-          if (!panel) return;
+        const isOpen = panel.classList.toggle('is-open');
+        trigger.setAttribute('aria-expanded', isOpen);
 
-          const isOpen = panel.classList.toggle('is-open');
-          trigger.setAttribute('aria-expanded', isOpen);
-
-          if (isOpen) {
-            setTimeout(() => {
-              panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            }, 400);
-          }
-          return;
+        if (isOpen) {
+          setTimeout(() => {
+            panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }, 400);
         }
+        return;
+      }
 
-        const closeBtn = e.target.closest('.project-close, .cinematic-close');
-        if (closeBtn) {
-          const panel = closeBtn.closest('.project-panel, .cinematic-panel');
-          if (!panel) return;
+      const closeBtn = e.target.closest('.project-close, .cinematic-close');
+      if (closeBtn) {
+        const panel = closeBtn.closest('.project-panel, .cinematic-panel');
+        if (!panel) return;
 
-          panel.classList.remove('is-open');
+        panel.classList.remove('is-open');
 
-          const panelId        = panel.id;
-          const relatedTrigger = grid.querySelector(`[aria-controls="${panelId}"]`);
-          if (relatedTrigger) relatedTrigger.setAttribute('aria-expanded', 'false');
-        }
-      });
-    }
-/* -- Category filter ------------------------------------------ */
+        const panelId        = panel.id;
+        const relatedTrigger = document.querySelector(`[aria-controls="${panelId}"]`);
+        if (relatedTrigger) relatedTrigger.setAttribute('aria-expanded', 'false');
+      }
+    });
 
+    /* -- Category filter: style.display overrides CSS flex -- */
     (function () {
       const pills    = document.querySelectorAll('.category-pill');
       const sections = document.querySelectorAll('.projects-grid');
 
       function filterTo(category) {
-        /* style.display overrides CSS -- hidden attribute does not */
         sections.forEach(section => {
           section.style.display = section.id === category ? 'flex' : 'none';
         });
-
-        /* Update active pill styling */
         pills.forEach(pill => {
-          const isActive = pill.getAttribute('data-category') === category;
-          pill.classList.toggle('is-active', isActive);
+          pill.classList.toggle('is-active', pill.getAttribute('data-category') === category);
         });
       }
 
-      /* Intercept pill clicks -- prevent anchor scroll, run filter instead */
       pills.forEach(pill => {
         pill.addEventListener('click', (e) => {
           e.preventDefault();
@@ -1087,7 +1079,6 @@
         });
       });
 
-      /* Default state on load -- show Attractions only */
       filterTo('attractions');
     }());
 
