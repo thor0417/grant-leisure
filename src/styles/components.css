@@ -1066,6 +1066,10 @@
   transition: transform var(--duration-default) var(--ease-stellar);
 }
 
+.team-card--keith .team-card__img-wrap img {
+  object-position: center 30%;
+}
+
 .team-card:hover .team-card__img-wrap img {
   transform: scale(1.04);
 }
