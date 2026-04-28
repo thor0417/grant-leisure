@@ -1,0 +1,448 @@
+/* =============================================================
+   projects.css -- scoped to projects.html only
+   All color values via CSS custom properties from tokens.css.
+   Mobile-first. min-width breakpoints scale up.
+   No magic numbers without explanatory comments.
+   ============================================================= */
+
+.projects-header {
+  padding-top: 72px; /* Exact nav height -- prevents content sliding under fixed nav */
+  background: var(--gl-navy);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-overlay);
+  transition: background 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+.projects-header.is-scrolled {
+  background: rgba(50, 62, 72, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.projects-header-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 3vw, 2rem) clamp(1.25rem, 4vw, 3rem);
+}
+
+.category-nav {
+  display: flex;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+.category-pill {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--gl-white);
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-full);
+  padding: 0 1.5rem;
+  height: 48px; /* Senior touch target */
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-stellar),
+              border-color var(--duration-fast) var(--ease-stellar),
+              color var(--duration-fast) var(--ease-stellar);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.category-pill:hover {
+  border-color: var(--gl-green);
+  color: var(--gl-green);
+}
+
+.category-pill.is-active {
+  background: var(--gl-green);
+  border-color: var(--gl-green);
+  color: var(--gl-white);
+}
+
+.projects-grid {
+  background: var(--gl-white);
+  display: flex;
+  flex-direction: column; /* Flush stacking -- no gaps */
+}
+
+.projects-grid > article:first-child {
+  padding-top: 72px; /* Offsets fixed nav height so first cinematic row is not obscured */
+}
+
+/* --- Editorial row -------------------------------------------- */
+
+.project-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  border-bottom: 1px solid rgba(50, 62, 72, 0.12);
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .project-row {
+    grid-template-columns: 50% 50%;
+  }
+
+  .project-row.is-reversed .project-image-block {
+    order: 2;
+  }
+
+  .project-row.is-reversed .project-image-block {
+    border-right: none;
+    border-left: 1px solid rgba(50, 62, 72, 0.12);
+  }
+
+  .project-row.is-reversed .project-text-block {
+    order: 1;
+  }
+ .project-row.is-reversed .project-panel {
+   order: 3; /* Forces panel below both columns regardless of visual reorder */
+  }
+}
+
+.project-image-block {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3; /* Fills column -- no thumbnail, no border, no padding */
+  border-right: 1px solid rgba(50, 62, 72, 0.12);
+}
+
+.project-image-block img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+
+.project-text-block {
+  padding: clamp(2rem, 4vw, 3.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--gl-white);
+}
+
+.project-location {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-widest);
+  color: var(--gl-green);
+  text-transform: uppercase;
+  margin-bottom: var(--space-xs);
+}
+
+.project-title {
+  font-family: var(--font-header);
+  font-size: var(--text-h2);
+  font-weight: 400;
+  color: var(--gl-navy);
+  line-height: var(--leading-tight);
+  margin-bottom: var(--space-md);
+}
+
+.project-teaser {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--gl-navy);
+  line-height: var(--leading-loose);
+  margin-bottom: var(--space-lg);
+  opacity: 0.75;
+}
+
+.project-trigger {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--gl-green);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  transition: gap var(--duration-fast) var(--ease-stellar),
+              opacity var(--duration-fast) var(--ease-stellar);
+  text-decoration: none;
+}
+
+.project-trigger:hover {
+  gap: 0.75rem;
+  opacity: 0.8;
+}
+
+.project-panel {
+  grid-column: 1 / -1;
+  max-height: 0;
+  overflow: hidden;
+  background: var(--gl-navy);
+  border-left: 3px solid var(--gl-green);
+  transition: max-height 0.6s var(--ease-stellar);
+}
+
+.project-panel.is-open {
+  max-height: 600px;
+}
+
+.project-panel-inner {
+  padding: clamp(2rem, 4vw, 3rem) clamp(2rem, 4vw, 3.5rem);
+}
+
+.project-panel p {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--gl-white);
+  line-height: var(--leading-loose);
+  max-width: 72ch;
+}
+
+.project-panel p + p {
+  margin-top: var(--space-md);
+}
+
+.project-close {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--gl-white);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  margin-top: var(--space-lg);
+  opacity: 0.65;
+  transition: opacity var(--duration-fast) var(--ease-stellar),
+              gap var(--duration-fast) var(--ease-stellar);
+}
+
+.project-close:hover {
+  opacity: 1;
+  gap: 0.75rem;
+}
+
+/* --- Cinematic row -------------------------------------------- */
+
+.project-row-cinematic {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid rgba(50, 62, 72, 0.12);
+  overflow: hidden;
+  margin: 0;
+}
+
+.cinematic-image-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-base);
+}
+
+.cinematic-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center; /* Anchors to top -- preserves subject on tall images */
+  display: block;
+}
+
+/* Bottom-third gradient scrim -- text lifts off image with real weight */
+.cinematic-image-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(50, 62, 72, 0.75) 0%,
+    rgba(50, 62, 72, 0.40) 25%,
+    transparent 60%
+  );
+}
+
+.cinematic-content {
+  position: relative;
+  z-index: var(--z-overlay);
+  padding: clamp(3rem, 6vw, 5rem) clamp(2rem, 5vw, 4rem);
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: inherit;
+}
+
+.cinematic-location {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--gl-white);
+  background: var(--gl-green);
+  width: fit-content; /* Pill hugs text -- never stretches full width */
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-md);
+}
+
+.cinematic-title {
+  font-family: var(--font-header);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 400;
+  color: var(--gl-white);
+  line-height: var(--leading-tight);
+  margin-bottom: var(--space-md);
+  /* Dual-layer shadow: spread for lift, tight for crispness */
+  text-shadow:
+    0 2px 24px rgba(0, 0, 0, 0.65),
+    0 1px 4px rgba(0, 0, 0, 0.9);
+}
+
+.cinematic-teaser {
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  color: rgba(255, 255, 255, 0.9);
+  line-height: var(--leading-loose);
+  margin-bottom: var(--space-lg);
+  text-shadow:
+    0 1px 12px rgba(0, 0, 0, 0.5),
+    0 1px 3px rgba(0, 0, 0, 0.75);
+  max-width: 56ch;
+}
+
+.cinematic-trigger {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--gl-white);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  transition: gap var(--duration-fast) var(--ease-stellar),
+              opacity var(--duration-fast) var(--ease-stellar);
+}
+
+.cinematic-trigger:hover {
+  gap: 0.75rem;
+  opacity: 0.8;
+}
+
+.cinematic-panel {
+  position: relative;
+  z-index: var(--z-overlay);
+  max-height: 0;
+  overflow: hidden;
+  background: var(--gl-navy);
+  border-left: 3px solid var(--gl-green);
+  transition: max-height 0.6s var(--ease-stellar);
+}
+
+.cinematic-panel.is-open {
+  max-height: 600px;
+}
+
+.cinematic-panel-inner {
+  padding: clamp(2rem, 4vw, 3rem) clamp(2rem, 4vw, 3.5rem);
+}
+
+.cinematic-panel p {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--gl-white);
+  line-height: var(--leading-loose);
+  max-width: 72ch;
+}
+
+.cinematic-panel p + p {
+  margin-top: var(--space-md);
+}
+
+.cinematic-close {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--gl-white);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  margin-top: var(--space-lg);
+  opacity: 0.65;
+  transition: opacity var(--duration-fast) var(--ease-stellar),
+              gap var(--duration-fast) var(--ease-stellar);
+}
+
+.cinematic-close:hover {
+  opacity: 1;
+  gap: 0.75rem;
+}
+
+/* --- Footer --------------------------------------------------- */
+
+.projects-footer {
+  background: var(--gl-navy);
+  padding: var(--space-xl) clamp(1.25rem, 4vw, 3rem);
+  text-align: center;
+}
+
+.projects-footer p {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+/* --- GSAP reveal initial states ------------------------------- */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(32px);
+}
+
+[data-reveal="left"] {
+  opacity: 0;
+  transform: translateX(-48px);
+}
+
+[data-reveal="right"] {
+  opacity: 0;
+  transform: translateX(48px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  [data-reveal="left"],
+  [data-reveal="right"] {
+    opacity: 1;
+    transform: none;
+  }
+}
