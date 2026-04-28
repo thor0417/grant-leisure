@@ -999,6 +999,150 @@
       </article>
 
     </section>
+<!-- ============================================================
+     ZOOLOGICAL SECTION
+     Paste directly below the closing </section> tag of #resorts
+     (line 1001 in the current file).
+
+     Filter logic: JS hides/shows entire <section> by id match.
+     No data-category needed on individual articles.
+     Accordion: delegated listener catches .cinematic-trigger and
+     .project-trigger via aria-controls -> panel id.
+     ============================================================ -->
+
+    <section class="projects-grid" id="zoological" aria-label="Zoological projects">
+
+      <!-- ROW 01: PHINDA PRIVATE GAME RESERVE -- Cinematic -->
+      <article class="project-row-cinematic" data-project="phinda-private">
+        <div class="cinematic-image-wrap">
+          <img
+            src="public/assets/images/projects/zoological/phinda-private.webp"
+            alt="Phinda Private Game Reserve -- luxury safari lodge at dusk across the KwaZulu-Natal savanna"
+            width="1440"
+            height="800"
+            loading="lazy"
+          />
+        </div>
+        <div class="cinematic-content" data-reveal>
+          <span class="cinematic-location">KwaZulu-Natal, South Africa</span>
+          <h2 class="cinematic-title">Phinda Private Game Reserve</h2>
+          <p class="cinematic-teaser">One of Africa's premier private game reserves, offering an unmatched safari experience across seven distinct ecosystems in KwaZulu-Natal.</p>
+          <button class="cinematic-trigger" aria-expanded="false" aria-controls="panel-phinda-private">
+            <span aria-hidden="true">&#8594;</span>
+            Read the Brief
+          </button>
+        </div>
+        <div class="cinematic-panel" id="panel-phinda-private" role="region" aria-label="Phinda Private Game Reserve project details">
+          <div class="cinematic-panel-inner">
+            <p>The Phinda Private Game Reserve is a 170 km&sup2; private game reserve situated in KwaZulu-Natal, South Africa. Grant Leisure was appointed curatorial advisor to the project by a Cape Town consortium that purchased 14,000 hectares of land between KwaZulu-Natal and Mkuze National Park.</p>
+            <p>Grant Leisure spearheaded the effort to connect the 2 national parks, creating the Phinda Private Game Reserve. The land was then traded to the Minister of the Interior for the rights to construct 5 luxury 25-room lodges on the site. The KwaZulu tribe was appointed as partners to the project, whereby Grant Leisure developed a working social order allowing the tribe to participate with all aspects of the development and operation of the lodges.</p>
+            <button class="cinematic-close" aria-label="Close Phinda Private Game Reserve details">
+              <span aria-hidden="true">&#8593;</span>
+              Close
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- ROW 02: NEW DOHA ZOO -- Editorial, text left, image right -->
+      <article class="project-row is-reversed" data-project="new-doha-zoo">
+        <div class="project-image-block" data-reveal="right">
+          <img
+            src="public/assets/images/projects/zoological/new-doha-zoo.webp"
+            alt="New Doha Zoo -- architectural render of the mega zoo master plan in Qatar"
+            width="880"
+            height="480"
+            loading="lazy"
+          />
+        </div>
+        <div class="project-text-block" data-reveal>
+          <p class="project-location">Doha, Qatar</p>
+          <h2 class="project-title">New Doha Zoo</h2>
+          <p class="project-teaser">A world-class zoological destination designed to redefine the visitor experience in the Middle East, featuring immersive habitats across a landmark site in Qatar.</p>
+          <button class="project-trigger" aria-expanded="false" aria-controls="panel-new-doha-zoo">
+            <span aria-hidden="true">&#8594;</span>
+            Read the Brief
+          </button>
+        </div>
+        <div class="project-panel" id="panel-new-doha-zoo" role="region" aria-label="New Doha Zoo project details">
+          <div class="project-panel-inner">
+            <p>The Doha Zoo will be a one-of-a-kind experience for zoo-goers around the globe. The project has been appropriately touted a "mega zoo," boasting driving and walking safari experiences, an immersive digital walkthrough experience, as well as interactive animal exhibits, shows, and dining interactions.</p>
+            <p>Grant Leisure was commissioned to provide operational advisory services throughout the Design Development phase of the project.</p>
+            <button class="project-close" aria-label="Close New Doha Zoo details">
+              <span aria-hidden="true">&#8593;</span>
+              Close
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- ROW 03: SAN DIEGO ZOO AND SAFARI PARK -- Editorial, image left, text right -->
+      <article class="project-row" data-project="san-diego-zoo">
+        <div class="project-image-block" data-reveal="left">
+          <img
+            src="public/assets/images/projects/zoological/san-diego-zoo.webp"
+            alt="San Diego Zoo and Safari Park -- open-range animal habitat in Southern California"
+            width="880"
+            height="480"
+            loading="lazy"
+          />
+        </div>
+        <div class="project-text-block" data-reveal>
+          <p class="project-location">San Diego, USA</p>
+          <h2 class="project-title">San Diego Zoo and Safari Park</h2>
+          <p class="project-teaser">One of the most celebrated zoological institutions in the world, renowned for its open-range habitats and global leadership in wildlife conservation.</p>
+          <button class="project-trigger" aria-expanded="false" aria-controls="panel-san-diego-zoo">
+            <span aria-hidden="true">&#8594;</span>
+            Read the Brief
+          </button>
+        </div>
+        <div class="project-panel" id="panel-san-diego-zoo" role="region" aria-label="San Diego Zoo and Safari Park project details">
+          <div class="project-panel-inner">
+            <p>Prior to moving to the United Kingdom, Principal Andy Grant was acting Deputy Director of the San Diego Zoo and Wild Animal Park. He was responsible for over 2,000 staff and a budget of $50 million. One of many notable successes includes increasing attendance from 1.1 to 1.6 million at the Wild Animal Park and turning a deficit of $1.2 million to a surplus of $0.6 million.</p>
+            <p>He developed a master plan for both facilities, which are still in place today. Grant Leisure is the preferred consulting partner to San Diego Zoo Global.</p>
+            <button class="project-close" aria-label="Close San Diego Zoo and Safari Park details">
+              <span aria-hidden="true">&#8593;</span>
+              Close
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- ROW 04: ZOOLOGICAL SOCIETY OF LONDON -- Editorial, text left, image right -->
+      <article class="project-row is-reversed" data-project="zoological-society-london">
+        <div class="project-image-block" data-reveal="right">
+          <img
+            src="public/assets/images/projects/zoological/zoological-society.webp"
+            alt="Zoological Society of London -- entrance to ZSL London Zoo in Regent's Park"
+            width="880"
+            height="480"
+            loading="lazy"
+          />
+        </div>
+        <div class="project-text-block" data-reveal>
+          <p class="project-location">London, United Kingdom</p>
+          <h2 class="project-title">Zoological Society of London</h2>
+          <p class="project-teaser">The world's oldest scientific zoo, delivering 200 years of wildlife conservation and visitor education in the heart of Regent's Park.</p>
+          <button class="project-trigger" aria-expanded="false" aria-controls="panel-zoological-society-london">
+            <span aria-hidden="true">&#8594;</span>
+            Read the Brief
+          </button>
+        </div>
+        <div class="project-panel" id="panel-zoological-society-london" role="region" aria-label="Zoological Society of London project details">
+          <div class="project-panel-inner">
+            <p>Grant Leisure was commissioned over a 5-year period to assist with implementing a wide range of capital and operational recommendations for both the London and Whipsnade Zoos.</p>
+            <p>The contract additionally provided four key members of staff including a Chief Executive of Zoo Operations, Financial Director, Marketing Director, and Operations Director.</p>
+            <button class="project-close" aria-label="Close Zoological Society of London details">
+              <span aria-hidden="true">&#8593;</span>
+              Close
+            </button>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+<!-- END ZOOLOGICAL SECTION -->
 
   </main>
 
