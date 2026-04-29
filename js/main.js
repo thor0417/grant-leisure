@@ -365,25 +365,23 @@ if (typeof gsap !== 'undefined' && typeof Lenis !== 'undefined') {
     lenis.raf(time * 1000);
   });
 
-  gsap.ticker.lagSmoothing(0);
+  /* lagSmoothing intentionally omitted -- default prevents snap-to-bottom
+     caused by large ticker deltas after tab switches or resizes */
+
+  /* Stop Lenis inside open modals so they can scroll independently */
+  const modalOverlayEl = document.getElementById('modal-overlay');
+  if (modalOverlayEl) {
+    modalOverlayEl.addEventListener('wheel', function (e) {
+      e.stopPropagation();
+    }, { passive: true });
+  }
 
   /* Refresh all ScrollTrigger instances once Lenis is live */
   ScrollTrigger.refresh();
 
-  /* -- Migrate nav scroll state to Lenis scroll event ------ */
-
-  /* Remove the native scroll listener that was set earlier.
-     We cannot reference the original anonymous function, so we
-     re-apply the same logic inside lenis.on('scroll'). */
+  /* -- Nav scroll state via Lenis (authoritative over native listener) -- */
 
   if (siteNav) {
-    window.removeEventListener('scroll', function () {});
-    /* The native listener above was anonymous so it cannot be
-       removed by reference. We suppress its effect by
-       overwriting the class check inside lenis instead.
-       The native listener fires on wheel events when Lenis
-       is active but scrollY stays near 0 in its own model,
-       so the lenis.on path below is authoritative. */
     lenis.on('scroll', function (e) {
       if (e.scroll > 50) {
         siteNav.classList.add('is-scrolled');

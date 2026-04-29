@@ -28,8 +28,9 @@ ol[role='list'] {
 }
 
 html {
-  /* Respect reduced-motion preference -- overridden below in @media query */
-  scroll-behavior: smooth;
+  /* auto required by Lenis -- native smooth scroll conflicts with Lenis
+     interpolation and causes lag-then-snap. Reduced-motion override below. */
+  scroll-behavior: auto;
 }
 
 body {
