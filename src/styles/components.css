@@ -309,7 +309,6 @@
   letter-spacing: -0.04em;
   margin: 0;
   white-space: nowrap;
-  text-shadow: 0 0 12px rgba(92, 147, 135, 0.25);
 }
 .logic-text {
   display: flex;
@@ -447,7 +446,7 @@
    ============================================================= */
 
 #proof {
-  background: var(--gl-green);
+  background: #5C9387; /* Hard-coded -- proof section must not follow --gl-green global updates */
   /* Tighter than full section-pad-y -- proof reads as a stats band, not a hero */
   padding: clamp(2.5rem, 5vw, 4rem) clamp(1.25rem, 5vw, 4rem);
 }
