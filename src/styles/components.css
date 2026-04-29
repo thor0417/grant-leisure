@@ -611,31 +611,6 @@
   max-width: 680px; /* Constrains line length for senior readability */
 }
 /* ============================================================
-   GREEN-ON-NAVY CONTRAST OVERRIDE
-   #5C9387 on #323E48 = ~3.1:1 -- fails WCAG AA for body text.
-   Scoped overrides lift to #72B5A8 (~4.8:1) on all navy surfaces.
-   Does not affect green-on-white or green-on-green usage.
-   ============================================================ */
-
-#logic .logic-stat,
-#logic .logic-resolve,
-#reach .reach-countries,
-#expertise .expertise__subhead,
-#leadership .leadership__subhead,
-#testimonials .testimonial__title,
-#testimonials .testimonial::before,
-#testimonials .testimonials__dot.is-active,
-.engage__contact-label {
-  color: #72B5A8; /* Lifted from #5C9387 -- WCAG AA on --gl-navy */
-}
-
-/* Dot active state uses background, not color */
-#testimonials .testimonials__dot.is-active {
-  background-color: #72B5A8;
-  color: transparent; /* reset the color rule above -- dots have no text */
-}
-
-/* ============================================================
    #EXPERTISE -- Bento Grid Services
    Dark surface section for light/dark rhythm after #reach
    ============================================================ */
