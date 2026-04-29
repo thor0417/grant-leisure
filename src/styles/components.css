@@ -1173,12 +1173,12 @@
 
 #testimonials {
   background-color: var(--gl-navy);
-  /* Compressed -- testimonials are a narrative bridge, not a hero-weight section */
-  padding-block: clamp(3rem, 6vw, 5rem);
+  /* Elegant strip -- minimal vertical presence, quotes land and move on */
+  padding-block: clamp(2rem, 4vw, 3rem);
 }
 
 .testimonials__carousel {
-  max-width: 900px;
+  max-width: 760px;
   margin-inline: auto;
   padding-inline: var(--space-lg);
 }
@@ -1191,11 +1191,11 @@
 .testimonial {
   display: none;
   flex-direction: column;
-  gap: var(--space-sm);
+  gap: var(--space-xs);
   margin: 0;
   padding: 0;
   border-left: 3px solid var(--gl-green);
-  padding-left: var(--space-lg);
+  padding-left: var(--space-md);
 }
 
 .testimonial.is-active {
@@ -1205,12 +1205,13 @@
 .testimonial::before {
   content: '\201C';
   font-family: var(--font-header);
-  font-size: clamp(4rem, 6vw, 6rem);
+  /* Reduced from clamp(4rem,6vw,6rem) -- decorative, not focal */
+  font-size: clamp(2rem, 3vw, 2.75rem);
   line-height: 1;
   color: var(--gl-green);
   display: block;
   margin-block-end: 0;
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
 .testimonial__quote {
@@ -1231,7 +1232,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-xs);
-  margin-block-start: var(--space-sm);
+  margin-block-start: var(--space-xs);
 }
 
 .testimonial__name {
@@ -1256,7 +1257,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-md);
-  margin-block-start: var(--space-lg);
+  margin-block-start: var(--space-md);
 }
 
 .testimonials__dots {
