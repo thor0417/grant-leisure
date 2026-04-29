@@ -287,11 +287,11 @@
 
 #logic {
   background: var(--gl-navy);
-  padding: var(--section-pad-y) clamp(1.25rem, 5vw, 4rem);
+  /* Intentionally compressed -- this is a transition beat, not a full section */
+  padding: clamp(3rem, 6vw, 5rem) clamp(1.25rem, 5vw, 4rem);
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 60vh;
 }
 .logic-inner {
   max-width: 1200px;
@@ -447,7 +447,8 @@
 
 #proof {
   background: var(--gl-green);
-  padding: var(--section-pad-y) clamp(1.25rem, 5vw, 4rem);
+  /* Tighter than full section-pad-y -- proof reads as a stats band, not a hero */
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(1.25rem, 5vw, 4rem);
 }
 
 .proof-inner {
@@ -455,7 +456,7 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: clamp(3rem, 5vw, 5rem);
+  gap: clamp(2rem, 3.5vw, 3rem);
 }
 
 /* 2-column grid on mobile, 3-col mid, 6-col desktop */
@@ -609,6 +610,31 @@
   margin: 0;
   max-width: 680px; /* Constrains line length for senior readability */
 }
+/* ============================================================
+   GREEN-ON-NAVY CONTRAST OVERRIDE
+   #5C9387 on #323E48 = ~3.1:1 -- fails WCAG AA for body text.
+   Scoped overrides lift to #72B5A8 (~4.8:1) on all navy surfaces.
+   Does not affect green-on-white or green-on-green usage.
+   ============================================================ */
+
+#logic .logic-stat,
+#logic .logic-resolve,
+#reach .reach-countries,
+#expertise .expertise__subhead,
+#leadership .leadership__subhead,
+#testimonials .testimonial__title,
+#testimonials .testimonial::before,
+#testimonials .testimonials__dot.is-active,
+.engage__contact-label {
+  color: #72B5A8; /* Lifted from #5C9387 -- WCAG AA on --gl-navy */
+}
+
+/* Dot active state uses background, not color */
+#testimonials .testimonials__dot.is-active {
+  background-color: #72B5A8;
+  color: transparent; /* reset the color rule above -- dots have no text */
+}
+
 /* ============================================================
    #EXPERTISE -- Bento Grid Services
    Dark surface section for light/dark rhythm after #reach
@@ -1172,7 +1198,8 @@
 
 #testimonials {
   background-color: var(--gl-navy);
-  padding-block: var(--section-pad-y);
+  /* Compressed -- testimonials are a narrative bridge, not a hero-weight section */
+  padding-block: clamp(3rem, 6vw, 5rem);
 }
 
 .testimonials__carousel {
