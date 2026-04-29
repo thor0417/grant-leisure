@@ -305,7 +305,7 @@
   font-size: clamp(6rem, 16vw, 13rem);
   font-weight: 900;
   line-height: 0.9;
-  color: var(--gl-green);
+  color: var(--gl-green-vivid);
   letter-spacing: -0.04em;
   margin: 0;
   white-space: nowrap;
@@ -329,7 +329,7 @@
   font-size: var(--text-body-lg);
   font-weight: 500;
   line-height: 1.6;
-  color: var(--gl-green);
+  color: var(--gl-green-vivid);
   margin: 0;
   letter-spacing: 0.02em;
   text-transform: uppercase;
@@ -634,7 +634,7 @@
   font-size: var(--text-sm);
   font-weight: 700;
   letter-spacing: 0.2em;
-  color: var(--gl-green);
+  color: var(--gl-green-vivid);
   text-transform: uppercase;
   margin-block-end: var(--space-sm);
 }
@@ -687,18 +687,18 @@
               box-shadow var(--duration-fast) var(--ease-stellar);
 }
 .bento__card:hover {
-  border-color: var(--gl-green);
+  border-color: var(--gl-green-vivid);
   box-shadow: 0 0 30px rgba(92, 147, 135, 0.20);
 }
 
 /* Accent variant -- green left border signal */
 .bento__card--accent {
-  border-left: 4px solid var(--gl-green);
+  border-left: 4px solid var(--gl-green-vivid);
 }
 
 /* Feature card -- premium tier, full right column */
 .bento__card--feature {
-  background-color: var(--gl-green);
+  background-color: var(--gl-green-vivid);
   border-color: transparent;
   justify-content: space-between;
 }
@@ -713,7 +713,7 @@
   font-family: var(--font-body);
   font-size: var(--text-sm);
   font-weight: 700;
-  color: var(--gl-green);
+  color: var(--gl-green-vivid);
   letter-spacing: 0.1em;
 }
 
@@ -812,7 +812,7 @@
 
 .modal {
   background-color: var(--gl-navy);
-  border-top: 4px solid var(--gl-green);
+  border-top: 4px solid var(--gl-green-vivid);
   border-radius: 4px;
   padding: var(--space-lg);
   max-width: 680px;
@@ -860,7 +860,7 @@
   font-size: var(--text-sm);
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: var(--gl-green);
+  color: var(--gl-green-vivid);
   display: block;
   margin-block-end: var(--space-sm);
 }
@@ -1021,7 +1021,7 @@
   font-size: var(--text-sm);
   font-weight: 700;
   letter-spacing: 0.2em;
-  color: var(--gl-green);
+  color: var(--gl-green-vivid);
   text-transform: uppercase;
   margin-block-end: var(--space-sm);
 }
@@ -1099,7 +1099,7 @@
 
 .team-card__body {
   padding: var(--space-md) var(--space-lg);
-  border-top: 3px solid var(--gl-green);
+  border-top: 3px solid var(--gl-green-vivid);
   display: flex;
   flex-direction: column;
   gap: var(--space-xs);
@@ -1118,7 +1118,7 @@
   font-size: var(--text-sm);
   font-weight: 600;
   letter-spacing: 0.08em;
-  color: var(--gl-green);
+  color: var(--gl-green-vivid);
   text-transform: uppercase;
   line-height: 1.4;
   margin: 0;
@@ -1144,8 +1144,8 @@
 }
 
 .team-card__bio-btn:hover {
-  border-color: var(--gl-green);
-  color: var(--gl-green);
+  border-color: var(--gl-green-vivid);
+  color: var(--gl-green-vivid);
 }
 
 .team-card__bio-btn:focus-visible {
@@ -1166,9 +1166,9 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  border: 2px solid var(--gl-green);
+  border: 2px solid var(--gl-green-vivid);
   background: none;
-  color: var(--gl-green);
+  color: var(--gl-green-vivid);
   font-size: 1.25rem;
   cursor: pointer;
   display: flex;
@@ -1230,7 +1230,7 @@
   /* Reduced from clamp(4rem,6vw,6rem) -- decorative, not focal */
   font-size: clamp(2rem, 3vw, 2.75rem);
   line-height: 1;
-  color: var(--gl-green);
+  color: var(--gl-green-vivid);
   display: block;
   margin-block-end: 0;
   opacity: 0.6;
@@ -1269,7 +1269,7 @@
   font-size: var(--text-sm);
   font-weight: 600;
   letter-spacing: 0.08em;
-  color: var(--gl-green);
+  color: var(--gl-green-vivid);
   text-transform: uppercase;
 }
 
@@ -1308,7 +1308,7 @@
   font-size: var(--text-sm);
   font-weight: 600;
   letter-spacing: 0.08em;
-  color: var(--gl-green);
+  color: var(--gl-green-vivid);
   text-transform: uppercase;
 }
 

@@ -13,8 +13,7 @@
   --------------------------------------------------------------------------- */
 
   --gl-green:  #5C9387; /* Primary action -- key section backgrounds, signal elements */
-  --gl-green-rgb: 92, 147, 135;  /* RGB channels for rgba() glow effects */
-  --gl-navy-rgb:  50, 62, 72;    /* RGB channels for rgba() glow effects */
+  --gl-green-vivid: #5BAF7A; /* High-contrast green for text and accent elements on dark/light surfaces */
   --gl-blue:   #5871A5; /* Heritage anchor -- secondary headers, sub-navigation       */
   --gl-white:  #FFFFFF; /* Base -- primary background and high-contrast text           */
   --gl-navy:   #323E48; /* Command -- body copy and primary navigation links           */
