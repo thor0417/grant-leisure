@@ -23,11 +23,15 @@
   /* Transparent over hero video by default */
   background: transparent;
   transition: background var(--duration-default) var(--ease-stellar),
+              backdrop-filter var(--duration-default) var(--ease-stellar),
               box-shadow var(--duration-default) var(--ease-stellar);
 }
 
 .site-nav.is-scrolled {
-  background: var(--gl-navy);
+  /* Frosted glass -- matches projects.html ghost nav exactly */
+  background: rgba(50, 62, 72, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 2px 24px rgba(0, 0, 0, 0.18); /* Elevation cue -- not decorative */
 }
 
