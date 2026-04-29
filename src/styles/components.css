@@ -309,6 +309,7 @@
   letter-spacing: -0.04em;
   margin: 0;
   white-space: nowrap;
+  text-shadow: 0 0 12px rgba(92, 147, 135, 0.25);
 }
 .logic-text {
   display: flex;
@@ -506,6 +507,7 @@
   line-height: 1;
   color: var(--gl-white);
   letter-spacing: -0.03em;
+  text-shadow: 0 0 8px rgba(92, 147, 135, 0.30);
 }
 
 .proof-label {
@@ -516,7 +518,8 @@
   color: var(--gl-white);
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  opacity: 0.9;
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.20);
+  opacity: 0.95;
 }
 
 /* Scale summary bar -- 43 Countries | 5 Continents | 2,500+ Projects */
@@ -685,7 +688,7 @@
 }
 .bento__card:hover {
   border-color: var(--gl-green);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 0 30px rgba(92, 147, 135, 0.20);
 }
 
 /* Accent variant -- green left border signal */
