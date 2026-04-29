@@ -970,18 +970,24 @@
   transition: filter 0.3s ease;
 }
 
-/* Optical weight tuning -- per-logo scale nudges */
-.marquee__item img[alt="ZSL Zoological Society of London"] { transform: scale(0.45); }
-.marquee__item img[alt="Lego"] { transform: scale(0.75); }
-.marquee__item img[alt="Victoria and Albert Museum"] { transform: scale(0.75); }
-.marquee__item img[alt="Disney Parks"] { transform: scale(0.85); }
-.marquee__item img[alt="Caesars Entertainment"] { transform: scale(0.85); }
-.marquee__item img[alt="Ferrari World"] { transform: scale(1.5); }
-.marquee__item img[alt="English Heritage"] { transform: scale(1.1); }
-.marquee__item img[alt="Parques Reunidos"] { transform: scale(1.4); }
-.marquee__item img[alt="Ocean Park"] { transform: scale(1.15); }
-.marquee__item img[alt="Merlin Entertainments"] { transform: scale(1.2); }
-.marquee__item img[alt="NBC Universal"] { transform: scale(1.25); }
+/* Optical weight tuning -- Disney Parks at scale(0.85) is the reference standard */
+.marquee__item img[alt="Disney Parks"]                  { transform: scale(0.85); }
+.marquee__item img[alt="Caesars Entertainment"]         { transform: scale(0.80); }
+.marquee__item img[alt="NBC Universal"]                 { transform: scale(0.80); }
+.marquee__item img[alt="Universal"]                     { transform: scale(0.75); }
+.marquee__item img[alt="Lego"]                          { transform: scale(0.75); }
+.marquee__item img[alt="Victoria and Albert Museum"]    { transform: scale(0.90); }
+.marquee__item img[alt="Merlin Entertainments"]         { transform: scale(0.75); }
+.marquee__item img[alt="Village Roadshow"]              { transform: scale(0.70); }
+.marquee__item img[alt="Anheuser-Busch"]                { transform: scale(0.80); }
+.marquee__item img[alt="Bluewater"]                     { transform: scale(0.75); }
+.marquee__item img[alt="Paramount"]                     { transform: scale(0.80); }
+.marquee__item img[alt="San Diego Zoo"]                 { transform: scale(0.80); }
+.marquee__item img[alt="Ocean Park"]                    { transform: scale(0.85); }
+.marquee__item img[alt="Parques Reunidos"]              { transform: scale(0.85); }
+.marquee__item img[alt="English Heritage"]              { transform: scale(0.90); }
+.marquee__item img[alt="Ferrari World"]                 { transform: scale(0.75); }
+.marquee__item img[alt="ZSL Zoological Society of London"] { transform: scale(0.55); }
 
 .marquee__item img[alt="NBC Universal"] {
   opacity: 1;
