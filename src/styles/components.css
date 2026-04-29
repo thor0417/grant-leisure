@@ -971,30 +971,17 @@
 }
 
 /* Optical weight tuning -- per-logo scale nudges */
-.marquee__item img[alt="ZSL Zoological Society of London"] {
-  transform: scale(0.6);
-}
-.marquee__item img[alt="Lego"] {
-  transform: scale(0.75);
-}
-.marquee__item img[alt="Disney Parks"] {
-  transform: scale(0.85);
-}
-.marquee__item img[alt="Caesars Entertainment"] {
-  transform: scale(0.85);
-}
-.marquee__item img[alt="Ferrari World"] {
-  transform: scale(1.3);
-}
-.marquee__item img[alt="English Heritage"] {
-  transform: scale(1.35);
-}
-.marquee__item img[alt="Parques Reunidos"] {
-  transform: scale(1.2);
-}
-.marquee__item img[alt="Merlin Entertainments"] {
-  transform: scale(1.2);
-}
+.marquee__item img[alt="ZSL Zoological Society of London"] { transform: scale(0.45); }
+.marquee__item img[alt="Lego"] { transform: scale(0.75); }
+.marquee__item img[alt="Victoria and Albert Museum"] { transform: scale(0.75); }
+.marquee__item img[alt="Disney Parks"] { transform: scale(0.85); }
+.marquee__item img[alt="Caesars Entertainment"] { transform: scale(0.85); }
+.marquee__item img[alt="Ferrari World"] { transform: scale(1.5); }
+.marquee__item img[alt="English Heritage"] { transform: scale(1.1); }
+.marquee__item img[alt="Parques Reunidos"] { transform: scale(1.4); }
+.marquee__item img[alt="Ocean Park"] { transform: scale(1.15); }
+.marquee__item img[alt="Merlin Entertainments"] { transform: scale(1.2); }
+.marquee__item img[alt="NBC Universal"] { transform: scale(1.25); }
 
 .marquee__item img[alt="NBC Universal"] {
   opacity: 1;
