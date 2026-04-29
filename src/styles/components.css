@@ -982,10 +982,10 @@
 .marquee__item img[alt="Ferrari World"]                    { transform: scale(0.88); } /* was 0.75 -- too small */
 .marquee__item img[alt="Merlin Entertainments"]            { transform: scale(0.82); } /* was 0.75 -- slightly small */
 .marquee__item img[alt="NBC Universal"]                    { transform: scale(0.88); } /* was 0.80 -- too small */
-.marquee__item img[alt="San Diego Zoo"]                    { transform: scale(0.88); } /* was 0.80 -- too small */
+.marquee__item img[alt="San Diego Zoo"]                    { transform: scale(1.05); } /* was 0.88 -- too small */
 .marquee__item img[alt="Ocean Park"]                       { transform: scale(0.90); } /* was 0.85 -- too small */
 .marquee__item img[alt="Paramount"]                        { transform: scale(0.88); } /* was 0.80 -- too small */
-.marquee__item img[alt="Parques Reunidos"]                 { transform: scale(0.90); } /* was 0.85 -- too small */
+.marquee__item img[alt="Parques Reunidos"]                 { transform: scale(1.05); } /* was 0.90 -- too small */
 .marquee__item img[alt="Village Roadshow"]                 { transform: scale(0.85); } /* was 0.70 -- too small */
 .marquee__item img[alt="Universal"]                        { transform: scale(0.85); } /* was 0.75 -- too small */
 
