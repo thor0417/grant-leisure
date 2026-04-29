@@ -28,8 +28,6 @@ ol[role='list'] {
 }
 
 html {
-  scroll-behavior: smooth;
-
   /* Respect reduced-motion preference -- overridden below in @media query */
   scroll-behavior: smooth;
 }
@@ -151,9 +149,11 @@ li {
 /* --------------------------------------------------------------------------
    04. NAVIGATION
    Sticky top nav. z-index from tokens. Height locked to --nav-height.
+   Class names match index.html and main.js exactly.
    -------------------------------------------------------------------------- */
 
-.nav {
+/* .site-nav: the <header> wrapper */
+.site-nav {
   position: fixed;
   top: 0;
   left: 0;
@@ -164,43 +164,50 @@ li {
   align-items: center;
   padding-inline: var(--page-gutter);
 
-  /* Starts transparent over hero video -- JS adds .nav--scrolled class */
+  /* Starts transparent over hero video -- JS adds .is-scrolled class */
   background-color: transparent;
   transition: background-color var(--duration-default) var(--ease-stellar),
               box-shadow var(--duration-default) var(--ease-stellar);
 }
 
-/* Applied by main.js when page scrolls past hero */
-.nav--scrolled {
+/* Applied by main.js when page scrolls past 50px */
+.site-nav.is-scrolled {
   background-color: var(--gl-navy);
   box-shadow: 0 2px 24px rgb(0 0 0 / 0.18);
 }
 
-.nav__logo {
+/* .nav-inner: the <nav> element inside the header */
+.nav-inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo {
   flex-shrink: 0;
   margin-right: auto;
 }
 
-.nav__logo img {
+.nav-logo img {
   height: 40px; /* Fixed height -- width auto-scales with aspect ratio */
   width: auto;
 }
 
-.nav__links {
+.nav-links {
   display: flex;
   align-items: center;
   gap: clamp(1.5rem, 3vw, 3rem);
   list-style: none;
 }
 
-/* Hide nav links on mobile -- hamburger handled in components.css */
+/* Hide nav links on mobile -- hamburger toggle handled in components.css */
 @media (max-width: 767px) {
-  .nav__links {
+  .nav-links {
     display: none;
   }
 }
 
-.nav__link {
+.nav-link {
   color: var(--gl-white);
   text-decoration: none;
   font-family: var(--font-body);
@@ -219,12 +226,12 @@ li {
   transition: color var(--duration-fast) var(--ease-stellar);
 }
 
-.nav__link:hover {
+.nav-link:hover {
   color: var(--gl-green);
 }
 
 /* CTA button in nav */
-.nav__cta {
+.nav-cta {
   min-height: 48px;
   padding: 0 1.5rem;
   background-color: var(--gl-green);
@@ -242,7 +249,7 @@ li {
   transition: background-color var(--duration-fast) var(--ease-stellar);
 }
 
-.nav__cta:hover {
+.nav-cta:hover {
   background-color: var(--gl-blue);
 }
 
