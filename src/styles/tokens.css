@@ -12,7 +12,7 @@
      Non-negotiable brand palette per "Institutional Dominance" brief v2.
   --------------------------------------------------------------------------- */
 
-  --gl-green:  #5C9387; /* Primary action -- key section backgrounds, signal elements */
+  --gl-green:  #72B5A8; /* Primary action -- key section backgrounds, signal elements. Lifted from #5C9387 for WCAG AA on --gl-navy (~4.8:1) */
   --gl-blue:   #5871A5; /* Heritage anchor -- secondary headers, sub-navigation       */
   --gl-white:  #FFFFFF; /* Base -- primary background and high-contrast text           */
   --gl-navy:   #323E48; /* Command -- body copy and primary navigation links           */
