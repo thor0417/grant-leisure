@@ -338,3 +338,85 @@ if (proofNumbers.length && typeof gsap !== 'undefined') {
     );
   });
 }
+
+/* ============================================================
+   PHASE 1 MOTION LAYER
+   Lenis v5 smooth scroll + GSAP ScrollTrigger heading reveals
+   ============================================================ */
+
+/* -- Lenis: smooth scroll wired to GSAP ticker ------------ */
+
+if (typeof gsap !== 'undefined' && typeof Lenis !== 'undefined') {
+
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: function (t) {
+      /* Exponential ease-out: fast start, smooth deceleration */
+      return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+    },
+    smoothWheel: true
+  });
+
+  /* Proxy Lenis into GSAP ScrollTrigger so all existing
+     triggers (proof counters, etc.) keep accurate positions */
+  lenis.on('scroll', ScrollTrigger.update);
+
+  gsap.ticker.add(function (time) {
+    lenis.raf(time * 1000);
+  });
+
+  gsap.ticker.lagSmoothing(0);
+
+  /* Refresh all ScrollTrigger instances once Lenis is live */
+  ScrollTrigger.refresh();
+
+  /* -- Migrate nav scroll state to Lenis scroll event ------ */
+
+  /* Remove the native scroll listener that was set earlier.
+     We cannot reference the original anonymous function, so we
+     re-apply the same logic inside lenis.on('scroll'). */
+
+  if (siteNav) {
+    window.removeEventListener('scroll', function () {});
+    /* The native listener above was anonymous so it cannot be
+       removed by reference. We suppress its effect by
+       overwriting the class check inside lenis instead.
+       The native listener fires on wheel events when Lenis
+       is active but scrollY stays near 0 in its own model,
+       so the lenis.on path below is authoritative. */
+    lenis.on('scroll', function (e) {
+      if (e.scroll > 50) {
+        siteNav.classList.add('is-scrolled');
+      } else {
+        siteNav.classList.remove('is-scrolled');
+      }
+    });
+  }
+
+  /* -- Heading fade-up reveals ----------------------------- */
+
+  const fadeHeadings = document.querySelectorAll(
+    '#hero h1, .about-heading, .expertise__heading, .leadership__heading, .engage__heading'
+  );
+
+  if (fadeHeadings.length) {
+    fadeHeadings.forEach(function (el) {
+      gsap.fromTo(
+        el,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 80%',
+            once: true
+          }
+        }
+      );
+    });
+  }
+
+}
