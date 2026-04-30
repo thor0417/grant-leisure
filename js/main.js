@@ -490,3 +490,20 @@ if (aboutRevealEls.length && typeof gsap !== 'undefined') {
     });
   });
 }
+/* Content reveal -- staggered element wipe */
+const revealElements = document.querySelectorAll('.reveal-content');
+if (revealElements.length && typeof gsap !== 'undefined') {
+  gsap.to(revealElements, {
+    clipPath: 'inset(0% 0 0 0)',
+    y: 0,
+    ease: 'power2.out',
+    stagger: 0.15,
+    scrollTrigger: {
+      trigger: '#expertise',
+      start: 'top 90%',
+      end: 'top 65%',
+      scrub: 1,
+      toggleActions: 'play reverse play reverse'
+    }
+  });
+}
