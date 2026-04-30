@@ -472,3 +472,19 @@ if (typeof gsap !== 'undefined' && typeof Lenis !== 'undefined') {
   }
 
 }
+/* Section wipe reveal -- clip-path scrub */
+const revealSections = document.querySelectorAll('.reveal-wipe');
+if (revealSections.length && typeof gsap !== 'undefined') {
+  revealSections.forEach((section) => {
+    gsap.to(section, {
+      clipPath: 'inset(0% 0 0 0)',
+      ease: 'none',
+      scrollTrigger: {
+        trigger: section,
+        start: 'top bottom',
+        end: 'top top',
+        scrub: true,
+      }
+    });
+  });
+}

@@ -1513,3 +1513,11 @@
   margin: 0;
   letter-spacing: 0.05em;
 }
+
+/* Clip-path wipe -- incoming section reveal */
+.reveal-wipe {
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  clip-path: inset(100% 0 0 0);
+}
