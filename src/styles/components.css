@@ -1505,25 +1505,3 @@
   margin: 0;
   letter-spacing: 0.05em;
 }
-
-
-/* =============================================================
-   STICKY STACK SECTION WRAPPERS
-   Each wrapper sticks to top: 0 and stacks via z-index so
-   incoming sections slide over outgoing ones like cards.
-   overflow: hidden clips the section to the wrapper boundary.
-   The section elements inside are untouched.
-   ============================================================= */
-
-.sticky-layer {
-  position: sticky;
-  top: 0;
-  overflow: hidden;
-  /* min-height ensures the wrapper holds its scroll real-estate */
-  min-height: 100vh;
-}
-
-.sticky-layer--logic { z-index: 10; }
-.sticky-layer--about  { z-index: 20; }
-.sticky-layer--proof  { z-index: 30; }
-.sticky-layer--reach  { z-index: 40; }
