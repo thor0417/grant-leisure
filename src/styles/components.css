@@ -1505,3 +1505,77 @@
   margin: 0;
   letter-spacing: 0.05em;
 }
+
+/* =============================================================
+   SECTION TRANSITION BLEEDS
+   Pseudo-element gradients at the bottom of each colour-change
+   section. Creates a colour-melt effect at boundaries without
+   JS, opacity changes, or layout disruption.
+   z-index: 1 lifts the overlay above section content.
+   pointer-events: none ensures it never blocks interaction.
+   ============================================================= */
+
+/* #logic (navy) melting into #about (white) */
+#logic {
+  position: relative;
+}
+#logic::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, var(--gl-white));
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* #about (white) melting into #proof (green #5C9387) */
+#about {
+  position: relative;
+}
+#about::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  /* Hard-coded to match #proof's hard-coded background */
+  background: linear-gradient(to bottom, transparent, #5C9387);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* #proof (green) melting into #reach (navy) */
+#proof {
+  position: relative;
+}
+#proof::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, var(--gl-navy));
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* #testimonials (navy) melting into #engage (white) */
+#testimonials {
+  position: relative;
+}
+#testimonials::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, var(--gl-white));
+  pointer-events: none;
+  z-index: 1;
+}

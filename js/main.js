@@ -387,62 +387,6 @@ ScrollTrigger.matchMedia({
   }
 });
 
-/* -- Section transition blends (desktop only) -------------- */
-/*    Dissolve-style opacity fades at colour-change boundaries.
-      Outgoing section fades out over its final scroll range.
-      Incoming section fades in over its opening scroll range.
-      No position changes -- layout is never disturbed.         */
-
-ScrollTrigger.matchMedia({
-  '(min-width: 1024px)': function () {
-
-    if (typeof gsap === 'undefined') { return; }
-
-    /* Pairs: [outgoing section id, incoming section id] */
-    const blendPairs = [
-      ['#logic',        '#about'],
-      ['#about',        '#proof'],
-      ['#proof',        '#reach'],
-      ['#testimonials', '#engage']
-    ];
-
-    blendPairs.forEach(function (pair) {
-      const outEl = document.querySelector(pair[0]);
-      const inEl  = document.querySelector(pair[1]);
-
-      if (!outEl || !inEl) { return; }
-
-      /* Outgoing: fade to 0 as its bottom approaches the viewport top */
-      gsap.to(outEl, {
-        opacity: 0,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: outEl,
-          /* Start fade when 80% of the section has scrolled past */
-          start: 'bottom 30%',
-          end:   'bottom top',
-          scrub: true
-        }
-      });
-
-      /* Incoming: fade from 0 to 1 as it enters the viewport */
-      gsap.fromTo(inEl,
-        { opacity: 0 },
-        {
-          opacity: 1,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: inEl,
-            start: 'top 90%',
-            end:   'top 40%',
-            scrub: true
-          }
-        }
-      );
-    });
-  }
-});
-
 /* ============================================================
    PHASE 1 MOTION LAYER
    Lenis v5 smooth scroll + GSAP ScrollTrigger heading reveals
