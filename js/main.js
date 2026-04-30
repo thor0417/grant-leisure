@@ -215,22 +215,23 @@ if (testimonialItems.length && testPrev && testNext) {
   function goToTestimonial(index) {
     testimonialItems[testIndex].classList.remove('is-active');
     dotsContainer.children[testIndex].classList.remove('is-active');
-    testIndex = index;
+    /* Modulo wrap -- index always stays within bounds */
+    testIndex = (index + testimonialItems.length) % testimonialItems.length;
     testimonialItems[testIndex].classList.add('is-active');
     dotsContainer.children[testIndex].classList.add('is-active');
-    testPrev.disabled = testIndex === 0;
-    testNext.disabled = testIndex === testimonialItems.length - 1;
+    /* Arrows always enabled -- no dead ends */
+    testPrev.disabled = false;
+    testNext.disabled = false;
   }
 
   testimonialItems[0].classList.add('is-active');
-  testPrev.disabled = true;
 
   testPrev.addEventListener('click', function () {
-    if (testIndex > 0) goToTestimonial(testIndex - 1);
+    goToTestimonial(testIndex - 1);
   });
 
   testNext.addEventListener('click', function () {
-    if (testIndex < testimonialItems.length - 1) goToTestimonial(testIndex + 1);
+    goToTestimonial(testIndex + 1);
   });
 }
 
