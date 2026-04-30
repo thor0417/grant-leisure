@@ -1521,3 +1521,9 @@
   transform: translateY(40px);
   will-change: opacity, transform;
 }
+/* Content reveal -- initial hidden state for GSAP tween */
+.reveal-content {
+  clip-path: inset(100% 0 0 0);
+  transform: translateY(40px);
+  will-change: clip-path, transform;
+}
