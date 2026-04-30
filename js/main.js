@@ -339,6 +339,30 @@ if (proofNumbers.length && typeof gsap !== 'undefined') {
   });
 }
 
+/* -- Hero video: parallax on scroll (desktop only) -------- */
+
+ScrollTrigger.matchMedia({
+  '(min-width: 1024px)': function () {
+    const heroVideo = document.querySelector('.hero-video');
+
+    if (heroVideo && typeof gsap !== 'undefined') {
+      heroVideo.style.willChange = 'transform';
+
+      gsap.to(heroVideo, {
+        /* 30vh = 30% of viewport height -- video is full-bleed */
+        y: '30vh',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true
+        }
+      });
+    }
+  }
+});
+
 /* -- Map image: parallax on scroll (desktop only) --------- */
 
 ScrollTrigger.matchMedia({
@@ -346,14 +370,14 @@ ScrollTrigger.matchMedia({
     const reachMap = document.querySelector('.reach-map');
 
     if (reachMap && typeof gsap !== 'undefined') {
-      /* Transform on the figure wrapper -- cleaner compositing than
-         targeting the lazy-loaded img directly */
       reachMap.style.willChange = 'transform';
 
       gsap.to(reachMap, {
-        /* 8vh ≈ 20% of the map's 600px natural height at standard viewport.
-           Adjust this value if the breathing feels too strong or too weak. */
-        y: '8vh',
+        /* -8vh moves the map upward as you scroll down through #reach.
+           Negative value = map travels in the opposite direction to scroll,
+           creating the sense the map is emerging/breathing upward.
+           Adjust magnitude here if too strong or too subtle. */
+        y: '-8vh',
         ease: 'none',
         scrollTrigger: {
           trigger: '#reach',
