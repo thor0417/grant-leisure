@@ -472,18 +472,19 @@ if (typeof gsap !== 'undefined' && typeof Lenis !== 'undefined') {
   }
 
 }
-/* Content reveal -- element level scrub */
-const revealElements = document.querySelectorAll('.reveal-content');
-if (revealElements.length && typeof gsap !== 'undefined') {
-  revealElements.forEach((el) => {
+
+/* About section content reveal -- opacity and rise, scrub 1 */
+const aboutRevealEls = document.querySelectorAll('.about-reveal');
+if (aboutRevealEls.length && typeof gsap !== 'undefined') {
+  aboutRevealEls.forEach(function (el) {
     gsap.to(el, {
-      clipPath: 'inset(0% 0 0 0)',
+      opacity: 1,
       y: 0,
       ease: 'power2.out',
       scrollTrigger: {
         trigger: el,
         start: 'top 90%',
-        end: 'top 65%',
+        end: 'top 55%',
         scrub: 1
       }
     });
