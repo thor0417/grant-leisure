@@ -1514,10 +1514,9 @@
   letter-spacing: 0.05em;
 }
 
-/* Clip-path wipe -- incoming section reveal */
-.reveal-wipe {
-  position: relative;
-  z-index: 2;
-  overflow: hidden;
+/* Content reveal -- element level only, no section masking */
+.reveal-content {
   clip-path: inset(100% 0 0 0);
+  transform: translateY(40px);
+  will-change: clip-path, transform;
 }
