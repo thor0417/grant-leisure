@@ -1506,74 +1506,24 @@
   letter-spacing: 0.05em;
 }
 
+
 /* =============================================================
-   SECTION TRANSITION BLEEDS
-   ::before on incoming sections only. Gradient runs from the
-   outgoing section's colour at top, fading to transparent.
-   Bleeds previous colour into the top of the new section.
-   No content overlap. pointer-events: none throughout.
+   STICKY STACK SECTION WRAPPERS
+   Each wrapper sticks to top: 0 and stacks via z-index so
+   incoming sections slide over outgoing ones like cards.
+   overflow: hidden clips the section to the wrapper boundary.
+   The section elements inside are untouched.
    ============================================================= */
 
-/* #about (incoming from #logic navy) */
-#about {
-  position: relative;
-}
-#about::before {
-  content: '';
-  position: absolute;
+.sticky-layer {
+  position: sticky;
   top: 0;
-  left: 0;
-  width: 100%;
-  height: 80px;
-  background: linear-gradient(to bottom, var(--gl-navy), transparent);
-  pointer-events: none;
-  z-index: 1;
+  overflow: hidden;
+  /* min-height ensures the wrapper holds its scroll real-estate */
+  min-height: 100vh;
 }
 
-/* #proof (incoming from #about white) */
-#proof {
-  position: relative;
-}
-#proof::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 80px;
-  background: linear-gradient(to bottom, var(--gl-white), transparent);
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* #reach (incoming from #proof green -- hard-coded to match #proof) */
-#reach {
-  position: relative;
-}
-#reach::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 80px;
-  background: linear-gradient(to bottom, #5C9387, transparent);
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* #engage (incoming from #testimonials navy) */
-#engage {
-  position: relative;
-}
-#engage::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 80px;
-  background: linear-gradient(to bottom, var(--gl-navy), transparent);
-  pointer-events: none;
-  z-index: 1;
-}
+.sticky-layer--logic { z-index: 10; }
+.sticky-layer--about  { z-index: 20; }
+.sticky-layer--proof  { z-index: 30; }
+.sticky-layer--reach  { z-index: 40; }
