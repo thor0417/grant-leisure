@@ -490,20 +490,24 @@ if (aboutRevealEls.length && typeof gsap !== 'undefined') {
     });
   });
 }
-/* Content reveal -- staggered element wipe */
+/* Content reveal -- per-element trigger, staggered delay, bidirectional */
 const revealElements = document.querySelectorAll('.reveal-content');
 if (revealElements.length && typeof gsap !== 'undefined') {
-  gsap.to(revealElements, {
-    clipPath: 'inset(0% 0 0 0)',
-    y: 0,
-    ease: 'power2.out',
-    stagger: 0.15,
-    scrollTrigger: {
-      trigger: '#expertise',
-      start: 'top 90%',
-      end: 'top 65%',
-      scrub: 1,
-      toggleActions: 'play reverse play reverse'
-    }
+  revealElements.forEach(function (el, i) {
+    gsap.to(el, {
+      clipPath: 'inset(0% 0 0 0)',
+      y: 0,
+      duration: 0.6,
+      ease: 'power2.out',
+      /* Stagger via delay -- each element offsets by 0.1s from the previous */
+      delay: i * 0.1,
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 90%',
+        end: 'top 65%',
+        /* toggleActions handles reverse on scroll back -- scrub removed */
+        toggleActions: 'play reverse play reverse'
+      }
+    });
   });
 }
