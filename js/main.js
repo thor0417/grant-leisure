@@ -339,6 +339,32 @@ if (proofNumbers.length && typeof gsap !== 'undefined') {
   });
 }
 
+/* -- Hero video: parallax on scroll (desktop only) -------- */
+
+ScrollTrigger.matchMedia({
+  '(min-width: 1024px)': function () {
+    const heroVideo = document.querySelector('.hero-video');
+
+    if (heroVideo && typeof gsap !== 'undefined') {
+      /* GPU compositing hint -- isolates transform from paint layer */
+      heroVideo.style.willChange = 'transform';
+
+      gsap.to(heroVideo, {
+        /* 30vh = 30% of viewport height, which equals the full-bleed
+           video height. Moves video down as user scrolls out of hero. */
+        y: '30vh',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true
+        }
+      });
+    }
+  }
+});
+
 /* ============================================================
    PHASE 1 MOTION LAYER
    Lenis v5 smooth scroll + GSAP ScrollTrigger heading reveals
