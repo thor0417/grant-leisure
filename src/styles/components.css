@@ -1,553 +1,1523 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Grant Leisure International -- Global consultancy for leisure attractions, theme parks, resorts, and visitor destinations." />
-  <title>Grant Leisure International</title>
+/* =============================================================
+   components.css
+   Scope: #hero, #logic, #about, #proof, #reach
+   Session 2 -- Grant Leisure "Visible Dominance" v2
+   All color values via CSS custom properties from tokens.css.
+   Mobile-first. min-width breakpoints scale up.
+   No magic numbers without explanatory comments.
+   ============================================================= */
 
-  <!-- Design system: tokens first, then typography, then global, then components -->
-  <link rel="stylesheet" href="src/styles/tokens.css" />
-  <link rel="stylesheet" href="src/styles/typography.css" />
-  <link rel="stylesheet" href="src/styles/global.css" />
-  <link rel="stylesheet" href="src/styles/components.css" />
-</head>
 
-<body>
+/* =============================================================
+   NAV
+   Sticky. Glass effect on scroll (class .is-scrolled added by JS).
+   48px min height for senior touch targets.
+   ============================================================= */
 
-  <!-- NAV -->
-  <header class="site-nav" role="banner">
-    <nav class="nav-inner" aria-label="Primary navigation">
-      <a href="#hero" class="nav-logo" aria-label="Grant Leisure International -- home">
-        <img
-          src="public/assets/images/gli-logo.png"
-          alt="Grant Leisure International logo"
-          width="120"
-          height="41"
-        />
-      </a>
-      <button class="nav-toggle" aria-controls="nav-links" aria-expanded="false" aria-label="Open menu">
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="nav-links" id="nav-links" role="list">
-       <li><a href="#about" class="nav-link">ABOUT</a></li>
-       <li><a href="#expertise" class="nav-link">SERVICES</a></li>
-       <li><a href="#leadership" class="nav-link">TEAM</a></li>
-       <li><a href="projects.html" class="nav-link">PROJECTS</a></li>
-       <li><a href="#engage" class="nav-link nav-cta">CONTACT</a></li>
-	</ul>
-    </nav>
-  </header>
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav);
+  /* Transparent over hero video by default */
+  background: transparent;
+  transition: background var(--duration-default) var(--ease-stellar),
+              backdrop-filter var(--duration-default) var(--ease-stellar),
+              box-shadow var(--duration-default) var(--ease-stellar);
+}
 
-  <main id="main-content">
+.site-nav.is-scrolled {
+  /* Frosted glass -- matches projects.html ghost nav exactly */
+  background: rgba(50, 62, 72, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.18); /* Elevation cue -- not decorative */
+}
 
-    <!-- 01 HERO -->
-    <section id="hero" aria-label="Hero">
-      <div class="hero-media" aria-hidden="true">
-        <video
-          class="hero-video"
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="none"
-          aria-hidden="true"
-        >
-          <source
-            src="https://res.cloudinary.com/dyceiucla/video/upload/f_auto,q_auto/v1776321502/hero.mp4_r5srrb.mp4"
-            type="video/mp4"
-          />
-        </video>
-        <div class="hero-overlay" aria-hidden="true"></div>
-      </div>
-      <div class="hero-content">
-        <h1 class="hero-headline">PROFIT FROM<br />OUR EXPERIENCE.</h1>
-        <a href="#logic" class="hero-scroll-cue" aria-label="Scroll to next section">
-          <span class="scroll-cue-line" aria-hidden="true"></span>
-        </a>
-      </div>
-    </section>
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* 20px minimum side breathing room on small screens */
+  padding: 0 clamp(1.25rem, 4vw, 3rem);
+  /* 72px nav height -- comfortably above 48px minimum touch target */
+  height: 72px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
 
-    <!-- 02 LOGIC -->
-    <section id="logic" aria-label="Why planning matters">
-      <div class="logic-inner">
-        <p class="logic-stat">90%</p>
-        <div class="logic-text">
-          <p class="logic-statement">Of operational failures are a result of improper planning.</p>
-          <p class="logic-resolve">We eliminate the guesswork.</p>
-        </div>
-      </div>
-    </section>
+.nav-logo img {
+  display: block;
+}
 
-    <!-- 03 ABOUT -->
-    <section id="about" aria-labelledby="about-heading">
-      <div class="about-inner">
-        <div class="about-text about-reveal">
-          <h2 id="about-heading" class="about-heading">
-            WE'VE BEEN MAKING PEOPLE SMILE SINCE 1982
-          </h2>
-          <p class="about-origin">
-            In 1980, Andy Grant awoke with a vision that would redefine the industry:
-            the "Tourist" as the primary consideration. We transitioned from conceptual
-            dreaming to an experiential approach that ensures every visitor's need is met.
-          </p>
-          <p class="about-narrative">
-            Grant Leisure is a global consortium of entertainment and attractions
-            executives with decades of experience as developers and operators.
-            When it comes to running visitor attractions, our team has seen it all.
-          </p>
-        </div>
-        <figure class="about-figure about-reveal">
-          <img
-            src="public/assets/images/tourist.webp"
-            alt="Andy Grant's original Tourist illustration -- the founding concept of Grant Leisure"
-            width="560"
-            height="640"
-            loading="lazy"
-          />
-        </figure>
-      </div>
-    </section>
+/* Mobile hamburger -- hidden on desktop */
+.nav-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 48px;
+  height: 48px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 8px;
+}
 
-    <!-- 04 PROOF -->
-    <section id="proof" aria-label="Track record by the numbers">
-      <div class="proof-inner">
-        <ul class="proof-grid" role="list">
+.nav-toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--gl-white);
+  border-radius: 2px;
+  transition: transform var(--duration-fast) var(--ease-stellar),
+              opacity var(--duration-fast) var(--ease-stellar);
+}
 
-          <li class="proof-item">
-            <img src="public/assets/images/icons/icon-parks.png" alt="" width="64" height="64" loading="lazy" aria-hidden="true" />
-            <span class="proof-number" data-target="65" data-suffix="+">65+</span>
-            <span class="proof-label">Theme Parks</span>
-          </li>
+/* Hamburger open state -- JS adds .is-open to .nav-toggle */
+.nav-toggle.is-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nav-toggle.is-open span:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle.is-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
 
-          <li class="proof-item">
-            <img src="public/assets/images/icons/icon-homes.png" alt="" width="64" height="64" loading="lazy" aria-hidden="true" />
-            <span class="proof-number" data-target="60" data-suffix="+">60+</span>
-            <span class="proof-label">Stately Homes</span>
-          </li>
+/* Nav links: stacked on mobile, hidden until toggle fired */
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 72px; /* aligns flush under nav bar */
+  left: 0;
+  right: 0;
+  background: var(--gl-navy);
+  list-style: none;
+  margin: 0;
+  padding: 1rem 0 2rem;
+  transform: translateY(-110%);
+  transition: transform var(--duration-default) var(--ease-stellar);
+  z-index: var(--z-overlay);
+}
 
-          <li class="proof-item">
-            <img src="public/assets/images/icons/icon-zoo.png" alt="" width="64" height="64" loading="lazy" aria-hidden="true" />
-            <span class="proof-number" data-target="27" data-suffix="">27</span>
-            <span class="proof-label">Zoological Institutions</span>
-          </li>
+/* JS adds .is-open to ul.nav-links when toggle fires */
+.nav-links.is-open {
+  transform: translateY(0);
+}
 
-          <li class="proof-item">
-            <img src="public/assets/images/icons/icon-museums.png" alt="" width="64" height="64" loading="lazy" aria-hidden="true" />
-            <span class="proof-number" data-target="35" data-suffix="">35</span>
-            <span class="proof-label">Museums</span>
-          </li>
+.nav-links li {
+  display: flex;
+}
 
-          <li class="proof-item">
-            <img src="public/assets/images/icons/icon-world-heritage.png" alt="" width="64" height="64" loading="lazy" aria-hidden="true" />
-            <span class="proof-number" data-target="5" data-suffix="">5</span>
-            <span class="proof-label">World Heritage Sites</span>
-          </li>
+.nav-link {
+  display: flex;
+  align-items: center;
+  /* 56px tall -- above 48px minimum */
+  min-height: 56px;
+  padding: 0 clamp(1.25rem, 4vw, 3rem);
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--gl-white);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-stellar);
+}
 
-          <li class="proof-item">
-            <img src="public/assets/images/icons/icon-fair.png" alt="" width="64" height="64" loading="lazy" aria-hidden="true" />
-            <span class="proof-number" data-target="2" data-suffix="">2</span>
-            <span class="proof-label">World Expositions</span>
-          </li>
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: var(--gl-green);
+}
 
-        </ul>
+/* CTA pill -- CONTACT */
+.nav-link.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem clamp(1.25rem, 4vw, 3rem);
+  padding: 0 2rem;
+  min-height: 48px;
+  width: auto;
+  background: var(--gl-green);
+  color: var(--gl-white);
+  border-radius: 4px;
+  transition: background var(--duration-fast) var(--ease-stellar);
+}
 
-        <div class="proof-scale">
-          <span class="proof-scale-item">43 Countries</span>
-          <span class="proof-scale-divider" aria-hidden="true">|</span>
-          <span class="proof-scale-item">5 Continents</span>
-          <span class="proof-scale-divider" aria-hidden="true">|</span>
-          <span class="proof-scale-item">2,500+ Projects</span>
-        </div>
-      </div>
-    </section>
+.nav-link.nav-cta:hover,
+.nav-link.nav-cta:focus-visible {
+  background: var(--gl-blue);
+  color: var(--gl-white);
+}
 
-    <!-- 05 REACH -->
-    <section id="reach" aria-label="Global reach">
-      <div class="reach-inner">
-        <figure class="reach-map">
-          <img
-            src="public/assets/images/maps/map.png"
-            alt="World map showing Grant Leisure project locations across 43 countries and 5 continents"
-            width="1200"
-            height="600"
-            loading="lazy"
-          />
-        </figure>
-        <div class="reach-copy">
-          <p class="reach-countries">
-            Canada. USA. UK. Europe. Africa. UAE.<br />
-            Malaysia. China. Japan. Australia.
-          </p>
-          <p class="reach-statement">
-            Our influence is etched into the world's most iconic skylines.
-          </p>
-        </div>
-      </div>
-    </section>
+@media (min-width: 768px) {
+  .nav-toggle { display: none; }
 
-    <!-- 06 EXPERTISE -->
-    <section id="expertise" aria-labelledby="expertise-heading">
-      <div class="expertise__inner">
-        <h2 id="expertise-heading" class="expertise__heading">MAXIMIZE YOUR RETURN.</h2>
-        <p class="expertise__subhead">SERVICES</p>
-        <div class="bento" role="list">
+  .nav-links {
+    flex-direction: row;
+    align-items: center;
+    position: static;
+    background: transparent;
+    padding: 0;
+    gap: clamp(1rem, 2vw, 2.5rem);
+    transform: none;
+    transition: none;
+  }
 
-          <article class="bento__card bento__card--accent" role="listitem">
-            <span class="bento__number" aria-hidden="true">01</span>
-            <h3 class="bento__title">Market Analysis</h3>
-            <p class="bento__body">Determining demand through surgical evaluation of occupancy, absorption, and revenue trends.</p>
-            <button class="bento__toggle" data-modal="modal-01">Read More</button>
-          </article>
+  .nav-links li { display: block; }
 
-          <article class="bento__card" role="listitem">
-            <span class="bento__number" aria-hidden="true">02</span>
-            <h3 class="bento__title">Development Planning</h3>
-            <p class="bento__body">Balancing economic planning with physical design to optimize amenities and facility sizing.</p>
-            <button class="bento__toggle" data-modal="modal-02">Read More</button>
-          </article>
+  .nav-link {
+    min-height: 48px;
+    padding: 0;
+    width: auto;
+  }
 
-          <article class="bento__card" role="listitem">
-            <span class="bento__number" aria-hidden="true">03</span>
-            <h3 class="bento__title">Financial Feasibility</h3>
-            <p class="bento__body">Investor-grade modeling for cash flow projections and sensitivity testing.</p>
-            <button class="bento__toggle" data-modal="modal-03">Read More</button>
-          </article>
+  .nav-link.nav-cta {
+    margin: 0;
+    padding: 0 1.5rem;
+  }
+}
 
-          <article class="bento__card bento__card--accent" role="listitem">
-            <span class="bento__number" aria-hidden="true">04</span>
-            <h3 class="bento__title">Funding Assistance</h3>
-            <p class="bento__body">Securing capital through a sovereign network of global investors and financiers.</p>
-            <button class="bento__toggle" data-modal="modal-04">Read More</button>
-          </article>
 
-          <article class="bento__card" role="listitem">
-            <span class="bento__number" aria-hidden="true">05</span>
-            <h3 class="bento__title">Operational Planning</h3>
-            <p class="bento__body">Bespoke optimization of visitor circulation, marketing, and staff training.</p>
-            <button class="bento__toggle" data-modal="modal-05">Read More</button>
-          </article>
+/* =============================================================
+   01 // HERO
+   Full-bleed video. h1 centered over overlay. Scroll cue below.
+   ============================================================= */
 
-          <article class="bento__card" role="listitem">
-            <span class="bento__number" aria-hidden="true">06</span>
-            <h3 class="bento__title">Turnkey Management</h3>
-            <p class="bento__body">Direct executive oversight from pre-opening through long-term stabilization.</p>
-            <button class="bento__toggle" data-modal="modal-06">Read More</button>
-          </article>
+#hero {
+  position: relative;
+  width: 100%;
+  /* 100svh -- safe area aware on iOS; fallback 100vh */
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-        </div>
-      </div>
-    </section>
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-base);
+}
 
-    <!-- SERVICE MODALS -->
-    <div class="modal-overlay" id="modal-overlay" aria-hidden="true">
-      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-        <button class="modal__close" id="modal-close" aria-label="Close">&#x2715;</button>
-        <span class="modal__number" id="modal-number"></span>
-        <h3 class="modal__title" id="modal-title"></h3>
-        <div class="modal__body" id="modal-body"></div>
-      </div>
-    </div>
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Slight desaturation so text remains legible without over-darkening */
+  filter: saturate(1.15) brightness(0.72);
+}
 
-    <!-- 07 VALIDATION -->
-    <section id="validation" aria-label="Trusted partners">
-      <div class="validation__inner">
-        <p class="validation__trust-line">
-          TRUSTED BY THE WORLD'S MOST ACCLAIMED BRANDS AND ATTRACTIONS.
-        </p>
-      </div>
-      <div class="marquee" id="marquee">
-        <ul class="marquee__track" id="marquee-track" role="list">
-          <li class="marquee__item"><img src="public/assets/images/logos/universal.png" alt="Universal" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/va.png" alt="Victoria and Albert Museum" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/zsl.png" alt="ZSL Zoological Society of London" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/anheuser-busch.png" alt="Anheuser-Busch" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/bluewater.png" alt="Bluewater" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/cesars-entertainment.png" alt="Caesars Entertainment" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/disney-parks.png" alt="Disney Parks" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/english-heritage.png" alt="English Heritage" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/ferrari-world.png" alt="Ferrari World" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/lego.png" alt="Lego" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/merlin-entertainment.png" alt="Merlin Entertainments" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/nbc-universal.png" alt="NBC Universal" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/ocean-park.png" alt="Ocean Park" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/paramount.png" alt="Paramount" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/parques-reunidos.png" alt="Parques Reunidos" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/sd-zoo.png" alt="San Diego Zoo" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/village-roadshow.png" alt="Village Roadshow" width="140" height="60" loading="lazy"></li>
-        </ul>
-      </div>
-    </section>
+/* Dark gradient overlay -- top is lighter (nav), bottom is darker (text anchor) */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(50, 62, 72, 0.35) 0%,   /* --gl-navy at 35% -- nav zone */
+    rgba(50, 62, 72, 0.15) 40%,  /* mid -- let video breathe */
+    rgba(26, 26, 26, 0.60) 100%  /* deep anchor at base for headline */
+  );
+}
 
-<section id="leadership" aria-labelledby="leadership-heading">
-  <div class="leadership__inner">
-    <p class="leadership__eyebrow">The Consortium</p>
-    <h2 id="leadership-heading" class="leadership__heading">MEET THE TEAM.</h2>
-    <div class="team-carousel" id="team-carousel">
-      <div class="team-carousel__track" id="team-carousel-track">
+.hero-content {
+  position: relative;
+  z-index: var(--z-overlay);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 clamp(1.25rem, 5vw, 4rem);
+  /* Push content slightly above center for visual balance */
+  margin-top: -6vh;
+}
 
-        <article class="team-card">
-          <div class="team-card__img-wrap">
-            <img src="public/assets/images/team/robert-liljenwall.png" alt="Robert Liljenwall, Managing Director" width="400" height="400" loading="lazy">
-          </div>
-          <div class="team-card__body">
-            <h3 class="team-card__name">Robert Liljenwall</h3>
-            <p class="team-card__title">Managing Director</p>
-            <button class="team-card__bio-btn" data-bio="bio-01">View Bio</button>
-          </div>
-        </article>
+.hero-headline {
+  font-family: var(--font-header);
+  font-size: clamp(3.25rem, 8vw + 1rem, 7.5rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  color: var(--gl-white);
+  text-transform: uppercase;
+  -webkit-font-smoothing: antialiased;
+  /* Directional shadow -- depth without glow, anchors text against any video frame */
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.5),
+    0 8px 24px rgba(0, 0, 0, 0.45),
+    0 24px 64px rgba(0, 0, 0, 0.35);
+}
 
-        <article class="team-card team-card--keith">
-          <div class="team-card__img-wrap">
-            <img src="public/assets/images/team/keith-robertson.png" alt="Keith Robertson, Co-Managing Director" width="400" height="400" loading="lazy">
-          </div>
-          <div class="team-card__body">
-            <h3 class="team-card__name">Keith Robertson</h3>
-            <p class="team-card__title">Co-Managing Director</p>
-            <button class="team-card__bio-btn" data-bio="bio-02">View Bio</button>
-          </div>
-        </article>
+/* Scroll cue -- animated vertical line */
+.hero-scroll-cue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: clamp(2rem, 4vh, 3.5rem);
+  min-height: 48px; /* touch target */
+  min-width: 48px;
+}
 
-        <article class="team-card">
-          <div class="team-card__img-wrap">
-            <img src="public/assets/images/team/andy-grant.png" alt="Andy Grant, Founder Emeritus and Director" width="400" height="400" loading="lazy">
-          </div>
-          <div class="team-card__body">
-            <h3 class="team-card__name">Andy Grant</h3>
-            <p class="team-card__title">Founder Emeritus and Director</p>
-            <button class="team-card__bio-btn" data-bio="bio-03">View Bio</button>
-          </div>
-        </article>
+.scroll-cue-line {
+  display: block;
+  width: 2px;
+  /* 48px line -- clear visual cue without crowding */
+  height: 48px;
+  background: var(--gl-white);
+  opacity: 0.7;
+  animation: scrollPulse 2s var(--ease-stellar) infinite;
+  transform-origin: top center;
+}
 
-        <article class="team-card">
-          <div class="team-card__img-wrap">
-            <img src="public/assets/images/team/raul-rios.png" alt="Raul Rios, Director Consulting Operations Europe" width="400" height="400" loading="lazy">
-          </div>
-          <div class="team-card__body">
-            <h3 class="team-card__name">Raul Rios</h3>
-            <p class="team-card__title">Director Consulting Operations, Europe</p>
-            <button class="team-card__bio-btn" data-bio="bio-04">View Bio</button>
-          </div>
-        </article>
+@keyframes scrollPulse {
+  0%   { transform: scaleY(0); opacity: 0; }
+  40%  { transform: scaleY(1); opacity: 0.7; }
+  100% { transform: scaleY(1); opacity: 0; }
+}
 
-        <article class="team-card">
-          <div class="team-card__img-wrap">
-            <img src="public/assets/images/team/clive-jones.png" alt="Clive Jones, Director Strategic Planning" width="400" height="400" loading="lazy">
-          </div>
-          <div class="team-card__body">
-            <h3 class="team-card__name">Clive Jones</h3>
-            <p class="team-card__title">Director Strategic Planning</p>
-            <button class="team-card__bio-btn" data-bio="bio-05">View Bio</button>
-          </div>
-        </article>
 
-        <article class="team-card">
-          <div class="team-card__img-wrap">
-            <img src="public/assets/images/team/claus-frimand.png" alt="Claus Frimand, Director Operations" width="400" height="400" loading="lazy">
-          </div>
-          <div class="team-card__body">
-            <h3 class="team-card__name">Claus Frimand</h3>
-            <p class="team-card__title">Director Operations</p>
-            <button class="team-card__bio-btn" data-bio="bio-06">View Bio</button>
-          </div>
-        </article>
+/* =============================================================
+   02 // LOGIC
+   Psychological stop-point. Dark navy surface. Large stat left.
+   Statement right. No section label.
+   ============================================================= */
 
-        <article class="team-card">
-          <div class="team-card__img-wrap">
-            <img src="public/assets/images/team/philip-kwong.png" alt="Philip Kwong, Compliance and Operations Consultant" width="400" height="400" loading="lazy">
-          </div>
-          <div class="team-card__body">
-            <h3 class="team-card__name">Philip Kwong</h3>
-            <p class="team-card__title">Compliance and Operations Consultant</p>
-            <button class="team-card__bio-btn" data-bio="bio-07">View Bio</button>
-          </div>
-        </article>
+#logic {
+  background: var(--gl-navy);
+  /* Intentionally compressed -- this is a transition beat, not a full section */
+  padding: clamp(3rem, 6vw, 5rem) clamp(1.25rem, 5vw, 4rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logic-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+.logic-stat {
+  font-family: var(--font-header);
+  font-size: clamp(6rem, 16vw, 13rem);
+  font-weight: 900;
+  line-height: 0.9;
+  color: var(--gl-green-vivid);
+  letter-spacing: -0.04em;
+  margin: 0;
+  white-space: nowrap;
+}
+.logic-text {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2vw, 1.75rem);
+}
+.logic-statement {
+  font-family: var(--font-header);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--gl-white);
+  margin: 0;
+}
+.logic-resolve {
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--gl-green-vivid);
+  margin: 0;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+@media (min-width: 768px) {
+  .logic-inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(2rem, 3vw, 3rem);
+  }
+  .logic-stat {
+    flex: 0 0 auto;
+    width: clamp(240px, 32vw, 420px);
+  }
+  .logic-text {
+    flex: 1;
+    max-width: 560px;
+  }
+}
 
-        <article class="team-card">
-          <div class="team-card__img-wrap">
-            <img src="public/assets/images/team/andrew-coates.png" alt="Andrew Coates, Director Zoological Operations" width="400" height="400" loading="lazy">
-          </div>
-          <div class="team-card__body">
-            <h3 class="team-card__name">Andrew Coates</h3>
-            <p class="team-card__title">Director Zoological Operations</p>
-            <button class="team-card__bio-btn" data-bio="bio-08">View Bio</button>
-          </div>
-        </article>
 
-        <article class="team-card">
-          <div class="team-card__img-wrap">
-            <img src="public/assets/images/team/edmund-rowley-williams.jpg" alt="Edmund Rowley Williams, Director Business Development" width="400" height="400" loading="lazy">
-          </div>
-          <div class="team-card__body">
-            <h3 class="team-card__name">Edmund Rowley Williams</h3>
-            <p class="team-card__title">Director Business Development</p>
-            <button class="team-card__bio-btn" data-bio="bio-09">View Bio</button>
-          </div>
-        </article>
+/* =============================================================
+   03 // ABOUT
+   White surface. Text left. Tourist photo right.
+   Visible h2: "WE'VE BEEN MAKING PEOPLE SMILE SINCE 1982"
+   ============================================================= */
 
-      </div>
-    </div>
-    <div class="team-carousel__controls">
-      <button class="carousel-btn carousel-btn--prev" id="team-prev" aria-label="Previous team members">&#8592;</button>
-      <button class="carousel-btn carousel-btn--next" id="team-next" aria-label="Next team members">&#8594;</button>
-    </div>
-  </div>
+#about {
+  background: var(--gl-white);
+  padding: var(--section-pad-y) clamp(1.25rem, 5vw, 4rem);
+}
 
-  <!-- BIO MODAL -->
-  <div class="modal-overlay" id="bio-modal-overlay" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="bio-modal-title">
-      <button class="modal__close" id="bio-modal-close" aria-label="Close">&#x2715;</button>
-      <span class="modal__number" id="bio-modal-number"></span>
-      <h3 class="modal__title" id="bio-modal-title"></h3>
-      <div class="modal__body" id="bio-modal-body"></div>
-    </div>
-  </div>
-</section>
+.about-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.5rem, 5vw, 5rem);
+}
 
-<section id="testimonials" aria-label="Client testimonials">
-  <div class="testimonials__carousel">
-    <div class="testimonials__track" id="testimonials-track">
+.about-text {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+}
 
-      <figure class="testimonial">
-        <blockquote class="testimonial__quote">
-          <p>I have been working with Grant Leisure for over 30 years and can personally testify to their unparalleled track record in translating creative concepts into feasible and profitable projects. They are our go-to resource when our projects and clients need a dose of reality.</p>
-        </blockquote>
-        <figcaption class="testimonial__attribution">
-          <span class="testimonial__name">Chris Mather</span>
-          <span class="testimonial__title">Chief Executive Officer</span>
-          <span class="testimonial__company">Mather &amp; Co</span>
-        </figcaption>
-      </figure>
+.about-heading {
+  font-family: var(--font-header);
+  font-size: clamp(2rem, 4vw + 0.5rem, 3.75rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--gl-navy);
+  margin: 0;
+  /* Green accent underline -- signals "start" of the brand story */
+  padding-bottom: clamp(1rem, 2vw, 1.5rem);
+  border-bottom: 4px solid var(--gl-green);
+}
 
-      <figure class="testimonial">
-        <blockquote class="testimonial__quote">
-          <p>I have enjoyed working with Andy Grant for over 25 years. His instinct and attention to detail in large-scale land-planning for leisure destinations is second to none.</p>
-        </blockquote>
-        <figcaption class="testimonial__attribution">
-          <span class="testimonial__name">Larry Wyatt</span>
-          <span class="testimonial__title">CEO</span>
-          <span class="testimonial__company">Wyatt Design Group</span>
-        </figcaption>
-      </figure>
+.about-origin {
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  line-height: 1.7;
+  color: var(--gl-black);
+  margin: 0;
+}
 
-      <figure class="testimonial">
-        <blockquote class="testimonial__quote">
-          <p>Andy is able to gauge the needs of the client in any situation and develop programs that are both functional and cost-effective. He also has a great sense of humor that at certain times is much needed to keep the team focused on the goal.</p>
-        </blockquote>
-        <figcaption class="testimonial__attribution">
-          <span class="testimonial__name">Pat Janikowski, AIA, NCARB</span>
-          <span class="testimonial__title">President</span>
-          <span class="testimonial__company">PJA</span>
-        </figcaption>
-      </figure>
+.about-narrative {
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  line-height: 1.7;
+  color: var(--gl-black);
+  margin: 0;
+}
 
-      <figure class="testimonial">
-        <blockquote class="testimonial__quote">
-          <p>Our collaboration was truly an experience due to Andrew's unique understanding of operations and how technology could enhance the guest experience. His many years of experience have proven to be a big positive on all of the projects with which we have collaborated.</p>
-        </blockquote>
-        <figcaption class="testimonial__attribution">
-          <span class="testimonial__name">Brian Edwards</span>
-          <span class="testimonial__title">Founder &amp; Chairman</span>
-          <span class="testimonial__company">Edwards Technologies Inc</span>
-        </figcaption>
-      </figure>
+.about-figure {
+  margin: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 16px 64px rgba(50, 62, 72, 0.12);
+}
 
-    </div>
-    <div class="testimonials__controls">
-      <button class="carousel-btn carousel-btn--prev" id="test-prev" aria-label="Previous testimonial">&#8592;</button>
-      <div class="testimonials__dots" id="testimonials-dots"></div>
-      <button class="carousel-btn carousel-btn--next" id="test-next" aria-label="Next testimonial">&#8594;</button>
-    </div>
-  </div>
-</section>
+.about-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 
-<section id="engage" aria-labelledby="engage-heading">
-  <div class="engage__inner">
-    <div class="engage__left">
-      <h2 id="engage-heading" class="engage__heading">Don't like waiting? Neither do we.</h2>
-      <address class="engage__contact">
-  <p class="engage__address">Address: 418 Wenham Road, Pasadena, CA 91107</p>
-  <div class="engage__contact-row">
-    <div>
-      <span class="engage__contact-label">R. Liljenwall</span>
-      <a class="engage__contact-link" href="tel:+16262983709">626-298-3709</a>
-    </div>
-    <div>
-      <span class="engage__contact-label">K. Robertson</span>
-      <a class="engage__contact-link" href="tel:+17024974459">702-497-4459</a>
-    </div>
-  </div>
-</address>
-    </div>
-    <div class="engage__right">
-      <form class="engage-form" id="engage-form" novalidate>
-  <div class="form-field form-field--name">
-    <label class="form-label" for="field-name">Name</label>
-    <input
-      class="form-input"
-      type="text"
-      id="field-name"
-      name="name"
-      autocomplete="name"
-      required
-      minlength="2"
-    >
-  </div>
-  <div class="form-field form-field--email">
-    <label class="form-label" for="field-email">Email</label>
-    <input
-      class="form-input"
-      type="email"
-      id="field-email"
-      name="email"
-      autocomplete="email"
-      required
-    >
-  </div>
-  <div class="form-field form-field--phone">
-    <label class="form-label" for="field-phone">Phone</label>
-    <input
-      class="form-input"
-      type="tel"
-      id="field-phone"
-      name="phone"
-      autocomplete="tel"
-    >
-  </div>
-  <div class="form-field form-field--message">
-    <label class="form-label" for="field-message">Message</label>
-    <textarea
-      class="form-input form-input--textarea"
-      id="field-message"
-      name="message"
-      rows="5"
-      required
-    ></textarea>
-  </div>
-  <div class="form-field form-field--submit">
-    <button class="form-submit" type="submit">Send Message</button>
-  </div>
-</form>
-  </div>
-</section>
+@media (min-width: 900px) {
+  .about-inner {
+    flex-direction: row;
+    align-items: center;
+  }
 
-  </main>
+  .about-text {
+    flex: 0 0 45%;
+  }
 
-  <footer id="footer" role="contentinfo">
-    <div class="footer__inner">
-      <p class="footer__legal">&copy; 2026 Grant Leisure. All Rights Reserved.</p>
-    </div>
-  </footer>
+  .about-figure {
+    flex: 1;
+  }
 
-  <!-- Lenis v5 smooth scroll -- must load before GSAP -->
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+  .about-figure img {
+    width: 100%;
+    height: auto;
+  }
+}
 
-  <!-- GSAP + ScrollTrigger via CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-  <!-- Main JS deferred -->
-  <script src="js/main.js" defer></script>
+/* =============================================================
+   04 // PROOF
+   Green surface. 6-icon grid. Scale summary below.
+   No section label.
+   ============================================================= */
 
-</body>
-</html>
+#proof {
+  background: #5C9387; /* Hard-coded -- proof section must not follow --gl-green global updates */
+  /* Tighter than full section-pad-y -- proof reads as a stats band, not a hero */
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(1.25rem, 5vw, 4rem);
+}
+
+.proof-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 3.5vw, 3rem);
+}
+
+/* 2-column grid on mobile, 3-col mid, 6-col desktop */
+.proof-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(2rem, 4vw, 3.5rem);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 600px) {
+  .proof-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .proof-grid {
+    /* All 6 items in one row at desktop -- horizontal read like a counter */
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+.proof-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+}
+
+.proof-item img {
+  /* 64px icon -- WCAG-safe size, not a touch target so no 48px rule applies */
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  /* White tint to unify icons on the green background */
+  filter: brightness(0) invert(1);
+}
+
+.proof-number {
+  font-family: var(--font-header);
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--gl-white);
+  letter-spacing: -0.03em;
+  text-shadow: 0 0 8px rgba(92, 147, 135, 0.30);
+}
+
+.proof-label {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--gl-white);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.20);
+  opacity: 0.95;
+}
+
+/* Scale summary bar -- 43 Countries | 5 Continents | 2,500+ Projects */
+.proof-scale {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+  /* Separator line above to visually anchor the summary */
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+  padding-top: clamp(2rem, 3vw, 2.5rem);
+}
+
+.proof-scale-item {
+  font-family: var(--font-header);
+  font-size: clamp(1.125rem, 2.5vw, 1.75rem);
+  font-weight: 700;
+  color: var(--gl-white);
+  letter-spacing: -0.01em;
+}
+
+.proof-scale-divider {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.5);
+  user-select: none;
+}
+
+
+/* =============================================================
+   05 // REACH
+   Dark navy surface. Map full-width. Country copy centered below.
+   No section label.
+   ============================================================= */
+
+#reach {
+  background: var(--gl-navy);
+  padding: var(--section-pad-y) clamp(1.25rem, 5vw, 4rem);
+}
+
+.reach-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.5rem, 4vw, 4rem);
+}
+
+.reach-map {
+  margin: 0;
+  /* Negative horizontal margin bleeds map to near-full viewport width */
+  max-width: 900px;
+  margin-inline: auto;
+  overflow: hidden;
+}
+
+.reach-map img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* Vibrant saturation boost per brief: "high-saturation map" */
+  filter: saturate(1.4) brightness(1.05);
+}
+
+.reach-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.reach-countries {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  font-weight: 600;
+  line-height: 1.8;
+  color: var(--gl-green);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.reach-statement {
+  font-family: var(--font-header);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--gl-white);
+  margin: 0;
+  max-width: 680px; /* Constrains line length for senior readability */
+}
+/* ============================================================
+   #EXPERTISE -- Bento Grid Services
+   Dark surface section for light/dark rhythm after #reach
+   ============================================================ */
+
+#expertise {
+  background-color: var(--gl-navy);
+  padding-block: var(--section-pad-y);
+}
+
+.expertise__inner {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--space-lg);
+}
+
+.expertise__subhead {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--gl-green-vivid);
+  text-transform: uppercase;
+  margin-block-end: var(--space-sm);
+}
+
+.expertise__heading {
+  font-family: var(--font-header);
+  font-size: var(--text-h1);
+  color: var(--gl-white);
+  line-height: 1.1;
+  margin-block-end: var(--space-lg);
+  max-width: 16ch;
+}
+
+/* -- Bento Grid Layout ------------------------------------ */
+
+.bento {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  align-items: stretch;
+}
+
+@media (min-width: 48rem) {
+  .bento {
+    grid-template-columns: repeat(2, 1fr);
+    align-items: stretch;
+  }
+}
+
+@media (min-width: 72rem) {
+  .bento {
+    grid-template-columns: repeat(3, 1fr);
+    align-items: stretch;
+  }
+}
+
+/* -- Bento Card Base -------------------------------------- */
+
+.bento__card {
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  height: 100%;
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  box-shadow: var(--shadow-md);
+  transition: border-color var(--duration-fast) var(--ease-stellar),
+              box-shadow var(--duration-fast) var(--ease-stellar);
+}
+.bento__card:hover {
+  border-color: var(--gl-green-vivid);
+  box-shadow: 0 0 30px rgba(92, 147, 135, 0.20);
+}
+
+/* Accent variant -- green left border signal */
+.bento__card--accent {
+  border-left: 4px solid var(--gl-green-vivid);
+}
+
+/* Feature card -- premium tier, full right column */
+.bento__card--feature {
+  background-color: var(--gl-green-vivid);
+  border-color: transparent;
+  justify-content: space-between;
+}
+
+.bento__card--feature:hover {
+  border-color: transparent;
+}
+
+/* -- Bento Card Elements ---------------------------------- */
+
+.bento__number {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--gl-green-vivid);
+  letter-spacing: 0.1em;
+}
+
+.bento__card--feature .bento__number {
+  color: rgba(255, 255, 255, 0.60);
+}
+
+.bento__title {
+  font-family: var(--font-header);
+  font-size: var(--text-h3);
+  color: var(--gl-white);
+  line-height: 1.2;
+}
+
+.bento__body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+.bento__card--feature .bento__body {
+  color: rgba(255, 255, 255, 0.90);
+}
+
+.bento__tag {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--gl-white);
+  background-color: rgba(50, 62, 72, 0.30);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: 2px;
+  align-self: flex-start;
+  margin-block-start: var(--space-md);
+}
+
+/* -- Bento Toggle Button --------------------------------- */
+
+.bento__toggle {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gl-green);
+  background: none;
+  border: 1px solid var(--gl-green);
+  border-radius: 4px;
+  padding: 0.6rem 1.25rem;
+  cursor: pointer;
+  align-self: flex-start;
+  margin-block-start: auto;
+  min-height: 48px;
+  transition: background-color var(--duration-fast) var(--ease-stellar),
+              color var(--duration-fast) var(--ease-stellar);
+}
+
+.bento__toggle:hover {
+  background-color: var(--gl-green);
+  color: var(--gl-white);
+}
+
+.bento__toggle:focus-visible {
+  outline: 3px solid var(--gl-green);
+  outline-offset: 4px;
+}
+
+/* ============================================================
+   SERVICE MODAL
+   Full-screen overlay. Navy surface. Slides up on open.
+   ============================================================ */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(26, 26, 26, 0.85);
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--duration-default) var(--ease-stellar),
+              visibility var(--duration-default) var(--ease-stellar);
+}
+
+.modal-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal {
+  background-color: var(--gl-navy);
+  border-top: 4px solid var(--gl-green-vivid);
+  border-radius: 4px;
+  padding: var(--space-lg);
+  max-width: 680px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  transform: translateY(24px);
+  transition: transform var(--duration-default) var(--ease-stellar);
+}
+
+.modal-overlay.is-open .modal {
+  transform: translateY(0);
+}
+
+.modal__close {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  background: none;
+  border: none;
+  color: var(--gl-white);
+  font-size: 1.25rem;
+  cursor: pointer;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color var(--duration-fast) var(--ease-stellar);
+}
+
+.modal__close:hover {
+  background-color: rgba(255, 255, 255, 0.10);
+}
+
+.modal__close:focus-visible {
+  outline: 3px solid var(--gl-green);
+  outline-offset: 2px;
+}
+
+.modal__number {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--gl-green-vivid);
+  display: block;
+  margin-block-end: var(--space-sm);
+}
+
+.modal__title {
+  font-family: var(--font-header);
+  font-size: var(--text-h2);
+  color: var(--gl-white);
+  line-height: 1.2;
+  margin: 0;
+  margin-block-end: var(--space-md);
+  padding-block-end: var(--space-md);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.modal__body {
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.7;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.modal__body p {
+  margin: 0;
+}
+
+/* ============================================================
+   #VALIDATION -- Partner Logo Marquee
+   White surface. JS-driven infinite scroll. Logos grey at rest.
+   ============================================================ */
+
+#validation {
+  background-color: var(--gl-white);
+  padding-block-start: var(--section-pad-y);
+  padding-block-end: var(--space-xl);
+  overflow: hidden;
+}
+
+.validation__inner {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--space-lg);
+  margin-block-end: var(--space-xl);
+}
+
+.validation__trust-line {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--gl-navy);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.marquee {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+}
+
+.marquee__track {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3rem;
+  padding-inline: 2rem;
+  list-style: none;
+  margin: 0;
+  padding-block: 0;
+  will-change: transform;
+  flex-shrink: 0;
+}
+
+.marquee__item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  height: 90px;
+}
+
+.marquee__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: grayscale(100%) opacity(0.6);
+  transition: filter 0.3s ease;
+}
+
+/* Optical weight tuning -- Disney Parks scale(0.85) is the reference standard */
+.marquee__item img[alt="Disney Parks"]                     { transform: scale(0.85); } /* LOCKED */
+.marquee__item img[alt="Lego"]                             { transform: scale(0.75); } /* LOCKED */
+.marquee__item img[alt="Anheuser-Busch"]                   { transform: scale(0.80); } /* LOCKED */
+.marquee__item img[alt="English Heritage"]                 { transform: scale(0.90); } /* LOCKED */
+.marquee__item img[alt="Caesars Entertainment"]            { transform: scale(0.72); } /* was 0.80 -- too big */
+.marquee__item img[alt="Victoria and Albert Museum"]       { transform: scale(0.72); } /* was 0.90 -- too big */
+.marquee__item img[alt="ZSL Zoological Society of London"] { transform: scale(0.75); } /* was 0.55 -- too small */
+.marquee__item img[alt="Bluewater"]                        { transform: scale(0.88); } /* was 0.75 -- too small */
+.marquee__item img[alt="Ferrari World"]                    { transform: scale(0.88); } /* was 0.75 -- too small */
+.marquee__item img[alt="Merlin Entertainments"]            { transform: scale(0.82); } /* was 0.75 -- slightly small */
+.marquee__item img[alt="NBC Universal"]                    { transform: scale(0.88); } /* was 0.80 -- too small */
+.marquee__item img[alt="San Diego Zoo"]                    { transform: scale(1.05); } /* was 0.88 -- too small */
+.marquee__item img[alt="Ocean Park"]                       { transform: scale(0.90); } /* was 0.85 -- too small */
+.marquee__item img[alt="Paramount"]                        { transform: scale(0.88); } /* was 0.80 -- too small */
+.marquee__item img[alt="Parques Reunidos"]                 { transform: scale(1.05); } /* was 0.90 -- too small */
+.marquee__item img[alt="Village Roadshow"]                 { transform: scale(0.85); } /* was 0.70 -- too small */
+.marquee__item img[alt="Universal"]                        { transform: scale(0.85); } /* was 0.75 -- too small */
+
+.marquee__item img[alt="NBC Universal"] {
+  opacity: 1;
+  filter: grayscale(0%) opacity(1);
+}
+
+.marquee__item img:hover {
+  filter: grayscale(0%) opacity(1);
+}
+
+/* ============================================================
+   #LEADERSHIP -- Team Grid
+   White surface. 1 col mobile, 2 col tablet, 3 col desktop.
+   ============================================================ */
+
+#leadership {
+  background-color: var(--gl-white);
+  padding-block: var(--section-pad-y);
+  /* Top border separates from #validation white surface */
+  border-top: 1px solid rgba(50, 62, 72, 0.10);
+}
+
+.leadership__inner {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--space-lg);
+}
+
+.leadership__eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--gl-green-vivid);
+  text-transform: uppercase;
+  margin-block-end: var(--space-sm);
+}
+
+.leadership__heading {
+  font-family: var(--font-header);
+  font-size: var(--text-h1);
+  color: var(--gl-navy);
+  line-height: 1.1;
+  margin-block-end: var(--space-lg);
+}
+
+/* -- Team Grid ------------------------------------------- */
+
+/* -- Team Carousel --------------------------------------- */
+
+.team-carousel {
+  overflow: hidden;
+  position: relative;
+}
+
+.team-carousel__track {
+  display: flex;
+  gap: var(--space-lg);
+  transition: transform var(--duration-default) var(--ease-stellar);
+  will-change: transform;
+}
+
+.team-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--gl-white);
+  border: 1px solid rgba(50, 62, 72, 0.10);
+  border-radius: 4px;
+  overflow: hidden;
+  flex: 0 0 100%;
+  transition: box-shadow var(--duration-fast) var(--ease-stellar),
+              transform var(--duration-fast) var(--ease-stellar);
+}
+
+@media (min-width: 48rem) {
+  .team-card {
+    flex: 0 0 calc(33.333% - var(--space-lg) * 2 / 3);
+  }
+}
+
+.team-card:hover {
+  box-shadow: 0 8px 32px rgba(50, 62, 72, 0.12);
+  transform: translateY(-4px);
+}
+
+.team-card__img-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background-color: rgba(50, 62, 72, 0.06);
+}
+
+.team-card__img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  filter: saturate(1.1);
+  transition: transform var(--duration-default) var(--ease-stellar);
+}
+
+.team-card--keith .team-card__img-wrap img {
+  object-position: center 30%;
+}
+
+.team-card:hover .team-card__img-wrap img {
+  transform: scale(1.04);
+}
+
+.team-card__body {
+  padding: var(--space-md) var(--space-lg);
+  border-top: 3px solid var(--gl-green-vivid);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.team-card__name {
+  font-family: var(--font-header);
+  font-size: var(--text-h3);
+  color: var(--gl-navy);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.team-card__title {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--gl-green-vivid);
+  text-transform: uppercase;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.team-card__bio-btn {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gl-navy);
+  background: none;
+  border: 1px solid rgba(50, 62, 72, 0.25);
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  align-self: flex-start;
+  margin-block-start: var(--space-sm);
+  min-height: 48px;
+  transition: border-color var(--duration-fast) var(--ease-stellar),
+              color var(--duration-fast) var(--ease-stellar);
+}
+
+.team-card__bio-btn:hover {
+  border-color: var(--gl-green-vivid);
+  color: var(--gl-green-vivid);
+}
+
+.team-card__bio-btn:focus-visible {
+  outline: 3px solid var(--gl-green);
+  outline-offset: 2px;
+}
+
+/* -- Carousel Controls ----------------------------------- */
+
+.team-carousel__controls {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-block-start: var(--space-lg);
+}
+
+.carousel-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid var(--gl-green-vivid);
+  background: none;
+  color: var(--gl-green-vivid);
+  font-size: 1.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--duration-fast) var(--ease-stellar),
+              color var(--duration-fast) var(--ease-stellar);
+}
+
+.carousel-btn:hover {
+  background-color: var(--gl-green);
+  color: var(--gl-white);
+}
+
+.carousel-btn:focus-visible {
+  outline: 3px solid var(--gl-green);
+  outline-offset: 3px;
+}
+
+/* ============================================================
+   #TESTIMONIALS -- Single quote carousel
+   Navy surface. One quote at a time. Arrow navigation.
+   ============================================================ */
+
+#testimonials {
+  background-color: var(--gl-navy);
+  /* Elegant strip -- minimal vertical presence, quotes land and move on */
+  padding-block: clamp(2rem, 4vw, 3rem);
+}
+
+.testimonials__carousel {
+  max-width: 760px;
+  margin-inline: auto;
+  padding-inline: var(--space-lg);
+}
+
+.testimonials__track {
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonial {
+  display: none;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin: 0;
+  padding: 0;
+  border-left: 3px solid var(--gl-green);
+  padding-left: var(--space-md);
+}
+
+.testimonial.is-active {
+  display: flex;
+}
+
+.testimonial::before {
+  content: '\201C';
+  font-family: var(--font-header);
+  /* Reduced from clamp(4rem,6vw,6rem) -- decorative, not focal */
+  font-size: clamp(2rem, 3vw, 2.75rem);
+  line-height: 1;
+  color: var(--gl-green-vivid);
+  display: block;
+  margin-block-end: 0;
+  opacity: 0.6;
+}
+
+.testimonial__quote {
+  margin: 0;
+  padding: 0;
+}
+
+.testimonial__quote p {
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  font-style: italic;
+}
+
+.testimonial__attribution {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin-block-start: var(--space-xs);
+}
+
+.testimonial__name {
+  font-family: var(--font-header);
+  font-size: var(--text-h3);
+  color: var(--gl-white);
+  line-height: 1.2;
+}
+
+.testimonial__title {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--gl-green-vivid);
+  text-transform: uppercase;
+}
+
+.testimonials__controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-block-start: var(--space-md);
+}
+
+.testimonials__dots {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.testimonials__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.30);
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-stellar);
+  padding: 0;
+  min-height: unset;
+}
+
+.testimonials__dot.is-active {
+  background-color: var(--gl-green);
+}
+
+.testimonial__title {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--gl-green-vivid);
+  text-transform: uppercase;
+}
+
+.testimonial__company {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--gl-white) !important; /* Overrides body color inherited from global.css */
+  opacity: 0.6;
+  letter-spacing: 0.04em;
+}
+
+/* ============================================================
+   #ENGAGE -- Contact Section
+   White surface. Two-column desktop. Copy left, form right.
+   ============================================================ */
+#engage {
+  background-color: var(--gl-white);
+  padding-block: var(--section-pad-y);
+  border-top: 1px solid rgba(50, 62, 72, 0.12);
+}
+.engage__inner {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--space-lg);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+}
+@media (min-width: 64rem) {
+  .engage__inner {
+    grid-template-columns: 1.2fr 1fr;
+    align-items: start;
+    gap: var(--space-2xl);
+  }
+}
+
+/* -- Left Column: Copy + Contact ------------------------- */
+.engage__heading {
+  font-family: var(--font-header);
+  font-size: var(--text-h1);
+  color: var(--gl-navy);
+  line-height: 1.2;
+  margin-block-end: var(--space-md);
+  padding-block-end: var(--space-md);
+  border-bottom: 3px solid var(--gl-green);
+}
+.engage__contact {
+  font-style: normal;
+  padding-block-start: var(--space-sm);
+}
+.engage__address {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--gl-black);
+  line-height: 1.6;
+  margin-block-end: var(--space-sm);
+  white-space: nowrap;
+}
+.engage__contact-row {
+  display: flex;
+  gap: var(--space-xl);
+}
+.engage__contact-label {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gl-green);
+  display: block;
+  margin-block-end: 2px;
+}
+.engage__contact-link {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--gl-navy);
+  text-decoration: none;
+  font-weight: 600;
+}
+.engage__contact-link:hover {
+  color: var(--gl-green);
+}
+
+/* -- Right Column: Form ---------------------------------- */
+.engage-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+  background-color: var(--gl-white);
+}
+
+/* Name and Email sit side by side. Phone spans full. */
+.form-field--name   { grid-column: 1; }
+.form-field--email  { grid-column: 2; }
+.form-field--phone  { grid-column: 1 / -1; }
+.form-field--message { grid-column: 1 / -1; }
+.form-field--submit  { grid-column: 1 / -1; }
+
+/* Stack to single column on mobile */
+@media (max-width: 40rem) {
+  .engage-form {
+    grid-template-columns: 1fr;
+  }
+  .form-field--name,
+  .form-field--email { grid-column: 1; }
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+.form-label {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--gl-navy);
+  text-transform: uppercase;
+}
+.form-input {
+  font-family: var(--font-body);
+  font-size: 1rem; /* 16px minimum -- prevents iOS zoom on focus */
+  color: var(--gl-navy);
+  background-color: var(--gl-white);
+  border: 1.5px solid rgba(50, 62, 72, 0.25);
+  border-radius: 4px;
+  height: 56px; /* above 48px minimum touch target */
+  padding-inline: var(--space-md);
+  width: 100%;
+  transition: border-color var(--duration-fast) var(--ease-stellar);
+}
+.form-input:focus {
+  outline: none;
+  border-color: var(--gl-green);
+}
+.form-input:focus-visible {
+  outline: 3px solid var(--gl-green);
+  outline-offset: 2px;
+}
+.form-input--textarea {
+  height: auto;
+  padding-block: var(--space-md);
+  resize: vertical;
+  min-height: 148px; /* ~5 rows */
+}
+.form-submit {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gl-white);
+  background-color: var(--gl-green);
+  border: none;
+  border-radius: 4px;
+  height: 56px; /* above 48px minimum touch target */
+  padding-inline: var(--space-xl);
+  cursor: pointer;
+  align-self: flex-start;
+  min-width: 48px;
+  transition: background-color var(--duration-fast) var(--ease-stellar);
+}
+.form-submit:hover {
+  background-color: var(--gl-navy);
+}
+.form-submit:focus-visible {
+  outline: 3px solid var(--gl-green);
+  outline-offset: 3px;
+}
+
+/* ============================================================
+   #FOOTER -- Legal
+   Navy surface. Single centered legal line.
+   ============================================================ */
+
+#footer {
+  background-color: var(--gl-navy);
+  padding-block: var(--space-lg);
+  /* Top border separates footer from engage green */
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.footer__inner {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--space-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer__legal {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.50);
+  text-align: center;
+  margin: 0;
+  letter-spacing: 0.05em;
+}
+
+/* About section content reveal -- opacity + rise only, no clip-path.
+   Section background cuts hard. Elements rise into the white space. */
+.about-reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  will-change: opacity, transform;
+}
