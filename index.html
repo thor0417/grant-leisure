@@ -1,553 +1,490 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Grant Leisure International -- Global consultancy for leisure attractions, theme parks, resorts, and visitor destinations." />
-  <title>Grant Leisure International</title>
+/* ============================================================
+   main.js -- Grant Leisure "Visible Dominance" v2
+   Handles: marquee, nav scroll state, counter animation
+   GSAP and ScrollTrigger loaded via CDN in index.html
+   ============================================================ */
 
-  <!-- Design system: tokens first, then typography, then global, then components -->
-  <link rel="stylesheet" href="src/styles/tokens.css" />
-  <link rel="stylesheet" href="src/styles/typography.css" />
-  <link rel="stylesheet" href="src/styles/global.css" />
-  <link rel="stylesheet" href="src/styles/components.css" />
-</head>
+/* -- Marquee: JS-driven infinite scroll ------------------- */
 
-<body>
+const marqueeTrack = document.getElementById('marquee-track');
 
-  <!-- NAV -->
-  <header class="site-nav" role="banner">
-    <nav class="nav-inner" aria-label="Primary navigation">
-      <a href="#hero" class="nav-logo" aria-label="Grant Leisure International -- home">
-        <img
-          src="public/assets/images/gli-logo.png"
-          alt="Grant Leisure International logo"
-          width="120"
-          height="41"
-        />
-      </a>
-      <button class="nav-toggle" aria-controls="nav-links" aria-expanded="false" aria-label="Open menu">
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="nav-links" id="nav-links" role="list">
-       <li><a href="#about" class="nav-link">ABOUT</a></li>
-       <li><a href="#expertise" class="nav-link">SERVICES</a></li>
-       <li><a href="#leadership" class="nav-link">TEAM</a></li>
-       <li><a href="projects.html" class="nav-link">PROJECTS</a></li>
-       <li><a href="#engage" class="nav-link nav-cta">CONTACT</a></li>
-	</ul>
-    </nav>
-  </header>
+if (marqueeTrack) {
+  const clone = marqueeTrack.cloneNode(true);
+  clone.setAttribute('aria-hidden', 'true');
+  marqueeTrack.parentElement.appendChild(clone);
 
-  <main id="main-content">
+  let position = 0;
+  const speed = 0.5;
 
-    <!-- 01 HERO -->
-    <section id="hero" aria-label="Hero">
-      <div class="hero-media" aria-hidden="true">
-        <video
-          class="hero-video"
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="none"
-          aria-hidden="true"
-        >
-          <source
-            src="https://res.cloudinary.com/dyceiucla/video/upload/f_auto,q_auto/v1776321502/hero.mp4_r5srrb.mp4"
-            type="video/mp4"
-          />
-        </video>
-        <div class="hero-overlay" aria-hidden="true"></div>
-      </div>
-      <div class="hero-content">
-        <h1 class="hero-headline">PROFIT FROM<br />OUR EXPERIENCE.</h1>
-        <a href="#logic" class="hero-scroll-cue" aria-label="Scroll to next section">
-          <span class="scroll-cue-line" aria-hidden="true"></span>
-        </a>
-      </div>
-    </section>
+  function animateMarquee() {
+    position -= speed;
 
-    <!-- 02 LOGIC -->
-    <section id="logic" aria-label="Why planning matters">
-      <div class="logic-inner">
-        <p class="logic-stat">90%</p>
-        <div class="logic-text">
-          <p class="logic-statement">Of operational failures are a result of improper planning.</p>
-          <p class="logic-resolve">We eliminate the guesswork.</p>
-        </div>
-      </div>
-    </section>
+    const trackWidth = marqueeTrack.offsetWidth;
+    if (Math.abs(position) >= trackWidth + 64) {
+      position = 0;
+    }
 
-    <!-- 03 ABOUT -->
-    <section id="about" class="reveal-wipe" aria-labelledby="about-heading">
-      <div class="about-inner">
-        <div class="about-text">
-          <h2 id="about-heading" class="about-heading">
-            WE'VE BEEN MAKING PEOPLE SMILE SINCE 1982
-          </h2>
-          <p class="about-origin">
-            In 1980, Andy Grant awoke with a vision that would redefine the industry:
-            the "Tourist" as the primary consideration. We transitioned from conceptual
-            dreaming to an experiential approach that ensures every visitor's need is met.
-          </p>
-          <p class="about-narrative">
-            Grant Leisure is a global consortium of entertainment and attractions
-            executives with decades of experience as developers and operators.
-            When it comes to running visitor attractions, our team has seen it all.
-          </p>
-        </div>
-        <figure class="about-figure">
-          <img
-            src="public/assets/images/tourist.webp"
-            alt="Andy Grant's original Tourist illustration -- the founding concept of Grant Leisure"
-            width="560"
-            height="640"
-            loading="lazy"
-          />
-        </figure>
-      </div>
-    </section>
+    marqueeTrack.style.transform = 'translateX(' + position + 'px)';
+    clone.style.transform = 'translateX(' + position + 'px)';
 
-    <!-- 04 PROOF -->
-    <section id="proof" aria-label="Track record by the numbers">
-      <div class="proof-inner">
-        <ul class="proof-grid" role="list">
+    requestAnimationFrame(animateMarquee);
+  }
 
-          <li class="proof-item">
-            <img src="public/assets/images/icons/icon-parks.png" alt="" width="64" height="64" loading="lazy" aria-hidden="true" />
-            <span class="proof-number" data-target="65" data-suffix="+">65+</span>
-            <span class="proof-label">Theme Parks</span>
-          </li>
+  animateMarquee();
+}
 
-          <li class="proof-item">
-            <img src="public/assets/images/icons/icon-homes.png" alt="" width="64" height="64" loading="lazy" aria-hidden="true" />
-            <span class="proof-number" data-target="60" data-suffix="+">60+</span>
-            <span class="proof-label">Stately Homes</span>
-          </li>
+/* -- Nav: background on scroll ---------------------------- */
 
-          <li class="proof-item">
-            <img src="public/assets/images/icons/icon-zoo.png" alt="" width="64" height="64" loading="lazy" aria-hidden="true" />
-            <span class="proof-number" data-target="27" data-suffix="">27</span>
-            <span class="proof-label">Zoological Institutions</span>
-          </li>
+const siteNav = document.querySelector('.site-nav');
 
-          <li class="proof-item">
-            <img src="public/assets/images/icons/icon-museums.png" alt="" width="64" height="64" loading="lazy" aria-hidden="true" />
-            <span class="proof-number" data-target="35" data-suffix="">35</span>
-            <span class="proof-label">Museums</span>
-          </li>
+if (siteNav) {
+  window.addEventListener('scroll', function () {
+    if (window.scrollY > 50) {
+      siteNav.classList.add('is-scrolled');
+    } else {
+      siteNav.classList.remove('is-scrolled');
+    }
+  });
+}
 
-          <li class="proof-item">
-            <img src="public/assets/images/icons/icon-world-heritage.png" alt="" width="64" height="64" loading="lazy" aria-hidden="true" />
-            <span class="proof-number" data-target="5" data-suffix="">5</span>
-            <span class="proof-label">World Heritage Sites</span>
-          </li>
+/* -- Nav: mobile toggle ----------------------------------- */
 
-          <li class="proof-item">
-            <img src="public/assets/images/icons/icon-fair.png" alt="" width="64" height="64" loading="lazy" aria-hidden="true" />
-            <span class="proof-number" data-target="2" data-suffix="">2</span>
-            <span class="proof-label">World Expositions</span>
-          </li>
+const navToggle = document.querySelector('.nav-toggle');
+const navLinks = document.getElementById('nav-links');
 
-        </ul>
+if (navToggle && navLinks) {
+  navToggle.addEventListener('click', function () {
+    const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
+    navToggle.setAttribute('aria-expanded', String(!isOpen));
+    navLinks.classList.toggle('is-open');
+  });
+}
 
-        <div class="proof-scale">
-          <span class="proof-scale-item">43 Countries</span>
-          <span class="proof-scale-divider" aria-hidden="true">|</span>
-          <span class="proof-scale-item">5 Continents</span>
-          <span class="proof-scale-divider" aria-hidden="true">|</span>
-          <span class="proof-scale-item">2,500+ Projects</span>
-        </div>
-      </div>
-    </section>
+/* -- Team carousel ---------------------------------------- */
 
-    <!-- 05 REACH -->
-    <section id="reach" aria-label="Global reach">
-      <div class="reach-inner">
-        <figure class="reach-map">
-          <img
-            src="public/assets/images/maps/map.png"
-            alt="World map showing Grant Leisure project locations across 43 countries and 5 continents"
-            width="1200"
-            height="600"
-            loading="lazy"
-          />
-        </figure>
-        <div class="reach-copy">
-          <p class="reach-countries">
-            Canada. USA. UK. Europe. Africa. UAE.<br />
-            Malaysia. China. Japan. Australia.
-          </p>
-          <p class="reach-statement">
-            Our influence is etched into the world's most iconic skylines.
-          </p>
-        </div>
-      </div>
-    </section>
+const teamTrack = document.getElementById('team-carousel-track');
+const teamPrev = document.getElementById('team-prev');
+const teamNext = document.getElementById('team-next');
 
-    <!-- 06 EXPERTISE -->
-    <section id="expertise" aria-labelledby="expertise-heading">
-      <div class="expertise__inner">
-        <h2 id="expertise-heading" class="expertise__heading">MAXIMIZE YOUR RETURN.</h2>
-        <p class="expertise__subhead">SERVICES</p>
-        <div class="bento" role="list">
+if (teamTrack && teamPrev && teamNext) {
+  const teamCards = teamTrack.querySelectorAll('.team-card');
+  let teamIndex = 0;
 
-          <article class="bento__card bento__card--accent" role="listitem">
-            <span class="bento__number" aria-hidden="true">01</span>
-            <h3 class="bento__title">Market Analysis</h3>
-            <p class="bento__body">Determining demand through surgical evaluation of occupancy, absorption, and revenue trends.</p>
-            <button class="bento__toggle" data-modal="modal-01">Read More</button>
-          </article>
+  function getTeamVisible() {
+    return window.innerWidth >= 768 ? 3 : 1;
+  }
 
-          <article class="bento__card" role="listitem">
-            <span class="bento__number" aria-hidden="true">02</span>
-            <h3 class="bento__title">Development Planning</h3>
-            <p class="bento__body">Balancing economic planning with physical design to optimize amenities and facility sizing.</p>
-            <button class="bento__toggle" data-modal="modal-02">Read More</button>
-          </article>
+  function getTeamMax() {
+    return Math.max(0, teamCards.length - getTeamVisible());
+  }
 
-          <article class="bento__card" role="listitem">
-            <span class="bento__number" aria-hidden="true">03</span>
-            <h3 class="bento__title">Financial Feasibility</h3>
-            <p class="bento__body">Investor-grade modeling for cash flow projections and sensitivity testing.</p>
-            <button class="bento__toggle" data-modal="modal-03">Read More</button>
-          </article>
+  function updateTeamCarousel() {
+    const cardWidth = teamCards[0].offsetWidth + parseInt(getComputedStyle(teamTrack).gap || '0');
+    teamTrack.style.transform = 'translateX(-' + (teamIndex * cardWidth) + 'px)';
+    /* Arrows always enabled -- index wraps via modulo, no dead ends */
+    teamPrev.disabled = false;
+    teamNext.disabled = false;
+  }
 
-          <article class="bento__card bento__card--accent" role="listitem">
-            <span class="bento__number" aria-hidden="true">04</span>
-            <h3 class="bento__title">Funding Assistance</h3>
-            <p class="bento__body">Securing capital through a sovereign network of global investors and financiers.</p>
-            <button class="bento__toggle" data-modal="modal-04">Read More</button>
-          </article>
+  teamPrev.addEventListener('click', function () {
+    /* Modulo wrap: stepping back from 0 lands on the last valid index */
+    teamIndex = (teamIndex - 1 + getTeamMax() + 1) % (getTeamMax() + 1);
+    updateTeamCarousel();
+  });
 
-          <article class="bento__card" role="listitem">
-            <span class="bento__number" aria-hidden="true">05</span>
-            <h3 class="bento__title">Operational Planning</h3>
-            <p class="bento__body">Bespoke optimization of visitor circulation, marketing, and staff training.</p>
-            <button class="bento__toggle" data-modal="modal-05">Read More</button>
-          </article>
+  teamNext.addEventListener('click', function () {
+    /* Modulo wrap: stepping past the last index returns to 0 */
+    teamIndex = (teamIndex + 1) % (getTeamMax() + 1);
+    updateTeamCarousel();
+  });
 
-          <article class="bento__card" role="listitem">
-            <span class="bento__number" aria-hidden="true">06</span>
-            <h3 class="bento__title">Turnkey Management</h3>
-            <p class="bento__body">Direct executive oversight from pre-opening through long-term stabilization.</p>
-            <button class="bento__toggle" data-modal="modal-06">Read More</button>
-          </article>
+  window.addEventListener('resize', function () {
+    teamIndex = Math.min(teamIndex, getTeamMax());
+    updateTeamCarousel();
+  });
 
-        </div>
-      </div>
-    </section>
+  updateTeamCarousel();
+}
 
-    <!-- SERVICE MODALS -->
-    <div class="modal-overlay" id="modal-overlay" aria-hidden="true">
-      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-        <button class="modal__close" id="modal-close" aria-label="Close">&#x2715;</button>
-        <span class="modal__number" id="modal-number"></span>
-        <h3 class="modal__title" id="modal-title"></h3>
-        <div class="modal__body" id="modal-body"></div>
-      </div>
-    </div>
+/* -- Bio modal -------------------------------------------- */
 
-    <!-- 07 VALIDATION -->
-    <section id="validation" aria-label="Trusted partners">
-      <div class="validation__inner">
-        <p class="validation__trust-line">
-          TRUSTED BY THE WORLD'S MOST ACCLAIMED BRANDS AND ATTRACTIONS.
-        </p>
-      </div>
-      <div class="marquee" id="marquee">
-        <ul class="marquee__track" id="marquee-track" role="list">
-          <li class="marquee__item"><img src="public/assets/images/logos/universal.png" alt="Universal" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/va.png" alt="Victoria and Albert Museum" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/zsl.png" alt="ZSL Zoological Society of London" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/anheuser-busch.png" alt="Anheuser-Busch" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/bluewater.png" alt="Bluewater" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/cesars-entertainment.png" alt="Caesars Entertainment" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/disney-parks.png" alt="Disney Parks" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/english-heritage.png" alt="English Heritage" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/ferrari-world.png" alt="Ferrari World" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/lego.png" alt="Lego" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/merlin-entertainment.png" alt="Merlin Entertainments" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/nbc-universal.png" alt="NBC Universal" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/ocean-park.png" alt="Ocean Park" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/paramount.png" alt="Paramount" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/parques-reunidos.png" alt="Parques Reunidos" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/sd-zoo.png" alt="San Diego Zoo" width="140" height="60" loading="lazy"></li>
-          <li class="marquee__item"><img src="public/assets/images/logos/village-roadshow.png" alt="Village Roadshow" width="140" height="60" loading="lazy"></li>
-        </ul>
-      </div>
-    </section>
+const bioData = {
+  'bio-01': {
+    name: 'Robert Liljenwall',
+    title: 'Managing Director',
+    body: '<p>Robert has been a long-time principal of Grant Leisure, serving as head of its marketing and branding services and providing initial concept and creative direction for a broad spectrum of leisure attractions, visitor services, and integrated marketing communications programs.</p><p>His career as a themed entertainment industry executive began with Disney and he has since worked on leisure and entertainment projects spanning a variety of themed attractions, zoological parks, resorts, film studios, themed entertainment centers, and new urban developments.</p><p>Robert is an expert with developing a project\'s customer marketing matrix, identifying how best to serve visitors, maximize revenue streams, and ensure the highest degree of customer satisfaction.</p>'
+  },
+  'bio-02': {
+    name: 'Keith Robertson',
+    title: 'Co-Managing Director',
+    body: '<p>Keith is a well-rounded senior executive with over 40 years of international project management experience in design, engineering, and operations for the development of major electrical power systems, commercial, industrial and residential construction, theme parks, water parks, tourism, and hospitality.</p><p>His high-energy approach and diversified experience in strategic planning, training, staffing, maintenance, and operations has proven invaluable for his clients as he continues driving innovative engineering and management solutions.</p>'
+  },
+  'bio-03': {
+    name: 'Andy Grant',
+    title: 'Founder Emeritus and Director',
+    body: '<p>Andy\'s 50+ year career began at Universal Studios Hollywood, where he holds claim to being one of the park\'s first-ever studio tour guides.</p><p>After climbing the ranks of Universal Studios to senior management, Andy went on to become the managing director for Busch Gardens, Squaw Valley Ski Resort, and the San Diego Zoo and Safari Park -- and spent 12 years in charge of Leeds Castle in the United Kingdom.</p><p>It was during Andy\'s tenure in London that Grant Leisure was founded and grew to become the foremost consultancy for English Heritage and a globally recognized operator for the themed entertainment industry.</p>'
+  },
+  'bio-04': {
+    name: 'Raul Rios',
+    title: 'Director Consulting Operations, Europe',
+    body: '<p>Raul brings over 15 years of industry experience and manages the consulting back-office for Grant Leisure\'s operations outside the US. Initially acting as Director of Projects and Commercial Controller, he was later appointed as Director for an international marketing services group.</p><p>Working as a consultant, his input ranges from preparing financial feasibilities, business and operational plans, and overseeing attraction construction projects for clients including Olympic Park Legacy Company, Ferrari World Abu Dhabi, Carlsberg, NBC Universal, and BBC.</p>'
+  },
+  'bio-05': {
+    name: 'Clive Jones',
+    title: 'Director Strategic Planning',
+    body: '<p>Clive has evaluated investment programs and solicited investors and operators for major hotels, resorts, and casinos throughout Asia-Pacific, the Americas, and Europe. His expertise in market and investment analysis, development programming, and database marketing has earned him a sterling reputation within the attractions, hospitality, and tourism industries.</p><p>Notable clients include the US National Park Service, Hong Kong Tourism Board, Canadian Tourism Board, the state of California, and the city of San Francisco. His ability to create market-driven value for clients is the common denominator across all his successful assignments.</p>'
+  },
+  'bio-06': {
+    name: 'Claus Frimand',
+    title: 'Director Operations',
+    body: '<p>Claus brings 35 years of experience in the service and leisure industry and has been an expat for over 25 years, living in ten different countries working across Europe, the Middle East, and Asia. He was responsible for opening Ferrari World in Abu Dhabi.</p><p>His breadth of expertise and insight for recruitment and operations has been an asset to Grant Leisure, having worked for organizations such as IKEA, Disneyland Paris, the Olympics, EXPO 2000, and several international traveling exhibitions.</p>'
+  },
+  'bio-07': {
+    name: 'Philip Kwong',
+    title: 'Compliance and Operations Consultant',
+    body: '<p>Philip Kwong is a compliance and operations consultant with eight years of experience in highly regulated and emerging industries. Having held leadership roles in the development of international standards bodies, including Vice Convener of ISO IWA 37 and Chair of UL Canada\'s TG 4400-2, he has contributed to regulatory frameworks, worked with publicly traded companies, and taken complex projects from inception through to completion.</p>'
+  },
+  'bio-08': {
+    name: 'Andrew Coates',
+    title: 'Director Zoological Operations',
+    body: '<p>Andrew delivers hands-on operational experience paired with an architectural background, working across the full range of disciplines in the visitor attractions industry.</p><p>Beginning his career as Operations Manager for the Zoological Society of London, he moved on to become a Director for Grant Leisure Group, Managing Director for MICE Group, and CEO for WARGM Co. Ltd, a UK charity organization for ensuring the long-term sustainability of the Royal Gunpowder Mills. Andrew is known for his pragmatic approach, able to balance the various tensions impacting projects to ensure results-driven solutions.</p>'
+  },
+  'bio-09': {
+    name: 'Edmund Rowley Williams',
+    title: 'Director Business Development',
+    body: '<p>Edmund has enjoyed over 25 years as a business development and management consultant, specializing in improving access to cultural visitor destinations. He has led over 150 projects for Grant Leisure, with clients ranging from leisure enterprises and financial institutions to non-profit and government agencies such as Tate Modern, Victoria and Albert Museum, Windsor Castle, the London Eye, Legoland, and Babelsberg Studios.</p><p>Several of Edmund\'s projects including Our Dynamic Earth, The Royal Armouries, and Tower of London have involved multi-year assignments engaging all stages of planning, development, and operations.</p>'
+  }
+};
 
-<section id="leadership" aria-labelledby="leadership-heading">
-  <div class="leadership__inner">
-    <p class="leadership__eyebrow">The Consortium</p>
-    <h2 id="leadership-heading" class="leadership__heading">MEET THE TEAM.</h2>
-    <div class="team-carousel" id="team-carousel">
-      <div class="team-carousel__track" id="team-carousel-track">
+const bioOverlay = document.getElementById('bio-modal-overlay');
+const bioClose = document.getElementById('bio-modal-close');
+const bioModalNumber = document.getElementById('bio-modal-number');
+const bioModalTitle = document.getElementById('bio-modal-title');
+const bioModalBody = document.getElementById('bio-modal-body');
 
-        <article class="team-card">
-          <div class="team-card__img-wrap">
-            <img src="public/assets/images/team/robert-liljenwall.png" alt="Robert Liljenwall, Managing Director" width="400" height="400" loading="lazy">
-          </div>
-          <div class="team-card__body">
-            <h3 class="team-card__name">Robert Liljenwall</h3>
-            <p class="team-card__title">Managing Director</p>
-            <button class="team-card__bio-btn" data-bio="bio-01">View Bio</button>
-          </div>
-        </article>
+function openBioModal(id) {
+  const data = bioData[id];
+  if (!data) return;
+  bioModalNumber.textContent = data.title;
+  bioModalTitle.textContent = data.name;
+  bioModalBody.innerHTML = data.body;
+  bioOverlay.classList.add('is-open');
+  bioOverlay.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  bioClose.focus();
+}
 
-        <article class="team-card team-card--keith">
-          <div class="team-card__img-wrap">
-            <img src="public/assets/images/team/keith-robertson.png" alt="Keith Robertson, Co-Managing Director" width="400" height="400" loading="lazy">
-          </div>
-          <div class="team-card__body">
-            <h3 class="team-card__name">Keith Robertson</h3>
-            <p class="team-card__title">Co-Managing Director</p>
-            <button class="team-card__bio-btn" data-bio="bio-02">View Bio</button>
-          </div>
-        </article>
+function closeBioModal() {
+  bioOverlay.classList.remove('is-open');
+  bioOverlay.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
 
-        <article class="team-card">
-          <div class="team-card__img-wrap">
-            <img src="public/assets/images/team/andy-grant.png" alt="Andy Grant, Founder Emeritus and Director" width="400" height="400" loading="lazy">
-          </div>
-          <div class="team-card__body">
-            <h3 class="team-card__name">Andy Grant</h3>
-            <p class="team-card__title">Founder Emeritus and Director</p>
-            <button class="team-card__bio-btn" data-bio="bio-03">View Bio</button>
-          </div>
-        </article>
+if (bioOverlay) {
+  document.querySelectorAll('.team-card__bio-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      openBioModal(btn.getAttribute('data-bio'));
+    });
+  });
 
-        <article class="team-card">
-          <div class="team-card__img-wrap">
-            <img src="public/assets/images/team/raul-rios.png" alt="Raul Rios, Director Consulting Operations Europe" width="400" height="400" loading="lazy">
-          </div>
-          <div class="team-card__body">
-            <h3 class="team-card__name">Raul Rios</h3>
-            <p class="team-card__title">Director Consulting Operations, Europe</p>
-            <button class="team-card__bio-btn" data-bio="bio-04">View Bio</button>
-          </div>
-        </article>
+  bioClose.addEventListener('click', closeBioModal);
 
-        <article class="team-card">
-          <div class="team-card__img-wrap">
-            <img src="public/assets/images/team/clive-jones.png" alt="Clive Jones, Director Strategic Planning" width="400" height="400" loading="lazy">
-          </div>
-          <div class="team-card__body">
-            <h3 class="team-card__name">Clive Jones</h3>
-            <p class="team-card__title">Director Strategic Planning</p>
-            <button class="team-card__bio-btn" data-bio="bio-05">View Bio</button>
-          </div>
-        </article>
+  bioOverlay.addEventListener('click', function (e) {
+    if (e.target === bioOverlay) closeBioModal();
+  });
 
-        <article class="team-card">
-          <div class="team-card__img-wrap">
-            <img src="public/assets/images/team/claus-frimand.png" alt="Claus Frimand, Director Operations" width="400" height="400" loading="lazy">
-          </div>
-          <div class="team-card__body">
-            <h3 class="team-card__name">Claus Frimand</h3>
-            <p class="team-card__title">Director Operations</p>
-            <button class="team-card__bio-btn" data-bio="bio-06">View Bio</button>
-          </div>
-        </article>
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { closeBioModal(); closeModal(); }
+  });
+}
 
-        <article class="team-card">
-          <div class="team-card__img-wrap">
-            <img src="public/assets/images/team/philip-kwong.png" alt="Philip Kwong, Compliance and Operations Consultant" width="400" height="400" loading="lazy">
-          </div>
-          <div class="team-card__body">
-            <h3 class="team-card__name">Philip Kwong</h3>
-            <p class="team-card__title">Compliance and Operations Consultant</p>
-            <button class="team-card__bio-btn" data-bio="bio-07">View Bio</button>
-          </div>
-        </article>
+/* -- Testimonials carousel -------------------------------- */
 
-        <article class="team-card">
-          <div class="team-card__img-wrap">
-            <img src="public/assets/images/team/andrew-coates.png" alt="Andrew Coates, Director Zoological Operations" width="400" height="400" loading="lazy">
-          </div>
-          <div class="team-card__body">
-            <h3 class="team-card__name">Andrew Coates</h3>
-            <p class="team-card__title">Director Zoological Operations</p>
-            <button class="team-card__bio-btn" data-bio="bio-08">View Bio</button>
-          </div>
-        </article>
+const testimonialItems = document.querySelectorAll('.testimonial');
+const testPrev = document.getElementById('test-prev');
+const testNext = document.getElementById('test-next');
+const dotsContainer = document.getElementById('testimonials-dots');
 
-        <article class="team-card">
-          <div class="team-card__img-wrap">
-            <img src="public/assets/images/team/edmund-rowley-williams.jpg" alt="Edmund Rowley Williams, Director Business Development" width="400" height="400" loading="lazy">
-          </div>
-          <div class="team-card__body">
-            <h3 class="team-card__name">Edmund Rowley Williams</h3>
-            <p class="team-card__title">Director Business Development</p>
-            <button class="team-card__bio-btn" data-bio="bio-09">View Bio</button>
-          </div>
-        </article>
+if (testimonialItems.length && testPrev && testNext) {
+  let testIndex = 0;
 
-      </div>
-    </div>
-    <div class="team-carousel__controls">
-      <button class="carousel-btn carousel-btn--prev" id="team-prev" aria-label="Previous team members">&#8592;</button>
-      <button class="carousel-btn carousel-btn--next" id="team-next" aria-label="Next team members">&#8594;</button>
-    </div>
-  </div>
+  testimonialItems.forEach(function (_, i) {
+    const dot = document.createElement('button');
+    dot.classList.add('testimonials__dot');
+    dot.setAttribute('aria-label', 'Go to testimonial ' + (i + 1));
+    if (i === 0) dot.classList.add('is-active');
+    dot.addEventListener('click', function () { goToTestimonial(i); });
+    dotsContainer.appendChild(dot);
+  });
 
-  <!-- BIO MODAL -->
-  <div class="modal-overlay" id="bio-modal-overlay" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="bio-modal-title">
-      <button class="modal__close" id="bio-modal-close" aria-label="Close">&#x2715;</button>
-      <span class="modal__number" id="bio-modal-number"></span>
-      <h3 class="modal__title" id="bio-modal-title"></h3>
-      <div class="modal__body" id="bio-modal-body"></div>
-    </div>
-  </div>
-</section>
+  function goToTestimonial(index) {
+    testimonialItems[testIndex].classList.remove('is-active');
+    dotsContainer.children[testIndex].classList.remove('is-active');
+    /* Modulo wrap -- index always stays within bounds */
+    testIndex = (index + testimonialItems.length) % testimonialItems.length;
+    testimonialItems[testIndex].classList.add('is-active');
+    dotsContainer.children[testIndex].classList.add('is-active');
+    /* Arrows always enabled -- no dead ends */
+    testPrev.disabled = false;
+    testNext.disabled = false;
+  }
 
-<section id="testimonials" aria-label="Client testimonials">
-  <div class="testimonials__carousel">
-    <div class="testimonials__track" id="testimonials-track">
+  testimonialItems[0].classList.add('is-active');
 
-      <figure class="testimonial">
-        <blockquote class="testimonial__quote">
-          <p>I have been working with Grant Leisure for over 30 years and can personally testify to their unparalleled track record in translating creative concepts into feasible and profitable projects. They are our go-to resource when our projects and clients need a dose of reality.</p>
-        </blockquote>
-        <figcaption class="testimonial__attribution">
-          <span class="testimonial__name">Chris Mather</span>
-          <span class="testimonial__title">Chief Executive Officer</span>
-          <span class="testimonial__company">Mather &amp; Co</span>
-        </figcaption>
-      </figure>
+  testPrev.addEventListener('click', function () {
+    goToTestimonial(testIndex - 1);
+  });
 
-      <figure class="testimonial">
-        <blockquote class="testimonial__quote">
-          <p>I have enjoyed working with Andy Grant for over 25 years. His instinct and attention to detail in large-scale land-planning for leisure destinations is second to none.</p>
-        </blockquote>
-        <figcaption class="testimonial__attribution">
-          <span class="testimonial__name">Larry Wyatt</span>
-          <span class="testimonial__title">CEO</span>
-          <span class="testimonial__company">Wyatt Design Group</span>
-        </figcaption>
-      </figure>
+  testNext.addEventListener('click', function () {
+    goToTestimonial(testIndex + 1);
+  });
+}
 
-      <figure class="testimonial">
-        <blockquote class="testimonial__quote">
-          <p>Andy is able to gauge the needs of the client in any situation and develop programs that are both functional and cost-effective. He also has a great sense of humor that at certain times is much needed to keep the team focused on the goal.</p>
-        </blockquote>
-        <figcaption class="testimonial__attribution">
-          <span class="testimonial__name">Pat Janikowski, AIA, NCARB</span>
-          <span class="testimonial__title">President</span>
-          <span class="testimonial__company">PJA</span>
-        </figcaption>
-      </figure>
+const serviceData = {
+  'modal-01': {
+    number: '01',
+    title: 'Market Analysis',
+    body: '<p>Grant Leisure assesses market support by evaluating overall market trends and growth in targeted markets. Available market support is determined by analyzing occupancy rates for hotels and condominiums, absorption rates and sales prices for real estate products, and utilization and revenue generated by attractions, support facilities, and amenities.</p><p>Consumer surveys, focus groups, and other market research techniques are used to test and refine demand estimates and market profiles.</p>'
+  },
+  'modal-02': {
+    number: '02',
+    title: 'Development Planning',
+    body: '<p>Grant Leisure works directly with architects, planners, engineers, and other professionals to achieve the optimum balance between economic planning and physical design, resulting in real estate products and creative development programs that are responsive to the market and financially viable.</p><p>Based on the identified target markets, competitive supply, location, and concept of the proposed project, we recommend an appropriate mix of units and amenities, sizing of attractions and accommodations, amount and type of facilities, requirements for food and beverage space, and phasing for the overall program.</p>'
+  },
+  'modal-03': {
+    number: '03',
+    title: 'Financial Feasibility',
+    body: '<p>Grant Leisure has created proprietary financial models for preparing cash flow and income projections, determining financial rates of return, and sensitivity testing of multi-use community development, income properties, and portfolio disposition programs.</p><p>Our feasibility studies cover land development projects such as new towns, resort communities, and residential developments - as well as income-producing properties including hotel, office, retail, and residential uses. Model users range from small investment syndicates to large development corporations.</p>'
+  },
+  'modal-04': {
+    number: '04',
+    title: 'Funding Assistance',
+    body: '<p>Grant Leisure identifies and evaluates acquisition and investment opportunities for our clients and provides assistance in purchase, sale, lease, and financing transaction negotiations.</p><p>We additionally reach out to our own network of investors and financiers to evaluate interest and make introductions.</p>'
+  },
+  'modal-05': {
+    number: '05',
+    title: 'Operational Planning',
+    body: '<p>Grant Leisure reviews performance, examines areas for expansion and revitalization, prepares pricing strategies and marketing programs, assists in operator selection and tenant negotiation, and evaluates financial restructuring and disposition alternatives.</p><p>Our services generally extend to: visitor circulation and services, marketing and branding, staff recruitment and training, development of operating manuals, communications systems, food and beverage, entertainment, and education.</p>'
+  },
+  'modal-06': {
+    number: '06',
+    title: 'Turnkey Management',
+    body: '<p>Clients profit from the opportunity to utilize Grant Leisure\'s decades of operating experience and apply it to the policies and procedures that will become the operational foundation for their venture.</p><p>We recruit executive staff as needed and consult with the selected operating team on best practices from Pre&#8209;Opening preparation through Grand Opening and beyond. Team members are reserved for 2 years following opening to monitor operations and make adjustments towards stabilization.</p>'
+  }
+};
 
-      <figure class="testimonial">
-        <blockquote class="testimonial__quote">
-          <p>Our collaboration was truly an experience due to Andrew's unique understanding of operations and how technology could enhance the guest experience. His many years of experience have proven to be a big positive on all of the projects with which we have collaborated.</p>
-        </blockquote>
-        <figcaption class="testimonial__attribution">
-          <span class="testimonial__name">Brian Edwards</span>
-          <span class="testimonial__title">Founder &amp; Chairman</span>
-          <span class="testimonial__company">Edwards Technologies Inc</span>
-        </figcaption>
-      </figure>
+const modalOverlay = document.getElementById('modal-overlay');
+const modalClose = document.getElementById('modal-close');
+const modalNumber = document.getElementById('modal-number');
+const modalTitle = document.getElementById('modal-title');
+const modalBody = document.getElementById('modal-body');
 
-    </div>
-    <div class="testimonials__controls">
-      <button class="carousel-btn carousel-btn--prev" id="test-prev" aria-label="Previous testimonial">&#8592;</button>
-      <div class="testimonials__dots" id="testimonials-dots"></div>
-      <button class="carousel-btn carousel-btn--next" id="test-next" aria-label="Next testimonial">&#8594;</button>
-    </div>
-  </div>
-</section>
+function openModal(id) {
+  const data = serviceData[id];
+  if (!data) return;
+  modalNumber.textContent = data.number;
+  modalTitle.textContent = data.title;
+  modalBody.innerHTML = data.body;
+  modalOverlay.classList.add('is-open');
+  modalOverlay.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  modalClose.focus();
+}
 
-<section id="engage" aria-labelledby="engage-heading">
-  <div class="engage__inner">
-    <div class="engage__left">
-      <h2 id="engage-heading" class="engage__heading">Don't like waiting? Neither do we.</h2>
-      <address class="engage__contact">
-  <p class="engage__address">Address: 418 Wenham Road, Pasadena, CA 91107</p>
-  <div class="engage__contact-row">
-    <div>
-      <span class="engage__contact-label">R. Liljenwall</span>
-      <a class="engage__contact-link" href="tel:+16262983709">626-298-3709</a>
-    </div>
-    <div>
-      <span class="engage__contact-label">K. Robertson</span>
-      <a class="engage__contact-link" href="tel:+17024974459">702-497-4459</a>
-    </div>
-  </div>
-</address>
-    </div>
-    <div class="engage__right">
-      <form class="engage-form" id="engage-form" novalidate>
-  <div class="form-field form-field--name">
-    <label class="form-label" for="field-name">Name</label>
-    <input
-      class="form-input"
-      type="text"
-      id="field-name"
-      name="name"
-      autocomplete="name"
-      required
-      minlength="2"
-    >
-  </div>
-  <div class="form-field form-field--email">
-    <label class="form-label" for="field-email">Email</label>
-    <input
-      class="form-input"
-      type="email"
-      id="field-email"
-      name="email"
-      autocomplete="email"
-      required
-    >
-  </div>
-  <div class="form-field form-field--phone">
-    <label class="form-label" for="field-phone">Phone</label>
-    <input
-      class="form-input"
-      type="tel"
-      id="field-phone"
-      name="phone"
-      autocomplete="tel"
-    >
-  </div>
-  <div class="form-field form-field--message">
-    <label class="form-label" for="field-message">Message</label>
-    <textarea
-      class="form-input form-input--textarea"
-      id="field-message"
-      name="message"
-      rows="5"
-      required
-    ></textarea>
-  </div>
-  <div class="form-field form-field--submit">
-    <button class="form-submit" type="submit">Send Message</button>
-  </div>
-</form>
-  </div>
-</section>
+function closeModal() {
+  modalOverlay.classList.remove('is-open');
+  modalOverlay.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
 
-  </main>
+if (modalOverlay) {
+  document.querySelectorAll('.bento__toggle').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      openModal(btn.getAttribute('data-modal'));
+    });
+  });
 
-  <footer id="footer" role="contentinfo">
-    <div class="footer__inner">
-      <p class="footer__legal">&copy; 2026 Grant Leisure. All Rights Reserved.</p>
-    </div>
-  </footer>
+  modalClose.addEventListener('click', closeModal);
 
-  <!-- Lenis v5 smooth scroll -- must load before GSAP -->
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+  modalOverlay.addEventListener('click', function (e) {
+    if (e.target === modalOverlay) closeModal();
+  });
 
-  <!-- GSAP + ScrollTrigger via CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeModal();
+  });
+}
 
-  <!-- Main JS deferred -->
-  <script src="js/main.js" defer></script>
+/* -- Proof counters: animate on scroll -------------------- */
 
-</body>
-</html>
+const proofNumbers = document.querySelectorAll('.proof-number');
+
+if (proofNumbers.length && typeof gsap !== 'undefined') {
+  proofNumbers.forEach(function (el) {
+    const target = parseInt(el.getAttribute('data-target'), 10);
+    const suffix = el.getAttribute('data-suffix') || '';
+
+    gsap.fromTo(
+      el,
+      { innerText: 0 },
+      {
+        innerText: target,
+        duration: 2,
+        ease: 'power2.out',
+        snap: { innerText: 1 },
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 80%',
+          once: true
+        },
+        onUpdate: function () {
+          el.textContent = Math.floor(parseFloat(el.innerText)) + suffix;
+        }
+      }
+    );
+  });
+}
+
+/* -- Hero video: parallax on scroll (desktop only) -------- */
+
+ScrollTrigger.matchMedia({
+  '(min-width: 1024px)': function () {
+    const heroVideo = document.querySelector('.hero-video');
+
+    if (heroVideo && typeof gsap !== 'undefined') {
+      heroVideo.style.willChange = 'transform';
+
+      gsap.to(heroVideo, {
+        /* 30vh = 30% of viewport height -- video is full-bleed */
+        y: '30vh',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true
+        }
+      });
+    }
+  }
+});
+
+/* -- Map image: parallax on scroll (desktop only) --------- */
+
+ScrollTrigger.matchMedia({
+  '(min-width: 1024px)': function () {
+    const reachMap = document.querySelector('.reach-map');
+
+    if (reachMap && typeof gsap !== 'undefined') {
+      reachMap.style.willChange = 'transform';
+
+      gsap.to(reachMap, {
+        /* -8vh pulls map upward against scroll -- classic parallax depth */
+        y: '-8vh',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#reach',
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true
+        }
+      });
+    }
+  }
+});
+
+/* ============================================================
+   PHASE 1 MOTION LAYER
+   Lenis v5 smooth scroll + GSAP ScrollTrigger heading reveals
+   ============================================================ */
+
+/* -- Lenis: smooth scroll wired to GSAP ticker ------------ */
+
+if (typeof gsap !== 'undefined' && typeof Lenis !== 'undefined') {
+
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: function (t) {
+      /* Exponential ease-out: fast start, smooth deceleration */
+      return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+    },
+    smoothWheel: true
+  });
+
+  /* Proxy Lenis into GSAP ScrollTrigger so all existing
+     triggers (proof counters, etc.) keep accurate positions */
+  lenis.on('scroll', ScrollTrigger.update);
+
+  gsap.ticker.add(function (time) {
+    lenis.raf(time * 1000);
+  });
+
+  /* lagSmoothing intentionally omitted -- default prevents snap-to-bottom
+     caused by large ticker deltas after tab switches or resizes */
+
+  /* Stop Lenis inside open modals so they can scroll independently */
+  const modalOverlayEl = document.getElementById('modal-overlay');
+  if (modalOverlayEl) {
+    modalOverlayEl.addEventListener('wheel', function (e) {
+      e.stopPropagation();
+    }, { passive: true });
+  }
+
+  /* Refresh all ScrollTrigger instances once Lenis is live */
+  ScrollTrigger.refresh();
+
+  /* -- Nav scroll state via Lenis (authoritative over native listener) -- */
+
+  if (siteNav) {
+    lenis.on('scroll', function (e) {
+      if (e.scroll > 50) {
+        siteNav.classList.add('is-scrolled');
+      } else {
+        siteNav.classList.remove('is-scrolled');
+      }
+    });
+  }
+
+  /* -- Heading fade-up reveals ----------------------------- */
+
+  const fadeHeadings = document.querySelectorAll(
+    '#hero h1, .about-heading, .expertise__heading, .leadership__heading, .engage__heading'
+  );
+
+  if (fadeHeadings.length) {
+    fadeHeadings.forEach(function (el) {
+      gsap.fromTo(
+        el,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 80%',
+            once: true
+          }
+        }
+      );
+    });
+  }
+
+}
+/* Section wipe reveal -- clip-path scrub */
+const revealSections = document.querySelectorAll('.reveal-wipe');
+if (revealSections.length && typeof gsap !== 'undefined') {
+  revealSections.forEach((section) => {
+    gsap.to(section, {
+      clipPath: 'inset(0% 0 0 0)',
+      ease: 'none',
+      scrollTrigger: {
+        trigger: section,
+        start: 'top bottom',
+        end: 'top top',
+        scrub: 1.5,
+      }
+    });
+  });
+}

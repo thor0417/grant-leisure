@@ -483,7 +483,7 @@ if (revealSections.length && typeof gsap !== 'undefined') {
         trigger: section,
         start: 'top bottom',
         end: 'top top',
-        scrub: true,
+        scrub: 1.5,
       }
     });
   });
