@@ -1315,6 +1315,14 @@
   text-transform: uppercase;
 }
 
+.testimonial__company {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--gl-white) !important; /* Overrides body color inherited from global.css */
+  opacity: 0.6;
+  letter-spacing: 0.04em;
+}
+
 /* ============================================================
    #ENGAGE -- Contact Section
    White surface. Two-column desktop. Copy left, form right.
