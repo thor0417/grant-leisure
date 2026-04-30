@@ -339,24 +339,25 @@ if (proofNumbers.length && typeof gsap !== 'undefined') {
   });
 }
 
-/* -- Hero video: parallax on scroll (desktop only) -------- */
+/* -- Map image: parallax on scroll (desktop only) --------- */
 
 ScrollTrigger.matchMedia({
   '(min-width: 1024px)': function () {
-    const heroVideo = document.querySelector('.hero-video');
+    const reachMap = document.querySelector('.reach-map');
 
-    if (heroVideo && typeof gsap !== 'undefined') {
-      /* GPU compositing hint -- isolates transform from paint layer */
-      heroVideo.style.willChange = 'transform';
+    if (reachMap && typeof gsap !== 'undefined') {
+      /* Transform on the figure wrapper -- cleaner compositing than
+         targeting the lazy-loaded img directly */
+      reachMap.style.willChange = 'transform';
 
-      gsap.to(heroVideo, {
-        /* 30vh = 30% of viewport height, which equals the full-bleed
-           video height. Moves video down as user scrolls out of hero. */
-        y: '30vh',
+      gsap.to(reachMap, {
+        /* 8vh ≈ 20% of the map's 600px natural height at standard viewport.
+           Adjust this value if the breathing feels too strong or too weak. */
+        y: '8vh',
         ease: 'none',
         scrollTrigger: {
-          trigger: '#hero',
-          start: 'top top',
+          trigger: '#reach',
+          start: 'top bottom',
           end: 'bottom top',
           scrub: true
         }
