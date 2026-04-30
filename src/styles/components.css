@@ -1521,9 +1521,9 @@
   transform: translateY(40px);
   will-change: opacity, transform;
 }
-/* Content reveal -- initial hidden state for GSAP tween */
+/* Content reveal -- opacity + rise, matches about-reveal pattern */
 .reveal-content {
-  clip-path: inset(100% 0 0 0);
+  opacity: 0;
   transform: translateY(40px);
-  will-change: clip-path, transform;
+  will-change: opacity, transform;
 }
