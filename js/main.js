@@ -81,16 +81,21 @@ if (teamTrack && teamPrev && teamNext) {
   function updateTeamCarousel() {
     const cardWidth = teamCards[0].offsetWidth + parseInt(getComputedStyle(teamTrack).gap || '0');
     teamTrack.style.transform = 'translateX(-' + (teamIndex * cardWidth) + 'px)';
-    teamPrev.disabled = teamIndex === 0;
-    teamNext.disabled = teamIndex >= getTeamMax();
+    /* Arrows always enabled -- index wraps via modulo, no dead ends */
+    teamPrev.disabled = false;
+    teamNext.disabled = false;
   }
 
   teamPrev.addEventListener('click', function () {
-    if (teamIndex > 0) { teamIndex--; updateTeamCarousel(); }
+    /* Modulo wrap: stepping back from 0 lands on the last valid index */
+    teamIndex = (teamIndex - 1 + getTeamMax() + 1) % (getTeamMax() + 1);
+    updateTeamCarousel();
   });
 
   teamNext.addEventListener('click', function () {
-    if (teamIndex < getTeamMax()) { teamIndex++; updateTeamCarousel(); }
+    /* Modulo wrap: stepping past the last index returns to 0 */
+    teamIndex = (teamIndex + 1) % (getTeamMax() + 1);
+    updateTeamCarousel();
   });
 
   window.addEventListener('resize', function () {
