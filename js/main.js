@@ -490,22 +490,18 @@ if (aboutRevealEls.length && typeof gsap !== 'undefined') {
     });
   });
 }
-/* Content reveal -- per-element trigger, staggered delay, bidirectional */
+/* Content reveal -- opacity + rise, reveal once and stay */
 const revealElements = document.querySelectorAll('.reveal-content');
 if (revealElements.length && typeof gsap !== 'undefined') {
-  revealElements.forEach(function (el, i) {
+  revealElements.forEach(function (el) {
     gsap.to(el, {
-      clipPath: 'inset(0% 0 0 0)',
+      opacity: 1,
       y: 0,
       duration: 0.6,
       ease: 'power2.out',
-      /* Stagger via delay -- each element offsets by 0.1s from the previous */
-      delay: i * 0.1,
       scrollTrigger: {
         trigger: el,
         start: 'top 90%',
-        end: 'top 65%',
-        /* toggleActions handles reverse on scroll back -- scrub removed */
         toggleActions: 'play none none none'
       }
     });
