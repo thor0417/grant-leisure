@@ -1199,49 +1199,31 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js" defer></script>
 
   <script>
     /* =============================================================
-       projects.js -- scoped to projects.html
-       1. Ghost nav -- solid on scroll past header strip
-       2. Mobile nav toggle
-       3. Accordion open/close
-       4. GSAP scroll reveals
+       projects-inline.js -- scoped to projects.html
+       Handles UI only: nav toggle, accordion, category filter.
+       Motion (Lenis, GSAP reveals, Ken Burns) lives in projects-motion.js.
        ============================================================= */
 
-    const siteNav     = document.querySelector('.site-nav');
-    const headerStrip = document.querySelector('.projects-header');
-
-    if (siteNav && headerStrip) {
-      const navObserver = new IntersectionObserver(
-        ([entry]) => {
-          siteNav.classList.toggle('is-scrolled', !entry.isIntersecting);
-        },
-        { threshold: 0 }
-      );
-      navObserver.observe(headerStrip);
-    }
+    /* -- Nav: mobile toggle ----------------------------------- */
 
     const navToggle = document.querySelector('.nav-toggle');
     const navLinks  = document.querySelector('.nav-links');
 
     if (navToggle && navLinks) {
-      navToggle.addEventListener('click', () => {
+      navToggle.addEventListener('click', function () {
         const isOpen = navToggle.classList.toggle('is-open');
         navToggle.setAttribute('aria-expanded', isOpen);
         navLinks.classList.toggle('is-open');
       });
     }
 
-    /* -- Pill bar: solid navy at top, ghost on scroll -- */
-    const projectsHeader = document.querySelector('.projects-header');
-
-    window.addEventListener('scroll', () => {
-      projectsHeader.classList.toggle('is-scrolled', window.scrollY > 72);
-    });
-
     /* -- Accordion: delegated to document so all sections respond -- */
-    document.addEventListener('click', (e) => {
+
+    document.addEventListener('click', function (e) {
 
       const trigger = e.target.closest('.project-trigger, .cinematic-trigger');
       if (trigger) {
@@ -1253,7 +1235,7 @@
         trigger.setAttribute('aria-expanded', isOpen);
 
         if (isOpen) {
-          setTimeout(() => {
+          setTimeout(function () {
             panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
           }, 400);
         }
@@ -1268,27 +1250,28 @@
         panel.classList.remove('is-open');
 
         const panelId        = panel.id;
-        const relatedTrigger = document.querySelector(`[aria-controls="${panelId}"]`);
+        const relatedTrigger = document.querySelector('[aria-controls="' + panelId + '"]');
         if (relatedTrigger) relatedTrigger.setAttribute('aria-expanded', 'false');
       }
     });
 
-    /* -- Category filter: style.display overrides CSS flex -- */
+    /* -- Category filter -------------------------------------- */
+
     (function () {
       const pills    = document.querySelectorAll('.category-pill');
       const sections = document.querySelectorAll('.projects-grid');
 
       function filterTo(category) {
-        sections.forEach(section => {
+        sections.forEach(function (section) {
           section.style.display = section.id === category ? 'flex' : 'none';
         });
-        pills.forEach(pill => {
+        pills.forEach(function (pill) {
           pill.classList.toggle('is-active', pill.getAttribute('data-category') === category);
         });
       }
 
-      pills.forEach(pill => {
-        pill.addEventListener('click', (e) => {
+      pills.forEach(function (pill) {
+        pill.addEventListener('click', function (e) {
           e.preventDefault();
           filterTo(pill.getAttribute('data-category'));
           document.querySelector('.projects-header').scrollIntoView({ behavior: 'smooth' });
@@ -1298,48 +1281,9 @@
       filterTo('attractions');
     }());
 
-    function initGSAP() {
-      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-
-      gsap.registerPlugin(ScrollTrigger);
-
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (prefersReducedMotion) {
-        document.querySelectorAll('[data-reveal]').forEach(el => {
-          el.style.opacity   = '1';
-          el.style.transform = 'none';
-        });
-        return;
-      }
-
-      gsap.utils.toArray('[data-reveal]:not([data-reveal="left"]):not([data-reveal="right"])').forEach(el => {
-        gsap.fromTo(el,
-          { opacity: 0, y: 32 },
-          { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out',
-            scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' } }
-        );
-      });
-
-      gsap.utils.toArray('[data-reveal="left"]').forEach(el => {
-        gsap.fromTo(el,
-          { opacity: 0, x: -48 },
-          { opacity: 1, x: 0, duration: 1, ease: 'power3.out',
-            scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' } }
-        );
-      });
-
-      gsap.utils.toArray('[data-reveal="right"]').forEach(el => {
-        gsap.fromTo(el,
-          { opacity: 0, x: 48 },
-          { opacity: 1, x: 0, duration: 1, ease: 'power3.out',
-            scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' } }
-        );
-      });
-    }
-
-    window.addEventListener('load', initGSAP);
-
   </script>
+
+  <script src="js/projects-motion.js" defer></script>
 
 </body>
 </html>
