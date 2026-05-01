@@ -190,7 +190,7 @@
 }
 
 .project-panel.is-open {
-  max-height: 600px;
+  max-height: 2000px; /* High cap -- accommodates any brief length */
 }
 
 .project-panel-inner {
@@ -243,7 +243,6 @@
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid rgba(50, 62, 72, 0.12);
-  overflow: hidden;
   margin: 0;
 }
 
@@ -251,6 +250,7 @@
   position: absolute;
   inset: 0;
   z-index: var(--z-base);
+  overflow: hidden; /* Contains image within the fixed aspect-ratio frame -- not the parent */
 }
 
 .cinematic-image-wrap img {
@@ -360,7 +360,7 @@
 }
 
 .cinematic-panel.is-open {
-  max-height: 600px;
+  max-height: 2000px; /* High cap -- accommodates any brief length */
 }
 
 .cinematic-panel-inner {
