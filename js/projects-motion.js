@@ -195,13 +195,13 @@
         gsap.fromTo(img,
           { scale: 1 },
           {
-            scale: 1.08, /* Slightly more pronounced -- visible at the scrub rate */
+            scale: 1.04, /* Subtle -- reads as depth, not a glitch */
             ease: 'none',
             scrollTrigger: {
               trigger: row,
-              start: 'top bottom',
+              start: 'top 85%', /* Fires when row is nearly in view */
               end: 'bottom top',
-              scrub: 2 /* 2s lag -- slow and cinematic */
+              scrub: 1.5 /* Tighter response -- less perceived lag */
             }
           }
         );
