@@ -119,11 +119,11 @@
         {
           opacity: 1,
           x: 0,
-          duration: 1.1,
-          ease: 'power3.out',
+          duration: 1.6, /* Slower -- deliberate, not snappy */
+          ease: 'power2.out',
           scrollTrigger: {
             trigger: el.closest('.project-row') || el,
-            start: 'top 82%',
+            start: 'top 90%', /* Earlier trigger -- animation is well underway when in view */
             toggleActions: 'play none none none'
           }
         }
@@ -137,21 +137,20 @@
         {
           opacity: 1,
           x: 0,
-          duration: 1.1,
-          ease: 'power3.out',
+          duration: 1.6,
+          ease: 'power2.out',
           scrollTrigger: {
             trigger: el.closest('.project-row') || el,
-            start: 'top 82%',
+            start: 'top 90%',
             toggleActions: 'play none none none'
           }
         }
       );
     });
 
-    /* Text blocks -- fade up, 150ms after the image starts */
+    /* Text blocks -- fade up, 250ms after the image starts */
     gsap.utils.toArray('[data-reveal]:not([data-reveal="left"]):not([data-reveal="right"])').forEach(function (el) {
 
-      /* Only apply this stagger to editorial row text blocks */
       const isEditorialText = el.classList.contains('project-text-block');
 
       gsap.fromTo(el,
@@ -159,12 +158,12 @@
         {
           opacity: 1,
           y: 0,
-          duration: 0.9,
-          ease: 'power3.out',
-          delay: isEditorialText ? 0.15 : 0, /* 150ms stagger after image on editorial rows */
+          duration: 1.2,
+          ease: 'power2.out',
+          delay: isEditorialText ? 0.25 : 0, /* 250ms stagger -- image leads, text follows */
           scrollTrigger: {
             trigger: el.closest('.project-row') || el.closest('.project-row-cinematic') || el,
-            start: 'top 82%',
+            start: 'top 90%',
             toggleActions: 'play none none none'
           }
         }
@@ -183,21 +182,26 @@
 
     gsap.utils.toArray('.project-row-cinematic').forEach(function (row) {
 
+      const imgWrap = row.querySelector('.cinematic-image-wrap');
       const img     = row.querySelector('.cinematic-image-wrap img');
       const content = row.querySelector('.cinematic-content');
 
-      /* Ken Burns: slow scale scrubbed to scroll while row is visible */
-      if (img) {
+      /* Ken Burns: prep the image for GPU-accelerated scale */
+      if (img && imgWrap) {
+        imgWrap.style.overflow      = 'hidden'; /* Clip the scale so it never bleeds outside */
+        img.style.transformOrigin   = 'center center';
+        img.style.willChange        = 'transform';
+
         gsap.fromTo(img,
           { scale: 1 },
           {
-            scale: 1.06,
+            scale: 1.08, /* Slightly more pronounced -- visible at the scrub rate */
             ease: 'none',
             scrollTrigger: {
               trigger: row,
               start: 'top bottom',
               end: 'bottom top',
-              scrub: 1.5 /* Smooth, not snappy -- 1.5s lag behind scroll */
+              scrub: 2 /* 2s lag -- slow and cinematic */
             }
           }
         );
@@ -210,11 +214,11 @@
           {
             opacity: 1,
             y: 0,
-            duration: 1,
-            ease: 'power3.out',
+            duration: 1.2,
+            ease: 'power2.out',
             scrollTrigger: {
               trigger: row,
-              start: 'top 75%',
+              start: 'top 80%',
               toggleActions: 'play none none none'
             }
           }

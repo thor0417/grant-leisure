@@ -360,7 +360,7 @@
 }
 
 .cinematic-panel.is-open {
-  max-height: 900px; /* Increased -- accommodates longer briefs like The Strat */
+  max-height: 600px;
 }
 
 .cinematic-panel-inner {
