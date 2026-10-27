@@ -140,10 +140,15 @@ if (teamTrack && teamPrev && teamNext) {
 /* -- Bio modal -------------------------------------------- */
 
 const bioData = {
+  'bio-01': {
+    name: 'Robert Liljenwall',
+    title: 'Managing Director',
+    body: '<p>Robert has been a long-time principal of Grant Leisure, serving as head of its marketing and branding services and providing initial concept and creative direction for a broad spectrum of leisure attractions, visitor services, and integrated marketing communications programs.</p><p>His career as a themed entertainment industry executive began with Disney and he has since worked on leisure and entertainment projects spanning a variety of themed attractions, zoological parks, resorts, film studios, themed entertainment centers, and new urban developments.</p><p>Robert is an expert with developing a project\'s customer marketing matrix, identifying how best to serve visitors, maximize revenue streams, and ensure the highest degree of customer satisfaction.</p>'
+  },
   'bio-02': {
     name: 'Keith Robertson',
-    title: 'Managing Director',
-    body: '<p>Keith is a senior executive with over 40 years of international project management experience in design, engineering, and operations for the development of major electrical power systems, commercial, industrial and residential construction, theme parks, water parks, tourism, and hospitality.</p><p>His high-energy approach and diversified experience in strategic planning, training, staffing, maintenance, and operations has proven invaluable for his clients as he continues driving innovative engineering and management solutions.</p>'
+    title: 'Co-Managing Director',
+    body: '<p>Keith is a well-rounded senior executive with over 40 years of international project management experience in design, engineering, and operations for the development of major electrical power systems, commercial, industrial and residential construction, theme parks, water parks, tourism, and hospitality.</p><p>His high-energy approach and diversified experience in strategic planning, training, staffing, maintenance, and operations has proven invaluable for his clients as he continues driving innovative engineering and management solutions.</p>'
   },
   'bio-03': {
     name: 'Andy Grant',
@@ -152,33 +157,33 @@ const bioData = {
   },
   'bio-04': {
     name: 'Raul Rios',
-    title: 'Director of Consulting Operations, Europe',
+    title: 'Director Consulting Operations, Europe',
     body: '<p>Raul brings over 15 years of industry experience and manages the consulting back-office for Grant Leisure\'s operations outside the US. Initially acting as Director of Projects and Commercial Controller, he was later appointed as Director for an international marketing services group.</p><p>Working as a consultant, his input ranges from preparing financial feasibilities, business and operational plans, and overseeing attraction construction projects for clients including Olympic Park Legacy Company, Ferrari World Abu Dhabi, Carlsberg, NBC Universal, and BBC.</p>'
   },
   'bio-05': {
     name: 'Clive Jones',
-    title: 'Director of Strategic Planning',
-    body: '<p>Clive has evaluated investment programs and solicited investors and operators for major hotels, resorts, and casinos throughout Asia-Pacific, the Americas, and Europe. His expertise in market and investment analysis, development programming, and database marketing has earned him a sterling reputation within the attractions, hospitality, and tourism industries.</p><p>Notable clients include the US National Park Service, Hong Kong Tourism Board, Canadian Tourism Board, the state of California, and the city of San Francisco.</p>'
+    title: 'Director Strategic Planning',
+    body: '<p>Clive has evaluated investment programs and solicited investors and operators for major hotels, resorts, and casinos throughout Asia-Pacific, the Americas, and Europe. His expertise in market and investment analysis, development programming, and database marketing has earned him a sterling reputation within the attractions, hospitality, and tourism industries.</p><p>Notable clients include the US National Park Service, Hong Kong Tourism Board, Canadian Tourism Board, the state of California, and the city of San Francisco. His ability to create market-driven value for clients is the common denominator across all his successful assignments.</p>'
   },
   'bio-06': {
     name: 'Claus Frimand',
-    title: 'Director of Operations',
+    title: 'Director Operations',
     body: '<p>Claus brings 35 years of experience in the service and leisure industry and has been an expat for over 25 years, living in ten different countries working across Europe, the Middle East, and Asia. He was responsible for opening Ferrari World in Abu Dhabi.</p><p>His breadth of expertise and insight for recruitment and operations has been an asset to Grant Leisure, having worked for organizations such as IKEA, Disneyland Paris, the Olympics, EXPO 2000, and several international traveling exhibitions.</p>'
   },
   'bio-07': {
     name: 'Philip Kwong',
-    title: 'Director of Compliance and Business Operations',
-    body: '<p>Philip Kwong works at the intersection of compliance, operations, and strategy. Over eight years in highly regulated and emerging industries, he has held leadership roles in international standards development, including Vice Convener of ISO IWA 37 and Chair of UL Canada\'s Technical Guide 4400-2. He has contributed to government regulatory consultations and published on regulation and standards in the European policy press. His work spans market entry, regulatory architecture, quality systems, and commercialization, taking complex projects from inception through to completion for publicly traded companies and organizations entering new markets. He operates between Vancouver and Bangkok.</p>'
+    title: 'Compliance and Operations Consultant',
+    body: '<p>Philip Kwong is a compliance and operations consultant with eight years of experience in highly regulated and emerging industries. Having held leadership roles in the development of international standards bodies, including Vice Convener of ISO IWA 37 and Chair of UL Canada\'s TG 4400-2, he has contributed to regulatory frameworks, worked with publicly traded companies, and taken complex projects from inception through to completion.</p>'
   },
   'bio-08': {
     name: 'Andrew Coates',
-    title: 'Director of Zoological Operations',
+    title: 'Director Zoological Operations',
     body: '<p>Andrew delivers hands-on operational experience paired with an architectural background, working across the full range of disciplines in the visitor attractions industry.</p><p>Beginning his career as Operations Manager for the Zoological Society of London, he moved on to become a Director for Grant Leisure Group, Managing Director for MICE Group, and CEO for WARGM Co. Ltd, a UK charity organization for ensuring the long-term sustainability of the Royal Gunpowder Mills. Andrew is known for his pragmatic approach, able to balance the various tensions impacting projects to ensure results-driven solutions.</p>'
   },
-  'bio-10': {
-    name: 'Scott Lange',
-    title: 'Director of Marketing',
-    body: '<p>Scott is a lifelong marketer, television producer, and business growth expert with over 40 years of experience commercializing intellectual property and securing corporate sponsorship across sports, entertainment, arts, and philanthropy.</p><p>His career highlights include co-founding National College Television, driving the commercial growth of the New York City Marathon, securing sponsorship for SFX Sports Television, monetizing The Gates Project by Christo and Jean-Claude, and secured sponsorship for the Singleton Foundation\'s award-winning Million Stories Media channel.</p>'
+  'bio-09': {
+    name: 'Edmund Rowley Williams',
+    title: 'Director Business Development',
+    body: '<p>Edmund has enjoyed over 25 years as a business development and management consultant, specializing in improving access to cultural visitor destinations. He has led over 150 projects for Grant Leisure, with clients ranging from leisure enterprises and financial institutions to non-profit and government agencies such as Tate Modern, Victoria and Albert Museum, Windsor Castle, the London Eye, Legoland, and Babelsberg Studios.</p><p>Several of Edmund\'s projects including Our Dynamic Earth, The Royal Armouries, and Tower of London have involved multi-year assignments engaging all stages of planning, development, and operations.</p>'
   }
 };
 
@@ -293,9 +298,9 @@ const serviceData = {
     body: '<p>Grant Leisure reviews performance, examines areas for expansion and revitalization, prepares pricing strategies and marketing programs, assists in operator selection and tenant negotiation, and evaluates financial restructuring and disposition alternatives.</p><p>Our services generally extend to: visitor circulation and services, marketing and branding, staff recruitment and training, development of operating manuals, communications systems, food and beverage, entertainment, and education.</p>'
   },
   'modal-06': {
-    number: '04',
-    title: 'Project Management and Compliance',
-    body: '<p>Grant Leisure provides direct executive oversight from concept through completion, managing the full project lifecycle across planning, procurement, compliance, and operational readiness. Every engagement is structured to meet its regulatory requirements and deliver on its brief.</p><p>We draw on decades of operational experience to establish the policies, procedures, and governance frameworks that become the foundation for your venture. Where required, we recruit and embed executive staff and consult with the operating team on best practices from pre-opening preparation through grand opening and beyond.</p><p>Team members remain available for two years following opening to monitor performance, identify gaps, and drive stabilization. The result is an operation built to regulatory standard and positioned to perform from day one.</p>'
+    number: '06',
+    title: 'Turnkey Management',
+    body: '<p>Clients profit from the opportunity to utilize Grant Leisure\'s decades of operating experience and apply it to the policies and procedures that will become the operational foundation for their venture.</p><p>We recruit executive staff as needed and consult with the selected operating team on best practices from Pre&#8209;Opening preparation through Grand Opening and beyond. Team members are reserved for 2 years following opening to monitor operations and make adjustments towards stabilization.</p>'
   }
 };
 
@@ -985,18 +990,17 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
       
       /* Bleed 2: white → navy as #about scrolls away (settles before #proof enters).
          start 'center top' = bleed begins when about's CENTER reaches viewport
-         TOP (about is mostly scrolled past). Before this start, the underlay
-         sits on full white -- about's content displays on pure white during
-         its centered viewport time.
-         end 'bottom top' = bleed completes when about's bottom exits viewport.
-         Gives wide scroll window for smooth 8-stop walk. Proof lands on
-         settled navy since about is fully gone by then. */
-      buildBleed('#about', 'center top', 'bottom top', 0, 7);
+         TOP (about is mostly scrolled past, only bottom portion visible).
+         Before this start, the underlay sits on full white -- about's content
+         displays on pure white during its centered viewport time.
+         end 'bottom 60%' = navy fully settled while about's bottom is still
+         60% down viewport, generous pure-navy buffer before proof arrives. */
+      buildBleed('#about', 'center top', 'bottom 60%', 0, 7);
       
       /* Bleed 3: navy → white as #expertise scrolls away (settles before #validation enters).
          Reverted to last-known-working values. Services stays on full navy
          until expertise is actually exiting viewport. */
-      buildBleed('#expertise', 'bottom 80%', 'bottom 20%', 7, 0);
+      buildBleed('#expertise', 'bottom 80%', 'bottom top', 7, 0);
 
       ScrollTrigger.refresh();
     });
@@ -1031,12 +1035,8 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
          20-40%: Logic + About (white held)
          40-48%: Bleed white → navy into Proof
          48-68%: Proof + Reach + Expertise (navy held)
-         68-73%: Bleed navy → white into Validation
-         73-100%: Validation through Footer (white held)
-       NOTE: Bleed 3 window shifted from 62-67% to 68-73% after bento
-       was reduced from 6 cards to 4 cards (shorter page, validation
-       arrives earlier in scroll percentage). Adjust further if Bleed 3
-       fires while expertise is still in view.
+         68-76%: Bleed navy → white into Validation
+         76-100%: Validation through Footer (white held)
        Adjust these if the bleeds land too early or too late on mobile.
        ================================================================ */
     bleedMM.add('(max-width: 767px)', function () {
@@ -1150,26 +1150,24 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
           '33.8%':  { backgroundColor: stops[6] },
           '34%':    { backgroundColor: stops[7] },
 
-          /* Proof + Reach + Expertise: held navy -- extended to 68% (was 62%)
-             to compensate for the bento reduction from 6 cards to 4 cards.
-             4 cards at fixed 320px is shorter than the original 6-card
-             auto-height grid, which shifts validation earlier in scroll
-             percentage. Holding navy through 68% ensures services always
-             displays on the full navy underlay regardless of card count. */
-          '68%':    { backgroundColor: stops[7] },
+          /* Proof + Reach + Expertise: held navy -- extended to 59% (was 55%)
+             so services stays on full navy longer before the walk to white
+             begins. Combined with #expertise's increased bottom padding in
+             mobile.css, services content sits on pure navy throughout its
+             viewport time. */
+          '59%':    { backgroundColor: stops[7] },
 
-          /* Bleed 3: navy → white walk, lands at 73%.
-             Walk window 5% (68% → 73%). Shifted from 62%→67% to account
-             for the shorter bento -- validation now enters the viewport
-             earlier (scroll percentage-wise), so the walk is pushed later
-             to fire as expertise exits rather than while it is still visible. */
-          '68.8%':  { backgroundColor: stops[6] },
-          '69.6%':  { backgroundColor: stops[5] },
-          '70.4%':  { backgroundColor: stops[4] },
-          '71.2%':  { backgroundColor: stops[3] },
-          '72.0%':  { backgroundColor: stops[2] },
-          '72.8%':  { backgroundColor: stops[1] },
-          '73%':    { backgroundColor: stops[0] },
+          /* Bleed 3: navy → white walk, lands at 64%.
+             Walk window tightened from 8% to 5% -- same logic as Bleed 2.
+             Bleed happens in transition space after services scrolls off,
+             not during services content view. */
+          '59.8%':  { backgroundColor: stops[6] },
+          '60.6%':  { backgroundColor: stops[5] },
+          '61.4%':  { backgroundColor: stops[4] },
+          '62.2%':  { backgroundColor: stops[3] },
+          '63.0%':  { backgroundColor: stops[2] },
+          '63.8%':  { backgroundColor: stops[1] },
+          '64%':    { backgroundColor: stops[0] },
 
           /* Validation through Footer: held white */
           '100%':   { backgroundColor: stops[0] }
