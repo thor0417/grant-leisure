@@ -284,23 +284,13 @@ const serviceData = {
   },
   'modal-03': {
     number: '03',
-    title: 'Financial Feasibility',
-    body: '<p>Grant Leisure has created proprietary financial models for preparing cash flow and income projections, determining financial rates of return, and sensitivity testing of multi-use community development, income properties, and portfolio disposition programs.</p><p>Our feasibility studies cover land development projects such as new towns, resort communities, and residential developments - as well as income-producing properties including hotel, office, retail, and residential uses. Model users range from small investment syndicates to large development corporations.</p>'
-  },
-  'modal-04': {
-    number: '04',
-    title: 'Funding Assistance',
-    body: '<p>Grant Leisure identifies and evaluates acquisition and investment opportunities for our clients and provides assistance in purchase, sale, lease, and financing transaction negotiations.</p><p>We additionally reach out to our own network of investors and financiers to evaluate interest and make introductions.</p>'
-  },
-  'modal-05': {
-    number: '05',
     title: 'Operational Planning',
     body: '<p>Grant Leisure reviews performance, examines areas for expansion and revitalization, prepares pricing strategies and marketing programs, assists in operator selection and tenant negotiation, and evaluates financial restructuring and disposition alternatives.</p><p>Our services generally extend to: visitor circulation and services, marketing and branding, staff recruitment and training, development of operating manuals, communications systems, food and beverage, entertainment, and education.</p>'
   },
-  'modal-06': {
-    number: '06',
-    title: 'Turnkey Management',
-    body: '<p>Clients profit from the opportunity to utilize Grant Leisure\'s decades of operating experience and apply it to the policies and procedures that will become the operational foundation for their venture.</p><p>We recruit executive staff as needed and consult with the selected operating team on best practices from Pre&#8209;Opening preparation through Grand Opening and beyond. Team members are reserved for 2 years following opening to monitor operations and make adjustments towards stabilization.</p>'
+  'modal-04': {
+    number: '04',
+    title: 'Project Management and Compliance',
+    body: '<p>Grant Leisure provides executive oversight across the full project lifecycle, from initial concept through regulatory approval, procurement, and grand opening.</p><p>Our principals embed directly with client teams to manage planning frameworks, vendor selection, and compliance requirements across jurisdictions. We coordinate across architecture, engineering, operations, and legal disciplines to keep complex projects on schedule and within mandate.</p><p>Procurement is structured to meet both local regulatory standards and international best practices, with documentation and audit trails built for institutional scrutiny. Where regulatory approvals are required, our team navigates the process with agencies directly, removing that burden from the client entirely.</p><p>From groundbreaking to opening day, Grant Leisure ensures every milestone is met with the governance and precision that protects the client\'s investment and reputation.</p>'
   }
 };
 
