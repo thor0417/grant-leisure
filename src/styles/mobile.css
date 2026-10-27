@@ -312,7 +312,10 @@
     /* Fixed height so card swaps never resize the container.
        Tuned to fit the tallest card's natural content at 390px width
        (3-line body + padding + button), matching desktop card ratio. */
-    height: 280px;
+    /* Height increased from 280px -- card 04 (Project Management and Compliance)
+       has two-line body copy that overflows the old value. 320px fits all 4 cards
+       at 390px viewport width without dead space. */
+    height: 320px;
     touch-action: pan-y;
   }
 
@@ -323,6 +326,11 @@
     pointer-events: none;
     transition: opacity var(--duration-default) var(--ease-stellar);
     height: auto;
+    /* Strip card background so the page-underlay bleed shows through.
+       On desktop the navy underlay makes rgba(255,255,255,0.06) invisible.
+       On mobile the absolute positioning renders it as a hard rectangle. */
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.12);
   }
 
   .bento__card.is-active {
