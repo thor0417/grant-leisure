@@ -333,6 +333,23 @@
     border: 1px solid rgba(255, 255, 255, 0.12);
   }
 
+  /* Feature card (--feature variant) has solid green background from
+     components.css that blocks the underlay bleed from showing through.
+     Strip to transparent on mobile so the bleed is visible. */
+  .bento__card--feature {
+    background-color: transparent;
+  }
+
+  /* Expertise container and bento grid must be fully transparent on mobile
+     so the page-underlay bleed shows through. Any solid background on
+     #expertise, .expertise__inner, or .bento blocks the fade and renders
+     as a hard rectangle covering the bleed layer. */
+  #expertise,
+  .expertise__inner,
+  .bento {
+    background-color: transparent;
+  }
+
   .bento__card.is-active {
     opacity: 1;
     pointer-events: auto;
