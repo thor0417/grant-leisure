@@ -409,7 +409,12 @@
      VALIDATION / MARQUEE
      Gap reduced. Per-logo transform: scale(...) rules in components.css are
      preserved by NOT writing any rule that sets transform on .marquee__item img.
+     Background forced white so the GSAP underlay state does not bleed navy.
      ====================================================================== */
+
+  #validation {
+    background-color: var(--gl-white);
+  }
 
   .marquee__track {
     gap: 1.5rem;
