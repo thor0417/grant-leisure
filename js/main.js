@@ -1031,8 +1031,12 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
          20-40%: Logic + About (white held)
          40-48%: Bleed white → navy into Proof
          48-68%: Proof + Reach + Expertise (navy held)
-         68-76%: Bleed navy → white into Validation
-         76-100%: Validation through Footer (white held)
+         68-73%: Bleed navy → white into Validation
+         73-100%: Validation through Footer (white held)
+       NOTE: Bleed 3 window shifted from 62-67% to 68-73% after bento
+       was reduced from 6 cards to 4 cards (shorter page, validation
+       arrives earlier in scroll percentage). Adjust further if Bleed 3
+       fires while expertise is still in view.
        Adjust these if the bleeds land too early or too late on mobile.
        ================================================================ */
     bleedMM.add('(max-width: 767px)', function () {
@@ -1146,25 +1150,26 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
           '33.8%':  { backgroundColor: stops[6] },
           '34%':    { backgroundColor: stops[7] },
 
-          /* Proof + Reach + Expertise: held navy -- extended to 62% (was 59%)
-             to compensate for reduced #expertise bottom padding. When
-             expertise padding was reduced from 14rem to 10rem, validation's
-             scroll position moved earlier, requiring the navy hold to extend
-             so services stays on full navy throughout its viewport time. */
-          '62%':    { backgroundColor: stops[7] },
+          /* Proof + Reach + Expertise: held navy -- extended to 68% (was 62%)
+             to compensate for the bento reduction from 6 cards to 4 cards.
+             4 cards at fixed 320px is shorter than the original 6-card
+             auto-height grid, which shifts validation earlier in scroll
+             percentage. Holding navy through 68% ensures services always
+             displays on the full navy underlay regardless of card count. */
+          '68%':    { backgroundColor: stops[7] },
 
-          /* Bleed 3: navy → white walk, lands at 67%.
-             Walk window 5% (62% → 67%). Shifted from 59.8%→64% to compensate
-             for reduced expertise padding -- with less padding, validation
-             arrives earlier in scroll, so the walk happens later relative
-             to the new section positions. Services cards stay on navy. */
-          '62.8%':  { backgroundColor: stops[6] },
-          '63.6%':  { backgroundColor: stops[5] },
-          '64.4%':  { backgroundColor: stops[4] },
-          '65.2%':  { backgroundColor: stops[3] },
-          '66.0%':  { backgroundColor: stops[2] },
-          '66.8%':  { backgroundColor: stops[1] },
-          '67%':    { backgroundColor: stops[0] },
+          /* Bleed 3: navy → white walk, lands at 73%.
+             Walk window 5% (68% → 73%). Shifted from 62%→67% to account
+             for the shorter bento -- validation now enters the viewport
+             earlier (scroll percentage-wise), so the walk is pushed later
+             to fire as expertise exits rather than while it is still visible. */
+          '68.8%':  { backgroundColor: stops[6] },
+          '69.6%':  { backgroundColor: stops[5] },
+          '70.4%':  { backgroundColor: stops[4] },
+          '71.2%':  { backgroundColor: stops[3] },
+          '72.0%':  { backgroundColor: stops[2] },
+          '72.8%':  { backgroundColor: stops[1] },
+          '73%':    { backgroundColor: stops[0] },
 
           /* Validation through Footer: held white */
           '100%':   { backgroundColor: stops[0] }
