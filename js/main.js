@@ -291,6 +291,17 @@ const serviceData = {
     number: '04',
     title: 'Project Management and Compliance',
     body: '<p>Grant Leisure provides executive oversight across the full project lifecycle, from initial concept through regulatory approval, procurement, and grand opening.</p><p>Our principals embed directly with client teams to manage planning frameworks, vendor selection, and compliance requirements across jurisdictions. We coordinate across architecture, engineering, operations, and legal disciplines to keep complex projects on schedule and within mandate.</p><p>Procurement is structured to meet both local regulatory standards and international best practices, with documentation and audit trails built for institutional scrutiny. Where regulatory approvals are required, our team navigates the process with agencies directly, removing that burden from the client entirely.</p><p>From groundbreaking to opening day, Grant Leisure ensures every milestone is met with the governance and precision that protects the client\'s investment and reputation.</p>'
+  },
+  /* Aliases: HTML bento cards still reference modal-05 and modal-06 */
+  'modal-05': {
+    number: '03',
+    title: 'Operational Planning',
+    body: '<p>Grant Leisure reviews performance, examines areas for expansion and revitalization, prepares pricing strategies and marketing programs, assists in operator selection and tenant negotiation, and evaluates financial restructuring and disposition alternatives.</p><p>Our services generally extend to: visitor circulation and services, marketing and branding, staff recruitment and training, development of operating manuals, communications systems, food and beverage, entertainment, and education.</p>'
+  },
+  'modal-06': {
+    number: '04',
+    title: 'Project Management and Compliance',
+    body: '<p>Grant Leisure provides executive oversight across the full project lifecycle, from initial concept through regulatory approval, procurement, and grand opening.</p><p>Our principals embed directly with client teams to manage planning frameworks, vendor selection, and compliance requirements across jurisdictions. We coordinate across architecture, engineering, operations, and legal disciplines to keep complex projects on schedule and within mandate.</p><p>Procurement is structured to meet both local regulatory standards and international best practices, with documentation and audit trails built for institutional scrutiny. Where regulatory approvals are required, our team navigates the process with agencies directly, removing that burden from the client entirely.</p><p>From groundbreaking to opening day, Grant Leisure ensures every milestone is met with the governance and precision that protects the client\'s investment and reputation.</p>'
   }
 };
 
