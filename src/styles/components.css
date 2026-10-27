@@ -691,7 +691,8 @@
 
 @media (min-width: 72rem) {
   .bento {
-    grid-template-columns: repeat(3, 1fr);
+    /* 4 cards -- 2-column cap gives clean 2x2 at all widths above 48rem */
+    grid-template-columns: repeat(2, 1fr);
     align-items: stretch;
   }
 }

@@ -293,9 +293,9 @@ const serviceData = {
     body: '<p>Grant Leisure reviews performance, examines areas for expansion and revitalization, prepares pricing strategies and marketing programs, assists in operator selection and tenant negotiation, and evaluates financial restructuring and disposition alternatives.</p><p>Our services generally extend to: visitor circulation and services, marketing and branding, staff recruitment and training, development of operating manuals, communications systems, food and beverage, entertainment, and education.</p>'
   },
   'modal-06': {
-    number: '06',
-    title: 'Turnkey Management',
-    body: '<p>Clients profit from the opportunity to utilize Grant Leisure\'s decades of operating experience and apply it to the policies and procedures that will become the operational foundation for their venture.</p><p>We recruit executive staff as needed and consult with the selected operating team on best practices from Pre&#8209;Opening preparation through Grand Opening and beyond. Team members are reserved for 2 years following opening to monitor operations and make adjustments towards stabilization.</p>'
+    number: '04',
+    title: 'Project Management and Compliance',
+    body: '<p>Grant Leisure provides direct executive oversight from concept through completion, managing the full project lifecycle across planning, procurement, compliance, and operational readiness. Every engagement is structured to meet its regulatory requirements and deliver on its brief.</p><p>We draw on decades of operational experience to establish the policies, procedures, and governance frameworks that become the foundation for your venture. Where required, we recruit and embed executive staff and consult with the operating team on best practices from pre-opening preparation through grand opening and beyond.</p><p>Team members remain available for two years following opening to monitor performance, identify gaps, and drive stabilization. The result is an operation built to regulatory standard and positioned to perform from day one.</p>'
   }
 };
 
