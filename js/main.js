@@ -299,10 +299,8 @@ const serviceData = {
   },
   'modal-06': {
     number: '06',
-    title: 'Project Management and Compliance',
-    body: '<p>Clients profit from the opportunity to utilize Grant Leisure’s decades of operating experience and apply it to the policies and procedures that will become the operational foundation for their venture.
-
-We recruit executive staff as needed and consult with the selected operating team as to best practices from Pre-Opening preparation through Grand Opening and beyond. Team members are reserved for 2 years following opening to monitor operations and make needed adjustments towards stabilization, phasing out responsibilities until the client is left with a self-sufficient operation.</p>'
+    title: 'Turnkey Management',
+    body: '<p>Clients profit from the opportunity to utilize Grant Leisure\'s decades of operating experience and apply it to the policies and procedures that will become the operational foundation for their venture.</p><p>We recruit executive staff as needed and consult with the selected operating team on best practices from Pre&#8209;Opening preparation through Grand Opening and beyond. Team members are reserved for 2 years following opening to monitor operations and make adjustments towards stabilization.</p>'
   }
 };
 
